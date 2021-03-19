@@ -10,15 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="153c30f3-eeb5-498a-9724-95f3603f88ec" name="Default Changelist" comment="login form basic (components splitting tbd).">
-      <change afterPath="$PROJECT_DIR$/.idea/RoliqueOktenInternship.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="153c30f3-eeb5-498a-9724-95f3603f88ec" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +38,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1pyM30l1ivNiLp3s7tDOj6A4Oba" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -54,12 +48,21 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
@@ -74,6 +77,7 @@
       <workItem from="1616163527247" duration="470000" />
       <workItem from="1616164030350" duration="1212000" />
       <workItem from="1616165363948" duration="421000" />
+      <workItem from="1616167980333" duration="334000" />
     </task>
     <task id="LOCAL-00001" summary="login form basic (components splitting tbd)">
       <created>1616152178382</created>
@@ -96,11 +100,18 @@
       <option name="project" value="LOCAL" />
       <updated>1616163632971</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add server folder">
+      <created>1616168125321</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616168125321</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -120,51 +131,7 @@
     </ignored-roots>
     <MESSAGE value="login form basic (components splitting tbd)" />
     <MESSAGE value="login form basic (components splitting tbd)." />
-    <option name="LAST_COMMIT_MESSAGE" value="login form basic (components splitting tbd)." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="604" y="317" key="#Notifications" timestamp="1616163662877">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="604" y="317" key="#Notifications/0.0.1440.900@0.0.1440.900" timestamp="1616163662877" />
-    <state x="548" y="336" width="343" height="270" key="Github.ShareDialog" timestamp="1616164900101">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="548" y="351" key="Github.ShareDialog/0.0.1440.900@0.0.1440.900" timestamp="1616163896593" />
-    <state x="548" y="336" width="343" height="270" key="Github.ShareDialog/0.25.1440.798@0.25.1440.798" timestamp="1616164900101" />
-    <state x="442" y="130" key="RollbackChangesDialog" timestamp="1616165078724">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="442" y="130" key="RollbackChangesDialog/0.25.1440.798@0.25.1440.798" timestamp="1616165078724" />
-    <state x="229" y="95" key="SettingsEditor" timestamp="1616165213583">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1616164305950" />
-    <state x="229" y="95" key="SettingsEditor/0.25.1440.798@0.25.1440.798" timestamp="1616165213583" />
-    <state x="320" y="204" key="Vcs.Push.Dialog.v2" timestamp="1616165016252">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="320" y="202" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1616164111900" />
-    <state x="320" y="204" key="Vcs.Push.Dialog.v2/0.25.1440.798@0.25.1440.798" timestamp="1616165016252" />
-    <state x="511" y="342" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616164991145">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="511" y="342" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1440.798@0.25.1440.798" timestamp="1616164991145" />
-    <state x="348" y="216" key="git4idea.merge.GitPullDialog" timestamp="1616165149191">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="348" y="216" key="git4idea.merge.GitPullDialog/0.25.1440.798@0.25.1440.798" timestamp="1616165149191" />
-    <state x="450" y="307" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1616165121642">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="450" y="307" key="git4idea.remote.GitConfigureRemotesDialog/0.25.1440.798@0.25.1440.798" timestamp="1616165121642" />
-    <state x="475" y="322" key="git4idea.ui.GitResetDialog" timestamp="1616165555978">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="475" y="322" key="git4idea.ui.GitResetDialog/0.25.1440.798@0.25.1440.798" timestamp="1616165555978" />
-    <state x="475" y="327" key="git4idea.ui.GitStashDialog" timestamp="1616164452070">
-      <screen x="0" y="25" width="1440" height="798" />
-    </state>
-    <state x="475" y="327" key="git4idea.ui.GitStashDialog/0.25.1440.798@0.25.1440.798" timestamp="1616164452070" />
+    <MESSAGE value="add server folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="add server folder" />
   </component>
 </project>
