@@ -1,0 +1,105 @@
+.msgContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 16px;
+
+    height: max-content;
+    width: fill-available;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 0px 8px;
+    border-radius: 50px;
+
+    position: static;
+    width: 16px;
+    height: 16px;
+    left: 16px;
+    top: 6.5px;
+}
+
+.mask {
+    left: 8.33%;
+    right: 8.33%;
+    top: 8.33%;
+    bottom: 8.33%;
+
+    width: min-content;
+    height: fit-content;
+}
+
+.stick {
+    height: 4px;
+    width: 1.33px;
+    left: 6px;
+    top: 3.33px;
+    border-radius: 1px;
+    background: #DADADA;
+}
+
+.dot {
+    height: 1.33px;
+    width: 1.33px;
+    left: 6px;
+    top: 8.66px;
+    margin-top: 1px;
+    background: #DADADA;
+}
+
+span {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.35px;
+}
+
+.success-bg-color {
+    background-color: #EDF9F0;
+}
+.success-icon-color {
+    background-color: #287D3C;
+}
+.success-text-color {
+    color: #287D3C;
+}
+
+.warning-bg-color {
+    background-color: #FFF4EC;
+}
+.warning-icon-color {
+    background-color: #B95000;
+}
+.warning-text-color {
+    color: #B95000;
+}
+
+.error-bg-color {
+    background-color: #FEEFEF;
+}
+.error-icon-color {
+    background-color: #DA1414;
+}
+.error-text-color {
+    color: #DA1414;
+}
+
+.info-bg-color {
+    background-color: #EEF2FA;
+}
+.info-icon-color {
+    background-color: #2E5AAC;
+}
+.info-text-color {
+    color: #2E5AAC;
+}
+

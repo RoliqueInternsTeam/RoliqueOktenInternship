@@ -1,0 +1,48 @@
+input {
+    background: #FAFAFB;
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 344px;
+    height: 32px;
+
+    margin-bottom: 0;
+}
+
+label {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.35px;
+
+    color: rgba(0, 0, 0, 0.6);
+
+    mix-blend-mode: hard-light;
+    opacity: 0.76;
+}
+div {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    width: 74px;
+    height: 14px;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: -0.35px;
+
+    color: #DA1414;
+
+    margin: 4px 0px 0px 0px;
+}
+
+.loginInput {
+    margin-bottom: 16px;
+}
