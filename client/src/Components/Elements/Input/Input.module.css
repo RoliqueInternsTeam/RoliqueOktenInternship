@@ -1,4 +1,4 @@
-input {
+.input {
     background: #FAFAFB;
     border: 1px solid #BFBFBF;
     box-sizing: border-box;
@@ -9,7 +9,7 @@ input {
     margin-bottom: 0;
 }
 
-label {
+.label {
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -22,12 +22,12 @@ label {
     mix-blend-mode: hard-light;
     opacity: 0.76;
 }
-div {
+.div {
     display: flex;
     flex-direction: column;
 }
 
-p {
+.p {
     width: 74px;
     height: 14px;
 

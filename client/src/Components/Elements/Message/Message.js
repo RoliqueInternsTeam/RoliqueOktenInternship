@@ -1,11 +1,16 @@
 import React from 'react';
-import './Message.css';
+import classes from './Message.module.css';
 
 const Message = (props) => {
     return (
-        <div className={`msgContainer ${props.style[0]}`}>
-            <div className={`icon ${props.style[1]}`}><div className='mask'><div className='stick'></div><div className='dot'></div></div></div>
-            <span className={props.style[2]}>{props.message}</span>
+        <div className={`${classes.msgContainer} ${classes[props.style[0]]}`}>
+            <div className={`${classes.icon} ${classes[props.style[1]]}`}>
+                <div className={classes.mask}>
+                    <div className={classes.stick}></div>
+                    <div className={classes.dot}></div>
+                </div>
+            </div>
+            <span className={classes[props.style[2]]}>{props.message}</span>
         </div>
     );
 };

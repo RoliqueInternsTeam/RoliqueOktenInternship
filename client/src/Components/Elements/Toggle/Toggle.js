@@ -1,11 +1,11 @@
 import React from 'react';
-import './Toggle.css';
+import classes from'./Toggle.module.css';
 
 const Toggle = () => {
     return (
-            <label className='toggleLabel'>
-                <input type='checkbox' className='toggle'/>
-                    <span></span>
+            <label className={classes.switch}>
+                <input type='checkbox' className={classes.toggle}/>
+                    <span className={classes.slider}></span>
             </label>
     );
 };

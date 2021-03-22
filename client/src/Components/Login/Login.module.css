@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-h3 {
+.h3 {
     width: 189px;
     height: 22px;
     margin-top: 23px;
@@ -33,7 +33,7 @@ h3 {
     opacity: 0.9;
 }
 
-button {
+.button {
     width: 344px;
     height: 33px;
     margin-top: 8px;
@@ -58,4 +58,5 @@ button {
 
     margin: 0px 32px;
 }
+
 
