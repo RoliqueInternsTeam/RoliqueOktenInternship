@@ -21,7 +21,7 @@
     width: 0;
 }
 
-/* Create a custom checkbox */
+/* custom checkbox */
 .checkmark {
     position: absolute;
     top: 0;
@@ -37,7 +37,7 @@
     background-color: #FAFAFB;
 }
 
-/* When the checkbox is checked, add a blue background */
+/* When the checkbox is checked, add a background */
 .container input:checked ~ .checkmark {
     background-color: #FF650E;
 }
@@ -54,14 +54,15 @@
     display: block;
 }
 
-/* Style the checkmark/indicator */
+/* tick */
 .container .checkmark:after {
-    left: 27%;
+    left: 40%;
     top: 10%;
-    width: 5.5px;
+    width: 3.5px;
     height: 8px;
     border: solid white;
-    border-width: 0 1.5px 1.5px 0;
+    border-width: 0 1.7px 1.7px 0;
+    border-radius: 1px;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
