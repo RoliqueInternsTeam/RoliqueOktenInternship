@@ -1,0 +1,27 @@
+.sidebar {
+    width: 40px;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 0;
+
+    background-color: #121033;
+}
+.vectorContainer {
+    height: 79px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.imgContainer {
+    height: 49px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-top: solid 1px rgba(255, 255, 255, 0.3);
+}
