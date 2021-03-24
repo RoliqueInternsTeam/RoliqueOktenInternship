@@ -5,12 +5,14 @@ import Checkbox from "./Components/Elements/Checkbox/Checkbox";
 import Login from "./Components/Login/Login";
 import Dropdown from "./Components/Elements/Dropdown/Dropdown";
 import Input from "./Components/Elements/Input/Input";
+import Tooltip from "./Components/Elements/Tooltip/Tooltip";
 
 function App() {
 
   return (
     <div>
-        <Dropdown name='Agency' label='Agency' options={['agency', 'option2', 'option3']}/>
+        {/*<Dropdown name='Agency' label='Agency' options={['agency', 'option2', 'option3']}/>*/}
+        <Tooltip message='Tooltip message will show up here' arrowLocation='top'/>
     </div>
   );
 }

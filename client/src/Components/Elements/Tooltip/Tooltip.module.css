@@ -1,0 +1,134 @@
+.tooltip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px;
+
+    position: absolute;
+    width: 240px;
+    height: 76px;
+
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 16px;
+
+    position: static;
+
+    background: #000000;
+    opacity: 0.8;
+    border-radius: 8px;
+
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
+.body.bottom {
+    height: 64px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    order: 0;
+}
+.body.top {
+    height: 64px;
+    left: 0px;
+    right: 0px;
+    top: 12px;
+    order: 1;
+}
+.p {
+    position: static;
+    width: 208px;
+    height: 40px;
+    left: 16px;
+    top: 12px;
+
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #EEEEEE;
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 10px 0px;
+}
+
+.arrowContainerBottom {
+    position: static;
+    height: 12px;
+    left: 0px;
+    right: 0px;
+    bottom: -12px;
+    transform: scaleY(-1);
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
+.arrowContainerTop {
+    position: static;
+    height: 12px;
+    left: 0px;
+    right: 0px;
+    bottom: 52px;
+    transform: scaleY(-1);
+
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
+.arrowMaskBottom {
+    position: absolute;
+    width: 20px;
+    height: 12px;
+    left: 16px;
+    top: calc(50% - 12px/2 + 0px);
+}
+.arrowMaskTop {
+    position: absolute;
+    width: 20px;
+    height: 12px;
+    left: 36px;
+    top: calc(50% - 12px/2 + 12px);
+
+    transform: rotate(-180deg);
+}
+.arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    opacity: 0.8;
+}
+.arrow.top {
+    border-width: 12px 10px 0 10px;
+    border-color: #000000 transparent transparent transparent;
+}
+.arrow.bottom {
+    border-width: 0 10px 12px 10px;
+    border-color: transparent transparent #000000 transparent;
+}
+.arrow.left {
+    border-width: 10px 12px 10px 0;
+    border-color: transparent #000000 transparent  transparent;
+}
+.arrow.right {
+    border-width: 10px 0 10px 12px;
+    border-color: transparent transparent transparent #000000;
+}
