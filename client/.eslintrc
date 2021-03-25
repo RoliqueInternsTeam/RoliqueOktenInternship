@@ -1,0 +1,11 @@
+{
+  "extends": ["airbnb", "airbnb/hooks"],
+  "rules": {
+    "no-console": "off",
+    "react/prop-types": "off",
+    "react/destructuring-assignment": "off",
+    "no-unused-expressions": "off",
+    "no-undef": "off",
+    "react/jsx-filename-extension": "off"
+  }
+}
