@@ -1,25 +1,35 @@
 .tooltip {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
     padding: 0px;
-
     position: absolute;
-    width: 240px;
-    height: 76px;
 
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
+}
+.tooltip.top, .tooltip.bottom {
+    flex-direction: column;
+    align-items: flex-end;
+
+    width: 240px;
+    height: 76px;
+}
+.tooltip.left, .tooltip.right {
+    flex-direction: row;
+    align-items: center;
+
+    width: 252px;
+    height: 64px;
 }
 
 .body {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     padding: 0px 16px;
 
     position: static;
+    height: 64px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
 
-    background: #000000;
     opacity: 0.8;
     border-radius: 8px;
 
@@ -28,20 +38,28 @@
     flex-grow: 0;
     margin: 0px 0px;
 }
-.body.bottom {
-    height: 64px;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    order: 0;
+.body.top, .body.bottom {
+    flex-direction: column;
+    align-items: flex-start;
 }
-.body.top {
-    height: 64px;
-    left: 0px;
-    right: 0px;
-    top: 12px;
+.body.left, .body.right {
+    flex-direction: row;
+    align-items: center;
+    /*left: 12px;*/
+}
+.body.top, .body.left{
     order: 1;
 }
+.body.bottom, .body.right {
+    order: 0;
+}
+.body.light{
+    background: #EEEEEE;
+}
+.body.dark{
+    background: #000000;
+}
+
 .p {
     position: static;
     width: 208px;
@@ -54,7 +72,6 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
-    color: #EEEEEE;
 
     flex: none;
     order: 0;
@@ -63,72 +80,83 @@
     margin: 10px 0px;
 }
 
-.arrowContainerBottom {
+.arrowContainer {
     position: static;
-    height: 12px;
-    left: 0px;
-    right: 0px;
-    bottom: -12px;
     transform: scaleY(-1);
 
     flex: none;
-    order: 1;
     align-self: stretch;
     flex-grow: 0;
     margin: 0px 0px;
 }
-.arrowContainerTop {
-    position: static;
+.arrowContainer.top, .arrowContainer.bottom {
     height: 12px;
-    left: 0px;
-    right: 0px;
-    bottom: 52px;
-    transform: scaleY(-1);
-
-    /* Inside Auto Layout */
-
-    flex: none;
+}
+.arrowContainer.left, .arrowContainer.right {
+    width: 12px;
+}
+.arrowContainer.top, .arrowContainer.left {
     order: 0;
-    align-self: stretch;
-    flex-grow: 0;
-    margin: 0px 0px;
 }
-.arrowMaskBottom {
-    position: absolute;
-    width: 20px;
-    height: 12px;
-    left: 16px;
-    top: calc(50% - 12px/2 + 0px);
+.arrowContainer.bottom, .arrowContainer.right {
+    order: 1;
 }
-.arrowMaskTop {
-    position: absolute;
-    width: 20px;
-    height: 12px;
-    left: 36px;
-    top: calc(50% - 12px/2 + 12px);
 
-    transform: rotate(-180deg);
+.arrowMask {
+    position: absolute;
+    width: 20px;
+    height: 12px;
 }
+.arrowMask.left {
+    left: 16px;
+}
+.arrowContainer.top .arrowMask.center, .arrowContainer.bottom .arrowMask.center {
+    left: calc(50% - 20px/2 + 2px);
+}
+.arrowMask.right {
+    right: 10px;
+}
+.arrowMask.top {
+    bottom: 24px;
+}
+.arrowContainer.left .arrowMask.center, .arrowContainer.right .arrowMask.center {
+    top: calc(50% - 12px / 2 - 4px);
+}
+.arrowMask.bottom {
+    top: 16px;
+}
+
 .arrow {
     position: absolute;
-    width: 0;
-    height: 0;
     border-style: solid;
     opacity: 0.8;
 }
 .arrow.top {
     border-width: 12px 10px 0 10px;
-    border-color: #000000 transparent transparent transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
 }
 .arrow.bottom {
     border-width: 0 10px 12px 10px;
-    border-color: transparent transparent #000000 transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
 }
 .arrow.left {
     border-width: 10px 12px 10px 0;
-    border-color: transparent #000000 transparent  transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
 }
 .arrow.right {
     border-width: 10px 0 10px 12px;
-    border-color: transparent transparent transparent #000000;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.dark {
+    color: #EEEEEE;
+    border-color: #000000;
+}
+.light {
+    color: #000000;
+    border-color: #EEEEEE;
 }

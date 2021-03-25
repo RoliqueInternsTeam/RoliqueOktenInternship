@@ -12,7 +12,9 @@ function App() {
   return (
     <div>
         {/*<Dropdown name='Agency' label='Agency' options={['agency', 'option2', 'option3']}/>*/}
-        <Tooltip message='Tooltip message will show up here' arrowLocation='top'/>
+        <Tooltip arrowPlace='bottom' align='left' color='light'
+                 message='Tooltip message will show up here'
+        />
     </div>
   );
 }
