@@ -11,16 +11,16 @@ const Sidebar = (props) => {
     return (
         <div className={classes.sidebar}>
             <div className={classes.vectorContainer}>
-            <img src={Vector}/>
+            <img src={Vector} alt='vector icon'/>
             </div>
-            <div className={classes.imgContainer}>
-            <img src={Users} onClick={() => props.history.push('/create')}/>
+            <div className={classes.imgContainer}  onClick={() => props.history.push('/create')}>
+            <img src={Users} alt='create user'/>
             </div>
-            <div className={classes.imgContainer}>
-            <img src={Volume} onClick={() => props.history.push('/campaigns')}/>
+            <div className={classes.imgContainer}  onClick={() => props.history.push('/campaigns')}>
+            <img src={Volume} alt='campaigns'/>
             </div>
-            <div className={classes.imgContainer}>
-            <img src={At} onClick={() => props.history.push('/users')}/>
+            <div className={classes.imgContainer} onClick={() => props.history.push('/users')}>
+            <img src={At} alt='users'/>
             </div>
         </div>
     );
