@@ -7,9 +7,6 @@ const Login = () => (
   <div className={classes.loginForm}>
     <h3 className={classes.h3}>Log into your account</h3>
     <div className={classes.loginContainer}>
-      {/*
-      <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={props.message} />
-       */}
       <Input className="loginInput" id="email" label="Email" type="email" />
       <Input className="loginInput" id="password" label="Password" type="password" />
     </div>
