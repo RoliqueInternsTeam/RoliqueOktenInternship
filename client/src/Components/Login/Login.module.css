@@ -1,8 +1,8 @@
 .loginForm {
     position: absolute;
     width: 408px;
-    height: 312px;
-    left: 516px;
+    height: fit-content;
+    left: calc(50% - 204px);
     top: 280px;
 
     background: rgba(255, 255, 255, 0.55);
@@ -37,6 +37,7 @@
     width: 344px;
     height: 33px;
     margin-top: 8px;
+    margin-bottom: 56px;
 
     background: linear-gradient(180deg, #FF650E 0%, #FF650E 100%);
     border-radius: 8px;
@@ -47,6 +48,8 @@
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
+
+    cursor: pointer;
 
     border-style: none;
 }
