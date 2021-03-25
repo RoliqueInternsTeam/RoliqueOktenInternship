@@ -31,6 +31,6 @@
     cursor: pointer;
 }
 
-.imgContainer:active {
+.imgContainer:hover {
     background-color: #FF650E;
 }
