@@ -34,3 +34,7 @@
 .imgContainer:hover {
     background-color: #FF650E;
 }
+
+.active {
+    background-color: #FF650E;
+}
