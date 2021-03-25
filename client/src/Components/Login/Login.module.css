@@ -2,7 +2,7 @@
     position: absolute;
     width: 408px;
     height: fit-content;
-    left: 516px;
+    left: calc(50% - 204px);
     top: 280px;
 
     background: rgba(255, 255, 255, 0.55);
