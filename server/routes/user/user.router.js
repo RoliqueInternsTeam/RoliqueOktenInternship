@@ -1,9 +1,15 @@
 const { Router } = require('express');
 
 const { userController } = require('../../controllers');
+const { usersMiddleware, fileMiddleware } = require('../../middlewares');
 
 const userRouter = Router();
 
-userRouter.post('/', userController.createUser);
+userRouter.post('/',
+    usersMiddleware.checkUserValid,
+    fileMiddleware.checkFileMiddleware,
+    usersMiddleware.checkIsUserCreated,
+    fileMiddleware.checkPhotoCountUser,
+    userController.createUser);
 
 module.exports = userRouter;
