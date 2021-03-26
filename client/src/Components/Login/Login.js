@@ -3,16 +3,38 @@ import Input from '../Elements/Input/Input';
 import classes from './Login.module.css';
 // import Message from '../Elements/Message/Message';
 
-const Login = () => (
-  <form className={classes.loginForm}>
-    <h3 className={classes.h3}>Log into your account</h3>
-    {/* <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={props.message} /> */}
-    <div className={classes.loginContainer}>
-      <Input className="loginInput" id="email" label="Email" type="email" required='required' />
-      <Input className="loginInput" id="password" label="Password" type="password" required='required' />
-    </div>
-    <button type="submit" className={classes.button}>Log In</button>
-  </form>
-);
+const Login = () => {
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    console.log(event);
+    console.log(event.target[1].value);
+    const request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        [event.target[0].id]: event.target[0].value,
+        [event.target[1].id]: event.target[1].value,
+      }),
+    };
+    console.log(request);
+
+    const response = await fetch('http://localhost:5000/auth', request);
+    console.log(response);
+  };
+
+  return (
+    <form className={classes.loginForm} onSubmit={(event) => submitHandler(event)}>
+      <h3 className={classes.h3}>Log into your account</h3>
+      {/* <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={props.message} /> */}
+      <div className={classes.loginContainer}>
+        <Input className="loginInput" id="email" label="Email" type="email" required='required' />
+        <Input className="loginInput" id="password" label="Password" type="password" required='required' />
+      </div>
+      <button type="submit" className={classes.button}>Log In</button>
+    </form>
+  );
+};
 
 export default Login;
