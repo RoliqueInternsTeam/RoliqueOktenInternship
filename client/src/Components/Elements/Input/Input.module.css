@@ -8,7 +8,16 @@
 
     margin-bottom: 0;
 }
-
+.input:active {
+    border: 1px solid rgba(255, 101, 14, 0.5);
+    box-shadow: 0px 0px 2px rgba(255, 101, 14, 0.25);
+}
+.input:required {
+    border: 1px solid #DA1414;
+}
+.input:invalid {
+    border: 1px solid #DA1414;
+}
 .label {
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
@@ -28,7 +37,6 @@
     display: flex;
     flex-direction: column;
 }
-
 .p {
     width: 74px;
     height: 14px;
@@ -44,7 +52,6 @@
 
     margin: 4px 0px 0px 0px;
 }
-
 .loginInput {
     margin-bottom: 16px;
 }

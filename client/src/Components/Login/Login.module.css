@@ -14,13 +14,11 @@
     flex-direction: column;
     align-items: center;
 }
-
 .h3 {
     width: 189px;
     height: 22px;
     margin-top: 23px;
     margin-bottom: 24px;
-
 
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
@@ -29,10 +27,8 @@
     line-height: 22px;
 
     color: #151515;
-
     opacity: 0.9;
 }
-
 .button {
     width: 344px;
     height: 33px;
@@ -41,6 +37,7 @@
 
     background: linear-gradient(180deg, #FF650E 0%, #FF650E 100%);
     border-radius: 8px;
+    border-style: none;
 
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
@@ -48,18 +45,11 @@
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
-
     cursor: pointer;
-
-    border-style: none;
 }
-
 .loginContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     margin: 0px 32px;
 }
-
-
