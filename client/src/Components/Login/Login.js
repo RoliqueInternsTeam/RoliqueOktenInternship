@@ -1,9 +1,12 @@
-import React from 'react';
-import Input from '../Elements/Input/Input';
+import React, { useState } from 'react';
 import classes from './Login.module.css';
-// import Message from '../Elements/Message/Message';
+
+import Input from '../Elements/Input/Input';
+import Message from '../Elements/Message/Message';
 
 const Login = () => {
+  const [mismatch, setMismatch] = useState(null);
+
   const submitHandler = async (event) => {
     event.preventDefault();
     console.log(event);
@@ -22,12 +25,21 @@ const Login = () => {
 
     const response = await fetch('http://localhost:5000/auth', request);
     console.log(response);
+
+    if (response.code !== 200) {
+      setMismatch(true);
+    }
+    if (response.code === 200) {
+      props.history.push('/users');
+    }
   };
 
   return (
     <form className={classes.loginForm} onSubmit={(event) => submitHandler(event)}>
       <h3 className={classes.h3}>Log into your account</h3>
-      {/* <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={props.message} /> */}
+
+      { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={props.message} /> : null }
+
       <div className={classes.loginContainer}>
         <Input className="loginInput" id="email" label="Email" type="email" required='required' />
         <Input className="loginInput" id="password" label="Password" type="password" required='required' />
