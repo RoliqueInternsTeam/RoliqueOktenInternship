@@ -38,7 +38,7 @@ const Login = () => {
     <form className={classes.loginForm} onSubmit={(event) => submitHandler(event)}>
       <h3 className={classes.h3}>Log into your account</h3>
 
-      { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={props.message} /> : null }
+      { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message="Invalid email or password" /> : null }
 
       <div className={classes.loginContainer}>
         <Input className="loginInput" id="email" label="Email" type="email" required='required' />
