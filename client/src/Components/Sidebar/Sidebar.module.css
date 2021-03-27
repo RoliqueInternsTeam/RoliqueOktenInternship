@@ -5,6 +5,8 @@
     margin-left: 0;
 
     background-color: #121033;
+
+    position: fixed;
 }
 .vectorContainer {
     height: 79px;

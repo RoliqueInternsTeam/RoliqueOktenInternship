@@ -24,6 +24,9 @@
     width: 344px;
     height: 32px;
 }
+.select:required {
+    border: 1px solid #DA1414;
+}
 .option {
     width: 46px;
     height: 17px;
@@ -38,4 +41,7 @@
     letter-spacing: -0.35px;
 
     color: #383838;
+}
+.selected {
+    color: rgba(56, 56, 56, 0.45);
 }
