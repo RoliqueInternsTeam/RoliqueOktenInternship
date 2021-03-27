@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router';
 
 import Sidebar from './Components/Sidebar/Sidebar';
 import Login from './Components/Login/Login';
-import CreateInternalUser from './Components/CreateInternalUser/CreateInternalUser';
 
 function App() {
   return (
@@ -12,7 +11,6 @@ function App() {
       <Sidebar />
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/create" component={CreateInternalUser} />
       </Switch>
 
     </div>
