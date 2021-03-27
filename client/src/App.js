@@ -9,10 +9,8 @@ function App() {
   return (
     <div>
       <Sidebar />
-      <Login />
       <Switch>
         <Route path="/login" component={Login} />
-
       </Switch>
 
     </div>

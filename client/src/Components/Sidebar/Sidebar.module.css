@@ -5,8 +5,9 @@
     margin-left: 0;
 
     background-color: #121033;
-}
 
+    position: fixed;
+}
 .vectorContainer {
     height: 79px;
 
@@ -17,7 +18,6 @@
 
     border-bottom: solid 1px rgba(255, 255, 255, 0.3);
 }
-
 .imgContainer {
     height: 49px;
 
@@ -30,11 +30,9 @@
 
     cursor: pointer;
 }
-
 .imgContainer:hover {
     background-color: #FF650E;
 }
-
 .active {
     background-color: #FF650E;
 }
