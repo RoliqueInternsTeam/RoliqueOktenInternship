@@ -1,6 +1,7 @@
-const { BAD_REQUEST, OK, } = require('../config/errors-codes');
+const { BAD_REQUEST, OK, UNAUTHORIZED } = require('../config/errors-codes');
 
 module.exports = {
+    // BAD REQUEST
     NOT_VALID_BODY: {
         message: 'Request is not valid',
         code: BAD_REQUEST
@@ -8,10 +9,6 @@ module.exports = {
     WRONG_EMAIL_OR_PASSWORD: {
         message: 'Email or password is not valid',
         code: BAD_REQUEST
-    },
-    LOGIN: {
-        message: 'User logged in',
-        code: OK
     },
     EMAIL_ALREADY_EXIST: {
         message: 'Email already exist',
@@ -28,6 +25,20 @@ module.exports = {
     JUST_ONE_PHOTO: {
         message: 'You can upload just one photo as avatar',
         code: BAD_REQUEST
+    },
+    NOT_TOKEN: {
+        message: 'Not token',
+        code: BAD_REQUEST
+    },
+    // UNAUTHORIZED
+    NOT_VALID_TOKEN: {
+        message: 'Not valid token',
+        code: UNAUTHORIZED
+    },
+
+    LOGIN: {
+        message: 'User logged in',
+        code: OK
     },
 
 };

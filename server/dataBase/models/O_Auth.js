@@ -8,6 +8,14 @@ const O_AuthSchema = new Schema({
     refresh_token: {
         type: String,
         required: true
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 
