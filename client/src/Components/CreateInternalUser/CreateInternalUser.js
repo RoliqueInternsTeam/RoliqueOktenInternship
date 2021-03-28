@@ -6,6 +6,8 @@ import Info from '../Elements/Icons/info.svg';
 import ProfilePicture from '../Elements/Icons/profile-picture.svg';
 import Input from '../Elements/Input/Input';
 import Dropdown from '../Elements/Dropdown/Dropdown';
+import Tooltip from '../Elements/Tooltip/Tooltip';
+import { ROLES_INFO } from '../../config/messages';
 
 const CreateInternalUser = (props) => (
   <form className={classes.mainContainer}>
@@ -30,6 +32,9 @@ const CreateInternalUser = (props) => (
         <div className={classes.rolesInfo}>
           <h4>Roles & Permissions</h4>
           <img src={Info} alt='info' className={classes.info} />
+          <div className={classes.tooltipHider}>
+            <Tooltip color='dark' arrowPlace='top' align='center' message={ROLES_INFO} />
+          </div>
         </div>
         <Dropdown label="Role" name="roles" options={['Admin', 'Manager', 'Employee']} required="required" />
         <div className={classes.passwordContainer}>

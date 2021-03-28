@@ -3,6 +3,7 @@ import classes from './Login.module.css';
 
 import Input from '../Elements/Input/Input';
 import Message from '../Elements/Message/Message';
+import { INVALID_CREDENTIALS } from '../../config/messages';
 
 const Login = () => {
   const [mismatch, setMismatch] = useState(null);
@@ -38,7 +39,7 @@ const Login = () => {
     <form className={classes.loginForm} onSubmit={(event) => submitHandler(event)}>
       <h3 className={classes.h3}>Log into your account</h3>
 
-      { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={props.message} /> : null }
+      { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={INVALID_CREDENTIALS} /> : null }
 
       <div className={classes.loginContainer}>
         <Input className="loginInput" id="email" label="Email" type="email" required='required' />

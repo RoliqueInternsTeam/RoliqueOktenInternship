@@ -62,12 +62,16 @@
 }
 .profilePicture {
     margin-bottom: 24px;
+
+    cursor: pointer;
 }
 .info {
     width: 16px;
     height: 16px;
 
-    margin-left: 10px
+    margin-left: 10px;
+
+    cursor: pointer;
 }
 .body {
     display: flex;
@@ -86,6 +90,7 @@
     margin-right: 180px;
 }
 .rolesInfo {
+    position: relative;
     display: flex;
     flex-direction: row;
 
@@ -93,4 +98,12 @@
 }
 .passwordContainer {
     margin-top: 39px;
+}
+.tooltipHider {
+    visibility: hidden;
+    position: absolute;
+    top: 50px;
+}
+.info:hover + .tooltipHider {
+    visibility: visible;
 }
