@@ -6,7 +6,7 @@
     width: 344px;
     height: 32px;
 
-    margin-bottom: 0;
+    margin-bottom: 16px;
 }
 .input:active {
     border: 1px solid rgba(255, 101, 14, 0.5);
@@ -52,6 +52,6 @@
 
     margin: 4px 0px 0px 0px;
 }
-.loginInput {
-    margin-bottom: 16px;
+.loginInput > input:required {
+    border: 1px solid #BFBFBF;
 }
