@@ -11,7 +11,7 @@ const users = [
     id: '2',
     firstName: 'Andriy',
     lastName: 'Romanyuk',
-    email: 'natanbfhjsdbfhjdsbhjfbsdhjfbhjdsbfjiel.rr@gmail.com',
+    email: 'natanbfhr@gmail.com',
     role: 'Manager',
     phone: '+380934400536',
   },
