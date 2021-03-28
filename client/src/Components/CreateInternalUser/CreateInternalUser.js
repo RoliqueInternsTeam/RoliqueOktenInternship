@@ -10,7 +10,6 @@ import Dropdown from '../Elements/Dropdown/Dropdown';
 const CreateInternalUser = (props) => (
   <form className={classes.mainContainer}>
     <div className={classes.header}>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div className={classes.headerLeft}>
         <img src={Arrow} alt='Arrow button' className={classes.arrow} onClick={() => props.history.goBack()} />
         <h1>Create Internal User</h1>
