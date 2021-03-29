@@ -26,6 +26,7 @@
     align-self: stretch;
     flex-grow: 0;
     margin: 0px;
+
 }
 .body.top, .body.left{
     order: 1;
@@ -43,9 +44,10 @@
     position: static;
     max-width: 340px;
     min-width: 98px;
+
     white-space: pre-wrap;
 
-    font-family: Inter, sans-serif;
+    font-family: Helvetica Neue;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -131,4 +133,3 @@
 .light {
     color: #000000;
     border-color: #EEEEEE;
-}

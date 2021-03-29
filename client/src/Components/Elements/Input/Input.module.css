@@ -15,6 +15,10 @@
 .input:required {
     border: 1px solid #DA1414;
 }
+
+.loginInput > .input:required {
+    border: 1px solid #BFBFBF;
+}
 .input:invalid {
     border: 1px solid #DA1414;
 }
