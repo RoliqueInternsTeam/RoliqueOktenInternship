@@ -1,6 +1,5 @@
 module.exports = {
-    authMiddleware: require('./auth/check-password-hash.middleware'),
-    validationMiddleware: require('./validation/validation.middleware'),
+    authMiddleware: require('./auth'),
     usersMiddleware: require('./user'),
     fileMiddleware: require('./files')
 };
