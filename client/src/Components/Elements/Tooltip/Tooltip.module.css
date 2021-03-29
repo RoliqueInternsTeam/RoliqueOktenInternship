@@ -41,8 +41,9 @@
 }
 .p {
     position: static;
-    max-width: 208px;
+    max-width: 340px;
     min-width: 98px;
+    white-space: pre-wrap;
 
     font-family: Inter, sans-serif;
     font-style: normal;
@@ -50,6 +51,7 @@
     font-size: 14px;
     line-height: 20px;
     text-align: left;
+    color: #EEEEEE;
 
     margin: 0px;
 }
