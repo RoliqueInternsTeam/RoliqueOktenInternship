@@ -1,0 +1,11 @@
+.Search {
+    margin-top: 24px;
+    position: relative;
+}
+.Search input {
+    content: "";
+    padding-left: 28px;
+    background-image: url("../../Elements/Icons/search.svg");
+    background-repeat: no-repeat;
+    background-position: 3%;
+}

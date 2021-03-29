@@ -25,7 +25,8 @@
     flex: none;
     align-self: stretch;
     flex-grow: 0;
-    margin: 0px 0px;
+    margin: 0px;
+
 }
 .body.top, .body.left{
     order: 1;
@@ -42,6 +43,8 @@
 .p {
     position: static;
     max-width: 340px;
+    min-width: 98px;
+
     white-space: pre-wrap;
 
     font-family: Helvetica Neue;
@@ -49,9 +52,10 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
+    text-align: left;
     color: #EEEEEE;
 
-    margin: 0;
+    margin: 0px;
 }
 .arrowContainer {
     position: static;
@@ -129,8 +133,3 @@
 .light {
     color: #000000;
     border-color: #EEEEEE;
-}
-/*.overlayCreateUser {*/
-/*    position: absolute;*/
-/*    top: 50px;*/
-/*}*/

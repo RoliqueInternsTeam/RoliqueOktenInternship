@@ -1,0 +1,10 @@
+.Users {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    margin: 0 0 0 40px;
+}
+.container {
+    background: #E5E5E5;
+    padding: 0 68px 0 28px;
+}
