@@ -1,6 +1,13 @@
-.button {
-    width: 123px;
-    height: 32px;
+.input {
+    display: none;
+}
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 106px;
+    height: 33px;
 
     background: url("../Icons/arrowdown.svg") 12.67px no-repeat, linear-gradient(180deg, #FF650E 0%, #FF650E 100%);
     border-radius: 8px;
@@ -16,13 +23,12 @@
 
     cursor: pointer;
 }
-.button:focus {
+.input:checked + .label {
     background: url("../Icons/arrowup.svg") 12.67px no-repeat, linear-gradient(180deg, #FF650E 0%, #FF650E 100%);
     outline: none;
-    pointer-events: none;
 }
-.button:focus + .dropdown {
-    visibility: visible;
+.input:checked + .label + .dropdown {
+    transform: scale(1);
 }
 .dropdown {
     display: grid;
@@ -34,11 +40,11 @@
     padding: 0;
 
     border: #c9c8ca solid 1px;
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: #ffffff;
     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
 
-    visibility: hidden;
+    transform: scale(0);
 }
 .link {
     display: flex;

@@ -1,10 +1,12 @@
 .UserList {
     display: grid;
     grid-auto-flow: row;
-    text-align: left;
 }
 .table {
     border-collapse: collapse;
+    width: 100%;
+    height: min-content;
+    text-align: left;
 }
 .header {
     height: 56px;
@@ -13,9 +15,6 @@
 }
 .header .th {
     padding: 0 0 0 16px;
-}
-.header th {
-    padding: 0;
 }
 .th {
     padding-left: 16px;

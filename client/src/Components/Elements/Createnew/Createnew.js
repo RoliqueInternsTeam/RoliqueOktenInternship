@@ -1,16 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import classes from './Createnew.module.css';
+import Aux from '../../../hoc/Aux';
 
 const Createnew = () => (
-  <div>
-    <button type='button' className={classes.button}>Create New</button>
+  <Aux>
+    <input type='checkbox' className={classes.input} id='checkbox' />
+    <label className={classes.label} htmlFor="checkbox">
+      Create New
+    </label>
     <div className={classes.dropdown}>
-      <NavLink className={classes.link} to="/create/campaign">Campaign</NavLink>
-      <NavLink className={classes.link} to="/create/influencer">Influencer</NavLink>
-      <NavLink className={classes.link} to="/create/user">Internal User</NavLink>
+      <NavLink className={classes.link} to='/create'>Campaign</NavLink>
+      <NavLink className={classes.link} to="/create">Influencer</NavLink>
+      <NavLink className={classes.link} to="/create">Internal User</NavLink>
     </div>
-  </div>
+  </Aux>
 );
-
-export default Createnew;
+export default withRouter(Createnew);

@@ -2,9 +2,10 @@ import React from 'react';
 import SingleUser from './SingleUser/SingleUser';
 import classes from './UserList.module.css';
 import users from '../../../Database/Users';
+import Aux from '../../../hoc/Aux';
 
 const UserList = () => (
-  <div className={classes.UserList}>
+  <Aux>
     <table className={classes.table}>
       <tbody>
         <tr className={classes.header}>
@@ -13,12 +14,10 @@ const UserList = () => (
           <th><span className={classes.span}>Role</span></th>
           <th colSpan='2'><span className={classes.span}>Phone</span></th>
         </tr>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         {users.map((user) => (<SingleUser key={user.id} {...user} />))}
       </tbody>
-
     </table>
-  </div>
+  </Aux>
 );
 
 export default UserList;
