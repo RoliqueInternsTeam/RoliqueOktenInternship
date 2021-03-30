@@ -1,4 +1,4 @@
-const { BAD_REQUEST, OK, UNAUTHORIZED } = require('../config/errors-codes');
+const { BAD_REQUEST, UNAUTHORIZED } = require('../constants/status-codes');
 
 module.exports = {
     // BAD REQUEST
@@ -34,11 +34,6 @@ module.exports = {
     NOT_VALID_TOKEN: {
         message: 'Not valid token',
         code: UNAUTHORIZED
-    },
-
-    LOGIN: {
-        message: 'User logged in',
-        code: OK
     },
 
 };

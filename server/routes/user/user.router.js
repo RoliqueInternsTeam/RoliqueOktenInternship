@@ -1,11 +1,12 @@
 const { Router } = require('express');
 
 const { userController } = require('../../controllers');
-const { usersMiddleware, fileMiddleware } = require('../../middlewares');
+const { usersMiddleware, fileMiddleware, authMiddleware } = require('../../middlewares');
 
 const userRouter = Router();
 
 userRouter.post('/',
+    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserValid,
     fileMiddleware.checkFileMiddleware,
     usersMiddleware.checkIsUserCreated,

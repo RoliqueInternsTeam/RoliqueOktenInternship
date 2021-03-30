@@ -4,7 +4,7 @@ const path = require('path');
 
 const passwordHash = require('../../helpers/password.helper');
 const userService = require('../../services/user/user.service');
-const { CREATED } = require('../../config/errors-codes');
+const { CREATED } = require('../../constants/status-codes');
 
 module.exports = {
     createUser: async (req, res, next) => {
