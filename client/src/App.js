@@ -16,7 +16,7 @@ function App() {
         <Route path="/users" component={Users} />
         <Route path="/create" component={CreateInternalUser} />
       </Switch>
-    
+
     </div>
   );
 }
