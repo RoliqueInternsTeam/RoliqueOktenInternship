@@ -1,18 +1,25 @@
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
+const path = require('path');
+
 require('dotenv').config();
 
-const { authRouter } = require('./routes');
+const { authRouter, userRouter } = require('./routes');
 const { PORT, MONGO_URI } = require('./config/config');
 
 const app = express();
 
 app.use(cors());
+app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/auth', authRouter);
+app.use('/users', userRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use('*', (err, req, res, next) => {
