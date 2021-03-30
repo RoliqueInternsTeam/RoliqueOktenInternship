@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const { authController } = require('../../controllers');
-const { authMiddleware, validationMiddleware } = require('../../middlewares');
+const { authMiddleware } = require('../../middlewares');
 
 const authRouter = Router();
 
 authRouter.post('/',
-    validationMiddleware.isUserCorrect,
-    authMiddleware.checkPasswordHash,
+    authMiddleware.checkAuthUserValid,
+    authMiddleware.checkPassword,
     authController.login);
 
 module.exports = authRouter;

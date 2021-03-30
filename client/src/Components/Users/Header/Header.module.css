@@ -1,0 +1,25 @@
+.div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 80px;
+    background: #FAFAFB;
+    padding: 0 68px 0 28px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+}
+.h1 {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+
+    color: #151515;
+
+    opacity: 0.9;
+}
