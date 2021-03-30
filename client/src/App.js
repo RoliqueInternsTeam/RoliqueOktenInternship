@@ -10,12 +10,12 @@ function App() {
   return (
     <div>
       <Sidebar />
-    
+
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/create" component={CreateInternalUser} />
       </Switch>
-    
+
     </div>
   );
 }
