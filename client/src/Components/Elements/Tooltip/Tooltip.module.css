@@ -1,0 +1,155 @@
+.tooltip {
+    display: flex;
+    padding: 0px;
+    position: absolute;
+
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
+}
+.tooltip.top, .tooltip.bottom {
+    flex-direction: column;
+    align-items: flex-end;
+
+    width: 240px;
+    height: 76px;
+}
+.tooltip.left, .tooltip.right {
+    flex-direction: row;
+    align-items: center;
+
+    width: 252px;
+    height: 64px;
+}
+.body {
+    display: flex;
+    padding: 0px 16px;
+
+    position: static;
+    height: 64px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+
+    opacity: 0.8;
+    border-radius: 8px;
+
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
+.body.top, .body.bottom {
+    flex-direction: column;
+    align-items: flex-start;
+}
+.body.left, .body.right {
+    flex-direction: row;
+    align-items: center;
+}
+.body.top, .body.left{
+    order: 1;
+}
+.body.bottom, .body.right {
+    order: 0;
+}
+.body.light{
+    background: #EEEEEE;
+}
+.body.dark{
+    background: #000000;
+}
+.p {
+    position: static;
+    width: 208px;
+    height: 40px;
+    left: 16px;
+    top: 12px;
+
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 10px 0px;
+}
+.arrowContainer {
+    position: static;
+    transform: scaleY(-1);
+
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
+.arrowContainer.top, .arrowContainer.bottom {
+    height: 12px;
+}
+.arrowContainer.left, .arrowContainer.right {
+    width: 12px;
+}
+.arrowContainer.top, .arrowContainer.left {
+    order: 0;
+}
+.arrowContainer.bottom, .arrowContainer.right {
+    order: 1;
+}
+.arrowMask {
+    position: absolute;
+    width: 20px;
+    height: 12px;
+}
+.arrowMask.left {
+    left: 16px;
+}
+.arrowContainer.top .arrowMask.center, .arrowContainer.bottom .arrowMask.center {
+    left: calc(50% - 20px/2 + 2px);
+}
+.arrowMask.right {
+    right: 10px;
+}
+.arrowMask.top {
+    bottom: 24px;
+}
+.arrowContainer.left .arrowMask.center, .arrowContainer.right .arrowMask.center {
+    top: calc(50% - 12px / 2 - 4px);
+}
+.arrowMask.bottom {
+    top: 16px;
+}
+.arrow {
+    position: absolute;
+    border-style: solid;
+    opacity: 0.8;
+}
+.arrow.top {
+    border-width: 12px 10px 0 10px;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+.arrow.bottom {
+    border-width: 0 10px 12px 10px;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+.arrow.left {
+    border-width: 10px 12px 10px 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+.arrow.right {
+    border-width: 10px 0 10px 12px;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+.dark {
+    color: #EEEEEE;
+    border-color: #000000;
+}
+.light {
+    color: #000000;
+    border-color: #EEEEEE;
+}

@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
@@ -10,6 +11,7 @@ const { PORT, MONGO_URI } = require('./config/config');
 
 const app = express();
 
+app.use(cors());
 app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
