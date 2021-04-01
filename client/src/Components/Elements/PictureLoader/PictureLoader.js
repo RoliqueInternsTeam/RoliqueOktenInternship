@@ -26,13 +26,12 @@ const PictureLoader = (props) => {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <label className={classes.profileLabel}>{props.label}</label>
       <ImgCrop shape='round' grid>
         <Upload
           onChange={onChange}
           onPreview={onPreview}
-          className={classes.upload}
         >
           <img src={ProfilePicture} alt={props.alt} className={classes.profilePicture} />
         </Upload>

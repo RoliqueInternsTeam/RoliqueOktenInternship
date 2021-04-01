@@ -1,6 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
 .profilePicture {
     margin-bottom: 24px;
-    visibility: visible;
+    height: 64px;
+    width: 64px;
 
     cursor: pointer;
 }
@@ -17,8 +23,4 @@
     mix-blend-mode: hard-light;
     opacity: 0.76;
     margin-bottom: 12px;
-}
-.upload {
-    visibility: visible;
-    position: fixed;
 }
