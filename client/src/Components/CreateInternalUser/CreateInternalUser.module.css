@@ -22,10 +22,6 @@
     align-items: center;
     justify-content: space-around;
 }
-.headerLeft > h1 {
-    position: relative;
-    top: 6px;
-}
 .arrow {
     margin-right: 20px;
 }
@@ -58,11 +54,8 @@
     height: 16px;
 
     margin-left: 10px;
-
+    margin-bottom: 2px;
     cursor: pointer;
-
-    position: relative;
-    top: -12px;
 }
 .body {
     display: flex;
@@ -95,8 +88,8 @@
     height: 244px;
     visibility: hidden;
     position: absolute;
-    top: 30px;
-    right: 8px;
+    top: 52px;
+    right: -14px;
 }
 .info:hover + .tooltipHider {
     visibility: visible;

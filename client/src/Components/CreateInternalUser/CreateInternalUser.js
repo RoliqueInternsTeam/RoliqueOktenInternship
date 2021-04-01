@@ -38,7 +38,7 @@ const CreateInternalUser = (props) => {
       body: JSON.stringify(userInfo),
     };
 
-    const response = await fetch('http://localhost:5000/user', request);
+    const response = await fetch('http://localhost:5000/users', request);
 
     if (response.status === 201) {
       props.history.push('/users');
