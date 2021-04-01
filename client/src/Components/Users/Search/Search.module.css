@@ -1,7 +1,9 @@
 .Search {
-    margin-top: 24px;
-    position: relative;
-    width: min-content;
+    /*margin-top: 24px;*/
+    position: sticky;
+    top: 0;;
+    padding: 24px 68px 0 28px;
+    background-color: #ebe8e9;
 }
 .Search input {
     content: "";

@@ -1,9 +1,8 @@
-.div {
+.Header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    position: relative;
 
     height: 80px;
     background: #FAFAFB;
@@ -12,6 +11,7 @@
 }
 .createnew {
     position: absolute;
+    z-index: 999;
     right: 68px;
     top: 23px;
 }

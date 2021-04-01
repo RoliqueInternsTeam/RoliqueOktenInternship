@@ -7,10 +7,8 @@ import classes from './Users.module.css';
 const Users = () => (
   <div className={classes.Users}>
     <Header />
-    <div className={classes.container}>
-      <Search />
-      <UserList />
-    </div>
+    <Search />
+    <UserList />
   </div>
 );
 

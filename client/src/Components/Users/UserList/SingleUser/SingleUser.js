@@ -13,12 +13,14 @@ const SingleUser = (props) => (
     <td>{props.email}</td>
     <td>{props.role}</td>
     <td>{props.phone}</td>
-    <NavLink className={classes.edit} to="/edit">
-      <div className={classes.tooltipDiv}>
-        <Tooltip arrowPlace='right' align='center' color='dark' message='Edit User' />
-      </div>
-      <img src={Edit} alt="Edit User" />
-    </NavLink>
+    <td className={classes.edit}>
+      <NavLink to="/edit">
+        <div className={classes.tooltipDiv}>
+          <Tooltip arrowPlace='right' align='center' color='dark' message='Edit User' />
+        </div>
+        <img src={Edit} alt="Edit User" />
+      </NavLink>
+    </td>
   </tr>
 );
 

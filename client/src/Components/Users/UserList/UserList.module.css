@@ -1,23 +1,23 @@
-.UserList {
-    display: grid;
-    grid-auto-flow: row;
-}
+/*.UserList {*/
+/*    display: grid;*/
+/*    grid-auto-flow: row;*/
+/*}*/
 .table {
     border-collapse: collapse;
-    width: 100%;
+    margin: 0 68px 0 28px;
     height: min-content;
     text-align: left;
-}
-.header {
-    height: 56px;
-    background: #FAF9FB;
-    box-shadow: inset 0px -4px 0px #E5E5E5;
-}
-.header .th {
-    padding: 0 0 0 16px;
+    overflow-y: auto;
 }
 .th {
     padding-left: 16px;
+}
+th{
+    position: sticky;
+    top: 72px;;
+    height: 56px;
+    background: #FAF9FB;
+    box-shadow: inset 0px -4px 0px #E5E5E5;
 }
 .span {
     font-family: Helvetica Neue, sans-serif;
