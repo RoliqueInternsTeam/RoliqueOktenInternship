@@ -53,26 +53,6 @@
 .h4 {
     margin-bottom: 24px;
 }
-.profileLabel {
-    font-family: Helvetica Neue, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: -0.35px;
-
-    color: rgba(0, 0, 0, 0.6);
-
-    mix-blend-mode: hard-light;
-    opacity: 0.76;
-    margin-bottom: 12px;
-}
-.profilePicture {
-    margin-bottom: 24px;
-    visibility: visible;
-
-    cursor: pointer;
-}
 .info {
     width: 16px;
     height: 16px;
@@ -120,9 +100,4 @@
 }
 .info:hover + .tooltipHider {
     visibility: visible;
-}
-
-.upload {
-    visibility: hidden;
-    position: relative;
 }
