@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import ImgCrop from 'antd-img-crop';
-import { Upload } from 'antd';
 import { withRouter } from 'react-router';
 import classes from './CreateInternalUser.module.css';
 import Arrow from '../Elements/Icons/arrow.svg';
 import Info from '../Elements/Icons/info.svg';
-import ProfilePicture from '../Elements/Icons/profile-picture.svg';
 import Input from '../Elements/Input/Input';
 import Dropdown from '../Elements/Dropdown/Dropdown';
 import Tooltip from '../Elements/Tooltip/Tooltip';
+import PictureLoader from '../Elements/PictureLoader/PictureLoader';
 import { ROLES_INFO } from '../../config/messages';
-import { PHONE_NUMBER } from '../../config/regexp.enum';
-import 'antd/dist/antd.css';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -25,27 +21,32 @@ const CreateInternalUser = (props) => {
   });
 
   useEffect(() => { console.log(userInfo); }, [userInfo]);
-  const onChange = ({ fileList: newFileList }) => {
-    setUserInfo((prevState) => ({ ...prevState, picture: newFileList }));
-  };
 
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
+  const inputHandler = (event) => {
+    setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
+  };
+  const dropdownHandler = (event) => {
+    setUserInfo(((prevState) => ({ ...prevState, role: event.target.value })));
+  };
+  const createHandler = async (event) => {
+    event.preventDefault();
+    const request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfo),
+    };
+
+    const response = await fetch('http://localhost:5000/users', request);
+
+    if (response.status === 201) {
+      props.history.push('/users');
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
   };
 
   return (
-    <form className={classes.mainContainer}>
+    <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
       <div className={classes.header}>
         <div className={classes.headerLeft}>
           <img src={Arrow} alt='Arrow button' className={classes.arrow} onClick={() => props.history.goBack()} />
@@ -56,21 +57,11 @@ const CreateInternalUser = (props) => {
       <div className={classes.body}>
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
-          <p className={classes.profileLabel}>Profile Picture</p>
-          <ImgCrop shape='round' grid>
-            <Upload
-              fileList={userInfo.picture}
-              onChange={onChange}
-              onPreview={onPreview}
-              className={classes.upload}
-            >
-              <img src={ProfilePicture} alt='Add a profile avatar' className={classes.profilePicture} />
-            </Upload>
-          </ImgCrop>
-          <Input label="First Name" type='text' id="firstName" required="required" />
-          <Input label="Last Name" type='text' id="lastName" required="required" />
-          <Input label="Email" type='email' id="email" required="required" />
-          <Input label="Phone" type='tel' id="phone" pattern={PHONE_NUMBER} />
+          <PictureLoader label="Profile Picture" alt="Add a profile picture" setState={setUserInfo} />
+          <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
+          <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
+          <Input label="Email" type='email' id="email" required="required" onChange={(event) => inputHandler(event)} />
+          <Input label="Phone" type='tel' id="phone" onChange={(event) => inputHandler(event)} />
         </div>
         <div className={classes.rightContainer}>
           <div className={classes.rolesInfo}>
@@ -80,10 +71,10 @@ const CreateInternalUser = (props) => {
               <Tooltip color='dark' arrowPlace='top' align='center' message={ROLES_INFO} />
             </div>
           </div>
-          <Dropdown label="Role" name="roles" options={['Admin', 'Manager', 'Employee']} required="required" />
+          <Dropdown label="Role" name="roles" options={['Admin', 'Manager', 'Employee']} required="required" onChange={(event) => dropdownHandler(event)} />
           <div className={classes.passwordContainer}>
             <h4 className={classes.h4}>Password</h4>
-            <Input label="Set Password" type='password' id="password" required="required" />
+            <Input label="Set Password" type='password' id="password" required="required" onChange={(event) => inputHandler(event)} />
           </div>
         </div>
       </div>
