@@ -22,6 +22,10 @@
     align-items: center;
     justify-content: space-around;
 }
+.headerLeft > h1 {
+    position: relative;
+    top: 6px;
+}
 .arrow {
     margin-right: 20px;
 }
@@ -46,6 +50,9 @@
 
     cursor: pointer;
 }
+.h4 {
+    margin-bottom: 24px;
+}
 .profileLabel {
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
@@ -62,6 +69,7 @@
 }
 .profilePicture {
     margin-bottom: 24px;
+    visibility: visible;
 
     cursor: pointer;
 }
@@ -72,6 +80,9 @@
     margin-left: 10px;
 
     cursor: pointer;
+
+    position: relative;
+    top: -12px;
 }
 .body {
     display: flex;
@@ -100,10 +111,18 @@
     margin-top: 39px;
 }
 .tooltipHider {
+    width: 372px;
+    height: 244px;
     visibility: hidden;
     position: absolute;
-    top: 50px;
+    top: 30px;
+    right: 8px;
 }
 .info:hover + .tooltipHider {
     visibility: visible;
+}
+
+.upload {
+    visibility: hidden;
+    position: relative;
 }
