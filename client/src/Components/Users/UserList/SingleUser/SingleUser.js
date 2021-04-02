@@ -8,6 +8,7 @@ const SingleUser = (props) => (
   <tr className={classes.tr}>
     <td className={classes.td}>
       {props.firstName}
+      &nbsp;
       {props.lastName}
     </td>
     <td>{props.email}</td>

@@ -15,25 +15,18 @@ const UserList = () => {
   // }, []);
 
   const searchContext = useContext(SearchContext);
-  // let list = [...userslist];
 
   const [users, setUsers] = useState(userslist);
   const [search, setSearch] = useState('');
 
   searchContext.searchHandler = (event) => {
     setUsers(userslist);
-    console.log(event.target.value);
     setSearch(event.target.value);
-    console.log('search +', search);
   };
 
   useEffect(() => {
-    console.log('useEffect itworks search +', search);
     if (search) {
-      console.log('useEffect searchContext.search, search +', search);
-      const newlist = users.filter((user) => (user.firstName.toLowerCase().includes(search.toLowerCase())));
-      setUsers(newlist);
-      console.log(users);
+      setUsers(users.filter((user) => ([user.firstName, user.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);

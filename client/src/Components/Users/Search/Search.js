@@ -5,10 +5,6 @@ import SearchContext from '../../../context/searchContext';
 
 const Search = () => {
   const searchContext = useContext(SearchContext);
-  // const searchHandler = (event) => {
-  //   searchContext.search = event.target.value;
-  //   console.log(searchContext.search);
-  // };
 
   return (
     <div className={classes.Search}>
