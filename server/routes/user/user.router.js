@@ -12,6 +12,5 @@ userRouter.post('/',
     usersMiddleware.checkIsUserCreated,
     fileMiddleware.checkPhotoCountUser,
     userController.createUser);
-userRouter.put('/:id',
-    );
+userRouter.put('/:id');
 module.exports = userRouter;
