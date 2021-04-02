@@ -1,32 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react';
 import SingleUser from './SingleUser/SingleUser';
 import classes from './UserList.module.css';
-import userslist from '../../../Database/Users';
 import Aux from '../../../hoc/Aux';
 import SearchContext from '../../../context/searchContext';
 
-// const urlUsers = 'http://localhost:5000/users';
+const urlUsers = 'http://localhost:5000/user';
 
 const UserList = () => {
-  // useEffect(() => {
-  //   fetch(urlUsers)
-  //     .then((res) => res.json())
-  //     .then((data) => setUsers(data));
-  // }, []);
-
   const searchContext = useContext(SearchContext);
-
-  const [users, setUsers] = useState(userslist);
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
 
   searchContext.searchHandler = (event) => {
-    setUsers(userslist);
+    setUsers(searchContext.userList);
+    console.log('users', users);
     setSearch(event.target.value);
   };
 
   useEffect(() => {
+    fetch(urlUsers)
+      .then((res) => res.json())
+      .then((data) => {
+        searchContext.userList = [...data];
+        setUsers(searchContext.userList);
+        console.log('searchContext.userList', searchContext.userList);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (search) {
-      setUsers(users.filter((user) => ([user.firstName, user.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
+      setUsers(users.filter((user) => ([user.firstname, user.lastname].join(' ').toLowerCase().includes(search.toLowerCase()))));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
@@ -43,7 +47,8 @@ const UserList = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (<SingleUser key={user.id} {...user} />))}
+          {/* eslint-disable-next-line no-underscore-dangle */}
+          {users.map((user) => (<SingleUser key={user._id} {...user} />))}
         </tbody>
       </table>
     </Aux>

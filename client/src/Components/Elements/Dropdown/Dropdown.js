@@ -10,7 +10,7 @@ const Dropdown = (props) => (
       required={props.required}
       onChange={props.onChange}
     >
-      <option className={classes.selected} selected disabled hidden>Select...</option>
+      <option className={classes.selected} selected disabled hidden>{props.select ? props.select : 'Select...'}</option>
       {props.options.map((option, key) => <option className={classes.option} key={key}>{option}</option>)}
     </select>
   </div>
