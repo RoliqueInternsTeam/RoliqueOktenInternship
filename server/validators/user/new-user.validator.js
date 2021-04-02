@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { EMAIL, PASSWORD, NAME } = require('../../config/regexp.enum');
+const { EMAIL, PASSWORD, NAME, PHONE } = require('../../config/regexp.enum');
 
 module.exports = Joi.object({
     email: Joi.string().trim().regex(EMAIL).required(),
@@ -8,5 +8,5 @@ module.exports = Joi.object({
     role: Joi.string().required(),
     firstname: Joi.string().trim().regex(NAME).required(),
     lastname: Joi.string().trim().regex(NAME).required(),
-    phone: Joi.number()
+    phone: Joi.string().regex(PHONE)
 });

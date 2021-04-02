@@ -13,5 +13,12 @@ userRouter.post('/',
     fileMiddleware.checkPhotoCountUser,
     userController.createUser);
 userRouter.put('/:id',
-    );
+    authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserById,
+    usersMiddleware.checkUpdateUser,
+    fileMiddleware.checkFileMiddleware,
+    fileMiddleware.checkPhotoCountUser,
+    userController.updateUser);
+userRouter.get('/', userController.getAllUsers);
+
 module.exports = userRouter;
