@@ -1,6 +1,3 @@
-.mainContainer {
-    margin-left: 40px;
-}
 .header {
     height: 79px;
     width: 100%;
@@ -46,51 +43,16 @@
 
     cursor: pointer;
 }
-.h4 {
-    margin-bottom: 24px;
-}
-.info {
-    width: 16px;
-    height: 16px;
-
-    margin-left: 10px;
-    margin-bottom: 2px;
-    cursor: pointer;
-}
-.body {
+.buttonsContainer {
+    width: 272px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-
-    margin-top: 47px;
-}
-.leftContainer {
-    margin-left: 180px;
-}
-.rightContainer {
-    display: flex;
-    flex-direction: column;
-
-    margin-right: 180px;
-}
-.rolesInfo {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-
     align-items: center;
+    align-self: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
-.passwordContainer {
-    margin-top: 39px;
-}
-.tooltipHider {
-    width: 372px;
-    height: 244px;
-    visibility: hidden;
-    position: absolute;
-    top: 52px;
-    right: -14px;
-}
-.info:hover + .tooltipHider {
-    visibility: visible;
+.createNew > div {
+    position: relative;
+    right: 68px;
+    top: 23px;
 }
