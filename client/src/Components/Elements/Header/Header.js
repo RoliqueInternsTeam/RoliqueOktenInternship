@@ -13,10 +13,10 @@ const Header = (props) => {
       case 'saveChanges':
         return <button type='submit' className={classes.button}>Save changes</button>;
       case 'createNew':
-        return <CreateNew className={classes.createNew} />;
+        return <CreateNew />;
       case 'edit':
         return (
-          <div>
+          <div className={classes.buttonsContainer}>
             <EditButton />
             <CreateNew />
           </div>

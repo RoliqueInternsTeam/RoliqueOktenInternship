@@ -1,16 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import classes from './CreateNew.module.css';
 
 const CreateNew = () => (
   <div className={classes.container}>
-    <button type='button' className={classes.button}>Create New</button>
+    <input type='checkbox' className={classes.input} id='checkbox' />
+    <label className={classes.label} htmlFor="checkbox">
+      Create New
+    </label>
     <div className={classes.dropdown}>
-      <NavLink className={classes.link} to="/create/campaign">Campaign</NavLink>
-      <NavLink className={classes.link} to="/create/influencer">Influencer</NavLink>
-      <NavLink className={classes.link} to="/create/user">Internal User</NavLink>
+      <NavLink className={classes.link} to='/create'>Campaign</NavLink>
+      <NavLink className={classes.link} to="/create">Influencer</NavLink>
+      <NavLink className={classes.link} to="/create">Internal User</NavLink>
     </div>
   </div>
 );
-
-export default CreateNew;
+export default withRouter(CreateNew);
