@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import classes from './CreateInternalUser.module.css';
-import Arrow from '../Elements/Icons/arrow.svg';
 import Info from '../Elements/Icons/info.svg';
 import Input from '../Elements/Input/Input';
 import Dropdown from '../Elements/Dropdown/Dropdown';
 import Tooltip from '../Elements/Tooltip/Tooltip';
 import PictureLoader from '../Elements/PictureLoader/PictureLoader';
 import { ROLES_INFO } from '../../config/messages';
+import Header from '../Elements/Header/Header';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -47,13 +47,7 @@ const CreateInternalUser = (props) => {
 
   return (
     <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
-      <div className={classes.header}>
-        <div className={classes.headerLeft}>
-          <img src={Arrow} alt='Arrow button' className={classes.arrow} onClick={() => props.history.goBack()} />
-          <h1>Create Internal User</h1>
-        </div>
-        <button type='submit' className={classes.button}>Save changes</button>
-      </div>
+      <Header arrow title='Create Internal User' button='saveChanges' />
       <div className={classes.body}>
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>

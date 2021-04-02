@@ -1,3 +1,9 @@
+.container {
+    height: fit-content;
+    position: relative;
+    top: 23px;
+    left: 1251px;
+}
 .button {
     width: 123px;
     height: 32px;
