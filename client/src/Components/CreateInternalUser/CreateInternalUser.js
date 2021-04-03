@@ -57,7 +57,8 @@ const CreateInternalUser = (props) => {
       <div className={classes.body}>
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
-          <PictureLoader label="Profile Picture" alt="Add a profile picture" setState={setUserInfo} />
+          <PictureLoader />
+          {/* <PictureLoader label="Profile Picture" alt="Add a profile picture" setState={setUserInfo} /> */}
           <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" required="required" onChange={(event) => inputHandler(event)} />

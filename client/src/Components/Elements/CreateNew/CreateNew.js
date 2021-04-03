@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import classes from './Createnew.module.css';
+import classes from './CreateNew.module.css';
 
-const Createnew = () => (
+const CreateNew = () => (
   <div>
     <button type='button' className={classes.button}>Create New</button>
     <div className={classes.dropdown}>
@@ -13,4 +13,4 @@ const Createnew = () => (
   </div>
 );
 
-export default Createnew;
+export default CreateNew;

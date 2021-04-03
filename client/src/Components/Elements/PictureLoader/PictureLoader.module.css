@@ -39,3 +39,21 @@
 
     cursor: pointer;
 }
+.cropper {
+    background-color: #121033;
+
+    position: absolute;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    text-align: center;
+    z-index: 999;
+
+    width: 500px;
+    height: 500px;
+
+    transform: scale(1);
+}
