@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import classes from './Header.module.css';
 import Arrow from '../Icons/arrow.svg';
-import CreateNew from '../Createnew/CreateNew';
+import CreateNew from '../CreateNew/CreateNew';
 import EditButton from '../EditButton/EditButton';
 
 const Header = (props) => {

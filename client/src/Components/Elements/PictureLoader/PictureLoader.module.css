@@ -70,7 +70,6 @@
 .submitButton {
     width: 123px;
     height: 33px;
-    margin-right: 68px;
 
     background: linear-gradient(180deg, #FF650E 0%, #FF650E 100%);
     border-radius: 8px;
@@ -87,7 +86,7 @@
 
 }
 .cancelButton {
-    width: 73px;
+    width: 123px;
     height: 33px;
     right: 203px;
     top: 23px;
@@ -109,12 +108,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 290px
+    width: 350px;
+
+    margin-left: 50px;
+    margin-right: 50px;
 }
 .newProfilePicture {
     width: 64px;
     height: 64px;
     border-radius: 200px;
+    border: 2px solid #121033;
 
     margin-bottom: 24px;
 

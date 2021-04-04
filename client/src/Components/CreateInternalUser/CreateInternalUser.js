@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import classes from './CreateInternalUser.module.css';
 import Info from '../Elements/Icons/info.svg';
@@ -21,8 +21,6 @@ const CreateInternalUser = (props) => {
     avatar: null,
   });
 
-  useEffect(() => { console.log(userInfo); }, [userInfo]);
-
   const inputHandler = (event) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
@@ -39,8 +37,8 @@ const CreateInternalUser = (props) => {
       body: JSON.stringify(userInfo),
     };
 
-    const response = await fetch('http://localhost:5000/users', request);
-
+    const response = await fetch('http://localhost:5000/user', request);
+    console.log(response);
     if (response.status === 201) {
       props.history.push('/users');
     }
