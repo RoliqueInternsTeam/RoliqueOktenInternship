@@ -17,7 +17,7 @@ const CreateInternalUser = (props) => {
     phone: '',
     role: '',
     password: '',
-    picture: null,
+    avatar: null,
   });
 
   useEffect(() => { console.log(userInfo); }, [userInfo]);
@@ -51,7 +51,7 @@ const CreateInternalUser = (props) => {
       <div className={classes.body}>
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
-          <PictureLoader label="Profile Picture" alt="Add a profile picture" setState={setUserInfo} />
+          <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setUserInfo} />
           <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" required="required" onChange={(event) => inputHandler(event)} />
@@ -65,7 +65,13 @@ const CreateInternalUser = (props) => {
               <Tooltip color='dark' arrowPlace='top' align='center' message={ROLES_INFO} />
             </div>
           </div>
-          <Dropdown label="Role" name="roles" options={['Admin', 'Manager', 'Employee']} required="required" onChange={(event) => dropdownHandler(event)} />
+          <Dropdown
+            label="Role"
+            name="roles"
+            options={['Admin', 'Manager', 'Employee']}
+            required="required"
+            onChange={(event) => dropdownHandler(event)}
+          />
           <div className={classes.passwordContainer}>
             <h4 className={classes.h4}>Password</h4>
             <Input label="Set Password" type='password' id="password" required="required" onChange={(event) => inputHandler(event)} />
