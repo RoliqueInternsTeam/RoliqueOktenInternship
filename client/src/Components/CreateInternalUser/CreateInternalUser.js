@@ -7,6 +7,7 @@ import Dropdown from '../Elements/Dropdown/Dropdown';
 import Tooltip from '../Elements/Tooltip/Tooltip';
 import PictureLoader from '../Elements/PictureLoader/PictureLoader';
 import { ROLES_INFO } from '../../config/messages';
+import { PHONE_NUMBER } from '../../config/regexp.enum';
 import Header from '../Elements/Header/Header';
 
 const CreateInternalUser = (props) => {
@@ -55,7 +56,7 @@ const CreateInternalUser = (props) => {
           <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" required="required" onChange={(event) => inputHandler(event)} />
-          <Input label="Phone" type='tel' id="phone" onChange={(event) => inputHandler(event)} />
+          <Input label="Phone" type='tel' id="phone" pattern={PHONE_NUMBER} onChange={(event) => inputHandler(event)} />
         </div>
         <div className={classes.rightContainer}>
           <div className={classes.rolesInfo}>

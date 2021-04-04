@@ -48,8 +48,8 @@ const PictureLoader = (props) => {
         // eslint-disable-next-line no-param-reassign
         blob.name = fileName;
         setCroppedImage(blob);
-        const croppedImageUrl = URL.createObjectURL(blob);
-        resolve(croppedImageUrl);
+        const ImageUrl = URL.createObjectURL(blob);
+        resolve(ImageUrl);
       }, 'image/jpeg', 1);
     });
   }
@@ -128,7 +128,6 @@ const PictureLoader = (props) => {
           <button type='button' className={classes.submitButton} onClick={submitHandler}>Submit</button>
         </div>
       </div>
-      {/* { croppedImageUrl && <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} /> } */}
     </div>
   );
 };
