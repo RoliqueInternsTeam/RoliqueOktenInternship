@@ -19,6 +19,9 @@ userRouter.put('/:id',
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
     userController.updateUser);
-userRouter.get('/', userController.getAllUsers);
+userRouter.get('/',
+    authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess([]),
+    userController.getAllUsers);
 
 module.exports = userRouter;

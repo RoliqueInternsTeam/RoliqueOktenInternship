@@ -1,5 +1,5 @@
 module.exports = {
-    // checkId: require('./chek-user-id.middleware'),
+    checkUserAccess: require('./check-user-access.middlewar'),
     checkIsUserCreated: require('./check-is-user-created.middlewar'),
     checkUserById: require('./check-is-user-created-by-id.middlewar'),
     checkUserValid: require('./chek-user-valid.middleware'),

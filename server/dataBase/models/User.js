@@ -33,7 +33,7 @@ const UserSchema = new Schema({
     },
 
     avatar: {
-        type: String,
+        type: Schema.Types.Mixed,
         required: false
     }
 });

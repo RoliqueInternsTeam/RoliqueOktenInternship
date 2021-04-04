@@ -4,7 +4,7 @@ const path = require('path');
 
 const passwordHash = require('../../helpers/password.helper');
 const userService = require('../../services/user/user.service');
-const { CREATED } = require('../../constants/status-codes');
+const { CREATED, OK } = require('../../constants/status-codes');
 
 module.exports = {
     createUser: async (req, res, next) => {
@@ -41,19 +41,24 @@ module.exports = {
                 const fileExtension = avatar.name.split('.').pop();
                 const photoName = `${uuid}.${fileExtension}`;
                 const avatarPathWithoutPublic = path.join('users', `${id}`, 'photos');
-                const w = path.join('users', `${id}`);
                 const avatarFullPath = path.join(process.cwd(), 'public', avatarPathWithoutPublic);
                 const photoPath = path.join(avatarPathWithoutPublic, photoName);
 
-                await fs.rmdir(path.join(avatarPathWithoutPublic), { recursive: true });
+                await fs.rmdir(path.join(avatarFullPath), { recursive: true });
                 await fs.mkdir(path.join(avatarFullPath), { recursive: true });
                 await avatar.mv(path.join(avatarFullPath, photoName));
 
-                await userService.addPhotoUser(id, { photo: photoPath });
+                await userService.addPhotoUser(id, photoPath);
             }
-            const db = await userService.updateUser(id, { ...updateUser }, false);
+            if (updateUser.password) {
+                updateUser.password = await passwordHash.hash(updateUser.password);
+                await userService.updateUser(id, { ...updateUser });
+                res.status(OK);
+            }
 
-            res.status(CREATED).json(db);
+            const db = await userService.updateUser(id, { ...updateUser });
+
+            res.status(OK).json(db);
         } catch (e) {
             next(e);
         }
@@ -67,6 +72,5 @@ module.exports = {
             next(e);
         }
     },
-
 
 };
