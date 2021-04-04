@@ -1,8 +1,8 @@
 .Search {
-    position: sticky;
+    position: relative;
     top: 0;;
     padding: 24px 68px 0 28px;
-    background-color: #ebe8e9;
+    z-index: 0;
 }
 .Search input {
     content: "";

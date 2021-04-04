@@ -9,10 +9,8 @@ class Users extends Component {
     return (
       <div className={classes.Users}>
         <Header title='Users' button='createNew' />
-        <div className={classes.container}>
-          <Search />
-          <UserList />
-        </div>
+        <Search />
+        <UserList />
       </div>
     );
   }

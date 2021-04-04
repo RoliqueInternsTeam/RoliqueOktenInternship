@@ -13,7 +13,6 @@ const UserList = () => {
 
   searchContext.searchHandler = (event) => {
     setUsers(searchContext.userList);
-    console.log('users', users);
     setSearch(event.target.value);
   };
 
