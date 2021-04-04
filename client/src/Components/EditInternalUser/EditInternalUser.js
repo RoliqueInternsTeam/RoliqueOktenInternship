@@ -50,7 +50,7 @@ const EditInternalUser = (props) => {
       <div className={classes.body}>
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
-          <PictureLoader label="Profile Picture" alt="Add a profile picture" avatar={userInfo.avatar} setState={setUserInfo} />
+          <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setUserInfo} />
           <Input label="First Name" type='text' id="firstName" required="required" value={userInfo.firstname} onChange={(event) => inputHandler(event)} />
           <Input label="Last Name" type='text' id="lastName" required="required" value={userInfo.lastname} onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" required="required" value={userInfo.email} onChange={(event) => inputHandler(event)} />
