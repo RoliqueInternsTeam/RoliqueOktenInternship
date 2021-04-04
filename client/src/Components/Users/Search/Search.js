@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Input from '../../Elements/Input/Input';
 import classes from './Search.module.css';
-// import SearchIcon from '../../Elements/Icons/search.svg';
+import SearchContext from '../../../context/searchContext';
 
-const Search = () => (
-  <div className={classes.Search}>
-    {/* <img className={classes.icon} src={SearchIcon} alt='Search' /> */}
-    <Input placeholder='Search' />
-  </div>
-);
+const Search = () => {
+  const searchContext = useContext(SearchContext);
+
+  return (
+    <div className={classes.Search}>
+      <Input
+        placeholder='Search'
+        onChange={(event) => {
+          searchContext.searchHandler(event);
+        }}
+      />
+    </div>
+  );
+};
 
 export default Search;
