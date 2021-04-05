@@ -14,7 +14,7 @@ const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser });
 
   useEffect(() => {
-    console.log(userInfo.avatar);
+    console.log(userInfo);
   }, [userInfo]);
 
   const inputHandler = (event) => {
@@ -33,7 +33,7 @@ const EditInternalUser = (props) => {
       body: JSON.stringify(userInfo),
     };
 
-    const response = await fetch('http://localhost:5000/user', request);
+    const response = await fetch(`http://localhost:5000/user/${userInfo._id}`, request);
 
     if (response.status === 201) {
       props.history.push('/users');
@@ -53,8 +53,8 @@ const EditInternalUser = (props) => {
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
           <PictureLoader label='Profile Picture' alt='Add an avatar' avatar={userInfo.avatar} setState={setUserInfo} />
-          <Input label="First Name" type='text' id="firstname" required="required" value={userInfo.firstname} onChange={(event) => inputHandler(event)} />
-          <Input label="Last Name" type='text' id="lastname" required="required" value={userInfo.lastname} onChange={(event) => inputHandler(event)} />
+          <Input label="First Name" type='text' id="firstName" required="required" value={userInfo.firstName || userInfo.firstname} onChange={(event) => inputHandler(event)} />
+          <Input label="Last Name" type='text' id="lastName" required="required" value={userInfo.lastName || userInfo.lastname} onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" required="required" value={userInfo.email} onChange={(event) => inputHandler(event)} />
           <Input label="Phone" type='tel' id="phone" value={userInfo.phone} onChange={(event) => inputHandler(event)} />
         </div>

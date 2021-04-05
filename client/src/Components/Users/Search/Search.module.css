@@ -1,8 +1,7 @@
 .Search {
     position: relative;
-    top: 0;;
     padding: 24px 68px 0 28px;
-    z-index: 0;
+    width: fit-content;
 }
 .Search input {
     content: "";
