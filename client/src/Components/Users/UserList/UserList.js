@@ -1,24 +1,56 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SingleUser from './SingleUser/SingleUser';
 import classes from './UserList.module.css';
-import users from '../../../Database/Users';
+import Aux from '../../../hoc/Aux';
+import SearchContext from '../../../context/searchContext';
 
-const UserList = () => (
-  <div className={classes.UserList}>
-    <table className={classes.table}>
-      <tbody>
-        <tr className={classes.header}>
-          <th className={classes.th}><span className={classes.span}>Name</span></th>
-          <th><span className={classes.span}>Email</span></th>
-          <th><span className={classes.span}>Role</span></th>
-          <th colSpan='2'><span className={classes.span}>Phone</span></th>
-        </tr>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        {users.map((user) => (<SingleUser key={user.id} {...user} />))}
-      </tbody>
+const urlUsers = 'http://localhost:5000/user';
 
-    </table>
-  </div>
-);
+const UserList = () => {
+  const searchContext = useContext(SearchContext);
+  const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState('');
+
+  searchContext.searchHandler = (event) => {
+    setUsers(searchContext.userList);
+    setSearch(event.target.value);
+  };
+
+  useEffect(() => {
+    fetch(urlUsers)
+      .then((res) => res.json())
+      .then((data) => {
+        searchContext.userList = [...data];
+        setUsers(searchContext.userList);
+        console.log('searchContext.userList', searchContext.userList);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (search) {
+      setUsers(users.filter((user) => ([user.firstname, user.lastname].join(' ').toLowerCase().includes(search.toLowerCase()))));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
+  return (
+    <Aux>
+      <table className={classes.table}>
+        <thead>
+          <tr>
+            <th className={classes.th}><span className={classes.span}>Name</span></th>
+            <th><span className={classes.span}>Email</span></th>
+            <th><span className={classes.span}>Role</span></th>
+            <th colSpan='2'><span className={classes.span}>Phone</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (<SingleUser key={user._id} {...user} />))}
+        </tbody>
+      </table>
+    </Aux>
+  );
+};
 
 export default UserList;

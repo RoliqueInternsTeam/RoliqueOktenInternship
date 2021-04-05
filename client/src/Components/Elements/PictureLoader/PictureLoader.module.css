@@ -1,0 +1,125 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+.profilePicture {
+    margin-bottom: 24px;
+    height: 64px;
+    width: 64px;
+
+    cursor: pointer;
+}
+.profileLabel {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.35px;
+
+    color: rgba(0, 0, 0, 0.6);
+
+    mix-blend-mode: hard-light;
+    opacity: 0.76;
+    margin-bottom: 12px;
+
+    cursor: pointer;
+}
+
+.input {
+    opacity: 0;
+
+    height: 64px;
+    width: 64px;
+    border-radius: 50px;
+
+    position: absolute;
+    top: 220px;
+
+    cursor: pointer;
+}
+.cropper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(18, 16, 51, 0.47) ;
+
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 999;
+
+    width: 100%;
+    height: 100%;
+}
+.hideCropper {
+    display: none;
+}
+.imageOnCrop {
+    position: relative;
+
+    top: 50px;
+}
+.submitButton {
+    width: 123px;
+    height: 33px;
+
+    background: linear-gradient(180deg, #FF650E 0%, #FF650E 100%);
+    border-radius: 8px;
+    border-style: none;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+}
+.cancelButton {
+    width: 123px;
+    height: 33px;
+    right: 203px;
+    top: 23px;
+
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 350px;
+
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.newProfilePicture {
+    width: 64px;
+    height: 64px;
+    border-radius: 200px;
+    border: 2px solid #121033;
+
+    margin-bottom: 24px;
+
+    cursor: pointer;
+}

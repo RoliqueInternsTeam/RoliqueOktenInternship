@@ -27,5 +27,4 @@ userRouter.get('/',
     authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([]),
     userController.getAllUsers);
-
 module.exports = userRouter;

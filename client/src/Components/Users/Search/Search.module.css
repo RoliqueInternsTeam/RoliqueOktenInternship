@@ -1,6 +1,8 @@
 .Search {
-    margin-top: 24px;
     position: relative;
+    top: 0;;
+    padding: 24px 68px 0 28px;
+    z-index: 0;
 }
 .Search input {
     content: "";
@@ -8,4 +10,7 @@
     background-image: url("../../Elements/Icons/search.svg");
     background-repeat: no-repeat;
     background-position: 3%;
+}
+.Search label {
+    margin: 0;
 }

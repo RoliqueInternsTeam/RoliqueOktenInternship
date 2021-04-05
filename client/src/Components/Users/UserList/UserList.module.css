@@ -1,24 +1,18 @@
-.UserList {
-    display: grid;
-    grid-auto-flow: row;
-    text-align: left;
-}
 .table {
     border-collapse: collapse;
-}
-.header {
-    height: 56px;
-    background: #FAF9FB;
-    box-shadow: inset 0px -4px 0px #E5E5E5;
-}
-.header .th {
-    padding: 0 0 0 16px;
-}
-.header th {
-    padding: 0;
+    margin: 0 68px 0 28px;
+    height: min-content;
+    text-align: left;
+    overflow-y: auto;
 }
 .th {
     padding-left: 16px;
+}
+th{
+    top: 72px;;
+    height: 56px;
+    background: #FAF9FB;
+    box-shadow: inset 0px -4px 0px #E5E5E5;
 }
 .span {
     font-family: Helvetica Neue, sans-serif;

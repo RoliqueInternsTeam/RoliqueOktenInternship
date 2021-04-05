@@ -21,7 +21,7 @@
 }
 .edit {
     display: table-cell;
-    position: relative;
+    /*position: relative;*/
     width: 28px;
     text-align: center;
     vertical-align: middle;
