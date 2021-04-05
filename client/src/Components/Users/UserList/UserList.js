@@ -22,7 +22,6 @@ const UserList = () => {
       .then((data) => {
         searchContext.userList = [...data];
         setUsers(searchContext.userList);
-        console.log('searchContext.userList', searchContext.userList);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

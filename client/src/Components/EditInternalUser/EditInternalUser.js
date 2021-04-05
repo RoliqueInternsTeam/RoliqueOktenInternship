@@ -35,7 +35,7 @@ const EditInternalUser = (props) => {
 
     const response = await fetch(`http://localhost:5000/user/${userInfo._id}`, request);
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       props.history.push('/users');
     }
   };
@@ -53,9 +53,9 @@ const EditInternalUser = (props) => {
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
           <PictureLoader label='Profile Picture' alt='Add an avatar' avatar={userInfo.avatar} setState={setUserInfo} />
-          <Input label="First Name" type='text' id="firstName" required="required" value={userInfo.firstName || userInfo.firstname} onChange={(event) => inputHandler(event)} />
-          <Input label="Last Name" type='text' id="lastName" required="required" value={userInfo.lastName || userInfo.lastname} onChange={(event) => inputHandler(event)} />
-          <Input label="Email" type='email' id="email" required="required" value={userInfo.email} onChange={(event) => inputHandler(event)} />
+          <Input label="First Name" type='text' id="firstName" value={userInfo.firstName || userInfo.firstname} onChange={(event) => inputHandler(event)} />
+          <Input label="Last Name" type='text' id="lastName" value={userInfo.lastName || userInfo.lastname} onChange={(event) => inputHandler(event)} />
+          <Input label="Email" type='email' id="email" value={userInfo.email} onChange={(event) => inputHandler(event)} />
           <Input label="Phone" type='tel' id="phone" value={userInfo.phone} onChange={(event) => inputHandler(event)} />
         </div>
         <div className={classes.rightContainer}>
@@ -71,12 +71,11 @@ const EditInternalUser = (props) => {
             name="roles"
             options={['admin', 'manager', 'employee']}
             select={userInfo.role}
-            required="required"
             onChange={(event) => dropdownHandler(event)}
           />
           <div className={classes.passwordContainer}>
             <h4 className={classes.h4}>Password</h4>
-            <Input label="Set Password" type='password' id="password" required="required" onChange={(event) => inputHandler(event)} />
+            <Input label="Set Password" type='password' id="password" onChange={(event) => inputHandler(event)} />
           </div>
         </div>
       </div>
