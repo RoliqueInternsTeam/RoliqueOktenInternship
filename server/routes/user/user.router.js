@@ -7,6 +7,10 @@ const userRouter = Router();
 
 userRouter.post('/',
     authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess([
+        'admin',
+        'manager'
+    ]),
     usersMiddleware.checkUserValid,
     fileMiddleware.checkFileMiddleware,
     usersMiddleware.checkIsUserCreated,

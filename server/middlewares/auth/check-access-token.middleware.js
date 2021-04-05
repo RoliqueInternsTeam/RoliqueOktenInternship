@@ -23,7 +23,8 @@ module.exports = async (req, res, next) => {
         if (!isTokenExist) {
             throw new ErrorHandler(errors.NOT_VALID_TOKEN.message, errors.NOT_VALID_TOKEN.code);
         }
-        req.user = isTokenExist;
+        const user = isTokenExist[0];
+        req.user = user;
 
         next();
     } catch (e) {

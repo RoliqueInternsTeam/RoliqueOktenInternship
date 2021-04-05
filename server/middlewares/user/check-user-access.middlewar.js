@@ -2,13 +2,14 @@ const { ErrorHandler, errors } = require('../../errors');
 
 module.exports = (whoHaveAccess = []) => (req, res, next) => {
     try {
-        const { role } = req.user;
+        const { user } = req.user;
+        console.log(user);
 
         if (!whoHaveAccess.length) {
             return next();
         }
 
-        if (!whoHaveAccess.includes(role)) {
+        if (!whoHaveAccess.includes(user.role)) {
             throw new ErrorHandler(errors.ACCESS_DENIED.message, errors.ACCESS_DENIED.code);
         }
 
