@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import SingleUser from './SingleUser/SingleUser';
 import classes from './UserList.module.css';
-import Aux from '../../../hoc/Aux';
+import Auxiliary from '../../../hoc/Auxiliary';
 import SearchContext from '../../../context/searchContext';
 
 const urlUsers = 'http://localhost:5000/user';
@@ -35,7 +35,7 @@ const UserList = () => {
   }, [search]);
 
   return (
-    <Aux>
+    <Auxiliary>
       <table className={classes.table}>
         <thead>
           <tr>
@@ -49,7 +49,7 @@ const UserList = () => {
           {users.map((user) => (<SingleUser key={user._id} {...user} />))}
         </tbody>
       </table>
-    </Aux>
+    </Auxiliary>
   );
 };
 
