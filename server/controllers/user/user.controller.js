@@ -53,7 +53,7 @@ module.exports = {
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
                 await userService.updateUser(id, { ...updateUser });
-                res.status(OK);
+                return res.status(OK).end();
             }
 
             const db = await userService.updateUser(id, { ...updateUser });
