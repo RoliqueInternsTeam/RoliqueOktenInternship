@@ -9,6 +9,7 @@ const Input = (props) => (
       type={props.type}
       id={props.id}
       placeholder={props.placeholder}
+      value={props.value}
       pattern={props.pattern}
       required={props.required}
       onChange={props.onChange}
