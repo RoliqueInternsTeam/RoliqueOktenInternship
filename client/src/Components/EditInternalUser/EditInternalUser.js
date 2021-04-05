@@ -21,12 +21,12 @@ const EditInternalUser = (props) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
   const dropdownHandler = (event) => {
-    setUserInfo(((prevState) => ({ ...prevState, role: event.target.value })));
+    setUserInfo(((prevState) => ({ ...prevState, role: event.target.value.toLowerCase() })));
   };
   const createHandler = async (event) => {
     event.preventDefault();
     const request = {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -66,7 +66,14 @@ const EditInternalUser = (props) => {
               <Tooltip color='dark' arrowPlace='top' align='center' message={ROLES_INFO} />
             </div>
           </div>
-          <Dropdown label="Role" name="roles" options={['Admin', 'Manager', 'Employee']} select={userInfo.role} required="required" onChange={(event) => dropdownHandler(event)} />
+          <Dropdown
+            label="Role"
+            name="roles"
+            options={['admin', 'manager', 'employee']}
+            select={userInfo.role}
+            required="required"
+            onChange={(event) => dropdownHandler(event)}
+          />
           <div className={classes.passwordContainer}>
             <h4 className={classes.h4}>Password</h4>
             <Input label="Set Password" type='password' id="password" required="required" onChange={(event) => inputHandler(event)} />

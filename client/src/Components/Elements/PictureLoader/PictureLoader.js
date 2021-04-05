@@ -109,7 +109,9 @@ const PictureLoader = (props) => {
   return (
     <div className={classes.container}>
       <label className={classes.profileLabel} htmlFor='avatar'>{props.label}</label>
-      { newProfilePicture ? <img src={newProfilePicture} alt='Your avatar' className={classes.newProfilePicture} /> : <img src={ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
+      { newProfilePicture
+        ? <img src={newProfilePicture} alt='Your avatar' className={classes.newProfilePicture} />
+        : <img src={props.avatar ? `'http://localhost:5000/public' + ${props.avatar}` : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
       <input type='file' id='avatar' accept={PHOTO_MIMETYPES} onChange={onChange} className={classes.input} />
       {error ? <Message message={error} style={['error-bg-color', 'error-icon-color', 'error-text-color']} /> : null}
       <div className={uploaded ? classes.cropper : classes.hideCropper}>

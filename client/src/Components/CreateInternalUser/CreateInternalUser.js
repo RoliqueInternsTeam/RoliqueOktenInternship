@@ -12,8 +12,8 @@ import Header from '../Elements/Header/Header';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     phone: '',
     role: '',
@@ -25,10 +25,11 @@ const CreateInternalUser = (props) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
   const dropdownHandler = (event) => {
-    setUserInfo(((prevState) => ({ ...prevState, role: event.target.value })));
+    setUserInfo(((prevState) => ({ ...prevState, role: event.target.value.toLowerCase() })));
   };
   const createHandler = async (event) => {
     event.preventDefault();
+    console.log(userInfo);
     const request = {
       method: 'POST',
       headers: {
@@ -51,8 +52,8 @@ const CreateInternalUser = (props) => {
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
           <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setUserInfo} />
-          <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
-          <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
+          <Input label="First Name" type='text' id="firstname" required="required" onChange={(event) => inputHandler(event)} />
+          <Input label="Last Name" type='text' id="lastname" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" required="required" onChange={(event) => inputHandler(event)} />
           <Input label="Phone" type='tel' id="phone" pattern={PHONE_NUMBER} onChange={(event) => inputHandler(event)} />
         </div>
@@ -67,7 +68,7 @@ const CreateInternalUser = (props) => {
           <Dropdown
             label="Role"
             name="roles"
-            options={['Admin', 'Manager', 'Employee']}
+            options={['admin', 'manager', 'employee']}
             required="required"
             onChange={(event) => dropdownHandler(event)}
           />
