@@ -69,6 +69,8 @@ const PictureLoader = (props) => {
     );
   });
 
+  const blobToFile = (blob, fileName) => new File([blob], fileName, { lastModified: new Date().getTime(), type: blob.type });
+
   const onChange = async (event) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -96,12 +98,17 @@ const PictureLoader = (props) => {
     getImage(crop);
   };
 
+  // const submitHandler = () => {
+  //   props.setState(((prevState) => ({ ...prevState, avatar: croppedImage })));
+  //   setNewProfilePicture(croppedImageUrl);
+  //   setUploaded(null);
+  // };
   const submitHandler = () => {
-    props.setState(((prevState) => ({ ...prevState, avatar: croppedImage })));
+    const file = blobToFile(croppedImage, 'avatar.jpeg');
+    props.setState(((prevState) => ({ ...prevState, avatar: file })));
     setNewProfilePicture(croppedImageUrl);
     setUploaded(null);
   };
-
   const cancelHandler = () => {
     setUploaded(null);
   };
