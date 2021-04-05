@@ -18,13 +18,13 @@ module.exports = async (req, res, next) => {
                 throw new ErrorHandler(errors.NOT_VALID_TOKEN.message, errors.NOT_VALID_TOKEN.code);
             }
         });
-        const isTokenExist = await authServices.getTokensByParams({ access_token });
+        const isTokenExist = await authServices.getTokensByParams(access_token);
 
         if (!isTokenExist) {
             throw new ErrorHandler(errors.NOT_VALID_TOKEN.message, errors.NOT_VALID_TOKEN.code);
         }
-
-        req.user = isTokenExist.id;
+        const user = isTokenExist[0];
+        req.user = user;
 
         next();
     } catch (e) {

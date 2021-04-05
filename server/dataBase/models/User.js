@@ -28,12 +28,12 @@ const UserSchema = new Schema({
     },
 
     phone: {
-        type: Number,
+        type: Schema.Types.Mixed,
         required: false
     },
 
     avatar: {
-        type: String,
+        type: Schema.Types.Mixed,
         required: false
     }
 });
