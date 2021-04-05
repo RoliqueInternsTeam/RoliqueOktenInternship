@@ -1,4 +1,9 @@
-const { BAD_REQUEST, UNAUTHORIZED } = require('../constants/status-codes');
+const {
+    BAD_REQUEST,
+    UNAUTHORIZED,
+    NOT_FOUND,
+    FORBIDDEN
+} = require('../constants/status-codes');
 
 module.exports = {
     // BAD REQUEST
@@ -34,6 +39,16 @@ module.exports = {
     NOT_VALID_TOKEN: {
         message: 'Not valid token',
         code: UNAUTHORIZED
+    },
+    // NOT FOUND
+    USER_NOT_FOUND: {
+        message: 'User not found',
+        code: NOT_FOUND
+    },
+    // FORBIDDEN
+    ACCESS_DENIED: {
+        message: 'Access denied',
+        code: FORBIDDEN
     },
 
 };

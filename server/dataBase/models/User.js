@@ -17,12 +17,12 @@ const UserSchema = new Schema({
         required: true
     },
 
-    firstname: {
+    firstName: {
         type: String,
         required: true
     },
 
-    lastname: {
+    lastName: {
         type: String,
         required: true
     },
@@ -33,7 +33,7 @@ const UserSchema = new Schema({
     },
 
     avatar: {
-        type: String,
+        type: Schema.Types.Mixed,
         required: false
     }
 });
