@@ -9,9 +9,10 @@ import Tooltip from '../Elements/Tooltip/Tooltip';
 import PictureLoader from '../Elements/PictureLoader/PictureLoader';
 import { ROLES_INFO } from '../../config/messages';
 import SearchContext from '../../context/searchContext';
+import { PHONE_NUMBER } from '../../config/regexp.enum';
 
 const EditInternalUser = (props) => {
-  const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser });
+  const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
 
   useEffect(() => {
     console.log(userInfo);
@@ -56,7 +57,7 @@ const EditInternalUser = (props) => {
           <Input label="First Name" type='text' id="firstName" value={userInfo.firstName || userInfo.firstname} onChange={(event) => inputHandler(event)} />
           <Input label="Last Name" type='text' id="lastName" value={userInfo.lastName || userInfo.lastname} onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" value={userInfo.email} onChange={(event) => inputHandler(event)} />
-          <Input label="Phone" type='tel' id="phone" value={userInfo.phone} onChange={(event) => inputHandler(event)} />
+          <Input label="Phone" type='tel' id="phone" pattern={PHONE_NUMBER} value={userInfo.phone} onChange={(event) => inputHandler(event)} />
         </div>
         <div className={classes.rightContainer}>
           <div className={classes.rolesInfo}>
