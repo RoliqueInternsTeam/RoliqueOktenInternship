@@ -98,11 +98,6 @@ const PictureLoader = (props) => {
     getImage(crop);
   };
 
-  // const submitHandler = () => {
-  //   props.setState(((prevState) => ({ ...prevState, avatar: croppedImage })));
-  //   setNewProfilePicture(croppedImageUrl);
-  //   setUploaded(null);
-  // };
   const submitHandler = () => {
     const file = blobToFile(croppedImage, 'avatar.jpeg');
     props.setState(((prevState) => ({ ...prevState, avatar: file })));

@@ -35,11 +35,8 @@ const Login = (props) => {
   return (
     <form className={classes.loginForm} onSubmit={(event) => submitHandler(event)}>
       <h3 className={classes.h3}>Log into your account</h3>
-
-      { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={INVALID_CREDENTIALS} /> : null }
-
       <div className={classes.loginContainer}>
-        { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message="Invalid email or password" /> : null }
+        { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={INVALID_CREDENTIALS} /> : null }
         <Input className="loginInput" id="email" label="Email" type="email" required='required' />
         <Input className="loginInput" id="password" label="Password" type="password" required='required' />
       </div>
