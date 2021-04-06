@@ -9,22 +9,23 @@ const { CREATED, OK } = require('../../constants/status-codes');
 module.exports = {
     createUser: async (req, res, next) => {
         try {
-            const user = req.body;
-            const [avatar] = req.photos;
+            const { avatar, body: { password } } = req;
+            const passwordHashed = await passwordHash.hash(password);
 
-            user.password = await passwordHash.hash(user.password);
-            const newUser = await userService.createUser(user);
+            Object.assign(req.body, { password: passwordHashed });
+
+            const newUser = await userService.createUser(req.body);
             if (avatar) {
-                const fileExtension = avatar.name.split('.').pop();
-                const photoName = `${uuid}.${fileExtension}`;
                 const avatarPathWithoutPublic = path.join('users', `${newUser._id}`, 'photos');
                 const avatarFullPath = path.join(process.cwd(), 'public', avatarPathWithoutPublic);
+                const fileExtension = avatar.name.split('.').pop();
+                const photoName = `${uuid}.${fileExtension}`;
                 const photoPath = path.join(avatarPathWithoutPublic, photoName);
 
                 await fs.mkdir(path.join(avatarFullPath), { recursive: true });
                 await avatar.mv(path.join(avatarFullPath, photoName));
 
-                await userService.addPhotoUser(newUser._id, photoPath);
+                await userService.addPhotoUser(newUser._id, { avatar: photoPath });
             }
 
             res.status(CREATED).json('User created');
@@ -35,20 +36,20 @@ module.exports = {
     updateUser: async (req, res, next) => {
         try {
             const updateUser = req.body;
-            const [avatar] = req.photos;
+            const { avatar } = req;
             const { id } = req.params;
             if (avatar) {
-                const fileExtension = avatar.name.split('.').pop();
-                const photoName = `${uuid}.${fileExtension}`;
                 const avatarPathWithoutPublic = path.join('users', `${id}`, 'photos');
                 const avatarFullPath = path.join(process.cwd(), 'public', avatarPathWithoutPublic);
+                const fileExtension = avatar.name.split('.').pop();
+                const photoName = `${uuid}.${fileExtension}`;
                 const photoPath = path.join(avatarPathWithoutPublic, photoName);
 
                 await fs.rmdir(path.join(avatarFullPath), { recursive: true });
                 await fs.mkdir(path.join(avatarFullPath), { recursive: true });
                 await avatar.mv(path.join(avatarFullPath, photoName));
 
-                await userService.addPhotoUser(id, photoPath);
+                await userService.addPhotoUser(id, { avatar: photoPath });
             }
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
