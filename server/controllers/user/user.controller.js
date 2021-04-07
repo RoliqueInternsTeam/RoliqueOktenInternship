@@ -25,7 +25,7 @@ module.exports = {
                 await fs.mkdir(path.join(avatarFullPath), { recursive: true });
                 await avatar.mv(path.join(avatarFullPath, photoName));
 
-                await userService.addPhotoUser(newUser._id, { avatar: photoPath });
+                await userService.addPhotoUser(newUser._id, photoPath);
             }
 
             res.status(CREATED).json('User created');
@@ -49,7 +49,7 @@ module.exports = {
                 await fs.mkdir(path.join(avatarFullPath), { recursive: true });
                 await avatar.mv(path.join(avatarFullPath, photoName));
 
-                await userService.addPhotoUser(id, { avatar: photoPath });
+                await userService.addPhotoUser(id, photoPath);
             }
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
