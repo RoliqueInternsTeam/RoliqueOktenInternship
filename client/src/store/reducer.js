@@ -1,4 +1,6 @@
-import { LOGIN, LOGOUT, TOKEN } from './actions';
+import {
+  LOGIN, LOGOUT, TOKEN, ROLE,
+} from './actions';
 
 const initialState = {
   isLogged: false,
@@ -24,6 +26,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         access_token: action.payload,
+      };
+    case ROLE:
+      return {
+        ...state,
+        role: action.payload,
       };
   }
 };

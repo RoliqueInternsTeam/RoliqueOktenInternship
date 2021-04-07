@@ -6,10 +6,11 @@ import classes from './Login.module.css';
 import Input from '../Elements/Input/Input';
 import Message from '../Elements/Message/Message';
 import { INVALID_CREDENTIALS } from '../../config/messages';
-import { LOGIN, TOKEN } from '../../store/actions';
+import { LOGIN, TOKEN, ROLE } from '../../store/actions';
 
 const login = () => ({ type: LOGIN });
 const setToken = (payload) => ({ type: TOKEN, payload });
+const setRole = (payload) => ({ type: ROLE, payload });
 
 const Login = (props) => {
   const [mismatch, setMismatch] = useState(null);
@@ -30,13 +31,14 @@ const Login = (props) => {
     };
 
     const response = await fetch('http://localhost:5000/auth', request);
-    const { access_token } = await response.json();
+    const { access_token, role } = await response.json();
 
     if (response.status !== 200) {
       setMismatch(true);
     }
 
     if (response.status === 200) {
+      dispatch(setRole(role.toLowerCase()));
       dispatch(setToken(access_token));
       dispatch(login());
       props.history.push('/users');
