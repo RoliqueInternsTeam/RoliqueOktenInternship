@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
+import { useSelector } from 'react-redux';
 import classes from './EditInternalUser.module.css';
 import Arrow from '../Elements/Icons/arrow.svg';
 import Info from '../Elements/Icons/info.svg';
@@ -13,6 +14,8 @@ import { PHONE_NUMBER } from '../../config/regexp.enum';
 
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
+
+  const access_token = useSelector(({ access_token }) => access_token);
 
   useEffect(() => {
     console.log(userInfo);
@@ -30,6 +33,7 @@ const EditInternalUser = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        AUTHORIZATION: access_token,
       },
       body: JSON.stringify(userInfo),
     };

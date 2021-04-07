@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router';
 import classes from './Login.module.css';
 
 import Input from '../Elements/Input/Input';
 import Message from '../Elements/Message/Message';
 import { INVALID_CREDENTIALS } from '../../config/messages';
+import { LOGIN, TOKEN } from '../../store/actions';
+
+const login = () => ({ type: LOGIN });
+const setToken = (payload) => ({ type: TOKEN, payload });
 
 const Login = (props) => {
   const [mismatch, setMismatch] = useState(null);
+
+  const dispatch = useDispatch();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -22,12 +30,15 @@ const Login = (props) => {
     };
 
     const response = await fetch('http://localhost:5000/auth', request);
+    const { access_token } = await response.json();
 
     if (response.status !== 200) {
       setMismatch(true);
     }
 
     if (response.status === 200) {
+      dispatch(setToken(access_token));
+      dispatch(login());
       props.history.push('/users');
     }
   };
@@ -45,4 +56,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

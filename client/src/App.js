@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
+import { useSelector } from 'react-redux';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Login from './Components/Login/Login';
 import Users from './Components/Users/Users';
@@ -9,7 +10,9 @@ import CreateInternalUser from './Components/CreateInternalUser/CreateInternalUs
 import EditInternalUser from './Components/EditInternalUser/EditInternalUser';
 
 function App() {
-  return (
+  const isLogged = useSelector(({ isLogged }) => isLogged);
+
+  return isLogged ? (
     <div>
       <Sidebar />
       <Switch>
@@ -19,7 +22,7 @@ function App() {
         <Route path="/edit" component={EditInternalUser} />
       </Switch>
     </div>
-  );
+  ) : <Login />;
 }
 
 export default App;

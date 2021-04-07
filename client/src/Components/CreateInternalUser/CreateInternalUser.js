@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
+import { useSelector } from 'react-redux';
 import classes from './CreateInternalUser.module.css';
 import Info from '../Elements/Icons/info.svg';
 import Input from '../Elements/Input/Input';
@@ -21,6 +22,8 @@ const CreateInternalUser = (props) => {
     avatar: null,
   });
 
+  const access_token = useSelector(({ access_token }) => access_token);
+
   const inputHandler = (event) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
@@ -34,6 +37,7 @@ const CreateInternalUser = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        AUTHORIZATION: access_token,
       },
       body: JSON.stringify(userInfo),
     };

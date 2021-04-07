@@ -23,6 +23,8 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "no-noninteractive-element-interactions": "off",
     "import/named": "off",
+    "camelcase": "off",
+    "import/prefer-default-export": "warn",
     "no-shadow": "warn",
     "no-underscore-dangle": "warn",
     "react/jsx-props-no-spreading": "warn"
