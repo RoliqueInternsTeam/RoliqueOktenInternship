@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import classes from './EditInternalUser.module.css';
 import Arrow from '../Elements/Icons/arrow.svg';
@@ -14,10 +14,6 @@ import { PHONE_NUMBER } from '../../config/regexp.enum';
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
-
   const inputHandler = (event) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
@@ -26,12 +22,13 @@ const EditInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
+    // eslint-disable-next-line prefer-const
+    let formData = new FormData();
+    Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
+
     const request = {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userInfo),
+      body: formData,
     };
 
     const response = await fetch(`http://localhost:5000/user/${userInfo._id}`, request);
