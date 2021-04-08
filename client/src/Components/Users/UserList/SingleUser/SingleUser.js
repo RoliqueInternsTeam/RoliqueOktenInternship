@@ -15,7 +15,7 @@ const SingleUser = (props) => {
   const permissionHandler = () => {
     switch (props.role) {
       default:
-        return [ADMIN, MANAGER];
+        return [ADMIN];
       case ADMIN:
         return [ADMIN];
       case MANAGER:
@@ -35,7 +35,7 @@ const SingleUser = (props) => {
       <td>{props.email}</td>
       <td>{capitalizeFirstLetter(props.role)}</td>
       <td>{props.phone}</td>
-      <PermissionChecker permission={permissionHandler()}>
+      <PermissionChecker permission={permissionHandler()} display={null}>
         <td className={classes.edit}>
           <NavLink
             to="/edit"

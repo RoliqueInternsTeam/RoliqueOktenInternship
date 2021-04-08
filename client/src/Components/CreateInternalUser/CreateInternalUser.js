@@ -12,6 +12,7 @@ import { PHONE_NUMBER } from '../../config/regexp.enum';
 import Header from '../Elements/Header/Header';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
+import refreshToken from '../../helpers';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -46,7 +47,6 @@ const CreateInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
-    console.log(userInfo);
     const request = {
       method: 'POST',
       headers: {
@@ -60,10 +60,14 @@ const CreateInternalUser = (props) => {
     if (response.status === 201) {
       props.history.push('/users');
     }
+    if (response.status === 401) {
+      await refreshToken();
+      await createHandler();
+    }
   };
 
   return (
-    <PermissionChecker permission={[ADMIN, MANAGER]}>
+    <PermissionChecker permission={[ADMIN, MANAGER]} display={props.history.push('/users')}>
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <Header arrow title='Create Internal User' button='saveChanges' />
         <div className={classes.body}>

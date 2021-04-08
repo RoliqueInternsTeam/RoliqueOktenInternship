@@ -21,6 +21,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLogged: false,
+        access_token: null,
+        role: null,
       };
     case TOKEN:
       return {
