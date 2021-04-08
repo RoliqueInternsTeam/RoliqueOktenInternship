@@ -12,7 +12,7 @@
     border: 1px solid rgba(255, 101, 14, 0.5);
     box-shadow: 0px 0px 2px rgba(255, 101, 14, 0.25);
 }
-.input:required {
+.input:not([value]) {
     border: 1px solid #DA1414;
 }
 
