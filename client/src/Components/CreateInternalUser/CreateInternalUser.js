@@ -29,13 +29,13 @@ const CreateInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
-    console.log(userInfo);
+    // eslint-disable-next-line prefer-const
+    let formData = new FormData();
+    Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
+
     const request = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userInfo),
+      body: formData,
     };
 
     const response = await fetch('http://localhost:5000/user', request);
