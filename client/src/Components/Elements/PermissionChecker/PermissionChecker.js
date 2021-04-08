@@ -1,11 +1,13 @@
 import { useSelector } from 'react-redux';
+import { withRouter } from 'react-router';
 
 const PermissionChecker = (props) => {
   const role = useSelector(({ role }) => role);
-  console.log(props.permission);
+  console.log(role);
+
   const authorized = props.permission.includes(role);
-  console.log(role, authorized);
+  console.log(authorized);
   return authorized ? props.children : props.display;
 };
 
-export default PermissionChecker;
+export default withRouter(PermissionChecker);

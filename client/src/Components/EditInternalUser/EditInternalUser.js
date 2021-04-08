@@ -13,7 +13,7 @@ import SearchContext from '../../context/searchContext';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
-import refreshToken from '../../helpers';
+import RefreshToken from '../../helpers';
 
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
@@ -47,7 +47,7 @@ const EditInternalUser = (props) => {
       props.history.push('/users');
     }
     if (response.status === 401) {
-      await refreshToken();
+      await RefreshToken();
       await createHandler();
     }
   };

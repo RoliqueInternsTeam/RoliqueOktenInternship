@@ -35,8 +35,8 @@ const SingleUser = (props) => {
       <td>{props.email}</td>
       <td>{capitalizeFirstLetter(props.role)}</td>
       <td>{props.phone}</td>
-      <PermissionChecker permission={permissionHandler()} display={null}>
-        <td className={classes.edit}>
+      <td className={classes.edit}>
+        <PermissionChecker permission={permissionHandler()} display={null}>
           <NavLink
             to="/edit"
             onClick={() => {
@@ -49,8 +49,8 @@ const SingleUser = (props) => {
             </div>
             <img src={Edit} alt="Edit User" />
           </NavLink>
-        </td>
-      </PermissionChecker>
+        </PermissionChecker>
+      </td>
     </tr>
   );
 };

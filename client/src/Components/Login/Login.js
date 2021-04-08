@@ -43,7 +43,6 @@ const Login = (props) => {
 
     if (response.status === 200) {
       cookies.set('refresh_token', refresh_token);
-      console.log(cookies.get('refresh_token'));
       dispatch(setRole(role.toLowerCase()));
       dispatch(setToken(access_token));
       dispatch(login());

@@ -12,7 +12,7 @@ import { PHONE_NUMBER } from '../../config/regexp.enum';
 import Header from '../Elements/Header/Header';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
-import refreshToken from '../../helpers';
+import RefreshToken from '../../helpers';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -61,12 +61,13 @@ const CreateInternalUser = (props) => {
       props.history.push('/users');
     }
     if (response.status === 401) {
-      await refreshToken();
+      await RefreshToken();
       await createHandler();
     }
   };
 
   return (
+    // eslint-disable-next-line no-restricted-globals
     <PermissionChecker permission={[ADMIN, MANAGER]} display={props.history.push('/users')}>
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <Header arrow title='Create Internal User' button='saveChanges' />

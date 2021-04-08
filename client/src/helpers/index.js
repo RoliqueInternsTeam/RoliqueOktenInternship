@@ -4,12 +4,10 @@ import { TOKEN } from '../store/actions';
 
 const cookies = new Cookies();
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const dispatch = useDispatch();
-
 const setToken = (payload) => ({ type: TOKEN, payload });
 
-const refreshToken = async () => {
+const RefreshToken = async () => {
+  const dispatch = useDispatch();
   const refresh_token = cookies.get('refresh_token');
   const refreshResponse = await fetch('http://localhost:5000/refresh', {
     method: 'POST',
@@ -24,4 +22,4 @@ const refreshToken = async () => {
   }
 };
 
-export default refreshToken;
+export default RefreshToken;
