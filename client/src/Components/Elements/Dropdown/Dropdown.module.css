@@ -18,14 +18,19 @@
 }
 .select {
     background: #FAFAFB;
-    border: 1px solid #BFBFBF;
+    border: 1px solid #DA1414;
     box-sizing: border-box;
     border-radius: 6px;
     width: 344px;
     height: 32px;
 }
-.select:required {
-    border: 1px solid #DA1414;
+.select1 {
+    border: 1px solid #BFBFBF;
+    background: #FAFAFB;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 344px;
+    height: 32px;
 }
 .option {
     width: 46px;
