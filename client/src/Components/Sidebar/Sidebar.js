@@ -9,7 +9,7 @@ import Users from '../Elements/Icons/users.svg';
 import Volume from '../Elements/Icons/volume.svg';
 import At from '../Elements/Icons/at.svg';
 import Logout from '../Elements/Icons/log-out.png';
-import { LOGOUT } from '../../store/actions';
+import { LOGOUT } from '../../store/actionTypes';
 
 const logout = () => ({ type: LOGOUT });
 

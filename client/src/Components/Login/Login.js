@@ -7,11 +7,7 @@ import classes from './Login.module.css';
 import Input from '../Elements/Input/Input';
 import Message from '../Elements/Message/Message';
 import { INVALID_CREDENTIALS } from '../../config/messages';
-import { LOGIN, TOKEN, ROLE } from '../../store/actions';
-
-const login = () => ({ type: LOGIN });
-const setToken = (payload) => ({ type: TOKEN, payload });
-const setRole = (payload) => ({ type: ROLE, payload });
+import { login, setRole, setToken } from '../../store/actions';
 
 const Login = (props) => {
   const [mismatch, setMismatch] = useState(null);

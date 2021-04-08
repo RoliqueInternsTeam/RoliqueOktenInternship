@@ -12,6 +12,7 @@
     position: absolute;
     top: 15px;
     left: 50px;
+    opacity: 97%;
 }
 .icon {
     filter: invert(32%) sepia(98%) saturate(4441%) hue-rotate(341deg) brightness(75%) contrast(138%);

@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import { useDispatch } from 'react-redux';
-import { TOKEN } from '../store/actions';
+import { TOKEN } from '../store/actionTypes';
 
 const cookies = new Cookies();
 

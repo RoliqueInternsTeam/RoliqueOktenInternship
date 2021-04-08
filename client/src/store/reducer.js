@@ -1,11 +1,12 @@
 import {
-  LOGIN, LOGOUT, TOKEN, ROLE,
-} from './actions';
+  LOGIN, LOGOUT, TOKEN, ROLE, BAD_REQUEST,
+} from './actionTypes';
 
 const initialState = {
   isLogged: false,
   role: null,
   access_token: null,
+  badRequest: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +34,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         role: action.payload,
+      };
+    case BAD_REQUEST:
+      return {
+        ...state,
+        badRequest: action.payload,
       };
   }
 };

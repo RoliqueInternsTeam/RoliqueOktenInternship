@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './EditInternalUser.module.css';
 import Arrow from '../Elements/Icons/arrow.svg';
 import Info from '../Elements/Icons/info.svg';
@@ -15,15 +15,14 @@ import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
 import RefreshToken from '../../helpers';
 import Toastr from '../Elements/Toastr/Toastr';
+import { setBadRequest } from '../../store/actions';
 
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
 
   const access_token = useSelector(({ access_token }) => access_token);
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
+  const dispatch = useDispatch();
 
   const inputHandler = (event) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
@@ -51,10 +50,14 @@ const EditInternalUser = (props) => {
       await RefreshToken();
       await createHandler();
     }
+    if (response.status !== 401 && response.status !== 201) {
+      dispatch(setBadRequest(true));
+      setTimeout(() => dispatch(setBadRequest(false)), 3000);
+    }
   };
 
   return (
-    <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} />}>
+    <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} redirect />}>
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <div className={classes.header}>
           <div className={classes.headerLeft}>

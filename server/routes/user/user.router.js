@@ -6,12 +6,12 @@ const { usersMiddleware, fileMiddleware, authMiddleware } = require('../../middl
 const userRouter = Router();
 
 userRouter.post('/',
-    // authMiddleware.checkAccessToken,
-    // usersMiddleware.checkUserAccess([
-    //     'admin',
-    //     'manager'
-    // ]),
-    // usersMiddleware.checkUserValid,
+    authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess([
+        'admin',
+        'manager'
+    ]),
+    usersMiddleware.checkUserValid,
     fileMiddleware.checkFileMiddleware,
     usersMiddleware.checkIsUserCreated,
     fileMiddleware.checkPhotoCountUser,

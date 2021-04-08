@@ -8,12 +8,16 @@ import Login from './Components/Login/Login';
 import Users from './Components/Users/Users';
 import CreateInternalUser from './Components/CreateInternalUser/CreateInternalUser';
 import EditInternalUser from './Components/EditInternalUser/EditInternalUser';
+import Toastr from './Components/Elements/Toastr/Toastr';
+import { SOMETHING_WRONG } from './config/messages';
 
 function App() {
   const isLogged = useSelector(({ isLogged }) => isLogged);
+  const badRequest = useSelector(({ badRequest }) => badRequest);
 
   return isLogged ? (
     <div>
+      { badRequest ? <Toastr message={SOMETHING_WRONG} /> : null }
       <Sidebar />
       <Switch>
         <Route path="/login" component={Login} />

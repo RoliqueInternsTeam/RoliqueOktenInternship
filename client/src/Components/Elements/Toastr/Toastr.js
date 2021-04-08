@@ -4,7 +4,7 @@ import Error from '../Icons/error.png';
 import classes from './Toastr.module.css';
 
 const Toastr = (props) => {
-  setTimeout(() => props.history.push('/users'), 3000);
+  props.redirect ? setTimeout(() => props.history.push('/users'), 3000) : null;
   return (
     <div className={classes.container}>
       <img src={Error} alt='error' className={classes.icon} />

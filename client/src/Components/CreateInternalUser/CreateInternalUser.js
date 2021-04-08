@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './CreateInternalUser.module.css';
 import Info from '../Elements/Icons/info.svg';
 import Input from '../Elements/Input/Input';
@@ -9,11 +9,12 @@ import Tooltip from '../Elements/Tooltip/Tooltip';
 import PictureLoader from '../Elements/PictureLoader/PictureLoader';
 import { RESTRICTED_ACCESS, ROLES_INFO } from '../../config/messages';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
+import { ADMIN, MANAGER } from '../../config/constants';
 import Header from '../Elements/Header/Header';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
-import { ADMIN, MANAGER } from '../../config/constants';
 import RefreshToken from '../../helpers';
 import Toastr from '../Elements/Toastr/Toastr';
+import { setBadRequest } from '../../store/actions';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -28,6 +29,7 @@ const CreateInternalUser = (props) => {
 
   const access_token = useSelector(({ access_token }) => access_token);
   const role = useSelector(({ role }) => role);
+  const dispatch = useDispatch();
 
   const creatingAccessHandler = (role) => {
     switch (role) {
@@ -65,10 +67,14 @@ const CreateInternalUser = (props) => {
       await RefreshToken();
       await createHandler();
     }
+    if (response.status !== 401 && response.status !== 201) {
+      dispatch(setBadRequest(true));
+      setTimeout(() => dispatch(setBadRequest(false)), 3000);
+    }
   };
 
   return (
-    <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} />}>
+    <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} redirect />}>
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <Header arrow title='Create Internal User' button='saveChanges' />
         <div className={classes.body}>
