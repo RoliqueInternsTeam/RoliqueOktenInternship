@@ -8,12 +8,13 @@ import Input from '../Elements/Input/Input';
 import Dropdown from '../Elements/Dropdown/Dropdown';
 import Tooltip from '../Elements/Tooltip/Tooltip';
 import PictureLoader from '../Elements/PictureLoader/PictureLoader';
-import { ROLES_INFO } from '../../config/messages';
+import { RESTRICTED_ACCESS, ROLES_INFO } from '../../config/messages';
 import SearchContext from '../../context/searchContext';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
 import RefreshToken from '../../helpers';
+import Toastr from '../Elements/Toastr/Toastr';
 
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
@@ -53,7 +54,7 @@ const EditInternalUser = (props) => {
   };
 
   return (
-    <PermissionChecker permission={[ADMIN, MANAGER]}>
+    <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} />}>
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <div className={classes.header}>
           <div className={classes.headerLeft}>

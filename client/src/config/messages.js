@@ -7,4 +7,5 @@ module.exports = {
         + '3. Employees\n'
         + 'Can see internal/external users, edit his own profile, see Budget/Client CPMs when allowed.',
   PHOTO_SIZE_EXCEED: 'A photo size should not exceed 10MB',
+  RESTRICTED_ACCESS: 'Oops! It seems that access to this page is restricted',
 };
