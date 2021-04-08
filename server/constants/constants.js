@@ -1,5 +1,8 @@
 module.exports = {
     AUTHORIZATION: 'Authorization',
+    ADMIN: 'admin',
+    MANAGER: 'manager',
+    EMPLOYEE: 'employee',
 
     PHOTO_MIMETYPES: [
         'image/gif',
