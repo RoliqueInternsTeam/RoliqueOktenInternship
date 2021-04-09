@@ -20,13 +20,18 @@ userRouter.post('/',
     userController.createUser);
 userRouter.put('/:id',
     authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess([
+        ADMIN,
+        MANAGER
+    ]),
     usersMiddleware.checkUserById,
+    usersMiddleware.checkUserAccessUpdate,
     usersMiddleware.checkUpdateUser,
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
     userController.updateUser);
 userRouter.get('/',
-    // authMiddleware.checkAccessToken,
-    // usersMiddleware.checkUserAccess([]),
+    authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess([]),
     userController.getAllUsers);
 module.exports = userRouter;

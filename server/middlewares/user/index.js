@@ -4,5 +4,6 @@ module.exports = {
     checkUserById: require('./check-is-user-created-by-id.middlewar'),
     checkUserValid: require('./chek-user-valid.middleware'),
     checkUpdateUser: require('./check-update-user.middlewar'),
-    checkUserAccessCreate: require('./check-user-access-to-create.middleware')
+    checkUserAccessCreate: require('./check-user-access-to-create.middleware'),
+    checkUserAccessUpdate: require('./check-user-access-to-update.middleware')
 };
