@@ -20,6 +20,7 @@ import { setBadRequest } from '../../store/actions';
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
 
+
   const access_token = useSelector(({ access_token }) => access_token);
 
   const dispatch = useDispatch();
@@ -32,13 +33,16 @@ const EditInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
+    let formData = new FormData();
+    Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
+
     const request = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         AUTHORIZATION: access_token,
       },
-      body: JSON.stringify(userInfo),
+      body: formData,
     };
 
     const response = await fetch(`http://localhost:5000/user/${userInfo._id}`, request);
@@ -57,6 +61,7 @@ const EditInternalUser = (props) => {
   };
 
   return (
+
     <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} redirect />}>
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <div className={classes.header}>
@@ -70,8 +75,8 @@ const EditInternalUser = (props) => {
           <div className={classes.leftContainer}>
             <h4 className={classes.h4}>General</h4>
             <PictureLoader label='Profile Picture' alt='Add an avatar' avatar={userInfo.avatar} setState={setUserInfo} />
-            <Input label="First Name" type='text' id="firstName" value={userInfo.firstName || userInfo.firstname} onChange={(event) => inputHandler(event)} />
-            <Input label="Last Name" type='text' id="lastName" value={userInfo.lastName || userInfo.lastname} onChange={(event) => inputHandler(event)} />
+            <Input label="First Name" type='text' id="firstName" value={userInfo.firstName} onChange={(event) => inputHandler(event)} />
+            <Input label="Last Name" type='text' id="lastName" value={userInfo.lastName} onChange={(event) => inputHandler(event)} />
             <Input label="Email" type='email' id="email" value={userInfo.email} onChange={(event) => inputHandler(event)} />
             <Input label="Phone" type='tel' id="phone" pattern={PHONE_NUMBER} value={userInfo.phone} onChange={(event) => inputHandler(event)} />
           </div>

@@ -9,7 +9,7 @@ import { PHOTO_SIZE_EXCEED } from '../../../config/messages';
 import Message from '../Message/Message';
 
 const PictureLoader = (props) => {
-  const [uploaded, setUploaded] = useState('');
+  const [uploaded, setUploaded] = useState(null);
   const [error, setError] = useState(null);
   const [crop, setCrop] = useState({
     unit: 'px',
@@ -81,6 +81,7 @@ const PictureLoader = (props) => {
         setError(null);
         const image = await resizeFile(file);
         setUploaded(image);
+        event.target.value = '';
       }
     }
   };

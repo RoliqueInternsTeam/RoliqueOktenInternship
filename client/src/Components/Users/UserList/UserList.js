@@ -23,14 +23,12 @@ const UserList = () => {
         searchContext.userList = [...data];
         setUsers(searchContext.userList);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (search) {
       setUsers(users.filter((user) => ([user.firstName || user.firstname, user.lastName || user.lastname].join(' ').toLowerCase().includes(search.toLowerCase()))));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   return (
