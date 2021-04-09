@@ -30,15 +30,15 @@ const Login = (props) => {
     };
 
     const response = await fetch('http://localhost:5000/auth', request);
-    const { token_pair, role } = await response.json();
-    const { access_token, refresh_token } = token_pair;
-
 
     if (response.status !== 200) {
       setMismatch(true);
     }
 
     if (response.status === 200) {
+      const { token_pair, role } = await response.json();
+      const { access_token, refresh_token } = token_pair;
+
       cookies.set('refresh_token', refresh_token);
       dispatch(setRole(role.toLowerCase()));
       dispatch(setToken(access_token));

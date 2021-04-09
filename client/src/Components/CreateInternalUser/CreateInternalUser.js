@@ -13,8 +13,8 @@ import { ADMIN, MANAGER } from '../../config/constants';
 import Header from '../Elements/Header/Header';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import RefreshToken from '../../helpers';
-import Toastr from '../Elements/Toastr/Toastr';
 import { setBadRequest } from '../../store/actions';
+import Message from '../Elements/Message/Message';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -77,7 +77,10 @@ const CreateInternalUser = (props) => {
   };
 
   return (
-    <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} redirect />}>
+    <PermissionChecker
+      permission={[ADMIN, MANAGER]}
+      display={<Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={RESTRICTED_ACCESS} redirect />}
+    >
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <Header arrow title='Create Internal User' button='saveChanges' />
         <div className={classes.body}>
