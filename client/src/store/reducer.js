@@ -1,9 +1,8 @@
 import {
-  LOGIN, LOGOUT, TOKEN, ROLE, BAD_REQUEST,
+  LOGOUT, TOKEN, ROLE, BAD_REQUEST,
 } from './actionTypes';
 
 const initialState = {
-  isLogged: false,
   role: null,
   access_token: null,
   badRequest: false,
@@ -13,11 +12,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
-    case LOGIN:
-      return {
-        ...state,
-        isLogged: true,
-      };
     case LOGOUT:
       return {
         ...state,

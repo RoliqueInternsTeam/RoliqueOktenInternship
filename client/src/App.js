@@ -12,10 +12,10 @@ import { SOMETHING_WRONG } from './config/messages';
 import Message from './Components/Elements/Message/Message';
 
 function App() {
-  const isLogged = useSelector(({ isLogged }) => isLogged);
+  const access_token = useSelector(({ access_token }) => access_token);
   const badRequest = useSelector(({ badRequest }) => badRequest);
 
-  return isLogged ? (
+  return access_token ? (
     <div>
       { badRequest ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={SOMETHING_WRONG} /> : null }
       <Sidebar />

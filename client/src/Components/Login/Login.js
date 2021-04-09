@@ -7,7 +7,7 @@ import classes from './Login.module.css';
 import Input from '../Elements/Input/Input';
 import Message from '../Elements/Message/Message';
 import { INVALID_CREDENTIALS } from '../../config/messages';
-import { login, setRole, setToken } from '../../store/actions';
+import { setRole, setToken } from '../../store/actions';
 
 const Login = (props) => {
   const [mismatch, setMismatch] = useState(null);
@@ -42,7 +42,6 @@ const Login = (props) => {
       cookies.set('refresh_token', refresh_token);
       dispatch(setRole(role.toLowerCase()));
       dispatch(setToken(access_token));
-      dispatch(login());
       props.history.push('/users');
     }
   };
