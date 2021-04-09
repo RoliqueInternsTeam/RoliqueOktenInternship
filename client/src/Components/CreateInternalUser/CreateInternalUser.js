@@ -38,7 +38,7 @@ const CreateInternalUser = (props) => {
       case ADMIN:
         return ['admin', 'manager', 'employee'];
       case MANAGER:
-        return ['employee'];
+        return ['manager', 'employee'];
     }
   };
 
@@ -51,13 +51,12 @@ const CreateInternalUser = (props) => {
   const createHandler = async (event) => {
     event.preventDefault();
 
-    // eslint-disable-next-line prefer-const
-    let formData = new FormData();
+    const formData = new FormData();
     Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
 
     const request = {
       method: 'POST',
-      header: {
+      headers: {
         AUTHORIZATION: access_token,
       },
       body: formData,

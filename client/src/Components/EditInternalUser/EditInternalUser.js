@@ -19,11 +19,20 @@ import { setBadRequest } from '../../store/actions';
 
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
-
   const access_token = useSelector(({ access_token }) => access_token);
-
+  const role = useSelector(({ role }) => role);
   const dispatch = useDispatch();
 
+  const creatingAccessHandler = (role) => {
+    switch (role) {
+      default:
+        return null;
+      case ADMIN:
+        return ['admin', 'manager', 'employee'];
+      case MANAGER:
+        return ['manager', 'employee'];
+    }
+  };
   const inputHandler = (event) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
@@ -38,7 +47,6 @@ const EditInternalUser = (props) => {
     const request = {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
         AUTHORIZATION: access_token,
       },
       body: formData,
@@ -60,7 +68,6 @@ const EditInternalUser = (props) => {
   };
 
   return (
-
     <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} redirect />}>
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <div className={classes.header}>
@@ -90,7 +97,7 @@ const EditInternalUser = (props) => {
             <Dropdown
               label="Role"
               name="roles"
-              options={['admin', 'manager', 'employee']}
+              options={creatingAccessHandler(role)}
               select={userInfo.role}
               onChange={(event) => dropdownHandler(event)}
             />
