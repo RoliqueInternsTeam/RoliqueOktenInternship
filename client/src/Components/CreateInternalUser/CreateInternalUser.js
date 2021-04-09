@@ -38,7 +38,7 @@ const CreateInternalUser = (props) => {
       case ADMIN:
         return ['admin', 'manager', 'employee'];
       case MANAGER:
-        return ['employee'];
+        return ['manager', 'employee'];
     }
   };
 
@@ -57,6 +57,9 @@ const CreateInternalUser = (props) => {
 
     const request = {
       method: 'POST',
+      headers: {
+        AUTHORIZATION: access_token,
+      },
       body: formData,
     };
 

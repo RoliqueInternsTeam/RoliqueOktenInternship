@@ -18,8 +18,11 @@
     width: 32px;
     border-radius: 200px;
     vertical-align: middle;
-    margin: 12px 16px;
+    margin: 12px 16px 12px 0px;
     }
+.td {
+    padding-left: 16px;
+}
 .tr td {
     padding: 0;
 }

@@ -27,7 +27,7 @@ const SingleUser = (props) => {
 
   return (
     <tr className={classes.tr}>
-      <td>
+      <td className={classes.td}>
         {props.avatar
           ? <img src={`http://localhost:5000/${props.avatar}`} alt='avatar' className={classes.profilePicture} /> : ''}
         &nbsp;
