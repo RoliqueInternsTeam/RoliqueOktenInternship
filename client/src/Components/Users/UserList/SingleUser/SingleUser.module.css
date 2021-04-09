@@ -13,9 +13,13 @@
 
     color: #383838;
 }
-.tr .td {
-    padding: 0 0 0 16px;
-}
+.profilePicture {
+    height: 32px;
+    width: 32px;
+    border-radius: 200px;
+    vertical-align: middle;
+    margin: 12px 16px;
+    }
 .tr td {
     padding: 0;
 }

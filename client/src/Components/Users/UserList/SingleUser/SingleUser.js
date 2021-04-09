@@ -12,9 +12,11 @@ function capitalizeFirstLetter(string) {
 const SingleUser = (props) => (
   <tr className={classes.tr}>
     <td className={classes.td}>
-      {props.firstName || props.firstname}
+      {props.avatar ? <img src={`http://localhost:5000/${props.avatar}`} alt='avatar' className={classes.profilePicture} /> : ''}
       &nbsp;
-      {props.lastName || props.lastname}
+      {props.firstName}
+      &nbsp;
+      {props.lastName}
     </td>
     <td>{props.email}</td>
     <td>{capitalizeFirstLetter(props.role)}</td>
@@ -23,7 +25,6 @@ const SingleUser = (props) => (
       <NavLink
         to="/edit"
         onClick={() => {
-          // eslint-disable-next-line no-underscore-dangle
           SearchContext.editUser = { ...props };
         }}
       >

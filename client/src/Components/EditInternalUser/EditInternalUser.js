@@ -22,7 +22,6 @@ const EditInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
-    // eslint-disable-next-line prefer-const
     let formData = new FormData();
     Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
 
@@ -51,8 +50,8 @@ const EditInternalUser = (props) => {
         <div className={classes.leftContainer}>
           <h4 className={classes.h4}>General</h4>
           <PictureLoader label='Profile Picture' alt='Add an avatar' avatar={userInfo.avatar} setState={setUserInfo} />
-          <Input label="First Name" type='text' id="firstName" value={userInfo.firstName || userInfo.firstname} onChange={(event) => inputHandler(event)} />
-          <Input label="Last Name" type='text' id="lastName" value={userInfo.lastName || userInfo.lastname} onChange={(event) => inputHandler(event)} />
+          <Input label="First Name" type='text' id="firstName" value={userInfo.firstName} onChange={(event) => inputHandler(event)} />
+          <Input label="Last Name" type='text' id="lastName" value={userInfo.lastName} onChange={(event) => inputHandler(event)} />
           <Input label="Email" type='email' id="email" value={userInfo.email} onChange={(event) => inputHandler(event)} />
           <Input label="Phone" type='tel' id="phone" pattern={PHONE_NUMBER} value={userInfo.phone} onChange={(event) => inputHandler(event)} />
         </div>
