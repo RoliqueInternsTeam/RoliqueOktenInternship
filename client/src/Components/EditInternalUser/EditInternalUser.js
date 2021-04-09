@@ -14,8 +14,8 @@ import { PHONE_NUMBER } from '../../config/regexp.enum';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
 import RefreshToken from '../../helpers';
-import Toastr from '../Elements/Toastr/Toastr';
 import { setBadRequest } from '../../store/actions';
+import Message from '../Elements/Message/Message';
 
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
@@ -68,7 +68,10 @@ const EditInternalUser = (props) => {
   };
 
   return (
-    <PermissionChecker permission={[ADMIN, MANAGER]} display={<Toastr message={RESTRICTED_ACCESS} redirect />}>
+    <PermissionChecker
+      permission={[ADMIN, MANAGER]}
+      display={<Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={RESTRICTED_ACCESS} redirect />}
+    >
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
         <div className={classes.header}>
           <div className={classes.headerLeft}>

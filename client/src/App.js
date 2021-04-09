@@ -8,16 +8,16 @@ import Login from './Components/Login/Login';
 import Users from './Components/Users/Users';
 import CreateInternalUser from './Components/CreateInternalUser/CreateInternalUser';
 import EditInternalUser from './Components/EditInternalUser/EditInternalUser';
-import Toastr from './Components/Elements/Toastr/Toastr';
 import { SOMETHING_WRONG } from './config/messages';
+import Message from './Components/Elements/Message/Message';
 
 function App() {
-  const isLogged = useSelector(({ isLogged }) => isLogged);
+  const access_token = useSelector(({ access_token }) => access_token);
   const badRequest = useSelector(({ badRequest }) => badRequest);
 
-  return isLogged ? (
+  return access_token ? (
     <div>
-      { badRequest ? <Toastr message={SOMETHING_WRONG} /> : null }
+      { badRequest ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={SOMETHING_WRONG} /> : null }
       <Sidebar />
       <Switch>
         <Route path="/login" component={Login} />
