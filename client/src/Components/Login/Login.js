@@ -32,7 +32,7 @@ const Login = (props) => {
     const response = await fetch('http://localhost:5000/auth', request);
     const { token_pair, role } = await response.json();
     const { access_token, refresh_token } = token_pair;
-    console.log(access_token);
+
 
     if (response.status !== 200) {
       setMismatch(true);

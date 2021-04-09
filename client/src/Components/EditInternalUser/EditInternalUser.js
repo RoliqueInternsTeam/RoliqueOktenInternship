@@ -41,8 +41,7 @@ const EditInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
-    let formData = new FormData();
-    console.log(userInfo);
+    const formData = new FormData();
     Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
 
     const request = {
