@@ -26,33 +26,35 @@ const SingleUser = (props) => {
   };
 
   return (
-  <tr className={classes.tr}>
-    <td className={classes.td}>
-      {props.avatar ? <img src={`http://localhost:5000/${props.avatar}`} alt='avatar' className={classes.profilePicture} /> : ''}
-      &nbsp;
-      {props.firstName}
-      &nbsp;
-      {props.lastName}
-    </td>
-    <td>{props.email}</td>
-    <td>{capitalizeFirstLetter(props.role)}</td>
-    <td>{props.phone}</td>
-    <td className={classes.edit}>
+    <tr className={classes.tr}>
+      <td>
+        {props.avatar
+          ? <img src={`http://localhost:5000/${props.avatar}`} alt='avatar' className={classes.profilePicture} /> : ''}
+        &nbsp;
+        {props.firstName}
+        &nbsp;
+        {props.lastName}
+      </td>
+      <td>{props.email}</td>
+      <td>{capitalizeFirstLetter(props.role)}</td>
+      <td>{props.phone}</td>
+      <td className={classes.edit}>
         <PermissionChecker permission={permissionHandler()} display={null}>
-      <NavLink
-        to="/edit"
-        onClick={() => {
-          SearchContext.editUser = { ...props };
-        }}
-      >
-        <div className={classes.tooltipDiv}>
-          <Tooltip arrowPlace='right' align='center' color='dark' message='Edit User' />
-        </div>
-        <img src={Edit} alt="Edit User" />
-      </NavLink>
+          <NavLink
+            to="/edit"
+            onClick={() => {
+              SearchContext.editUser = { ...props };
+            }}
+          >
+            <div className={classes.tooltipDiv}>
+              <Tooltip arrowPlace='right' align='center' color='dark' message='Edit User' />
+            </div>
+            <img src={Edit} alt="Edit User" />
+          </NavLink>
         </PermissionChecker>
-    </td>
-  </tr>
-);
+      </td>
+    </tr>
+  );
+};
 
 export default SingleUser;
