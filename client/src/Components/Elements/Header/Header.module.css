@@ -56,3 +56,10 @@
     right: 68px;
     top: 23px;
 }
+.logout {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
