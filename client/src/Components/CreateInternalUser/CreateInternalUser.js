@@ -57,6 +57,9 @@ const CreateInternalUser = (props) => {
 
     const request = {
       method: 'POST',
+      header: {
+        AUTHORIZATION: access_token,
+      },
       body: formData,
     };
 

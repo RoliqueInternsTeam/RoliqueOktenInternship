@@ -20,7 +20,6 @@ import { setBadRequest } from '../../store/actions';
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
 
-
   const access_token = useSelector(({ access_token }) => access_token);
 
   const dispatch = useDispatch();
@@ -33,7 +32,7 @@ const EditInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
-    let formData = new FormData();
+    const formData = new FormData();
     Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
 
     const request = {
