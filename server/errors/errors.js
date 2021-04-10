@@ -40,6 +40,11 @@ module.exports = {
         message: 'Not valid token',
         code: UNAUTHORIZED
     },
+    NOT_VALID_REFRESH_TOKEN: {
+        message: 'Not valid token',
+        code: UNAUTHORIZED
+    },
+
     // NOT FOUND
     USER_NOT_FOUND: {
         message: 'User not found',
