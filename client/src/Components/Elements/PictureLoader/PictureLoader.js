@@ -9,7 +9,7 @@ import { PHOTO_SIZE_EXCEED } from '../../../config/messages';
 import Message from '../Message/Message';
 
 const PictureLoader = (props) => {
-  const [uploaded, setUploaded] = useState('');
+  const [uploaded, setUploaded] = useState(null);
   const [error, setError] = useState(null);
   const [crop, setCrop] = useState({
     unit: 'px',
@@ -81,6 +81,7 @@ const PictureLoader = (props) => {
         setError(null);
         const image = await resizeFile(file);
         setUploaded(image);
+        event.target.value = '';
       }
     }
   };
@@ -113,7 +114,7 @@ const PictureLoader = (props) => {
       <label className={classes.profileLabel} htmlFor='avatar'>{props.label}</label>
       { newProfilePicture
         ? <img src={newProfilePicture} alt='Your avatar' className={classes.newProfilePicture} />
-        : <img src={props.avatar ? `'http://localhost:5000/public' + ${props.avatar}` : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
+        : <img src={props.avatar ? `http://localhost:5000/${props.avatar}` : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
       <input type='file' id='avatar' accept={PHOTO_MIMETYPES} onChange={onChange} className={classes.input} />
       {error ? <Message message={error} style={['error-bg-color', 'error-icon-color', 'error-text-color']} /> : null}
       <div className={uploaded ? classes.cropper : classes.hideCropper}>

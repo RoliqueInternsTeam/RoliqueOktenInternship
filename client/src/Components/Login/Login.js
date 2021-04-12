@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router';
+import Cookies from 'universal-cookie';
 import classes from './Login.module.css';
 
 import Input from '../Elements/Input/Input';
 import Message from '../Elements/Message/Message';
 import { INVALID_CREDENTIALS } from '../../config/messages';
+import { setRole, setToken } from '../../store/actions';
 
 const Login = (props) => {
   const [mismatch, setMismatch] = useState(null);
+
+  const cookies = new Cookies();
+
+  const dispatch = useDispatch();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -28,6 +36,12 @@ const Login = (props) => {
     }
 
     if (response.status === 200) {
+      const { token_pair, role } = await response.json();
+      const { access_token, refresh_token } = token_pair;
+
+      cookies.set('refresh_token', refresh_token);
+      dispatch(setRole(role.toLowerCase()));
+      dispatch(setToken(access_token));
       props.history.push('/users');
     }
   };
@@ -45,4 +59,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

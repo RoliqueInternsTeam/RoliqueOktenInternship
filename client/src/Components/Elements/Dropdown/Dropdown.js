@@ -5,14 +5,20 @@ function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
 
+let selectClass = classes.select;
+function clickEventHandle() {
+  selectClass = classes.select1;
+}
+
 const Dropdown = (props) => (
   <div className={classes.div}>
     <label className={classes.label}>{props.label}</label>
     <select
-      className={classes.select}
+      className={selectClass}
       name={props.name}
       required={props.required}
       onChange={props.onChange}
+      onClick={() => clickEventHandle()}
     >
       <option className={classes.selected} selected disabled hidden>
         { props.select ? capitalizeFirstLetter(props.select) : 'Select...' }

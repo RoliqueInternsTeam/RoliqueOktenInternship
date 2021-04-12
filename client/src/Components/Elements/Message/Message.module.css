@@ -9,6 +9,13 @@
     border-radius: 8px;
     margin-bottom: 24px;
 }
+.absolute {
+    position: absolute;
+    top: 15px;
+    left: 50px;
+
+    width: fit-content;
+}
 .icon {
     display: flex;
     justify-content: center;

@@ -8,4 +8,7 @@ module.exports = {
   ],
 
   MAX_PHOTO_SIZE: 10 * 1024 * 1024,
+  ADMIN: 'admin',
+  MANAGER: 'manager',
+  EMPLOYEE: 'employee',
 };

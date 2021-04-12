@@ -1,9 +1,8 @@
 const { ErrorHandler, errors } = require('../../errors');
 
 module.exports = (req, res, next) => {
-
     if (!req.photos) {
-       return next();
+        return next();
     }
 
     if (req.photos.length > 1) {

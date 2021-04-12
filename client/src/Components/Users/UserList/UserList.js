@@ -1,36 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import SingleUser from './SingleUser/SingleUser';
 import classes from './UserList.module.css';
 import Auxiliary from '../../../hoc/Auxiliary';
 import SearchContext from '../../../context/searchContext';
-
-const urlUsers = 'http://localhost:5000/user';
+import RefreshToken from '../../../helpers';
 
 const UserList = () => {
   const searchContext = useContext(SearchContext);
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
+  const access_token = useSelector(({ access_token }) => access_token);
 
   searchContext.searchHandler = (event) => {
     setUsers(searchContext.userList);
     setSearch(event.target.value);
   };
 
+  const GetUsers = async () => {
+    console.log(access_token);
+    const request = {
+      method: 'GET',
+      headers: {
+        AUTHORIZATION: access_token,
+      },
+    };
+    const response = await fetch('http://localhost:5000/user', request);
+
+    if (response.status === 200) {
+      searchContext.userList = await response.json();
+      setUsers(searchContext.userList);
+    }
+    if (response.status === 401) {
+      await RefreshToken();
+      await GetUsers();
+      console.log('401');
+    }
+  };
+
   useEffect(() => {
-    fetch(urlUsers)
-      .then((res) => res.json())
-      .then((data) => {
-        searchContext.userList = [...data];
-        setUsers(searchContext.userList);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    GetUsers();
   }, []);
 
   useEffect(() => {
     if (search) {
-      setUsers(users.filter((user) => ([user.firstName || user.firstname, user.lastName || user.lastname].join(' ').toLowerCase().includes(search.toLowerCase()))));
+      setUsers(users.filter((user) => ([user.firstName, user.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   return (
