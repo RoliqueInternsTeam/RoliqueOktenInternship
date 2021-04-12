@@ -13,6 +13,10 @@ const Input = (props) => (
       pattern={props.pattern}
       required={props.required}
       onChange={props.onChange}
+      onClick={props.onClick}
+      onFocus={props.onFocus}
+      onKeyUp={props.onKeyUp}
+      onBlur={props.onBlur}
     />
     {props.error ? <p className={classes.p}>{props.error}</p> : null}
   </div>

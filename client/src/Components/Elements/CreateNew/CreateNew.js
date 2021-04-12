@@ -14,7 +14,7 @@ const CreateNew = () => (
       </label>
       <div className={classes.dropdown}>
         <NavLink className={classes.link} to='/create'>Campaign</NavLink>
-        <NavLink className={classes.link} to="/create">Influencer</NavLink>
+        <NavLink className={classes.link} to="/createInfluencer">Influencer</NavLink>
         <NavLink className={classes.link} to="/create">Internal User</NavLink>
       </div>
     </div>
