@@ -9,7 +9,7 @@ module.exports = {
 
             await authService.createTokenPair({ userId: id, ...token_pair });
 
-            res.json({ token_pair, role });
+            res.json({ ...token_pair, role });
         } catch (e) {
             next(e);
         }
