@@ -10,23 +10,25 @@ import CreateInternalUser from './Components/CreateInternalUser/CreateInternalUs
 import EditInternalUser from './Components/EditInternalUser/EditInternalUser';
 import { SOMETHING_WRONG } from './config/messages';
 import Message from './Components/Elements/Message/Message';
+import Influencers from './Components/Influencers/Influencers';
 
 function App() {
-  const access_token = useSelector(({ access_token }) => access_token);
+  // const access_token = useSelector(({ access_token }) => access_token);
   const badRequest = useSelector(({ badRequest }) => badRequest);
 
-  return access_token ? (
+  return (
     <div>
       { badRequest ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={SOMETHING_WRONG} /> : null }
       <Sidebar />
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/users" component={Users} />
+        <Route path="/influencers" component={Influencers} />
         <Route path="/create" component={CreateInternalUser} />
         <Route path="/edit" component={EditInternalUser} />
       </Switch>
     </div>
-  ) : <Login />;
+  );
 }
 
 export default App;
