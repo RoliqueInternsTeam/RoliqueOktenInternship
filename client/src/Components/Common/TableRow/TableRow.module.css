@@ -1,0 +1,45 @@
+.tr {
+    height: 56px;
+    background: #FFFFFF 55%;
+    box-shadow: inset 0px -4px 0px #E5E5E5;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+
+    letter-spacing: -0.35px;
+
+    color: #383838;
+}
+.profilePicture {
+    height: 32px;
+    width: 32px;
+    border-radius: 200px;
+    vertical-align: middle;
+    margin: 12px 16px 12px 0px;
+}
+.tr .td {
+    padding-left: 16px;
+}
+.tr td {
+    padding: 0;
+}
+.edit {
+    display: table-cell;
+    position: relative;
+    width: 28px;
+    text-align: center;
+    vertical-align: middle;
+    background: #E7E6E8;
+}
+.edit:hover .tooltipDiv {
+    visibility: visible;
+}
+.tooltipDiv {
+    position: absolute;
+    left: -142px;
+    top: 4px;
+    visibility: hidden;
+}
