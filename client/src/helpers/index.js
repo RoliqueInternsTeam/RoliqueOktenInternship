@@ -15,8 +15,6 @@ const RefreshToken = async () => {
   });
   if (refreshResponse.status === 200) {
     const { access_token, refresh_token } = await refreshResponse.json();
-    console.log('new access', access_token);
-    console.log('new refresh', refresh_token);
     cookies.set('refresh_token', refresh_token);
     store.dispatch(setToken(access_token));
   }
