@@ -21,6 +21,7 @@ module.exports = {
             await authService.deleteByParams({ refresh_token });
 
             const token_pair = tokenizer();
+            
             await authService.createTokenPair({ userId, ...token_pair });
 
             res.json(token_pair);
