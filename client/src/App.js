@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 
 import { useSelector } from 'react-redux';
+// import Cookies from 'universal-cookie';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Login from './Components/Login/Login';
 import Users from './Components/Users/Users';
@@ -12,6 +13,7 @@ import { SOMETHING_WRONG } from './config/messages';
 import Message from './Components/Elements/Message/Message';
 
 function App() {
+  // const cookies = new Cookies();
   const access_token = useSelector(({ access_token }) => access_token);
   const badRequest = useSelector(({ badRequest }) => badRequest);
 

@@ -1,6 +1,9 @@
+import Cookies from 'universal-cookie';
 import {
   LOGOUT, TOKEN, ROLE, BAD_REQUEST,
 } from './actionTypes';
+
+const cookies = new Cookies();
 
 const initialState = {
   role: null,
@@ -13,11 +16,12 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
     case LOGOUT:
+      cookies.remove('refresh_token');
       return {
         ...state,
-        isLogged: false,
         access_token: null,
         role: null,
+        badRequest: false,
       };
     case TOKEN:
       return {

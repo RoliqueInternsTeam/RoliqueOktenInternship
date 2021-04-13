@@ -1,24 +1,25 @@
 import Cookies from 'universal-cookie';
-import { useDispatch } from 'react-redux';
-import { TOKEN } from '../store/actionTypes';
+import { store } from '../store/store';
+import { setToken } from '../store/actions';
 
 const cookies = new Cookies();
 
-const setToken = (payload) => ({ type: TOKEN, payload });
-
 const RefreshToken = async () => {
-  const dispatch = useDispatch();
   const refresh_token = cookies.get('refresh_token');
-  const refreshResponse = await fetch('http://localhost:5000/refresh', {
+  const refreshResponse = await fetch('http://localhost:5000/auth/refresh', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      AUTHORIZATION: refresh_token,
     },
-    body: JSON.stringify(refresh_token),
   });
   if (refreshResponse.status === 200) {
-    const { access_token } = await refreshResponse.json();
-    dispatch(setToken(access_token));
+    const { access_token, refresh_token } = await refreshResponse.json();
+    cookies.set('refresh_token', refresh_token);
+    store.dispatch(setToken(access_token));
+  }
+  if (refreshResponse.status === 400 || refreshResponse.status === 401) {
+    window.location.href = '/login';
   }
 };
 
