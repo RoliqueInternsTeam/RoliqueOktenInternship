@@ -36,9 +36,7 @@ const Login = (props) => {
     }
 
     if (response.status === 200) {
-      const { token_pair, role } = await response.json();
-      const { access_token, refresh_token } = token_pair;
-
+      const { access_token, refresh_token, role } = await response.json();
       cookies.set('refresh_token', refresh_token);
       dispatch(setRole(role.toLowerCase()));
       dispatch(setToken(access_token));
@@ -48,7 +46,10 @@ const Login = (props) => {
 
   return (
     <form className={classes.loginForm} onSubmit={(event) => submitHandler(event)}>
-      <h3 className={classes.h3}>Log into your account</h3>
+      <h3 className={classes.h3}>
+        {props.REFRESH}
+        Log into your account
+      </h3>
       <div className={classes.loginContainer}>
         { mismatch ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} message={INVALID_CREDENTIALS} /> : null }
         <Input className="loginInput" id="email" label="Email" type="email" required='required' />
