@@ -19,9 +19,9 @@ const reducer = (state = initialState, action) => {
       cookies.remove('refresh_token');
       return {
         ...state,
-        isLogged: false,
         access_token: null,
         role: null,
+        badRequest: false,
       };
     case TOKEN:
       return {
