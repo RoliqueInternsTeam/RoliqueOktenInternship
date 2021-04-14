@@ -50,3 +50,11 @@
 .selected {
     color: rgba(56, 56, 56, 0.45);
 }
+.notRequiredSelect {
+    background: #FAFAFB;
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 344px;
+    height: 32px;
+}
