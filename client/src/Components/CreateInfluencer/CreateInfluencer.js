@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
+// import DayPickerInput from 'react-day-picker/DayPickerInput';
 import classes from './CreateInfluencer.module.css';
 import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
@@ -13,6 +13,7 @@ import Input from '../Elements/Input/Input';
 import RefreshToken from '../../helpers';
 import { setBadRequest } from '../../store/actions';
 import 'react-day-picker/lib/style.css';
+import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
 
 const CreateInfluencer = (props) => {
   const [influencerInfo, setInfluencerInfo] = useState({
@@ -46,8 +47,8 @@ const CreateInfluencer = (props) => {
     setInfluencerInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
 
-  const dayChangeHandler = (selectedDay) => {
-    setInfluencerInfo(((prevState) => ({ ...prevState, birthday: selectedDay })));
+  const dateHandler = (date) => {
+    setInfluencerInfo(((prevState) => ({ ...prevState, birthday: date })));
   };
 
   const createInfluencerHandler = async (event) => {
@@ -90,12 +91,7 @@ const CreateInfluencer = (props) => {
             <h4 className={classes.h4}>General</h4>
             <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
             <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
-            <DayPickerInput
-              component={(props) => <Input label="Birthday" type='text' id="birthday" onChange={(event) => inputHandler(event)} {...props} />}
-              hideOnDayClick
-              placeholder=''
-              onDayChange={dayChangeHandler}
-            />
+            <BirthdateInput setState={dateHandler} state={influencerInfo} label='Birthdate' />
             <Input label="Profession" type='text' id="profession" required="required" onChange={(event) => inputHandler(event)} />
             <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setInfluencerInfo} />
           </div>
@@ -111,12 +107,12 @@ const CreateInfluencer = (props) => {
                 <Input label="Blog" type='text' id="blog" required={influencerInfo.blogF ? 'required' : null} onChange={(event) => inputHandler(event)} />
               </div>
               <div className={classes.followersContainer}>
-                <Input label="Instagram Followers" type='number' id="instagramF" required={influencerInfo.instagram ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Youtube Followers" type='number' id="youtubeF" required={influencerInfo.youtube ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Facebook Followers" type='number' id="facebookF" required={influencerInfo.facebook ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="TikTok Followers" type='number' id="tiktokF" required={influencerInfo.tiktok ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Twitter Followers" type='number' id="twitterF" required={influencerInfo.twitter ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Blog Followers" type='number' id="blogF" required={influencerInfo.blog ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input input="masked" label="Instagram Followers" id="instagramF" required={influencerInfo.instagram ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input input="masked" label="Youtube Followers" type='number' id="youtubeF" required={influencerInfo.youtube ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input input="masked" label="Facebook Followers" type='number' id="facebookF" required={influencerInfo.facebook ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input input="masked" label="TikTok Followers" type='number' id="tiktokF" required={influencerInfo.tiktok ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input input="masked" label="Twitter Followers" type='number' id="twitterF" required={influencerInfo.twitter ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input input="masked" label="Blog Followers" type='number' id="blogF" required={influencerInfo.blog ? 'required' : null} onChange={(event) => inputHandler(event)} />
               </div>
             </div>
           </div>
