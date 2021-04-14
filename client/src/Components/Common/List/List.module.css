@@ -2,6 +2,7 @@
     border-collapse: collapse;
     margin: 0 68px 0 28px;
     height: min-content;
+    width: 1304px;
     text-align: left;
     overflow-y: auto;
 }
@@ -25,4 +26,7 @@ th{
 
     mix-blend-mode: hard-light;
     opacity: 0.76;
+}
+.last {
+    width: 500px;
 }

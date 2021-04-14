@@ -3,10 +3,10 @@ import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import Resizer from 'react-image-file-resizer';
 import classes from './PictureLoader.module.css';
-import ProfilePicture from '../Icons/profile-picture.svg';
+import ProfilePicture from '../../Elements/Icons/profile-picture.svg';
 import { MAX_PHOTO_SIZE, PHOTO_MIMETYPES } from '../../../config/constants';
 import { PHOTO_SIZE_EXCEED } from '../../../config/messages';
-import Message from '../Message/Message';
+import Message from '../../Elements/Message/Message';
 
 const PictureLoader = (props) => {
   const [uploaded, setUploaded] = useState(null);
