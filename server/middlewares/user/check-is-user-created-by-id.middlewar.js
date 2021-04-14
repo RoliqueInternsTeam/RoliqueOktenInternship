@@ -14,6 +14,8 @@ module.exports = async (req, res, next) => {
         if (!findUser) {
             throw new ErrorHandler(errors.USER_NOT_FOUND.message, errors.USER_NOT_FOUND.code);
         }
+
+        req.findUser = findUser;
         next();
     } catch (e) {
         next(e);

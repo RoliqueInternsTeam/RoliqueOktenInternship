@@ -1,9 +1,9 @@
 const uuid = require('uuid').v1();
-const fs = require('fs-extra').promises;
-const path = require('path');
 
 const passwordHash = require('../../helpers/password.helper');
 const userService = require('../../services/user/user.service');
+const { ErrorHandler, errors } = require('../../errors');
+const { s3 } = require('../../config/s3.config');
 const { CREATED, OK } = require('../../constants/status-codes');
 
 module.exports = {
@@ -16,16 +16,22 @@ module.exports = {
 
             const newUser = await userService.createUser(req.body);
             if (avatar) {
-                const avatarPathWithoutPublic = path.join('users', `${newUser._id}`, 'photos');
-                const avatarFullPath = path.join(process.cwd(), 'public', avatarPathWithoutPublic);
+                const { s3Client } = s3;
+                const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
-                const photoName = `${uuid}.${fileExtension}`;
-                const photoPath = path.join(avatarPathWithoutPublic, photoName);
 
-                await fs.mkdir(path.join(avatarFullPath), { recursive: true });
-                await avatar.mv(path.join(avatarFullPath, photoName));
+                params.Key = `${uuid}.${fileExtension}`;
+                params.Body = avatar.data;
 
-                await userService.addPhotoUser(newUser._id, photoPath);
+                s3Client.upload(params, async (err, data) => {
+                    if (err) {
+                        throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
+                    }
+
+                    const locationUrl = data.Location;
+
+                    await userService.addPhotoUser(newUser._id, locationUrl);
+                });
             }
 
             res.status(CREATED).json('User created');
@@ -39,17 +45,22 @@ module.exports = {
             const { avatar } = req;
             const { id } = req.params;
             if (avatar) {
-                const avatarPathWithoutPublic = path.join('users', `${id}`, 'photos');
-                const avatarFullPath = path.join(process.cwd(), 'public', avatarPathWithoutPublic);
+                const { s3Client } = s3;
+                const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
-                const photoName = `${uuid}.${fileExtension}`;
-                const photoPath = path.join(avatarPathWithoutPublic, photoName);
 
-                await fs.rmdir(path.join(avatarFullPath), { recursive: true });
-                await fs.mkdir(path.join(avatarFullPath), { recursive: true });
-                await avatar.mv(path.join(avatarFullPath, photoName));
+                params.Key = `${uuid}.${fileExtension}`;
+                params.Body = avatar.data;
 
-                await userService.addPhotoUser(id, photoPath);
+                s3Client.upload(params, async (err, data) => {
+                    if (err) {
+                        throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
+                    }
+
+                    const locationUrl = data.Location;
+
+                    await userService.addPhotoUser(id, locationUrl);
+                });
             }
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
@@ -57,9 +68,9 @@ module.exports = {
                 return res.status(OK).end();
             }
 
-            const db = await userService.updateUser(id, { ...updateUser });
+            await userService.updateUser(id, { ...updateUser });
 
-            res.status(OK).json(db);
+            res.status(OK).json('User updated');
         } catch (e) {
             next(e);
         }

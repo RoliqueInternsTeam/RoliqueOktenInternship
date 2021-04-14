@@ -18,7 +18,7 @@ const UserList = () => {
   };
 
   const GetUsers = async () => {
-    console.log(access_token);
+    console.log('GetUsers', access_token);
     const request = {
       method: 'GET',
       headers: {
@@ -33,14 +33,12 @@ const UserList = () => {
     }
     if (response.status === 401) {
       await RefreshToken();
-      await GetUsers();
-      console.log('401');
     }
   };
 
   useEffect(() => {
     GetUsers();
-  }, []);
+  }, [access_token]);
 
   useEffect(() => {
     if (search) {
