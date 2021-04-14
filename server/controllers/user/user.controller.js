@@ -41,10 +41,10 @@ module.exports = {
         try {
             const updateUser = req.body;
             const {
-                firsName, lastName, role, email, phone
+                firstName, lastName, role, email, phone
             } = req.body;
             const updateUserNoPass = {
-                firsName, lastName, role, email, phone
+                firstName, lastName, role, email, phone
             };
             const { avatar } = req;
             const { id } = req.params;
