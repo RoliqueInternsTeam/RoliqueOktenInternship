@@ -1,19 +1,10 @@
 import Cookies from 'universal-cookie';
-<<<<<<< HEAD
-// import { useDispatch } from 'react-redux';
-import { TOKEN } from '../store/actionTypes';
-=======
 import { store } from '../store/store';
 import { setToken } from '../store/actions';
->>>>>>> develop
 
 const cookies = new Cookies();
 
 const RefreshToken = async () => {
-<<<<<<< HEAD
-  // const dispatch = useDispatch();
-=======
->>>>>>> develop
   const refresh_token = cookies.get('refresh_token');
   const refreshResponse = await fetch('http://localhost:5000/auth/refresh', {
     method: 'POST',
