@@ -7,18 +7,18 @@ import Info from '../Elements/Icons/info.svg';
 import Input from '../Elements/Input/Input';
 import Dropdown from '../Elements/Dropdown/Dropdown';
 import Tooltip from '../Elements/Tooltip/Tooltip';
-import PictureLoader from '../Elements/PictureLoader/PictureLoader';
+import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import { RESTRICTED_ACCESS, ROLES_INFO } from '../../config/messages';
-import SearchContext from '../../context/searchContext';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
-import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
+import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
 import RefreshToken from '../../helpers';
 import { setBadRequest } from '../../store/actions';
 import Message from '../Elements/Message/Message';
 
 const EditInternalUser = (props) => {
-  const [userInfo, setUserInfo] = useState({ ...SearchContext.editUser, password: '' });
+  const user = useSelector(({ user }) => user);
+  const [userInfo, setUserInfo] = useState({ ...user, password: '' });
   const access_token = useSelector(({ access_token }) => access_token);
   const role = useSelector(({ role }) => role);
   const dispatch = useDispatch();
