@@ -11,6 +11,7 @@ import EditInternalUser from './Components/EditInternalUser/EditInternalUser';
 import { SOMETHING_WRONG } from './config/messages';
 import Message from './Components/Elements/Message/Message';
 import Influencers from './Components/Influencers/Influencers';
+import EditInfluencer from './Components/EditInfluencer/EditInfluencer';
 
 function App() {
   // const access_token = useSelector(({ access_token }) => access_token);
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/users" component={Users} />
         <Route path="/influencers" component={Influencers} />
+        <Route path="/editInfluencer" component={EditInfluencer} />
         <Route path="/create" component={CreateInternalUser} />
         <Route path="/edit" component={EditInternalUser} />
       </Switch>
