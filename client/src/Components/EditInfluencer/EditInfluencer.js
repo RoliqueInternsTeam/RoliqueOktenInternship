@@ -11,7 +11,7 @@ import PictureLoader from '../Common/PictureLoader/PictureLoader';
 // import RefreshToken from '../../helpers';
 // import { setBadRequest } from '../../store/actions';
 import { RESTRICTED_ACCESS } from '../../config/messages';
-import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datepicker/src/stylesheets/datepicker.scss';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
 
 const EditInfluencer = () => {

@@ -14,10 +14,10 @@ import Influencers from './Components/Influencers/Influencers';
 import EditInfluencer from './Components/EditInfluencer/EditInfluencer';
 
 function App() {
-  // const access_token = useSelector(({ access_token }) => access_token);
+  const access_token = useSelector(({ access_token }) => access_token);
   const badRequest = useSelector(({ badRequest }) => badRequest);
 
-  return (
+  return access_token ? (
     <div>
       { badRequest ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={SOMETHING_WRONG} /> : null }
       <Sidebar />
@@ -30,7 +30,7 @@ function App() {
         <Route path="/edit" component={EditInternalUser} />
       </Switch>
     </div>
-  );
+  ) : <Login />;
 }
 
 export default App;

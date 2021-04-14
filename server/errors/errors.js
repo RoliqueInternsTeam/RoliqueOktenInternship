@@ -31,6 +31,10 @@ module.exports = {
         message: 'You can upload just one photo as avatar',
         code: BAD_REQUEST
     },
+    UPLOAD_IMAGE_ERROR: {
+        message: 'Error occurred while trying to upload to S3 bucket',
+        code: BAD_REQUEST
+    },
     NOT_TOKEN: {
         message: 'Not token',
         code: BAD_REQUEST
@@ -40,6 +44,11 @@ module.exports = {
         message: 'Not valid token',
         code: UNAUTHORIZED
     },
+    NOT_VALID_REFRESH_TOKEN: {
+        message: 'Not valid token',
+        code: UNAUTHORIZED
+    },
+
     // NOT FOUND
     USER_NOT_FOUND: {
         message: 'User not found',

@@ -7,7 +7,7 @@
     "plugin:react/recommended"
   ],
   "rules": {
-    "no-console": "off",
+    "no-console": "warn",
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
     "no-unused-expressions": "off",
@@ -25,10 +25,10 @@
     "import/named": "off",
     "camelcase": "off",
     "import/prefer-default-export": "warn",
-    "no-shadow": "warn",
-    "no-underscore-dangle": "warn",
-    "react/jsx-props-no-spreading": "warn",
-    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-param-reassign": "warn",
     "prefer-const": "warn",
     "react-hooks/exhaustive-deps": "warn"
   },
