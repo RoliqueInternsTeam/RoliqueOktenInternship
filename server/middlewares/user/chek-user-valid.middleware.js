@@ -4,7 +4,7 @@ const { ErrorHandler, errors } = require('../../errors');
 module.exports = (req, res, next) => {
     try {
         const user = req.body;
-
+        console.log(user);
         const { error } = userValidator.validate(user);
 
         if (error) {

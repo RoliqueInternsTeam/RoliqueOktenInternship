@@ -1,5 +1,3 @@
-const uuid = require('uuid').v1();
-
 const passwordHash = require('../../helpers/password.helper');
 const userService = require('../../services/user/user.service');
 const { ErrorHandler, errors } = require('../../errors');
@@ -20,7 +18,7 @@ module.exports = {
                 const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
 
-                params.Key = `${uuid}.${fileExtension}`;
+                params.Key = `${await newUser._id}.${fileExtension}`;
                 params.Body = avatar.data;
 
                 s3Client.upload(params, async (err, data) => {
@@ -42,6 +40,12 @@ module.exports = {
     updateUser: async (req, res, next) => {
         try {
             const updateUser = req.body;
+            const {
+                firsName, lastName, role, email, phone
+            } = req.body;
+            const updateUserNoPass = {
+                firsName, lastName, role, email, phone
+            };
             const { avatar } = req;
             const { id } = req.params;
             if (avatar) {
@@ -49,7 +53,7 @@ module.exports = {
                 const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
 
-                params.Key = `${uuid}.${fileExtension}`;
+                params.Key = `${id}.${fileExtension}`;
                 params.Body = avatar.data;
 
                 s3Client.upload(params, async (err, data) => {
@@ -65,10 +69,10 @@ module.exports = {
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
                 await userService.updateUser(id, { ...updateUser });
-                return res.status(OK).end();
+                return res.status(OK).json('User updated').end();
             }
 
-            await userService.updateUser(id, { ...updateUser });
+            await userService.updateUser(id, { ...updateUserNoPass });
 
             res.status(OK).json('User updated');
         } catch (e) {

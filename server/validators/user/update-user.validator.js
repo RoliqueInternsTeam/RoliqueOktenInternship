@@ -5,10 +5,13 @@ const {
 } = require('../../config/regexp.enum');
 
 module.exports = Joi.object({
-    email: Joi.string().trim().regex(EMAIL),
-    password: Joi.string().trim().regex(PASSWORD),
-    role: Joi.string(),
-    firstName: Joi.string().trim().regex(NAME),
-    lastName: Joi.string().trim().regex(NAME),
-    phone: Joi.string().regex(PHONE)
+    _id: Joi.string(),
+    __v: Joi.string(),
+    email: Joi.string().trim().regex(EMAIL).allow(''),
+    password: Joi.string().trim().regex(PASSWORD).allow(''),
+    role: Joi.string().allow(''),
+    firstName: Joi.string().trim().regex(NAME).allow(''),
+    lastName: Joi.string().trim().regex(NAME).allow(''),
+    phone: Joi.string().regex(PHONE).allow(''),
+    avatar: Joi.string().allow('')
 });
