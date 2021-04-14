@@ -28,7 +28,7 @@ app.use('*', (err, req, res, next) => {
     });
 });
 
-async function start() {
+const start = async () => {
     try {
         await mongoose.connect(MONGO_URI, {
             useNewUrlParser: true,
@@ -36,11 +36,12 @@ async function start() {
             useCreateIndex: true,
             useFindAndModify: false
         });
-        app.listen(PORT || 5000, () => console.log(`App has been started on port ${PORT}...`));
+
+        await app.listen(PORT || 5000, () => console.log(`App has been started on port ${PORT}...`));
     } catch (e) {
         console.log('server error', e.message);
         process.exit(1);
     }
-}
+};
 
 start();
