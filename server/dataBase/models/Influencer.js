@@ -73,5 +73,9 @@ const Influencer = new Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 module.exports = model('influencer', Influencer);
