@@ -1,4 +1,4 @@
 module.exports = {
     newInfluencerValidator: require('./new-influencer.validator'),
-    // updateUserValidator: require('./update-user.validator')
+    updateInfluencerValidator: require('./update-influencer.validator')
 };
