@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './EditButton.module.css';
 import EditIcon from '../Icons/edit-alt.svg';
-import PermissionChecker from '../PermissionChecker/PermissionChecker';
+import PermissionChecker from '../../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../../config/constants';
 
 const EditButton = () => (

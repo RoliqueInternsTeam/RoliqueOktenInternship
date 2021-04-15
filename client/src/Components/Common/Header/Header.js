@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import classes from './Header.module.css';
-import Arrow from '../Icons/arrow.svg';
-import CreateNew from '../CreateNew/CreateNew';
-import EditButton from '../EditButton/EditButton';
+import Arrow from '../../Elements/Icons/arrow.svg';
+import CreateNew from '../../Elements/CreateNew/CreateNew';
+import EditButton from '../../Elements/EditButton/EditButton';
 
 const Header = (props) => {
   const buttonCheck = () => {
