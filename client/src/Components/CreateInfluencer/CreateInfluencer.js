@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-// import DayPickerInput from 'react-day-picker/DayPickerInput';
 import classes from './CreateInfluencer.module.css';
-import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
+import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
 import Message from '../Elements/Message/Message';
 import { RESTRICTED_ACCESS } from '../../config/messages';
-import Header from '../Elements/Header/Header';
-import PictureLoader from '../Elements/PictureLoader/PictureLoader';
+import Header from '../Common/Header/Header';
+import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import Input from '../Elements/Input/Input';
 import RefreshToken from '../../helpers';
 import { setBadRequest } from '../../store/actions';
-import 'react-day-picker/lib/style.css';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
 
 const CreateInfluencer = (props) => {

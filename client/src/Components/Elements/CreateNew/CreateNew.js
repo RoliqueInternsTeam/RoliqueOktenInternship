@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import classes from './CreateNew.module.css';
-import PermissionChecker from '../PermissionChecker/PermissionChecker';
+import PermissionChecker from '../../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../../config/constants';
 
 const CreateNew = () => (
