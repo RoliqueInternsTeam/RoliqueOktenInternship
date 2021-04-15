@@ -21,6 +21,8 @@ const Users = () => {
     setSearch(event.target.value);
   };
 
+  const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
+
   useEffect(() => {
     if (search) {
       setUsers(users.filter((user) => ([user.firstName, user.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
@@ -66,7 +68,7 @@ const Users = () => {
             column1={user.firstName}
             column11={user.lastName}
             column2={user.email}
-            column3={user.role}
+            column3={capitalizeFirstLetter(user.role)}
             column4={user.phone}
             to='/edit'
             tooltipMessage='Edit User'

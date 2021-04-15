@@ -21,14 +21,14 @@ const Sidebar = () => {
       <div className={classes.vectorContainer}>
         <img src={Vector} alt="vector icon" />
       </div>
-      <NavLink activeClassName={classes.active} className={classes.imgContainer} to="/create">
-        <img src={Users} alt="create user" />
+      <NavLink activeClassName={classes.active} className={classes.imgContainer} to="/users">
+        <img src={Users} alt="users" />
       </NavLink>
       <NavLink activeClassName={classes.active} className={classes.imgContainer} to="/campaigns">
         <img src={Volume} alt="campaigns" />
       </NavLink>
-      <NavLink activeClassName={classes.active} className={classes.imgContainer} to="/users">
-        <img src={At} alt="users" />
+      <NavLink activeClassName={classes.active} className={classes.imgContainer} to="/influencers">
+        <img src={At} alt="influencers" />
       </NavLink>
       <NavLink onClick={() => dispatch(logout())} className={classes.logoutContainer} to="/login">
         <img src={Logout} alt="logout" className={classes.logout} />
