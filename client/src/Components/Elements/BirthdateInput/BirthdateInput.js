@@ -1,7 +1,7 @@
 import React from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/src/stylesheets/datepicker.scss';
-import classes from './BirthdateInput.module.css';
+import classes from './BirthdateInput.module.scss';
 
 const BirthdateInput = (props) => (
   <div className={classes.div}>

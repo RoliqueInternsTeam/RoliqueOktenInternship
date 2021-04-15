@@ -4,10 +4,9 @@ import classes from './TableRow.module.css';
 import Tooltip from '../../Elements/Tooltip/Tooltip';
 import Edit from '../../Elements/Icons/combined-shape.svg';
 import { ADMIN, EMPLOYEE, MANAGER } from '../../../config/constants';
-// import PermissionChecker from '../PermissionChecker/PermissionChecker';
+import PermissionChecker from '../PermissionChecker/PermissionChecker';
 
 const TableRow = (props) => {
-  // eslint-disable-next-line no-unused-vars
   const permissionHandler = () => {
     switch (props.role) {
       default:
@@ -25,7 +24,7 @@ const TableRow = (props) => {
     <tr className={classes.tr}>
       <td className={classes.td}>
         {props.avatar
-          ? <img src={`http://localhost:5000/${props.avatar}`} alt='avatar' className={classes.profilePicture} /> : ''}
+          ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} /> : ''}
         &nbsp;
         {props.column1}
         &nbsp;
@@ -35,17 +34,17 @@ const TableRow = (props) => {
       <td>{props.column3}</td>
       <td>{props.column4}</td>
       <td className={classes.edit}>
-        {/* <PermissionChecker permission={permissionHandler()} display={null}> */}
-        <NavLink
-          to={props.to}
-          onClick={props.onClick}
-        >
-          <div className={classes.tooltipDiv}>
-            <Tooltip arrowPlace='right' align='center' color='dark' message={props.tooltipMessage} />
-          </div>
-          <img src={Edit} alt={props.imgAlt} />
-        </NavLink>
-        {/* </PermissionChecker> */}
+        <PermissionChecker permission={permissionHandler()} display={null}>
+          <NavLink
+            to={props.to}
+            onClick={props.onClick}
+          >
+            <div className={classes.tooltipDiv}>
+              <Tooltip arrowPlace='right' align='center' color='dark' message={props.tooltipMessage} />
+            </div>
+            <img src={Edit} alt={props.imgAlt} />
+          </NavLink>
+        </PermissionChecker>
       </td>
     </tr>
   );
