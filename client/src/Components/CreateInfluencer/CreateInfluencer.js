@@ -12,6 +12,7 @@ import Input from '../Elements/Input/Input';
 import RefreshToken from '../../helpers';
 import { setBadRequest } from '../../store/actions';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
+import 'react-datepicker/src/stylesheets/datepicker.scss';
 
 const CreateInfluencer = (props) => {
   const [influencerInfo, setInfluencerInfo] = useState({

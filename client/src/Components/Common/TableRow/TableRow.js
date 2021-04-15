@@ -25,7 +25,7 @@ const TableRow = (props) => {
     <tr className={classes.tr}>
       <td className={classes.td}>
         {props.avatar
-          ? <img src={`http://localhost:5000/${props.avatar}`} alt='avatar' className={classes.profilePicture} /> : ''}
+          ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} /> : ''}
         &nbsp;
         {props.column1}
         &nbsp;
