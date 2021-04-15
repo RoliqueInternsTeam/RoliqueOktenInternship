@@ -1,0 +1,23 @@
+.react-datepicker__day-names {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 332px;
+    margin-left: 7px;
+}
+.react-datepicker__month-container {
+    width: 100%;
+}
+.datepicker__header__dropdown {
+    background-color: #DA1414;
+}
+.react-datepicker__week {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+    width: 3.7rem;
+
+}
