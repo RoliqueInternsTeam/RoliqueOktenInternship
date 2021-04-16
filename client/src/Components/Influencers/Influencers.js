@@ -7,13 +7,21 @@ import List from '../Common/List/List';
 import TableRow from '../Common/TableRow/TableRow';
 import { setInfluencerList } from '../../store/actions';
 import RefreshToken from '../../helpers';
+import YouTube from '../Elements/Logos/youtube.svg';
+import Twitter from '../Elements/Logos/twitter.svg';
+import TikTok from '../Elements/Logos/tiktok.svg';
+import Facebook from '../Elements/Logos/facebook.svg';
+import Instagram from '../Elements/Logos/instagram.svg';
+import Rating from '../Elements/Icons/rating.svg';
+import Plus from '../Elements/Logos/plus-icon.svg';
 
 const Influencers = () => {
   const [influencers, setInfluencers] = useState([]);
-  // const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
   const access_token = useSelector(({ access_token }) => access_token);
 
   const dispatch = useDispatch();
+  const influencersList = useSelector(({ influencersList }) => influencersList);
 
   const getInfluencers = async () => {
     const request = {
@@ -23,26 +31,66 @@ const Influencers = () => {
       },
     };
     const response = await fetch('http://localhost:5000/influencer', request);
-    console.log(response);
+
     if (response.status === 200) {
       const influencersResponse = await response.json();
+
       setInfluencers(influencersResponse);
       dispatch(setInfluencerList(influencersResponse));
     }
+
     if (response.status === 401) {
       await RefreshToken();
     }
   };
+  const searchQuery = (event) => {
+    setInfluencers(influencersList);
+    setSearch(event.target.value);
+  };
+
+  useEffect(() => {
+    if (search) {
+      setInfluencers(influencers.filter((influencer) => ([influencer.username, influencer.firstName, influencer.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
+    }
+  }, [search]);
 
   useEffect(() => {
     getInfluencers();
   }, [access_token]);
 
+  const channelsHandler = (socialProfiles) => {
+    const profiles = Object.keys(socialProfiles);
+    const channels = [];
+    for (let i = 0; i < profiles.length; i++) {
+      if (profiles[i] === 'instagram') {
+        profiles[i] = <img src={Instagram} alt='instagram' className={classes.channel} />;
+        channels.push(profiles[i]);
+      }
+      if (profiles[i] === 'tiktok') {
+        profiles[i] = <img src={TikTok} alt='tiktok' className={classes.channel} />;
+        channels.push(profiles[i]);
+      }
+      if (profiles[i] === 'youtube') {
+        profiles[i] = <img src={YouTube} alt='youtube' className={classes.channel} />;
+        channels.push(profiles[i]);
+      }
+      if (profiles[i] === 'facebook') {
+        profiles[i] = <img src={Facebook} alt='facebook' className={classes.channel} />;
+        channels.push(profiles[i]);
+      }
+      if (profiles[i] === 'twitter') {
+        profiles[i] = <img src={Twitter} alt='twitter' className={classes.channel} />;
+        channels.push(profiles[i]);
+      }
+    }
+    return channels.map((channel) => channel);
+  };
+
   return (
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
       <div className={classes.body}>
-        <Search />
+        <Search search={searchQuery} />
         <List
           column1='Username'
           column2='Name'
@@ -52,12 +100,13 @@ const Influencers = () => {
             <TableRow
               key={influencer._id}
               avatar={influencer.avatar}
-              column1={influencer.firstName}
-              column11={influencer.lastName}
-              column2={influencer.socialProfiles}
-              to='/edit'
-              tooltipMessage='Edit User'
-              imgAlt='Edit User'
+              column1={influencer.username}
+              column2={`${influencer.firstName} ${influencer.lastName}`}
+              column3={[channelsHandler(influencer.socialProfiles), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />]}
+              column4={<img src={Rating} alt='rating' />}
+              to='/influencer'
+              tooltipMessage='Open Influencer'
+              imgAlt='Open Influencer'
             />
           ))}
         />
