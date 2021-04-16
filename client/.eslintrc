@@ -30,7 +30,8 @@
     "react/jsx-props-no-spreading": "off",
     "no-param-reassign": "warn",
     "prefer-const": "warn",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "no-plusplus": "off"
   },
   "plugins": [
     "jsx-a11y",
