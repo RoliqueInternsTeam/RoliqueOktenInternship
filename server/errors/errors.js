@@ -54,6 +54,10 @@ module.exports = {
         message: 'User not found',
         code: NOT_FOUND
     },
+    INFLUENCER_NOT_FOUND: {
+        message: 'Influencer not found',
+        code: NOT_FOUND
+    },
     // FORBIDDEN
     ACCESS_DENIED: {
         message: 'Access denied',

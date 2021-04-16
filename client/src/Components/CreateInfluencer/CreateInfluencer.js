@@ -104,9 +104,9 @@ const CreateInfluencer = (props) => {
       body: formData,
     };
 
-    const response = await fetch('http://localhost:5000/user', request);
+    const response = await fetch('http://localhost:5000/influencer', request);
     if (response.status === 201) {
-      props.history.push('/users');
+      props.history.push('/influencers');
     }
     if (response.status === 401) {
       await RefreshToken();

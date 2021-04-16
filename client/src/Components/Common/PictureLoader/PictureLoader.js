@@ -123,6 +123,7 @@ const PictureLoader = (props) => {
           ? <img src={newProfilePicture} alt='Your avatar' className={classes.newProfilePicture} />
           : <img src={props.avatar ? `http://localhost:5000/${props.avatar}` : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
       </div>
+
       {error ? <Message message={error} style={['error-bg-color', 'error-icon-color', 'error-text-color']} /> : null}
       <div className={uploaded ? classes.cropper : classes.hideCropper}>
         <ReactCrop

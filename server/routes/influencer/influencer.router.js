@@ -21,5 +21,20 @@ influencerRouter.post('/',
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
     influencerController.createInfluencer);
+influencerRouter.put('/:id',
+    authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess({
+        ADMIN,
+        MANAGER
+    }),
+    influencerMiddleware.checkInfluencerById,
+    influencerMiddleware.checkUpdateInfluencerValid,
+    fileMiddleware.checkFileMiddleware,
+    fileMiddleware.checkPhotoCountUser,
+    influencerController.updateInfluencer);
+influencerRouter.get('/',
+    authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess([]),
+    influencerController.getAllInfluencers);
 
 module.exports = influencerRouter;

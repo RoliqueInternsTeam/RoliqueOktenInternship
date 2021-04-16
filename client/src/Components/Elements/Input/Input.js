@@ -1,6 +1,6 @@
 import React from 'react';
-import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import MaskedInput from 'react-text-mask';
 import classes from './Input.module.css';
 
 const mask = createNumberMask({
