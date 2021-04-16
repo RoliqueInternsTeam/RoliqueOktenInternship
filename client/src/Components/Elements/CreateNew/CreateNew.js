@@ -13,9 +13,9 @@ const CreateNew = () => (
         Create New
       </label>
       <div className={classes.dropdown}>
-        <NavLink className={classes.link} to='/create'>Campaign</NavLink>
-        <NavLink className={classes.link} to="/createInfluencer">Influencer</NavLink>
-        <NavLink className={classes.link} to="/create">Internal User</NavLink>
+        <NavLink className={classes.link} to='/campaigns/create'>Campaign</NavLink>
+        <NavLink className={classes.link} to="/influencers/create">Influencer</NavLink>
+        <NavLink className={classes.link} to="/users/create">Internal User</NavLink>
       </div>
     </div>
   </PermissionChecker>
