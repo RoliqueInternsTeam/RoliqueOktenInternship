@@ -109,13 +109,21 @@ const PictureLoader = (props) => {
     setUploaded(null);
   };
 
+  const clickHandler = (event) => {
+    console.log(event);
+  };
+
   return (
-    <div className={classes.container}>
+    // eslint-disable-next-line no-restricted-globals
+    <div className={classes.container} onClick={clickHandler(event)}>
       <label className={classes.profileLabel} htmlFor='avatar'>{props.label}</label>
-      { newProfilePicture
-        ? <img src={newProfilePicture} alt='Your avatar' className={classes.newProfilePicture} />
-        : <img src={props.avatar ? props.avatar : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
-      <input type='file' id='avatar' accept={PHOTO_MIMETYPES} onChange={onChange} className={classes.input} />
+      <div>
+        <input type='file' id='avatar' accept={PHOTO_MIMETYPES} onChange={onChange} className={classes.input} />
+        { newProfilePicture
+          ? <img src={newProfilePicture} alt='Your avatar' className={classes.newProfilePicture} />
+          : <img src={props.avatar ? `http://localhost:5000/${props.avatar}` : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
+      </div>
+
       {error ? <Message message={error} style={['error-bg-color', 'error-icon-color', 'error-text-color']} /> : null}
       <div className={uploaded ? classes.cropper : classes.hideCropper}>
         <ReactCrop

@@ -3,14 +3,6 @@
     flex-direction: column;
     height: fit-content;
 }
-.profilePicture {
-    margin-bottom: 24px;
-    height: 64px;
-    width: 64px;
-    border-radius: 200px;
-
-    cursor: pointer;
-}
 .profileLabel {
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
@@ -27,16 +19,23 @@
 
     cursor: pointer;
 }
+.profilePicture {
+    position: relative;
+    margin-bottom: 24px;
+    height: 64px;
+    width: 64px;
+    border-radius: 200px;
 
+    cursor: pointer;
+}
 .input {
+    position: absolute;
     opacity: 0;
 
     height: 64px;
     width: 64px;
     border-radius: 50px;
-
-    position: absolute;
-    top: 220px;
+    z-index: 1;
 
     cursor: pointer;
 }
@@ -84,7 +83,6 @@
     color: #FFFFFF;
 
     cursor: pointer;
-
 }
 .cancelButton {
     width: 123px;
@@ -110,7 +108,6 @@
     align-items: center;
     justify-content: space-between;
     width: 350px;
-
     margin-left: 50px;
     margin-right: 50px;
 }
@@ -119,8 +116,6 @@
     height: 64px;
     border-radius: 200px;
     border: 2px solid #121033;
-
     margin-bottom: 24px;
-
     cursor: pointer;
 }

@@ -20,18 +20,32 @@ const CreateInfluencer = (props) => {
     lastName: '',
     birthday: '',
     profession: '',
-    instagram: '',
-    instagramF: '',
-    youtube: '',
-    youtubeF: '',
-    facebook: '',
-    facebookF: '',
-    tiktok: '',
-    tiktokF: '',
-    twitter: '',
-    twitterF: '',
-    blog: '',
-    blogF: '',
+    social: {
+      instagram: {
+        instagramUsername: '',
+        instagramFollowers: '',
+      },
+      youtube: {
+        youtubeUsername: '',
+        youtubeFollowers: '',
+      },
+      facebook: {
+        facebookUsername: '',
+        facebookFollowers: '',
+      },
+      tiktok: {
+        tiktokUsername: '',
+        tiktokFollowers: '',
+      },
+      twitter: {
+        twitterUsername: '',
+        twitterFollowers: '',
+      },
+      blog: {
+        blogUsername: '',
+        blogFollowers: '',
+      },
+    },
     avatar: null,
   });
 
@@ -44,6 +58,32 @@ const CreateInfluencer = (props) => {
 
   const inputHandler = (event) => {
     setInfluencerInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
+  };
+
+  const inputNetworkHandler = (event) => {
+    setInfluencerInfo(((prevState) => ({
+      ...prevState,
+      social: {
+        ...prevState.social,
+        [event.target.id.replace('Username', '')]: {
+          ...prevState.social.name,
+          [event.target.id]: event.target.value,
+        },
+      },
+    })));
+  };
+
+  const inputFollowersHandler = (event) => {
+    setInfluencerInfo(((prevState) => ({
+      ...prevState,
+      social: {
+        ...prevState.social,
+        [event.target.id.replace('Followers', '')]: {
+          ...prevState.social.name,
+          [event.target.id]: event.target.value.replace('.', ''),
+        },
+      },
+    })));
   };
 
   const dateHandler = (date) => {
@@ -98,20 +138,20 @@ const CreateInfluencer = (props) => {
             <h4 className={classes.h4}>Social Profiles</h4>
             <div className={classes.socialProfilesContainer}>
               <div className={classes.networkContainer}>
-                <Input label="Instagram" type='text' id="instagram" required={influencerInfo.instagramF ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Youtube" type='text' id="youtube" required={influencerInfo.youtubeF ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Facebook" type='text' id="facebook" required={influencerInfo.facebookF ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="TikTok" type='text' id="tiktok" required={influencerInfo.tiktokF ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Twitter" type='text' id="twitter" required={influencerInfo.twitterF ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input label="Blog" type='text' id="blog" required={influencerInfo.blogF ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input label="Instagram" type='text' id="instagramUsername" required={influencerInfo.social.instagram.instagramFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Youtube" type='text' id="youtubeUsername" required={influencerInfo.social.youtube.youtubeFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Facebook" type='text' id="facebookUsername" required={influencerInfo.social.facebook.facebookFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="TikTok" type='text' id="tiktokUsername" required={influencerInfo.social.tiktok.tiktokFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Twitter" type='text' id="twitterUsername" required={influencerInfo.social.twitter.twitterFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Blog" type='text' id="blogUsername" required={influencerInfo.social.blog.blogFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
               </div>
               <div className={classes.followersContainer}>
-                <Input input="masked" label="Instagram Followers" id="instagramF" required={influencerInfo.instagram ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input input="masked" label="Youtube Followers" type='number' id="youtubeF" required={influencerInfo.youtube ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input input="masked" label="Facebook Followers" type='number' id="facebookF" required={influencerInfo.facebook ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input input="masked" label="TikTok Followers" type='number' id="tiktokF" required={influencerInfo.tiktok ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input input="masked" label="Twitter Followers" type='number' id="twitterF" required={influencerInfo.twitter ? 'required' : null} onChange={(event) => inputHandler(event)} />
-                <Input input="masked" label="Blog Followers" type='number' id="blogF" required={influencerInfo.blog ? 'required' : null} onChange={(event) => inputHandler(event)} />
+                <Input input="masked" label="Instagram Followers" id="instagramFollowers" required={influencerInfo.social.instagram.instagramUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Youtube Followers" id="youtubeFollowers" required={influencerInfo.social.youtube.youtubeUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Facebook Followers" id="facebookFollowers" required={influencerInfo.social.facebook.facebookUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="TikTok Followers" id="tiktokFollowers" required={influencerInfo.social.tiktok.tiktokUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Twitter Followers" id="twitterFollowers" required={influencerInfo.social.twitter.twitterUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Blog Followers" id="blogFollowers" required={influencerInfo.social.blog.blogUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
               </div>
             </div>
           </div>
