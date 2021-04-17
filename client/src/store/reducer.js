@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import {
-  LOGOUT, TOKEN, ROLE, BAD_REQUEST, SET_INFLUENCER, SET_USERLIST, SET_INFLUENCERLIST, SET_USER,
+  LOGOUT, TOKEN, ROLE, BAD_REQUEST, SET_INFLUENCER, SET_USERLIST, SET_INFLUENCERLIST, SET_USER, EMAIL,
 } from './actionTypes';
 
 const cookies = new Cookies();
@@ -8,6 +8,7 @@ const cookies = new Cookies();
 const initialState = {
   role: null,
   access_token: null,
+  email: null,
   badRequest: false,
   userList: [],
   influencersList: [],
@@ -36,6 +37,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         role: action.payload,
+      };
+    case EMAIL:
+      return {
+        ...state,
+        email: action.payload,
       };
     case BAD_REQUEST:
       return {

@@ -109,13 +109,8 @@ const PictureLoader = (props) => {
     setUploaded(null);
   };
 
-  const clickHandler = (event) => {
-    console.log(event);
-  };
-
   return (
-    // eslint-disable-next-line no-restricted-globals
-    <div className={classes.container} onClick={clickHandler(event)}>
+    <div className={classes.container}>
       <label className={classes.profileLabel} htmlFor='avatar'>{props.label}</label>
       <div>
         <input type='file' id='avatar' accept={PHOTO_MIMETYPES} onChange={onChange} className={classes.input} />

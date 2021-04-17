@@ -70,7 +70,8 @@ const Users = () => {
             column2={user.email}
             column3={capitalizeFirstLetter(user.role)}
             column4={user.phone}
-            to='/edit'
+            role={user.role}
+            to='/users/edit'
             tooltipMessage='Edit User'
             imgAlt='Edit User'
             onClick={() => {
