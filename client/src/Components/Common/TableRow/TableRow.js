@@ -9,14 +9,12 @@ import PermissionChecker from '../PermissionChecker/PermissionChecker';
 const TableRow = (props) => {
   const permissionHandler = () => {
     switch (props.role) {
-      default:
-        return [ADMIN, MANAGER, EMPLOYEE];
       case ADMIN:
         return [ADMIN];
       case MANAGER:
-        return [ADMIN];
-      case EMPLOYEE:
         return [ADMIN, MANAGER];
+      default:
+        return [ADMIN, MANAGER, EMPLOYEE];
     }
   };
 
@@ -34,7 +32,7 @@ const TableRow = (props) => {
       <td>{props.column3}</td>
       <td>{props.column4}</td>
       <td className={classes.edit}>
-        <PermissionChecker permission={permissionHandler()} display={null}>
+        <PermissionChecker email={props.column2} permission={permissionHandler()} display={null}>
           <NavLink
             to={props.to}
             onClick={props.onClick}
