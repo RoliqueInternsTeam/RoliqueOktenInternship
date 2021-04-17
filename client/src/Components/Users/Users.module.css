@@ -3,5 +3,7 @@
     display: grid;
     grid-template-rows: 80px 1fr;
     margin: 0 0 0 40px;
+}
+.body {
     background: #ebe8e9;
 }

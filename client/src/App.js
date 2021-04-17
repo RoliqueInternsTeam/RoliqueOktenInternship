@@ -13,6 +13,7 @@ import Message from './Components/Elements/Message/Message';
 import Influencers from './Components/Influencers/Influencers';
 import EditInfluencer from './Components/EditInfluencer/EditInfluencer';
 import CreateInfluencer from './Components/CreateInfluencer/CreateInfluencer';
+import Influencer from './Components/Influencer/Influencer';
 
 function App() {
   const access_token = useSelector(({ access_token }) => access_token);
@@ -28,8 +29,9 @@ function App() {
         <Route exact path="/users/create" component={CreateInternalUser} />
         <Route exact path="/users/edit" component={EditInternalUser} />
         <Route exact path="/influencers" component={Influencers} />
+        <Route exact path="/influencer" component={Influencer} />
         <Route exact path="/influencers/create" component={CreateInfluencer} />
-        <Route exact path="/influencers/edit" component={EditInfluencer} />
+        <Route exact path="/influencer/edit" component={EditInfluencer} />
       </Switch>
     </div>
   ) : <Login />;
