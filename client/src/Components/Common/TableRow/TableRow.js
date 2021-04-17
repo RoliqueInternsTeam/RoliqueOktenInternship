@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Avatar from 'react-avatar';
 import classes from './TableRow.module.css';
 import Tooltip from '../../Elements/Tooltip/Tooltip';
 import Edit from '../../Elements/Icons/combined-shape.svg';
@@ -22,7 +23,8 @@ const TableRow = (props) => {
     <tr className={classes.tr}>
       <td className={classes.td}>
         {props.avatar
-          ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} /> : ''}
+          ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} />
+          : <Avatar name={(`${props.column1} ${props.column11}`) && props.column2} size="32px" round style={{ marginRight: '12px' }} />}
         &nbsp;
         {props.column1}
         &nbsp;
