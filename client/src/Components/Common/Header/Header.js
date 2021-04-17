@@ -17,7 +17,7 @@ const Header = (props) => {
       case 'edit':
         return (
           <div className={classes.buttonsContainer}>
-            <EditButton />
+            <EditButton to={props.to} />
             <CreateNew />
           </div>
         );

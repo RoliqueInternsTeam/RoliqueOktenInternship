@@ -1,0 +1,60 @@
+.mainContainer {
+    margin-left: 40px;
+}
+.body {
+    background: #ebe8e9;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.generalInfo {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+.personalInfo {
+    position: relative;
+    left: 145px;
+    top: -130px;
+
+}
+.label {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.35px;
+
+    color: rgba(0, 0, 0, 0.6);
+
+    mix-blend-mode: hard-light;
+    opacity: 0.76;
+
+    margin-bottom: 4px;
+}
+.p {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.35px;
+
+    color: #383838;
+
+    margin: 0 0 4px 22px;
+}
+.stringsContainer {
+    display: flex;
+    flex-direction: column;
+}
+.textContainer {
+    display: flex;
+    flex-direction: row;
+}
+.socialMediaContainer {
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: row;
+}
