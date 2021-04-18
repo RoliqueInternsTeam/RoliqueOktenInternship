@@ -61,7 +61,7 @@ const EditInternalUser = (props) => {
       await RefreshToken();
       await createHandler();
     }
-    if (response.status !== 401 && response.status !== 201) {
+    if (response.status !== 401 && response.status !== 200) {
       dispatch(setBadRequest(true));
       setTimeout(() => dispatch(setBadRequest(false)), 3000);
     }

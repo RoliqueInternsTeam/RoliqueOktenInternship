@@ -80,7 +80,7 @@ const CreateInfluencer = (props) => {
         ...prevState.social,
         [event.target.id.replace('Followers', '')]: {
           ...prevState.social.name,
-          [event.target.id]: event.target.value.replace('.', ''),
+          [event.target.id]: event.target.value.replaceAll('.', ''),
         },
       },
     })));
