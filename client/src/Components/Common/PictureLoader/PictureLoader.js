@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import Resizer from 'react-image-file-resizer';
@@ -138,6 +139,16 @@ const PictureLoader = (props) => {
       </div>
     </div>
   );
+};
+
+PictureLoader.propTypes = {
+  label: PropTypes.string,
+  avatar: PropTypes.string,
+};
+
+PictureLoader.defaultProps = {
+  label: '',
+  avatar: '',
 };
 
 export default PictureLoader;
