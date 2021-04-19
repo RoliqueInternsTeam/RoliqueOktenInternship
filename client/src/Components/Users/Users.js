@@ -53,7 +53,7 @@ const Users = () => {
   }, [access_token]);
 
   return (
-    <div className={classes.Users}>
+    <div className={classes.mainContainer}>
       <Header title='Users' button='createNew' />
       <Search search={searchQuery} />
       <List

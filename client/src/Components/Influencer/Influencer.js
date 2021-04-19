@@ -16,31 +16,31 @@ const Influencer = () => {
 
   const socialMediaHandler = (profiles) => {
     let {
-      youtube, twitter, tiktok, instagram, blogger, facebook,
+      youtube, twitter, tiktok, instagram, blog, facebook,
     } = profiles;
     const channels = [];
     if (instagram) {
-      instagram = <SocialMedia platform={instagramIcon} style={['instagram']} username={instagram.username} followers={instagram.followers} />;
+      instagram = <SocialMedia platform={instagramIcon} style={['instagram']} username={instagram.instagramUsername} followers={instagram.instagramFollowers} />;
       channels.push(instagram);
     }
     if (tiktok) {
-      tiktok = <SocialMedia platform={tiktokIcon} style={['tiktok']} username={tiktok.username} followers={tiktok.followers} />;
+      tiktok = <SocialMedia platform={tiktokIcon} style={['tiktok']} username={tiktok.tiktokUsername} followers={tiktok.tiktokFollowers} />;
       channels.push(tiktok);
     }
     if (facebook) {
-      facebook = <SocialMedia platform={facebookIcon} style={['facebook']} username={facebook.username} followers={facebook.followers} />;
+      facebook = <SocialMedia platform={facebookIcon} style={['facebook']} username={facebook.facebookUsername} followers={facebook.facebookFollowers} />;
       channels.push(facebook);
     }
     if (youtube) {
-      youtube = <SocialMedia platform={youtubeIcon} style={['youtube']} username={youtube.username} followers={youtube.followers} />;
+      youtube = <SocialMedia platform={youtubeIcon} style={['youtube']} username={youtube.youtubeUsername} followers={youtube.youtubeFollowers} />;
       channels.push(youtube);
     }
-    if (blogger) {
-      blogger = <SocialMedia platform={bloggerIcon} style={['blogger']} username={blogger.username} followers={blogger.followers} />;
-      channels.push(blogger);
+    if (blog) {
+      blog = <SocialMedia platform={bloggerIcon} style={['blog']} username={blog.blogUsername} followers={blog.blogFollowers} />;
+      channels.push(blog);
     }
     if (twitter) {
-      twitter = <SocialMedia platform={twitterIcon} style={['twitter']} username={twitter.username} followers={twitter.followers} />;
+      twitter = <SocialMedia platform={twitterIcon} style={['twitter']} username={twitter.twitterUsername} followers={twitter.twitterFollowers} />;
       channels.push(twitter);
     }
     return channels.map((channel) => channel);
@@ -66,7 +66,7 @@ const Influencer = () => {
             </div>
           </div>
           <div className={classes.socialMediaContainer}>
-            { influencer.socialProfiles ? socialMediaHandler(influencer.socialProfiles) : null }
+            { influencer.social ? socialMediaHandler(influencer.social) : null }
           </div>
         </div>
       </div>
