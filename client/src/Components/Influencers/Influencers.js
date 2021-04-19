@@ -5,7 +5,7 @@ import classes from './Influencers.module.css';
 import Search from '../Common/Search/Search';
 import List from '../Common/List/List';
 import TableRow from '../Common/TableRow/TableRow';
-import { setInfluencerList } from '../../store/actions';
+import { setInfluencer, setInfluencerList } from '../../store/actions';
 import RefreshToken from '../../helpers';
 import YouTube from '../Elements/Logos/youtube.svg';
 import Twitter from '../Elements/Logos/twitter.svg';
@@ -89,7 +89,7 @@ const Influencers = () => {
   return (
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
-      <div className={classes.body}>
+      <div>
         <Search search={searchQuery} />
         <List
           column1='Username'
@@ -107,6 +107,9 @@ const Influencers = () => {
               to='/influencer'
               tooltipMessage='Open Influencer'
               imgAlt='Open Influencer'
+              onClick={() => {
+                dispatch(setInfluencer(influencer));
+              }}
             />
           ))}
         />

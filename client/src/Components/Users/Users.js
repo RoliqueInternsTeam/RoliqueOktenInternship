@@ -53,9 +53,9 @@ const Users = () => {
   }, [access_token]);
 
   return (
-    <div className={classes.Users}>
+    <div className={classes.mainContainer}>
       <Header title='Users' button='createNew' />
-      <div className={classes.body}>
+      <div>
         <Search search={searchQuery} />
         <List
           column1='Name'

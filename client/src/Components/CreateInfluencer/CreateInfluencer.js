@@ -20,7 +20,7 @@ const CreateInfluencer = (props) => {
     lastName: '',
     birthday: '',
     profession: '',
-    SocialProfiles: {
+    social: {
       instagram: {
         instagramUsername: '',
         instagramFollowers: '',
