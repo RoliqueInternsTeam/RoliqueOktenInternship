@@ -56,14 +56,10 @@ const Influencer = () => {
         <div className={classes.personalInfo}>
           <h2>{`${influencer.firstName} ${influencer.lastName}`}</h2>
           <div className={classes.textContainer}>
-            <div className={classes.stringsContainer}>
-              <label className={classes.label}>Birthday:</label>
-              <label className={classes.label}>Occupation:</label>
-            </div>
-            <div className={classes.stringsContainer}>
-              <p className={classes.p}>{influencer.birthdate}</p>
-              <p className={classes.p}>{influencer.profession}</p>
-            </div>
+            <label className={classes.label}>Birthday:</label>
+            <p className={classes.p}>{influencer.birthdate}</p>
+            <label className={classes.label}>Occupation:</label>
+            <p className={classes.p}>{influencer.profession}</p>
           </div>
           <div className={classes.socialMediaContainer}>
             { influencer.social ? socialMediaHandler(influencer.social) : null }
