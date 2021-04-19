@@ -58,8 +58,8 @@ const Influencers = () => {
     getInfluencers();
   }, [access_token]);
 
-  const channelsHandler = (socialProfiles) => {
-    const profiles = Object.keys(socialProfiles);
+  const channelsHandler = (social) => {
+    const profiles = Object.keys(social);
     const channels = [];
     for (let i = 0; i < profiles.length; i++) {
       if (profiles[i] === 'instagram') {
@@ -102,7 +102,7 @@ const Influencers = () => {
               avatar={influencer.avatar}
               column1={influencer.username}
               column2={`${influencer.firstName} ${influencer.lastName}`}
-              column3={[channelsHandler(influencer.socialProfiles), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />]}
+              column3={[channelsHandler(influencer.social), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />]}
               column4={<img src={Rating} alt='rating' />}
               to='/influencer'
               tooltipMessage='Open Influencer'
