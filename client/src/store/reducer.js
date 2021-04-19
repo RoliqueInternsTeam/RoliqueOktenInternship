@@ -8,6 +8,7 @@ const cookies = new Cookies();
 const initialState = {
   role: null,
   access_token: null,
+  user_updated: false,
   email: null,
   badRequest: false,
   userList: [],
@@ -22,12 +23,7 @@ const reducer = (state = initialState, action) => {
       return state;
     case LOGOUT:
       cookies.remove('refresh_token');
-      return {
-        ...state,
-        access_token: null,
-        role: null,
-        badRequest: false,
-      };
+      return initialState;
     case TOKEN:
       return {
         ...state,

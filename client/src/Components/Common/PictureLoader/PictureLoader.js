@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import Resizer from 'react-image-file-resizer';
@@ -116,7 +117,7 @@ const PictureLoader = (props) => {
         <input type='file' id='avatar' accept={PHOTO_MIMETYPES} onChange={onChange} className={classes.input} />
         { newProfilePicture
           ? <img src={newProfilePicture} alt='Your avatar' className={classes.newProfilePicture} />
-          : <img src={props.avatar ? `http://localhost:5000/${props.avatar}` : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
+          : <img src={props.avatar ? props.avatar : ProfilePicture} alt={props.alt} className={classes.profilePicture} /> }
       </div>
 
       {error ? <Message message={error} style={['error-bg-color', 'error-icon-color', 'error-text-color']} /> : null}
@@ -138,6 +139,16 @@ const PictureLoader = (props) => {
       </div>
     </div>
   );
+};
+
+PictureLoader.propTypes = {
+  label: PropTypes.string,
+  avatar: PropTypes.string,
+};
+
+PictureLoader.defaultProps = {
+  label: '',
+  avatar: '',
 };
 
 export default PictureLoader;

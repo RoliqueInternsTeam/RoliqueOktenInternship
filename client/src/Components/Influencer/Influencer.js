@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from 'react-avatar';
+
 import Header from '../Common/Header/Header';
 import classes from './Influencer.module.css';
 import SocialMedia from '../Elements/SocialMedia/SocialMedia';
