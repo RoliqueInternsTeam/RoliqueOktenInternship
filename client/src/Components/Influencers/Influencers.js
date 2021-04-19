@@ -5,7 +5,7 @@ import classes from './Influencers.module.css';
 import Search from '../Common/Search/Search';
 import List from '../Common/List/List';
 import TableRow from '../Common/TableRow/TableRow';
-import { setInfluencerList } from '../../store/actions';
+import { setInfluencer, setInfluencerList } from '../../store/actions';
 import RefreshToken from '../../helpers';
 import YouTube from '../Elements/Logos/youtube.svg';
 import Twitter from '../Elements/Logos/twitter.svg';
@@ -58,8 +58,8 @@ const Influencers = () => {
     getInfluencers();
   }, [access_token]);
 
-  const channelsHandler = (socialProfiles) => {
-    const profiles = Object.keys(socialProfiles);
+  const channelsHandler = (social) => {
+    const profiles = Object.keys(social);
     const channels = [];
     for (let i = 0; i < profiles.length; i++) {
       if (profiles[i] === 'instagram') {
@@ -89,7 +89,7 @@ const Influencers = () => {
   return (
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
-      <div className={classes.body}>
+      <div>
         <Search search={searchQuery} />
         <List
           column1='Username'
@@ -102,11 +102,14 @@ const Influencers = () => {
               avatar={influencer.avatar}
               column1={influencer.username}
               column2={`${influencer.firstName} ${influencer.lastName}`}
-              column3={[channelsHandler(influencer.socialProfiles), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />]}
+              column3={[channelsHandler(influencer.social), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />]}
               column4={<img src={Rating} alt='rating' />}
               to='/influencer'
               tooltipMessage='Open Influencer'
               imgAlt='Open Influencer'
+              onClick={() => {
+                dispatch(setInfluencer(influencer));
+              }}
             />
           ))}
         />

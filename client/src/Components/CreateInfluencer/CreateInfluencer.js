@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
+import { serialize } from 'object-to-formdata';
 import classes from './CreateInfluencer.module.css';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
@@ -20,7 +21,7 @@ const CreateInfluencer = (props) => {
     lastName: '',
     birthday: '',
     profession: '',
-    SocialProfiles: {
+    social: {
       instagram: {
         instagramUsername: '',
         instagramFollowers: '',
@@ -66,7 +67,7 @@ const CreateInfluencer = (props) => {
       social: {
         ...prevState.social,
         [event.target.id.replace('Username', '')]: {
-          ...prevState.social.name,
+          ...prevState.social.[event.target.id.replace('Username', '')],
           [event.target.id]: event.target.value,
         },
       },
@@ -79,7 +80,7 @@ const CreateInfluencer = (props) => {
       social: {
         ...prevState.social,
         [event.target.id.replace('Followers', '')]: {
-          ...prevState.social.name,
+          ...prevState.social.[event.target.id.replace('Followers', '')],
           [event.target.id]: event.target.value.replaceAll('.', ''),
         },
       },
@@ -93,8 +94,17 @@ const CreateInfluencer = (props) => {
   const createInfluencerHandler = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    Object.keys(influencerInfo).forEach((key) => formData.append(key, influencerInfo[key]));
+    const formData = serialize(
+      influencerInfo,
+    );
+
+    // for (const pair of formData.entries()) {  // console for FormData
+    //   console.log(pair);
+    //   if (pair[0] === 'social') {
+    //     console.log(...pair[1]);
+    //   }
+    //   console.log(`${pair[0]}, ${pair[1]}`);
+    // }
 
     const request = {
       method: 'POST',
