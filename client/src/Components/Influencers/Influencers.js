@@ -5,7 +5,7 @@ import classes from './Influencers.module.css';
 import Search from '../Common/Search/Search';
 import List from '../Common/List/List';
 import TableRow from '../Common/TableRow/TableRow';
-import { setInfluencerList } from '../../store/actions';
+import { setInfluencer, setInfluencerList } from '../../store/actions';
 import RefreshToken from '../../helpers';
 import YouTube from '../Elements/Logos/youtube.svg';
 import Twitter from '../Elements/Logos/twitter.svg';
@@ -89,28 +89,29 @@ const Influencers = () => {
   return (
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
-      <div className={classes.body}>
-        <Search search={searchQuery} />
-        <List
-          column1='Username'
-          column2='Name'
-          column3='Channels'
-          column4='Rating'
-          map={influencers.map((influencer) => (
-            <TableRow
-              key={influencer._id}
-              avatar={influencer.avatar}
-              column1={influencer.username}
-              column2={`${influencer.firstName} ${influencer.lastName}`}
-              column3={[channelsHandler(influencer.socialProfiles), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />]}
-              column4={<img src={Rating} alt='rating' />}
-              to='/influencer'
-              tooltipMessage='Open Influencer'
-              imgAlt='Open Influencer'
-            />
-          ))}
-        />
-      </div>
+      <Search search={searchQuery} />
+      <List
+        column1='Username'
+        column2='Name'
+        column3='Channels'
+        column4='Rating'
+        map={influencers.map((influencer) => (
+          <TableRow
+            key={influencer._id}
+            avatar={influencer.avatar}
+            column1={influencer.username}
+            column2={`${influencer.firstName} ${influencer.lastName}`}
+            column3={influencer.socialProfiles ? [channelsHandler(influencer.socialProfiles), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />] : null}
+            column4={<img src={Rating} alt='rating' />}
+            to='/influencer'
+            tooltipMessage='Open Influencer'
+            imgAlt='Open Influencer'
+            onClick={() => {
+              dispatch(setInfluencer(influencer));
+            }}
+          />
+        ))}
+      />
     </div>
   );
 };

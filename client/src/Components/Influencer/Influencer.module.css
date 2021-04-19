@@ -1,21 +1,17 @@
 .mainContainer {
     margin-left: 40px;
-}
-.body {
+
     background: #ebe8e9;
-    position: absolute;
     height: 100%;
-    width: 100%;
 }
 .generalInfo {
     margin-top: 40px;
     margin-left: 40px;
+    display: flex;
+    align-items: center;
 }
 .personalInfo {
-    position: relative;
-    left: 145px;
-    top: -130px;
-
+    margin-left: 24px;
 }
 .label {
     font-family: Helvetica Neue, sans-serif;
