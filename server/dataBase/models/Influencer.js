@@ -1,5 +1,68 @@
 const { Schema, model } = require('mongoose');
 
+const profiles = {
+    instagram: {
+        instagramUsername: {
+            type: String,
+            required: false
+        },
+        instagramFollowers: {
+            type: Number,
+            required: false
+        }
+    },
+    youtube: {
+        youtubeUsername: {
+            type: String,
+            required: false
+        },
+        youtubeFollowers: {
+            type: Number,
+            required: false
+        }
+    },
+    facebook: {
+        facebookUsername: {
+            type: String,
+            required: false
+        },
+        facebookFollowers: {
+            type: Number,
+            required: false
+        }
+    },
+    tiktok: {
+        tiktokUsername: {
+            type: String,
+            required: false
+        },
+        tiktokFollowers: {
+            type: Number,
+            required: false
+        }
+    },
+    twitter: {
+        twitterUsername: {
+            type: String,
+            required: false
+        },
+        twitterFollowers: {
+            type: Number,
+            required: false
+        }
+    },
+    blog: {
+        blogUsername: {
+            type: String,
+            required: false
+        },
+        blogFollowers: {
+            type: Number,
+            required: false
+        }
+    }
+};
+
 const Influencer = new Schema({
     firstName: {
         type: String,
@@ -21,61 +84,10 @@ const Influencer = new Schema({
         type: Schema.Types.Mixed,
         required: false
     },
-    socialProfileInstagram: {
-        type: String,
-        required: false
-    },
-    instagramFollowers: {
-        type: Number,
-        required: false
-    },
-    socialProfileYouTube: {
-        type: String,
-        required: false
-    },
-    youTubeFollowers: {
-        type: Number,
-        required: false
-    },
-    socialProfileFacebook: {
-        type: String,
-        required: false
-    },
-    facebookFollowers: {
-        type: Number,
-        required: false
-    },
-    socialProfileTiktok: {
-        type: String,
-        required: false
-    },
-    tiktokFollowers: {
-        type: Number,
-        required: false
-    },
-    socialProfileTwitter: {
-        type: String,
-        required: false
-    },
-    twitterFollowers: {
-        type: Number,
-        required: false
-    },
-    socialProfileBlog: {
-        type: String,
-        required: false
-    },
-    blogFollowers: {
-        type: Number,
-        required: false
-    },
+    social: profiles,
     userId: {
         type: Schema.Types.ObjectId,
         required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
 });
 module.exports = model('influencer', Influencer);
