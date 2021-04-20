@@ -1,3 +1,4 @@
 module.exports = {
-    checkInfluencerValid: require('./chek-influencer-valid.middleware'),
+    checkInfluencerValid: require('./check-influencer-valid.middleware'),
+    checkInformationInfluencer: require('./check-information-influencer.middleware')
 };
