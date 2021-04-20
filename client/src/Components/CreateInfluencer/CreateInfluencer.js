@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-import { serialize } from 'object-to-formdata';
 import classes from './CreateInfluencer.module.css';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
@@ -47,12 +46,14 @@ const CreateInfluencer = (props) => {
         blogFollowers: '',
       },
     },
-    avatar: null,
   });
+
+  const [avatar, setAvatar] = useState({ avatar: null });
 
   useEffect(() => {
     console.log(influencerInfo);
-  }, [influencerInfo]);
+    console.log(avatar);
+  }, [influencerInfo, avatar]);
 
   const access_token = useSelector(({ access_token }) => access_token);
   const dispatch = useDispatch();
@@ -94,17 +95,9 @@ const CreateInfluencer = (props) => {
   const createInfluencerHandler = async (event) => {
     event.preventDefault();
 
-    const formData = serialize(
-      influencerInfo,
-    );
-
-    // for (const pair of formData.entries()) {  // console for FormData
-    //   console.log(pair);
-    //   if (pair[0] === 'social') {
-    //     console.log(...pair[1]);
-    //   }
-    //   console.log(`${pair[0]}, ${pair[1]}`);
-    // }
+    const formData = new FormData();
+    formData.append('json', JSON.stringify(influencerInfo));
+    formData.append('avatar', avatar);
 
     const request = {
       method: 'POST',
@@ -142,7 +135,7 @@ const CreateInfluencer = (props) => {
             <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
             <BirthdateInput setState={dateHandler} state={influencerInfo} label='Birthdate' />
             <Input label="Profession" type='text' id="profession" required="required" onChange={(event) => inputHandler(event)} />
-            <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setInfluencerInfo} />
+            <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setAvatar} />
           </div>
           <div className={classes.rightContainer}>
             <h4 className={classes.h4}>Social Profiles</h4>
