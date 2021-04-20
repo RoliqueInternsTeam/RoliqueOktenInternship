@@ -44,13 +44,11 @@ const Input = (props) => (
 Input.propTypes = {
   className: PropTypes.string,
   input: PropTypes.string,
-  value: PropTypes.string,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   pattern: PropTypes.string,
-  required: PropTypes.bool,
   onChange: PropTypes.func,
   error: PropTypes.string,
 };
@@ -58,11 +56,9 @@ Input.propTypes = {
 Input.defaultProps = {
   className: '',
   input: '',
-  value: '',
   error: '',
   placeholder: '',
-  required: false,
-  pattern: '',
+  pattern: null,
   onChange: null,
 };
 
