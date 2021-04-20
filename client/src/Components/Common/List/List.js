@@ -24,8 +24,8 @@ List.propTypes = {
   column1: PropTypes.string.isRequired,
   column2: PropTypes.string.isRequired,
   column3: PropTypes.string.isRequired,
-  column4: PropTypes.bool.isRequired,
-  map: PropTypes.func.isRequired,
+  column4: PropTypes.string.isRequired,
+  map: PropTypes.node.isRequired,
 };
 
 export default List;

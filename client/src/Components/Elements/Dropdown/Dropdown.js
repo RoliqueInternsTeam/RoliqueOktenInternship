@@ -1,24 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './Dropdown.module.css';
 
 function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
-const { notRequiredSelect } = classes;
-let selectClass = classes.select;
-function clickEventHandle() {
-  selectClass = classes.select1;
-}
+const { notRequiredSelect, select } = classes;
 
 const Dropdown = (props) => (
   <div className={classes.div}>
     <label className={classes.label}>{props.label}</label>
     <select
-      className={props.required ? selectClass : notRequiredSelect}
+      className={props.required ? select : notRequiredSelect}
       name={props.name}
       required={props.required}
       onChange={props.onChange}
-      onClick={() => clickEventHandle()}
     >
       <option className={classes.selected} selected disabled hidden>
         { props.select ? capitalizeFirstLetter(props.select) : 'Select...' }
@@ -27,5 +23,18 @@ const Dropdown = (props) => (
     </select>
   </div>
 );
+
+Dropdown.propTypes = {
+  label: PropTypes.string.isRequired,
+  required: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  select: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+Dropdown.defaultProps = {
+  select: '',
+};
 
 export default Dropdown;

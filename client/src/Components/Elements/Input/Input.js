@@ -1,6 +1,7 @@
 import React from 'react';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import MaskedInput from 'react-text-mask';
+import PropTypes from 'prop-types';
 import classes from './Input.module.css';
 
 const mask = createNumberMask({
@@ -39,4 +40,30 @@ const Input = (props) => (
     {props.error ? <p className={classes.p}>{props.error}</p> : null}
   </div>
 );
+
+Input.propTypes = {
+  className: PropTypes.string,
+  input: PropTypes.string,
+  value: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  pattern: PropTypes.string,
+  required: PropTypes.bool,
+  onChange: PropTypes.func,
+  error: PropTypes.string,
+};
+
+Input.defaultProps = {
+  className: '',
+  input: '',
+  value: '',
+  error: '',
+  placeholder: '',
+  required: false,
+  pattern: '',
+  onChange: null,
+};
+
 export default Input;

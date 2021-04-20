@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './Tooltip.module.css';
 
 const Tooltip = (props) => (
@@ -13,5 +14,13 @@ const Tooltip = (props) => (
     </div>
   </div>
 );
+
+Tooltip.propTypes = {
+  arrowPlace: PropTypes.string.isRequired,
+  align: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+
+};
 
 export default Tooltip;

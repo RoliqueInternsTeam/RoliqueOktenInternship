@@ -19,8 +19,8 @@ const PermissionChecker = (props) => {
 PermissionChecker.propTypes = {
   permission: PropTypes.arrayOf(PropTypes.string).isRequired,
   email: PropTypes.string,
-  children: PropTypes.elementType.isRequired,
-  display: PropTypes.node.isRequired,
+  children: PropTypes.element.isRequired,
+  display: PropTypes.oneOf([null, PropTypes.node]),
 };
 
 export default withRouter(PermissionChecker);

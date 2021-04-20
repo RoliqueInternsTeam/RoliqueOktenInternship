@@ -1,6 +1,7 @@
 import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+import PropTypes from 'prop-types';
 import classes from './BirthdateInput.module.scss';
 import './BirthdateCalendar.css';
 
@@ -20,5 +21,11 @@ const BirthdateInput = (props) => (
     />
   </div>
 );
+
+BirthdateInput.propTypes = {
+  label: PropTypes.string.isRequired,
+  setState: PropTypes.func.isRequired,
+
+};
 
 export default BirthdateInput;
