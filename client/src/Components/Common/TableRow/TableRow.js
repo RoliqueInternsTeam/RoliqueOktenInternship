@@ -24,7 +24,7 @@ const TableRow = (props) => {
       <td className={classes.td}>
         {props.avatar
           ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} />
-          : <Avatar name={(`${props.column1} ${props.column11}`) && props.column2} size="32px" round style={{ marginRight: '12px' }} />}
+          : <Avatar name={props.column1 && props.column11 ? `${props.column1} ${props.column11}` : props.column2} size="32px" round style={{ marginRight: '12px' }} />}
         &nbsp;
         {props.column1}
         &nbsp;

@@ -18,6 +18,7 @@ import Plus from '../Elements/Logos/plus-icon.svg';
 const Influencers = () => {
   const [influencers, setInfluencers] = useState([]);
   const [search, setSearch] = useState('');
+
   const access_token = useSelector(({ access_token }) => access_token);
 
   const dispatch = useDispatch();
@@ -86,34 +87,56 @@ const Influencers = () => {
     return channels.map((channel) => channel);
   };
 
+  const usernameHandler = (social) => {
+    const profiles = Object.keys(social);
+    for (let i = 0; i < profiles.length; i++) {
+      switch (profiles[i]) {
+        case 'instagram':
+          return social.instagram.instagramUsername;
+        case 'tiktok':
+          return social.tiktok.tiktokUsername;
+        case 'youtube':
+          return social.youtube.youtubeUsername;
+        case 'facebook':
+          return social.facebook.facebookUsername;
+        case 'twitter':
+          return social.twitter.twitterUsername;
+        case 'blog':
+          return social.blog.blogUsername;
+        default:
+          return null;
+      }
+    }
+    return profiles;
+  };
+
   return (
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
-      <div>
-        <Search search={searchQuery} />
-        <List
-          column1='Username'
-          column2='Name'
-          column3='Channels'
-          column4='Rating'
-          map={influencers.map((influencer) => (
-            <TableRow
-              key={influencer._id}
-              avatar={influencer.avatar}
-              column1={influencer.username}
-              column2={`${influencer.firstName} ${influencer.lastName}`}
-              column3={[channelsHandler(influencer.social), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />]}
-              column4={<img src={Rating} alt='rating' />}
-              to='/influencer'
-              tooltipMessage='Open Influencer'
-              imgAlt='Open Influencer'
-              onClick={() => {
-                dispatch(setInfluencer(influencer));
-              }}
-            />
-          ))}
-        />
-      </div>
+      <Search search={searchQuery} />
+      <List
+        column1='Username'
+        column2='Name'
+        column3='Channels'
+        column4='Rating'
+        map={influencers.map((influencer) => (
+          <TableRow
+            key={influencer._id}
+            avatar={influencer.avatar}
+            column1={usernameHandler(influencer.social)}
+            column2={`${influencer.firstName} ${influencer.lastName}`}
+            column3={influencer.social ? [channelsHandler(influencer.social), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />] : null}
+            column4={<img src={Rating} alt='rating' />}
+            to='/influencer'
+            tooltipMessage='Open Influencer'
+            imgAlt='Open Influencer'
+            onClick={() => {
+              dispatch(setInfluencer(influencer));
+            }}
+          />
+        ))}
+      />
+
     </div>
   );
 };
