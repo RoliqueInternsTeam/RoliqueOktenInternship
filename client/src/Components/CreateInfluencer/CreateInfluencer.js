@@ -68,7 +68,7 @@ const CreateInfluencer = (props) => {
       social: {
         ...prevState.social,
         [event.target.id.replace('Username', '')]: {
-          ...prevState.social.[event.target.id.replace('Username', '')],
+          ...prevState.social[event.target.id.replace('Username', '')],
           [event.target.id]: event.target.value,
         },
       },
@@ -81,7 +81,7 @@ const CreateInfluencer = (props) => {
       social: {
         ...prevState.social,
         [event.target.id.replace('Followers', '')]: {
-          ...prevState.social.[event.target.id.replace('Followers', '')],
+          ...prevState.social[event.target.id.replace('Followers', '')],
           [event.target.id]: event.target.value.replaceAll('.', ''),
         },
       },
