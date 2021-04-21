@@ -8,6 +8,7 @@ import ProfilePicture from '../../Elements/Icons/profile-picture.svg';
 import { MAX_PHOTO_SIZE, PHOTO_MIMETYPES } from '../../../config/constants';
 import { PHOTO_SIZE_EXCEED } from '../../../config/messages';
 import Message from '../../Elements/Message/Message';
+import Label from '../../Elements/Label/Label';
 
 const PictureLoader = (props) => {
   const [uploaded, setUploaded] = useState(null);
@@ -112,7 +113,7 @@ const PictureLoader = (props) => {
 
   return (
     <div className={classes.container}>
-      <label className={classes.profileLabel} htmlFor='avatar'>{props.label}</label>
+      <Label label={props.label} htmlFor='avatar' />
       <div>
         <input type='file' id='avatar' accept={PHOTO_MIMETYPES} onChange={onChange} className={classes.input} />
         { newProfilePicture

@@ -12,6 +12,7 @@ import Twitter from '../Elements/Logos/twitter.svg';
 import TikTok from '../Elements/Logos/tiktok.svg';
 import Facebook from '../Elements/Logos/facebook.svg';
 import Instagram from '../Elements/Logos/instagram.svg';
+import Blogger from '../Elements/Logos/blogger.svg';
 import Rating from '../Elements/Icons/rating.svg';
 import Plus from '../Elements/Logos/plus-icon.svg';
 
@@ -44,20 +45,33 @@ const Influencers = () => {
       await RefreshToken();
     }
   };
-  const searchQuery = (event) => {
-    setInfluencers(influencersList);
-    setSearch(event.target.value);
-  };
-
-  useEffect(() => {
-    if (search) {
-      setInfluencers(influencers.filter((influencer) => ([influencer.username, influencer.firstName, influencer.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
-    }
-  }, [search]);
 
   useEffect(() => {
     getInfluencers();
   }, [access_token]);
+
+  const usernameHandler = (social) => {
+    const profiles = Object.keys(social);
+    for (let i = 0; i < profiles.length; i++) {
+      switch (profiles[i]) {
+        case 'instagram':
+          return social.instagram.instagramUsername;
+        case 'tiktok':
+          return social.tiktok.tiktokUsername;
+        case 'youtube':
+          return social.youtube.youtubeUsername;
+        case 'facebook':
+          return social.facebook.facebookUsername;
+        case 'twitter':
+          return social.twitter.twitterUsername;
+        case 'blog':
+          return social.blog.blogUsername;
+        default:
+          return null;
+      }
+    }
+    return profiles;
+  };
 
   const channelsHandler = (social) => {
     const profiles = Object.keys(social);
@@ -83,32 +97,24 @@ const Influencers = () => {
         profiles[i] = <img src={Twitter} alt='twitter' className={classes.channel} />;
         channels.push(profiles[i]);
       }
+      if (profiles[i] === 'blog') {
+        profiles[i] = <img src={Blogger} alt='blog' className={classes.channel} />;
+        channels.push(profiles[i]);
+      }
     }
     return channels.map((channel) => channel);
   };
 
-  const usernameHandler = (social) => {
-    const profiles = Object.keys(social);
-    for (let i = 0; i < profiles.length; i++) {
-      switch (profiles[i]) {
-        case 'instagram':
-          return social.instagram.instagramUsername;
-        case 'tiktok':
-          return social.tiktok.tiktokUsername;
-        case 'youtube':
-          return social.youtube.youtubeUsername;
-        case 'facebook':
-          return social.facebook.facebookUsername;
-        case 'twitter':
-          return social.twitter.twitterUsername;
-        case 'blog':
-          return social.blog.blogUsername;
-        default:
-          return null;
-      }
-    }
-    return profiles;
+  const searchQuery = (event) => {
+    setInfluencers(influencersList);
+    setSearch(event.target.value);
   };
+
+  useEffect(() => {
+    if (search) {
+      setInfluencers(influencers.filter((influencer) => ([usernameHandler(influencer.social), influencer.firstName, influencer.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
+    }
+  }, [search]);
 
   return (
     <div className={classes.mainContainer}>

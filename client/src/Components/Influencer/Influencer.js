@@ -9,8 +9,9 @@ import instagramIcon from '../Elements/Icons/instagram-icon.svg';
 import twitterIcon from '../Elements/Icons/twitter-icon.svg';
 import facebookIcon from '../Elements/Icons/facebook-icon.svg';
 import tiktokIcon from '../Elements/Icons/tiktok-icon.svg';
-import bloggerIcon from '../Elements/Icons/blogger-icon.svg';
+import blogIcon from '../Elements/Icons/blogger-icon.svg';
 import youtubeIcon from '../Elements/Icons/youtube-icon.svg';
+import Label from '../Elements/Label/Label';
 
 const Influencer = () => {
   const influencer = useSelector(({ influencer }) => influencer);
@@ -37,7 +38,7 @@ const Influencer = () => {
       channels.push(youtube);
     }
     if (blog) {
-      blog = <SocialMedia platform={bloggerIcon} style={['blog']} username={blog.blogUsername} followers={blog.blogFollowers} />;
+      blog = <SocialMedia platform={blogIcon} style={['blog']} username={blog.blogUsername} followers={blog.blogFollowers} />;
       channels.push(blog);
     }
     if (twitter) {
@@ -57,9 +58,9 @@ const Influencer = () => {
         <div className={classes.personalInfo}>
           <h2>{`${influencer.firstName} ${influencer.lastName}`}</h2>
           <div className={classes.textContainer}>
-            <label className={classes.label}>Birthday:</label>
+            <Label label='Birthday:' />
             <p className={classes.p}>{influencer.birthdate}</p>
-            <label className={classes.label}>Occupation:</label>
+            <Label label='Occupation:' />
             <p className={classes.p}>{influencer.profession}</p>
           </div>
           <div className={classes.socialMediaContainer}>
