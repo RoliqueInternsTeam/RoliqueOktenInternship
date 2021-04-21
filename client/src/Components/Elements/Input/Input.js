@@ -2,6 +2,7 @@ import React from 'react';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import MaskedInput from 'react-text-mask';
 import classes from './Input.module.css';
+import Label from '../Label/Label';
 
 const mask = createNumberMask({
   prefix: '',
@@ -13,7 +14,7 @@ const mask = createNumberMask({
 
 const Input = (props) => (
   <div className={`${classes.div} ${classes[props.className]}`}>
-    <label className={classes.label} htmlFor={props.id}>{props.label}</label>
+    <Label label={props.label} htmlFor={props.id} />
     { props.input ? props.input === 'masked'
       && (
       <MaskedInput

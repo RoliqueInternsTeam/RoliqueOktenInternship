@@ -3,10 +3,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import classes from './BirthdateInput.module.scss';
 import './BirthdateCalendar.css';
+import Label from '../Label/Label';
 
 const BirthdateInput = (props) => (
   <div className={classes.div}>
-    <label className={classes.label}>{props.label}</label>
+    <Label label={props.label} />
     <DatePicker
       onChange={(date) => props.setState(date)}
       peekNextMonth
@@ -16,7 +17,6 @@ const BirthdateInput = (props) => (
       dateFormat="dd.MM.yyyy"
       selected={props.state.birthday}
       calendarClassName={classes.calendar}
-      po
     />
   </div>
 );
