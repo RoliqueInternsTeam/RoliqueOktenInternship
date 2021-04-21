@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import classes from './CreateInfluencer.module.css';
@@ -49,11 +49,6 @@ const CreateInfluencer = (props) => {
   });
 
   const [avatar, setAvatar] = useState({ avatar: null });
-
-  useEffect(() => {
-    console.log(influencerInfo);
-    console.log(avatar);
-  }, [influencerInfo, avatar]);
 
   const access_token = useSelector(({ access_token }) => access_token);
   const dispatch = useDispatch();

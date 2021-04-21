@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBadRequest } from '../../store/actions';
@@ -16,43 +16,8 @@ import 'react-datepicker/src/stylesheets/datepicker.scss';
 
 const EditInfluencer = () => {
   const influencer = useSelector(({ influencer }) => influencer);
-  const [influencerInfo, setInfluencerInfo] = useState({
-    firstName: '',
-    lastName: '',
-    birthdate: '',
-    profession: '',
-    social: {
-      instagram: {
-        instagramUsername: '',
-        instagramFollowers: '',
-      },
-      youtube: {
-        youtubeUsername: '',
-        youtubeFollowers: '',
-      },
-      facebook: {
-        facebookUsername: '',
-        facebookFollowers: '',
-      },
-      tiktok: {
-        tiktokUsername: '',
-        tiktokFollowers: '',
-      },
-      twitter: {
-        twitterUsername: '',
-        twitterFollowers: '',
-      },
-      blog: {
-        blogUsername: '',
-        blogFollowers: '',
-      },
-    },
-    avatar: null,
-  });
-
-  useEffect(() => {
-    setInfluencerInfo(influencer);
-  }, [influencer]);
+  const [influencerInfo, setInfluencerInfo] = useState({ ...influencer });
+  const [avatar, setAvatar] = useState(influencer.avatar);
 
   const access_token = useSelector(({ access_token }) => access_token);
   const dispatch = useDispatch();
@@ -62,8 +27,6 @@ const EditInfluencer = () => {
   };
 
   const inputNetworkHandler = (event) => {
-    console.log(event.target.id);
-    console.log(event.target.value);
     setInfluencerInfo(((prevState) => ({
       ...prevState,
       social: {
@@ -97,7 +60,8 @@ const EditInfluencer = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    Object.keys(influencerInfo).forEach((key) => formData.append(key, influencerInfo[key]));
+    formData.append('json', JSON.stringify(influencerInfo));
+    formData.append('avatar', avatar);
 
     const request = {
       method: 'PUT',
@@ -135,7 +99,7 @@ const EditInfluencer = () => {
             <Input label="Last Name" type='text' id="lastName" value={influencerInfo.lastName} onChange={(event) => inputHandler(event)} />
             <BirthdateInput setState={dateHandler} state={influencerInfo} value={influencerInfo.birthdate} label='Birthdate' />
             <Input label="Profession" type='text' id="profession" value={influencerInfo.profession} onChange={(event) => inputHandler(event)} />
-            <PictureLoader label='Profile Picture' alt='Add an avatar' value={influencerInfo.avatar} setState={setInfluencerInfo} />
+            <PictureLoader label='Profile Picture' alt='Add an avatar' avatar={avatar} setState={setAvatar} />
           </div>
           <div className={classes.rightContainer}>
             <h4 className={classes.h4}>Social Profiles</h4>

@@ -53,7 +53,7 @@ const Influencer = () => {
       <Header title={`${influencer.firstName} ${influencer.lastName}`} button='edit' to='/influencer/edit' />
       <div className={classes.generalInfo}>
         {influencer.avatar
-          ? <img src={influencer.avatar} alt='avatar' />
+          ? <img src={influencer.avatar} alt='avatar' className={classes.avatar} />
           : <Avatar name={`${influencer.firstName} ${influencer.lastName}`} round />}
         <div className={classes.personalInfo}>
           <h2>{`${influencer.firstName} ${influencer.lastName}`}</h2>
