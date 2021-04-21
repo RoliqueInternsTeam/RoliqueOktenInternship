@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { serialize } from 'object-to-formdata';
 import classes from './CreateInternalUser.module.css';
 import Info from '../Elements/Icons/info.svg';
 import Input from '../Elements/Input/Input';
@@ -51,8 +52,9 @@ const CreateInternalUser = (props) => {
   const createHandler = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
+    const formData = serialize(
+      userInfo,
+    );
 
     const request = {
       method: 'POST',
