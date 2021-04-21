@@ -46,12 +46,14 @@ const CreateInfluencer = (props) => {
         blogFollowers: '',
       },
     },
-    avatar: null,
   });
+
+  const [avatar, setAvatar] = useState({ avatar: null });
 
   useEffect(() => {
     console.log(influencerInfo);
-  }, [influencerInfo]);
+    console.log(avatar);
+  }, [influencerInfo, avatar]);
 
   const access_token = useSelector(({ access_token }) => access_token);
   const dispatch = useDispatch();
@@ -66,7 +68,7 @@ const CreateInfluencer = (props) => {
       social: {
         ...prevState.social,
         [event.target.id.replace('Username', '')]: {
-          ...prevState.social.name,
+          ...prevState.social.[event.target.id.replace('Username', '')],
           [event.target.id]: event.target.value,
         },
       },
@@ -79,8 +81,8 @@ const CreateInfluencer = (props) => {
       social: {
         ...prevState.social,
         [event.target.id.replace('Followers', '')]: {
-          ...prevState.social.name,
-          [event.target.id]: event.target.value.replace('.', ''),
+          ...prevState.social.[event.target.id.replace('Followers', '')],
+          [event.target.id]: event.target.value.replaceAll('.', ''),
         },
       },
     })));
@@ -94,7 +96,8 @@ const CreateInfluencer = (props) => {
     event.preventDefault();
 
     const formData = new FormData();
-    Object.keys(influencerInfo).forEach((key) => formData.append(key, influencerInfo[key]));
+    formData.append('json', JSON.stringify(influencerInfo));
+    formData.append('avatar', avatar);
 
     const request = {
       method: 'POST',
@@ -132,7 +135,7 @@ const CreateInfluencer = (props) => {
             <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
             <BirthdateInput setState={dateHandler} state={influencerInfo} label='Birthdate' />
             <Input label="Profession" type='text' id="profession" required="required" onChange={(event) => inputHandler(event)} />
-            <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setInfluencerInfo} />
+            <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setAvatar} />
           </div>
           <div className={classes.rightContainer}>
             <h4 className={classes.h4}>Social Profiles</h4>

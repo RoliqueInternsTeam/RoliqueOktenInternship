@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import Avatar from 'react-avatar';
+import { NavLink } from 'react-router-dom';
 import classes from './TableRow.module.css';
 import Tooltip from '../../Elements/Tooltip/Tooltip';
 import Edit from '../../Elements/Icons/combined-shape.svg';

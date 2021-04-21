@@ -5,48 +5,75 @@ const { NAME } = require('../../config/regexp.enum');
 module.exports = Joi.object({
     firstName: Joi.string().trim().regex(NAME).required(),
     lastName: Joi.string().trim().regex(NAME).required(),
-    birthdate: Joi.date(),
+    birthdate: Joi.date().allow(''),
     profession: Joi.string().trim().required(),
-    socialProfileInstagram: Joi.string(),
-    instagramFollowers: Joi.number().when(
-        'socialProfileInstagram', {
-            is: Joi.exist(),
-            then: Joi.number().required()
-        }
-    ),
-    socialProfileYouTube: Joi.string(),
-    youTubeFollowers: Joi.number().when(
-        'socialProfileYouTube', {
-            is: Joi.exist(),
-            then: Joi.number().required()
-        }
-    ),
-    socialProfileFacebook: Joi.string(),
-    facebookFollowers: Joi.number().when(
-        'socialProfileFacebook', {
-            is: Joi.exist(),
-            then: Joi.number().required()
-        }
-    ),
-    socialProfileTiktok: Joi.string(),
-    tiktokFollowers: Joi.number().when(
-        'socialProfileTiktok', {
-            is: Joi.exist(),
-            then: Joi.number().required()
-        }
-    ),
-    socialProfileTwitter: Joi.string(),
-    twitterFollowers: Joi.number().when(
-        'socialProfileTwitter', {
-            is: Joi.exist(),
-            then: Joi.number().required()
-        }
-    ),
-    socialProfileBlog: Joi.string(),
-    blogFollowers: Joi.number().when(
-        'socialProfileBlog', {
-            is: Joi.exist(),
-            then: Joi.number().required()
-        }
-    ),
+    avatar: Joi.string().allow(null, ''),
+    social: Joi.object().keys({
+        instagram: Joi.object().keys({
+            instagramUsername: Joi.string().allow(''),
+            instagramFollowers: Joi.number().when(
+                'instagramUsername', {
+                    switch: [
+                        { is: '', then: Joi.number().allow('') },
+                        { is: Joi.exist(), then: Joi.number().required() }
+                    ]
+                }
+            )
+        }),
+        youtube: Joi.object().keys({
+            youtubeUsername: Joi.string(),
+            youtubeFollowers: Joi.number().when(
+                'youtubeUsername', {
+                    switch: [
+                        { is: '', then: Joi.number().allow('') },
+                        { is: Joi.exist(), then: Joi.number().required() }
+                    ]
+                }
+            )
+        }),
+        facebook: Joi.object().keys({
+            facebookUsername: Joi.string(),
+            facebookFollowers: Joi.number().when(
+                'facebookUsername', {
+                    switch: [
+                        { is: '', then: Joi.number().allow('') },
+                        { is: Joi.exist(), then: Joi.number().required() }
+                    ]
+                }
+            )
+        }),
+        tiktok: Joi.object().keys({
+            tiktokUsername: Joi.string(),
+            tiktokFollowers: Joi.number().when(
+                'tiktokUsername', {
+                    switch: [
+                        { is: '', then: Joi.number().allow('') },
+                        { is: Joi.exist(), then: Joi.number().required() }
+                    ]
+                }
+            )
+        }),
+        twitter: Joi.object().keys({
+            twitterUsername: Joi.string(),
+            twitterFollowers: Joi.number().when(
+                'twitterUsername', {
+                    switch: [
+                        { is: '', then: Joi.number().allow('') },
+                        { is: Joi.exist(), then: Joi.number().required() }
+                    ]
+                }
+            )
+        }),
+        blog: Joi.object().keys({
+            blogUsername: Joi.string(),
+            blogFollowers: Joi.number().when(
+                'blogUsername', {
+                    switch: [
+                        { is: '', then: Joi.number().allow('') },
+                        { is: Joi.exist(), then: Joi.number().required() }
+                    ]
+                }
+            )
+        })
+    })
 });

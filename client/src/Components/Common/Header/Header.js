@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import classes from './Header.module.css';
 import Arrow from '../../Elements/Icons/arrow.svg';
@@ -35,6 +36,19 @@ const Header = (props) => {
       </div>
     </div>
   );
+};
+
+Header.propTypes = {
+  button: PropTypes.oneOf(['createNew', 'saveChanges', 'edit']).isRequired,
+  to: PropTypes.string,
+  title: PropTypes.string,
+  arrow: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  to: '/',
+  title: '',
+  arrow: false,
 };
 
 export default withRouter(Header);

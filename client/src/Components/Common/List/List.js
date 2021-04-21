@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './List.module.css';
 
 const List = (props) => (
@@ -16,7 +17,15 @@ const List = (props) => (
         {props.map}
       </tbody>
     </table>
-
   </div>
 );
+
+List.propTypes = {
+  column1: PropTypes.string.isRequired,
+  column2: PropTypes.string.isRequired,
+  column3: PropTypes.string.isRequired,
+  column4: PropTypes.bool.isRequired,
+  map: PropTypes.func.isRequired,
+};
+
 export default List;

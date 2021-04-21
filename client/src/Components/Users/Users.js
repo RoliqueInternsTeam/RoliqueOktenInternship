@@ -53,32 +53,34 @@ const Users = () => {
   }, [access_token]);
 
   return (
-    <div className={classes.Users}>
+    <div className={classes.mainContainer}>
       <Header title='Users' button='createNew' />
-      <Search search={searchQuery} />
-      <List
-        column1='Name'
-        column2='email'
-        column3='Role'
-        column4='Phone'
-        map={users.map((user) => (
-          <TableRow
-            key={user._id}
-            avatar={user.avatar}
-            column1={user.firstName}
-            column11={user.lastName}
-            column2={user.email}
-            column3={capitalizeFirstLetter(user.role)}
-            column4={user.phone}
-            to='/users/edit'
-            tooltipMessage='Edit User'
-            imgAlt='Edit User'
-            onClick={() => {
-              dispatch(setUser(user));
-            }}
-          />
-        ))}
-      />
+      <div>
+        <Search search={searchQuery} />
+        <List
+          column1='Name'
+          column2='email'
+          column3='Role'
+          column4='Phone'
+          map={users.map((user) => (
+            <TableRow
+              key={user._id}
+              avatar={user.avatar}
+              column1={user.firstName}
+              column11={user.lastName}
+              column2={user.email}
+              column3={capitalizeFirstLetter(user.role)}
+              column4={user.phone}
+              to='/users/edit'
+              tooltipMessage='Edit User'
+              imgAlt='Edit User'
+              onClick={() => {
+                dispatch(setUser(user));
+              }}
+            />
+          ))}
+        />
+      </div>
     </div>
   );
 };

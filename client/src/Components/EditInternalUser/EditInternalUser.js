@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { serialize } from 'object-to-formdata';
 import classes from './EditInternalUser.module.css';
-import Arrow from '../Elements/Icons/arrow.svg';
 import Info from '../Elements/Icons/info.svg';
 import Input from '../Elements/Input/Input';
 import Dropdown from '../Elements/Dropdown/Dropdown';
@@ -15,6 +15,7 @@ import { ADMIN, MANAGER } from '../../config/constants';
 import RefreshToken from '../../helpers';
 import { setBadRequest } from '../../store/actions';
 import Message from '../Elements/Message/Message';
+import Header from '../Common/Header/Header';
 
 const EditInternalUser = (props) => {
   const user = useSelector(({ user }) => user);
@@ -41,8 +42,10 @@ const EditInternalUser = (props) => {
   };
   const createHandler = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
+
+    const formData = serialize(
+      userInfo,
+    );
 
     const request = {
       method: 'PUT',
@@ -61,7 +64,7 @@ const EditInternalUser = (props) => {
       await RefreshToken();
       await createHandler();
     }
-    if (response.status !== 401 && response.status !== 201) {
+    if (response.status !== 401 && response.status !== 200) {
       dispatch(setBadRequest(true));
       setTimeout(() => dispatch(setBadRequest(false)), 3000);
     }
@@ -73,13 +76,7 @@ const EditInternalUser = (props) => {
       display={<Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={RESTRICTED_ACCESS} redirect />}
     >
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
-        <div className={classes.header}>
-          <div className={classes.headerLeft}>
-            <img src={Arrow} alt='Arrow button' className={classes.arrow} onClick={() => props.history.goBack()} />
-            <h1>Edit Internal User</h1>
-          </div>
-          <button type='submit' className={classes.button}>Save changes</button>
-        </div>
+        <Header arrow title='Edit Internal User' button='saveChanges' />
         <div className={classes.body}>
           <div className={classes.leftContainer}>
             <h4 className={classes.h4}>General</h4>
