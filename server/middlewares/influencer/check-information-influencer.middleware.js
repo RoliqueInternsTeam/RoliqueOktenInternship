@@ -1,6 +1,16 @@
-module.exports = (req, res, next) => {
+const fetch = require('node-fetch');
+
+module.exports = async (req, res, next) => {
     try {
         const influencer = JSON.parse(req.body.json);
+        const { instagramUsername } = influencer.social.instagram;
+
+        if (instagramUsername) {
+            const response = await fetch(`https://www.instagram.com/${instagramUsername}/?__a=1`);
+
+            const instagramAccount = await response.json();
+            console.log(instagramAccount);
+        }
 
         const cleanObject = (object) => {
             Object
@@ -24,6 +34,8 @@ module.exports = (req, res, next) => {
             return object;
         };
         cleanObject(influencer);
+
+
         req.influencer = influencer;
         next();
     } catch (e) {

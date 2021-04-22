@@ -13,10 +13,7 @@ module.exports = Joi.object({
             instagramUsername: Joi.string().allow(''),
             instagramFollowers: Joi.number().when(
                 'instagramUsername', {
-                    switch: [
-                        { is: '', then: Joi.number().allow('') },
-                        { is: Joi.exist(), then: Joi.number().required() }
-                    ]
+                    is: '', then: Joi.any().valid(''), otherwise: Joi.number().required()
                 }
             )
         }),
@@ -24,10 +21,7 @@ module.exports = Joi.object({
             youtubeUsername: Joi.string().allow(''),
             youtubeFollowers: Joi.number().when(
                 'youtubeUsername', {
-                    switch: [
-                        { is: '', then: Joi.number().allow('') },
-                        { is: Joi.exist(), then: Joi.number().required() }
-                    ]
+                    is: '', then: Joi.any().valid(''), otherwise: Joi.number().required()
                 }
             )
         }),
@@ -35,10 +29,7 @@ module.exports = Joi.object({
             facebookUsername: Joi.string().allow(''),
             facebookFollowers: Joi.number().when(
                 'facebookUsername', {
-                    switch: [
-                        { is: '', then: Joi.number().allow('') },
-                        { is: Joi.exist(), then: Joi.number().required() }
-                    ]
+                    is: '', then: Joi.any().valid(''), otherwise: Joi.number().required()
                 }
             )
         }),
@@ -46,10 +37,7 @@ module.exports = Joi.object({
             tiktokUsername: Joi.string().allow(''),
             tiktokFollowers: Joi.number().when(
                 'tiktokUsername', {
-                    switch: [
-                        { is: '', then: Joi.number().allow('') },
-                        { is: Joi.exist(), then: Joi.number().required() }
-                    ]
+                    is: '', then: Joi.any().valid(''), otherwise: Joi.number().required()
                 }
             )
         }),
@@ -57,10 +45,7 @@ module.exports = Joi.object({
             twitterUsername: Joi.string().allow(''),
             twitterFollowers: Joi.number().when(
                 'twitterUsername', {
-                    switch: [
-                        { is: '', then: Joi.number().allow('') },
-                        { is: Joi.exist(), then: Joi.number().required() }
-                    ]
+                    is: '', then: Joi.any().valid(''), otherwise: Joi.number().required()
                 }
             )
         }),
@@ -68,10 +53,7 @@ module.exports = Joi.object({
             blogUsername: Joi.string().allow(''),
             blogFollowers: Joi.number().when(
                 'blogUsername', {
-                    switch: [
-                        { is: '', then: Joi.number().allow('') },
-                        { is: Joi.exist(), then: Joi.number().required() }
-                    ]
+                    is: '', then: Joi.any().valid(''), otherwise: Joi.number().required()
                 }
             )
         })

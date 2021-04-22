@@ -3,7 +3,6 @@ const { ErrorHandler, errors } = require('../../errors');
 
 module.exports = (req, res, next) => {
     try {
-        console.log(req.body)
         const influencer = JSON.parse(req.body.json);
 
         const { error } = newInfluencerValidator.validate(influencer);
