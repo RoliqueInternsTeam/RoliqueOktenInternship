@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './Dropdown.module.css';
+import Label from '../Label/Label';
 
 function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
@@ -9,7 +10,7 @@ const { notRequiredSelect, select } = classes;
 
 const Dropdown = (props) => (
   <div className={classes.div}>
-    <label className={classes.label}>{props.label}</label>
+    <Label label={props.label} />
     <select
       className={props.required ? select : notRequiredSelect}
       name={props.name}

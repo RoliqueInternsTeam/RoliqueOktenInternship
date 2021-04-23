@@ -1,13 +1,14 @@
 .container {
     width: 127px;
-    height: 40px;
+    height: 25px;
 
     margin-right: 16px;
+    padding: 8px;
 
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 .image {
     height: 13px;
@@ -25,6 +26,7 @@
 
     color: #FFFFFF;
 
+    margin-left: 6px;
 }
 .instagram {
     border-radius: 17px;
@@ -41,7 +43,7 @@
 
     background-color: #415A94;
 }
-.blogger {
+.blog {
     border-radius: 32px;
 
     background-color: #E8934C;

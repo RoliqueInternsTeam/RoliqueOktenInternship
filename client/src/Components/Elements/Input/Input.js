@@ -4,6 +4,7 @@ import MaskedInput from 'react-text-mask';
 import PropTypes from 'prop-types';
 import classes from './Input.module.css';
 import { PHONE_NUMBER } from '../../../config/regexp.enum';
+import Label from '../Label/Label';
 
 const mask = createNumberMask({
   prefix: '',
@@ -15,7 +16,7 @@ const mask = createNumberMask({
 
 const Input = (props) => (
   <div className={`${classes.div} ${classes[props.className]}`}>
-    <label className={classes.label} htmlFor={props.id}>{props.label}</label>
+    <Label label={props.label} htmlFor={props.id} />
     { props.input ? props.input === 'masked'
       && (
       <MaskedInput

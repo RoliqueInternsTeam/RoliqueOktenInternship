@@ -2,20 +2,6 @@
     display: flex;
     flex-direction: column;
 }
-.label {
-    font-family: Helvetica Neue, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: -0.35px;
-
-    color: rgba(0, 0, 0, 0.6);
-
-    mix-blend-mode: hard-light;
-    opacity: 0.76;
-    margin-bottom: 8px;
-}
 .select {
     background: #FAFAFB;
     border: 1px solid #DA1414;
