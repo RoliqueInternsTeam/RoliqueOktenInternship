@@ -97,7 +97,7 @@ const EditInfluencer = () => {
             <h4 className={classes.h4}>General</h4>
             <Input label="First Name" type='text' id="firstName" value={influencerInfo.firstName} onChange={(event) => inputHandler(event)} />
             <Input label="Last Name" type='text' id="lastName" value={influencerInfo.lastName} onChange={(event) => inputHandler(event)} />
-            <BirthdateInput setState={dateHandler} state={influencerInfo} value={influencerInfo.birthdate} label='Birthdate' />
+            <BirthdateInput setState={dateHandler} selected={influencerInfo.birthdate} label='Birthdate' />
             <Input label="Profession" type='text' id="profession" value={influencerInfo.profession} onChange={(event) => inputHandler(event)} />
             <PictureLoader label='Profile Picture' alt='Add an avatar' avatar={avatar} setState={setAvatar} />
           </div>
