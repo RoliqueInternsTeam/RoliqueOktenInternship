@@ -149,7 +149,7 @@ PictureLoader.propTypes = {
 };
 
 PictureLoader.defaultProps = {
-  avatar: '',
+  avatar: null,
 };
 
 export default PictureLoader;
