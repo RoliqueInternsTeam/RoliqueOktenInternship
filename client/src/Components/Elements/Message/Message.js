@@ -2,6 +2,13 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import classes from './Message.module.css';
+import {
+  INVALID_CREDENTIALS,
+  PHOTO_SIZE_EXCEED,
+  RESTRICTED_ACCESS,
+  ROLES_INFO,
+  SOMETHING_WRONG,
+} from '../../../config/messages';
 
 const Message = (props) => {
   props.redirect ? setTimeout(() => props.history.push('/users'), 3000) : null;
@@ -22,8 +29,8 @@ const Message = (props) => {
 Message.propTypes = {
   redirect: PropTypes.bool,
   style: PropTypes.arrayOf(PropTypes.string).isRequired,
-  position: PropTypes.string,
-  message: PropTypes.string.isRequired,
+  position: PropTypes.oneOf(['absolute']),
+  message: PropTypes.oneOf([INVALID_CREDENTIALS, ROLES_INFO, PHOTO_SIZE_EXCEED, RESTRICTED_ACCESS, SOMETHING_WRONG]).isRequired,
 };
 
 Message.defaultProps = {

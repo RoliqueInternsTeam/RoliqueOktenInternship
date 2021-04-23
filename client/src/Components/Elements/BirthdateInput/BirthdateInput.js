@@ -15,7 +15,7 @@ const BirthdateInput = (props) => (
       showYearDropdown
       dropdownMode="select"
       dateFormat="dd.MM.yyyy"
-      selected={props.state.birthday}
+      selected={props.selected}
       calendarClassName={classes.calendar}
       po
     />
@@ -25,7 +25,7 @@ const BirthdateInput = (props) => (
 BirthdateInput.propTypes = {
   label: PropTypes.string.isRequired,
   setState: PropTypes.func.isRequired,
-
+  selected: PropTypes.string.isRequired,
 };
 
 export default BirthdateInput;

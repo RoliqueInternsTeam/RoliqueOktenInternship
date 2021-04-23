@@ -3,6 +3,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import MaskedInput from 'react-text-mask';
 import PropTypes from 'prop-types';
 import classes from './Input.module.css';
+import { PHONE_NUMBER } from '../../../config/regexp.enum';
 
 const mask = createNumberMask({
   prefix: '',
@@ -42,25 +43,25 @@ const Input = (props) => (
 );
 
 Input.propTypes = {
-  className: PropTypes.string,
-  input: PropTypes.string,
+  className: PropTypes.oneOf(['loginInput']),
+  input: PropTypes.oneOf(['masked']),
   label: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string,
   placeholder: PropTypes.string,
-  pattern: PropTypes.string,
+  pattern: PropTypes.oneOf([PHONE_NUMBER]),
   onChange: PropTypes.func,
   error: PropTypes.string,
 };
 
 Input.defaultProps = {
-  className: '',
-  input: '',
-  error: '',
+  className: null,
+  input: null,
+  error: null,
   label: null,
   type: null,
   id: null,
-  placeholder: '',
+  placeholder: null,
   pattern: null,
   onChange: null,
 };

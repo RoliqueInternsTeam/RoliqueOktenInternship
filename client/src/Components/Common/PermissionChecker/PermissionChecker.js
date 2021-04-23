@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { EMPLOYEE } from '../../../config/constants';
+import { ADMIN, EMPLOYEE, MANAGER } from '../../../config/constants';
 
 const PermissionChecker = (props) => {
   const role = useSelector(({ role }) => role);
@@ -17,10 +17,10 @@ const PermissionChecker = (props) => {
 };
 
 PermissionChecker.propTypes = {
-  permission: PropTypes.arrayOf(PropTypes.string).isRequired,
+  permission: PropTypes.arrayOf(PropTypes.oneOf([ADMIN, MANAGER, EMPLOYEE])).isRequired,
   email: PropTypes.string,
   children: PropTypes.element.isRequired,
-  display: PropTypes.oneOfType([null, PropTypes.node]),
+  display: PropTypes.oneOfType([PropTypes.node]),
 };
 
 export default withRouter(PermissionChecker);
