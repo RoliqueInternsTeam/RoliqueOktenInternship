@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './SocialMedia.module.css';
 
 const SocialMedia = (props) => (
@@ -11,5 +12,13 @@ const SocialMedia = (props) => (
     </label>
   </div>
 );
+
+SocialMedia.propTypes = {
+  style: PropTypes.arrayOf(PropTypes.string).isRequired,
+  platform: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  followers: PropTypes.number.isRequired,
+};
 
 export default SocialMedia;

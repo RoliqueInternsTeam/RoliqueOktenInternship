@@ -16,9 +16,9 @@ const Tooltip = (props) => (
 );
 
 Tooltip.propTypes = {
-  arrowPlace: PropTypes.string.isRequired,
-  align: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  arrowPlace: PropTypes.oneOf(['top', 'bottom', 'left', 'right']).isRequired,
+  align: PropTypes.oneOf(['center', 'right', 'left']).isRequired,
+  color: PropTypes.oneOf(['light', 'dark']).isRequired,
   message: PropTypes.string.isRequired,
 
 };
