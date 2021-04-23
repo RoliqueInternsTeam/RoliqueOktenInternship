@@ -1,6 +1,7 @@
 import React from 'react';
 import Avatar from 'react-avatar';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import classes from './TableRow.module.css';
 import Tooltip from '../../Elements/Tooltip/Tooltip';
 import Edit from '../../Elements/Icons/combined-shape.svg';
@@ -48,6 +49,27 @@ const TableRow = (props) => {
       </td>
     </tr>
   );
+};
+
+TableRow.propTypes = {
+  role: PropTypes.string,
+  avatar: PropTypes.string,
+  column1: PropTypes.string.isRequired,
+  column11: PropTypes.string,
+  column2: PropTypes.string.isRequired,
+  column3: PropTypes.node.isRequired,
+  column4: PropTypes.node,
+  to: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  tooltipMessage: PropTypes.string.isRequired,
+  imgAlt: PropTypes.string.isRequired,
+};
+
+TableRow.defaultProps = {
+  role: '',
+  avatar: '',
+  column11: '',
+  column4: '',
 };
 
 export default TableRow;

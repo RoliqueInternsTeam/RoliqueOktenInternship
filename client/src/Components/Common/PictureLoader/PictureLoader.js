@@ -143,13 +143,14 @@ const PictureLoader = (props) => {
 };
 
 PictureLoader.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   avatar: PropTypes.string,
+  setState: PropTypes.func.isRequired,
+  alt: PropTypes.string.isRequired,
 };
 
 PictureLoader.defaultProps = {
-  label: '',
-  avatar: '',
+  avatar: null,
 };
 
 export default PictureLoader;

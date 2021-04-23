@@ -48,7 +48,6 @@ const Login = (props) => {
   return (
     <form className={classes.loginForm} onSubmit={(event) => submitHandler(event)}>
       <h3 className={classes.h3}>
-        {props.REFRESH}
         Log into your account
       </h3>
       <div className={classes.loginContainer}>

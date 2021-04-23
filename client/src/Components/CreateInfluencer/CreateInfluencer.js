@@ -18,7 +18,7 @@ const CreateInfluencer = (props) => {
   const [influencerInfo, setInfluencerInfo] = useState({
     firstName: '',
     lastName: '',
-    birthday: '',
+    birthdate: '',
     profession: '',
     social: {
       instagram: {
@@ -128,7 +128,7 @@ const CreateInfluencer = (props) => {
             <h4 className={classes.h4}>General</h4>
             <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
             <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
-            <BirthdateInput setState={dateHandler} state={influencerInfo} label='Birthdate' />
+            <BirthdateInput setState={dateHandler} selected={influencerInfo.birthdate} label='Birthdate' />
             <Input label="Profession" type='text' id="profession" required="required" onChange={(event) => inputHandler(event)} />
             <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setAvatar} />
           </div>
@@ -158,4 +158,5 @@ const CreateInfluencer = (props) => {
     </PermissionChecker>
   );
 };
+
 export default withRouter(CreateInfluencer);
