@@ -16,9 +16,13 @@ const SocialMedia = (props) => (
 SocialMedia.propTypes = {
   style: PropTypes.arrayOf(PropTypes.string).isRequired,
   platform: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
+  alt: PropTypes.string,
   username: PropTypes.string.isRequired,
   followers: PropTypes.number.isRequired,
+};
+
+SocialMedia.defaultProps = {
+  alt: 'platform',
 };
 
 export default SocialMedia;

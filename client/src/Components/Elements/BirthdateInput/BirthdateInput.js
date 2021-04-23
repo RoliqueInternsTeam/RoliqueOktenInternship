@@ -25,7 +25,11 @@ const BirthdateInput = (props) => (
 BirthdateInput.propTypes = {
   label: PropTypes.string.isRequired,
   setState: PropTypes.func.isRequired,
-  selected: PropTypes.string.isRequired,
+  selected: PropTypes.string,
+};
+
+BirthdateInput.defaultProps = {
+  selected: null,
 };
 
 export default BirthdateInput;
