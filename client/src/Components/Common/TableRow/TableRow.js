@@ -7,7 +7,6 @@ import Tooltip from '../../Elements/Tooltip/Tooltip';
 import Edit from '../../Elements/Icons/combined-shape.svg';
 import { ADMIN, EMPLOYEE, MANAGER } from '../../../config/constants';
 import PermissionChecker from '../PermissionChecker/PermissionChecker';
-import PictureLoader from '../PictureLoader/PictureLoader';
 
 const TableRow = (props) => {
   const permissionHandler = () => {
@@ -54,20 +53,21 @@ const TableRow = (props) => {
 
 TableRow.propTypes = {
   role: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.string,
   column1: PropTypes.string.isRequired,
   column11: PropTypes.string.isRequired,
   column2: PropTypes.string.isRequired,
   column3: PropTypes.node.isRequired,
-  column4: PropTypes.node.isRequired,
+  column4: PropTypes.node,
   to: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  tooltipMessage: PropTypes.element.isRequired,
+  tooltipMessage: PropTypes.string.isRequired,
   imgAlt: PropTypes.string.isRequired,
 };
 
-PictureLoader.defaultProps = {
+TableRow.defaultProps = {
   avatar: '',
+  column4: '',
 };
 
 export default TableRow;
