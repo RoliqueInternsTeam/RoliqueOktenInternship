@@ -1,0 +1,52 @@
+.mainContainer {
+    margin-left: 40px;
+}
+.h4 {
+    margin-bottom: 24px;
+}
+.body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    margin-top: 47px;
+}
+.leftContainer {
+    margin-left: 180px;
+}
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    width: 408px;
+
+    margin-right: 180px;
+}
+.socialProfilesContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.networkContainer {
+    display: flex;
+    flex-direction: column;
+}
+.networkContainer input {
+    width: 184px;
+}
+.followersContainer input {
+    width: 184px;
+}
+.DayPickerInput {
+    background: #FAFAFB;
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 344px;
+    height: 32px;
+
+    margin-bottom: 16px;
+}
+.DayPickerInput:active {
+    border: 1px solid rgba(255, 101, 14, 0.5);
+    box-shadow: 0px 0px 2px rgba(255, 101, 14, 0.25);
+}

@@ -33,4 +33,46 @@ module.exports = {
             next(e);
         }
     },
+
+    updateInfluencer: async (req, res, next) => {
+        try {
+            const updateInfluencer = req.body;
+            const { avatar } = req;
+            const { id } = req.params;
+
+            if (avatar) {
+                const { s3Client } = s3;
+                const params = s3.uploadParams;
+                const fileExtension = avatar.name.split('.').pop();
+
+                params.Key = `${id}.${fileExtension}`;
+                params.Body = avatar.data;
+
+                s3Client.upload(params, async (err, data) => {
+                    if (err) {
+                        throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
+                    }
+
+                    const locationUrl = data.Location;
+
+                    await influencerServices.addPhotoInfluencer(id, locationUrl);
+                });
+            }
+
+            await influencerServices.updateInfluencer(id, { ...updateInfluencer });
+
+            res.status(OK).json('Influencer updated');
+        } catch (e) {
+            next(e);
+        }
+    },
+    getAllInfluencers: async (req, res, next) => {
+        try {
+            const influencers = await influencerServices.getInfluencers();
+
+            res.json(influencers);
+        } catch (e) {
+            next(e);
+        }
+    }
 };

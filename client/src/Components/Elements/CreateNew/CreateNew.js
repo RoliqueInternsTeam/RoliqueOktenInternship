@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import classes from './CreateNew.module.css';
-import PermissionChecker from '../PermissionChecker/PermissionChecker';
+import PermissionChecker from '../../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../../config/constants';
 
 const CreateNew = () => (
@@ -13,9 +13,9 @@ const CreateNew = () => (
         Create New
       </label>
       <div className={classes.dropdown}>
-        <NavLink className={classes.link} to='/create'>Campaign</NavLink>
-        <NavLink className={classes.link} to="/create">Influencer</NavLink>
-        <NavLink className={classes.link} to="/create">Internal User</NavLink>
+        <NavLink className={classes.link} to='/campaigns/create'>Campaign</NavLink>
+        <NavLink className={classes.link} to="/influencers/create">Influencer</NavLink>
+        <NavLink className={classes.link} to="/users/create">Internal User</NavLink>
       </div>
     </div>
   </PermissionChecker>

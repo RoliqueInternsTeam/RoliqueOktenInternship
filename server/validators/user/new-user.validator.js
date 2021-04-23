@@ -10,5 +10,6 @@ module.exports = Joi.object({
     role: Joi.string().required(),
     firstName: Joi.string().trim().regex(NAME).required(),
     lastName: Joi.string().trim().regex(NAME).required(),
-    phone: Joi.string().regex(PHONE)
+    phone: Joi.string().regex(PHONE).allow(''),
+    avatar: Joi.string().allow(null, '')
 });

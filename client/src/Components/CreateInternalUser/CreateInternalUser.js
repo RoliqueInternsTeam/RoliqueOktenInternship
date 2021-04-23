@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { serialize } from 'object-to-formdata';
 import classes from './CreateInternalUser.module.css';
 import Info from '../Elements/Icons/info.svg';
 import Input from '../Elements/Input/Input';
 import Dropdown from '../Elements/Dropdown/Dropdown';
 import Tooltip from '../Elements/Tooltip/Tooltip';
-import PictureLoader from '../Elements/PictureLoader/PictureLoader';
+import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import { RESTRICTED_ACCESS, ROLES_INFO } from '../../config/messages';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
 import { ADMIN, MANAGER } from '../../config/constants';
-import Header from '../Elements/Header/Header';
-import PermissionChecker from '../Elements/PermissionChecker/PermissionChecker';
+import Header from '../Common/Header/Header';
+import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import RefreshToken from '../../helpers';
 import { setBadRequest } from '../../store/actions';
 import Message from '../Elements/Message/Message';
@@ -51,8 +52,9 @@ const CreateInternalUser = (props) => {
   const createHandler = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    Object.keys(userInfo).forEach((key) => formData.append(key, userInfo[key]));
+    const formData = serialize(
+      userInfo,
+    );
 
     const request = {
       method: 'POST',
