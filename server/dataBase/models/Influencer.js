@@ -1,5 +1,16 @@
 const { Schema, model } = require('mongoose');
 
+const photos = {
+    photoURL: {
+        type: String
+    },
+    liked: {
+        type: Number
+    },
+    comment: {
+        type: Number
+    }
+};
 const profiles = {
     instagram: {
         instagramUsername: {
@@ -9,7 +20,8 @@ const profiles = {
         instagramFollowers: {
             type: Number,
             required: false
-        }
+        },
+        instagramPhotos: [photos]
     },
     youtube: {
         youtubeUsername: {
