@@ -9,7 +9,7 @@ module.exports = {
             const { avatar, user, influencer } = req;
 
             const newInfluencer = await influencerServices.createInfluencer({ userId: user._id, ...influencer });
-            if (avatar) {
+            if (avatar && !influencer.avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
