@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, withRouter } from 'react-router';
 
 import { useSelector } from 'react-redux';
 import Sidebar from './Components/Sidebar/Sidebar';
@@ -15,7 +15,7 @@ import EditInfluencer from './Components/EditInfluencer/EditInfluencer';
 import CreateInfluencer from './Components/CreateInfluencer/CreateInfluencer';
 import Influencer from './Components/Influencer/Influencer';
 
-function App() {
+function App(props) {
   const access_token = useSelector(({ access_token }) => access_token);
   const badRequest = useSelector(({ badRequest }) => badRequest);
 
@@ -32,9 +32,12 @@ function App() {
         <Route exact path="/influencer" component={Influencer} />
         <Route exact path="/influencers/create" component={CreateInfluencer} />
         <Route exact path="/influencer/edit" component={EditInfluencer} />
+
+        <Route render={() => props.history.push('/users')} />
+
       </Switch>
     </div>
   ) : <Login />;
 }
 
-export default App;
+export default withRouter(App);
