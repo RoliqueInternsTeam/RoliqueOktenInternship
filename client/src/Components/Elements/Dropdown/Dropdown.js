@@ -26,7 +26,7 @@ const Dropdown = (props) => (
 
 Dropdown.propTypes = {
   label: PropTypes.string.isRequired,
-  required: PropTypes.bool.isRequired,
+  required: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   select: PropTypes.string,
@@ -34,6 +34,7 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
+  required: '',
   select: '',
 };
 

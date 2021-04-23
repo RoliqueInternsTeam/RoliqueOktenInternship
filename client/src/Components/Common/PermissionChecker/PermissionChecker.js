@@ -20,7 +20,7 @@ PermissionChecker.propTypes = {
   permission: PropTypes.arrayOf(PropTypes.string).isRequired,
   email: PropTypes.string,
   children: PropTypes.element.isRequired,
-  display: PropTypes.oneOf([null, PropTypes.node]),
+  display: PropTypes.oneOfType([null, PropTypes.node]),
 };
 
 export default withRouter(PermissionChecker);

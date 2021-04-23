@@ -144,7 +144,7 @@ const PictureLoader = (props) => {
 PictureLoader.propTypes = {
   label: PropTypes.string.isRequired,
   avatar: PropTypes.string,
-  setState: PropTypes.objectOf(PropTypes.object).isRequired,
+  setState: PropTypes.func.isRequired,
   alt: PropTypes.string.isRequired,
 };
 

@@ -52,10 +52,10 @@ const TableRow = (props) => {
 };
 
 TableRow.propTypes = {
-  role: PropTypes.string.isRequired,
+  role: PropTypes.string,
   avatar: PropTypes.string,
   column1: PropTypes.string.isRequired,
-  column11: PropTypes.string.isRequired,
+  column11: PropTypes.string,
   column2: PropTypes.string.isRequired,
   column3: PropTypes.node.isRequired,
   column4: PropTypes.node,
@@ -66,7 +66,9 @@ TableRow.propTypes = {
 };
 
 TableRow.defaultProps = {
+  role: '',
   avatar: '',
+  column11: '',
   column4: '',
 };
 
