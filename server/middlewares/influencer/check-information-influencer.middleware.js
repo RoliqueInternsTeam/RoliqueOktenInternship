@@ -46,9 +46,6 @@ module.exports = async (req, res, next) => {
             return object;
         };
         cleanObject(influencer);
-        // influencer.avatar =
-
-
         req.influencer = influencer;
         next();
     } catch (e) {
