@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from 'react-avatar';
 
@@ -15,6 +15,8 @@ import Label from '../Elements/Label/Label';
 
 const Influencer = () => {
   const influencer = useSelector(({ influencer }) => influencer);
+
+  useEffect(() => console.log(influencer), [influencer]);
 
   const socialMediaHandler = (profiles) => {
     let {
@@ -67,6 +69,9 @@ const Influencer = () => {
             { influencer.social ? socialMediaHandler(influencer.social) : null }
           </div>
         </div>
+      </div>
+      <div className={classes.photosContainer}>
+        { influencer.social.instagram?.instagramPhotos.map((photo) => <img src={photo.photoURL} alt='Instagram content' key={photo._id} className={classes.instagramPhoto} />) }
       </div>
     </div>
   );
