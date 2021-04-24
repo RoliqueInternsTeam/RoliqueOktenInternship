@@ -1,7 +1,9 @@
 import './App.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router';
+import {
+  Redirect, Route, Switch,
+} from 'react-router';
 import Login from './Components/Login/Login';
 import Users from './Components/Users/Users';
 import CreateInternalUser from './Components/CreateInternalUser/CreateInternalUser';
@@ -24,18 +26,18 @@ const App = () => {
       {
         access_token
           ? (
-            <Route path="/">
+            <>
               { badRequest ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={SOMETHING_WRONG} /> : null }
               <Sidebar />
-              <Route exact path="/users" component={Users} />
               <Route exact path="/users/create" component={CreateInternalUser} />
               <Route exact path="/users/edit" component={EditInternalUser} />
-              <Route exact path="/influencers" component={Influencers} />
-              <Route exact path="/influencer" component={Influencer} />
+              <Route exact path="/users" component={Users} />
               <Route exact path="/influencers/create" component={CreateInfluencer} />
+              <Route exact path="/influencers" component={Influencers} />
               <Route exact path="/influencer/edit" component={EditInfluencer} />
-              <Route render={() => <Redirect to="/users" />} />
-            </Route>
+              <Route exact path="/influencer" component={Influencer} />
+              <Route render={() => <Redirect push to="/users" />} />
+            </>
           ) : <Redirect to="/login" />
       }
     </Switch>

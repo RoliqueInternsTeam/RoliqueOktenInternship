@@ -9,7 +9,7 @@ import { ADMIN, MANAGER } from '../../../config/constants';
 
 const EditButton = (props) => (
   <PermissionChecker permission={[ADMIN, MANAGER]} display={null}>
-    <NavLink to={props.to}>
+    <NavLink to={props.to} className={classes.link}>
       <button type='button' className={classes.button}>
         <img src={EditIcon} alt='Edit' className={classes.editImage} />
         Edit

@@ -30,7 +30,7 @@ const Sidebar = () => {
       <NavLink activeClassName={classes.active} className={classes.imgContainer} to="/influencers">
         <img src={At} alt="influencers" />
       </NavLink>
-      <NavLink onClick={() => dispatch(logout())} className={classes.logoutContainer} to="/login">
+      <NavLink onClick={() => dispatch(logout())} className={classes.logoutContainer} to="/">
         <img src={Logout} alt="logout" className={classes.logout} />
       </NavLink>
 
