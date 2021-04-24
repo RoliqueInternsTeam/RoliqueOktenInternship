@@ -108,7 +108,7 @@ const CreateInfluencer = (props) => {
     }
     if (response.status === 401) {
       await RefreshToken();
-      await createInfluencerHandler();
+      await createInfluencerHandler(event);
     }
     if (response.status !== 401 && response.status !== 201) {
       dispatch(setBadRequest(true));

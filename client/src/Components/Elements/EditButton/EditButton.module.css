@@ -20,6 +20,11 @@
     font-size: 14px;
     line-height: 17px;
     color: rgba(0, 0, 0, 0.6);
+
+    cursor: pointer;
+}
+.link{
+    text-decoration: none;
 }
 .editImage {
     margin-right: 10px;

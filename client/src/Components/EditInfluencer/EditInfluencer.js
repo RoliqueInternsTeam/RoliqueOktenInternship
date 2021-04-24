@@ -22,7 +22,7 @@ const EditInfluencer = () => {
   const access_token = useSelector(({ access_token }) => access_token);
   const dispatch = useDispatch();
 
-  const inputHandler = (setState, event) => {
+  const inputHandler = (event) => {
     setInfluencerInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
 
@@ -71,13 +71,13 @@ const EditInfluencer = () => {
       body: formData,
     };
 
-    const response = await fetch('http://localhost:5000/influencer', request);
+    const response = await fetch(`http://localhost:5000/influencer/${influencerInfo._id}`, request);
     if (response.status === 201) {
       props.history.push('/influencers');
     }
     if (response.status === 401) {
       await RefreshToken();
-      await editInfluencerHandler();
+      await editInfluencerHandler(event);
     }
     if (response.status !== 401 && response.status !== 201) {
       dispatch(setBadRequest(true));
