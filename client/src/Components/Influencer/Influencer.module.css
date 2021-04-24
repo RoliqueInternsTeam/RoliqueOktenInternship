@@ -5,15 +5,16 @@
     height: 100vh;
 }
 .generalInfo {
-    margin-top: 15px;
+    margin-top: 40px;
     margin-left: 40px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 .personalInfo {
     margin-left: 24px;
 }
 .personalInfo > h2 {
+    margin-top: 0;
     margin-bottom: 16px;
 }
 .avatar {
