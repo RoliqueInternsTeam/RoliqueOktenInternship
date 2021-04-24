@@ -13,6 +13,9 @@
 .personalInfo {
     margin-left: 24px;
 }
+.personalInfo > h2 {
+    margin-bottom: 16px;
+}
 .avatar {
     border-radius: 50%;
     height: 104px;
