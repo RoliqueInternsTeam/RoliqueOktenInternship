@@ -6,10 +6,10 @@ const { CREATED, OK } = require('../../constants/status-codes');
 module.exports = {
     createInfluencer: async (req, res, next) => {
         try {
-            const { avatar, user, body } = req;
+            const { avatar, user, influencer } = req;
 
-            const newInfluencer = await influencerServices.createInfluencer({ userId: user._id, ...body });
-            if (avatar) {
+            const newInfluencer = await influencerServices.createInfluencer({ userId: user._id, ...influencer });
+            if (avatar && !influencer.avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
