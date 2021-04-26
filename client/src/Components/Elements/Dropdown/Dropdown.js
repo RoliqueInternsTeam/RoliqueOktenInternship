@@ -6,16 +6,20 @@ import Label from '../Label/Label';
 function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
-const { notRequiredSelect, select } = classes;
-
+const { notRequiredSelect } = classes;
+let selectClass = classes.select;
+function clickEventHandle() {
+  selectClass = classes.notRequiredSelect;
+}
 const Dropdown = (props) => (
   <div className={classes.div}>
     <Label label={props.label} />
     <select
-      className={props.required ? select : notRequiredSelect}
+      className={props.required ? selectClass : notRequiredSelect}
       name={props.name}
       required={props.required}
       onChange={props.onChange}
+      onClick={clickEventHandle}
     >
       <option className={classes.selected} selected disabled hidden>
         { props.select ? capitalizeFirstLetter(props.select) : 'Select...' }
