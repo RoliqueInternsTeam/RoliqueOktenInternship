@@ -14,7 +14,7 @@ import RefreshToken from '../../helpers';
 import classes from './EditInfluencer.module.css';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
 
-const EditInfluencer = () => {
+const EditInfluencer = (props) => {
   const influencer = useSelector(({ influencer }) => influencer);
   const [influencerInfo, setInfluencerInfo] = useState({ ...influencer });
   const [avatar, setAvatar] = useState(influencer.avatar);
@@ -72,14 +72,15 @@ const EditInfluencer = () => {
     };
 
     const response = await fetch(`http://localhost:5000/influencer/${influencerInfo._id}`, request);
-    if (response.status === 201) {
+    console.log(response);
+    if (response.status === 200) {
       props.history.push('/influencers');
     }
     if (response.status === 401) {
       await RefreshToken();
       await editInfluencerHandler(event);
     }
-    if (response.status !== 401 && response.status !== 201) {
+    if (response.status !== 401 && response.status !== 200) {
       dispatch(setBadRequest(true));
       setTimeout(() => dispatch(setBadRequest(false)), 3000);
     }

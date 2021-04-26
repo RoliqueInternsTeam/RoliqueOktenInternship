@@ -40,6 +40,9 @@ module.exports = {
             const { avatar } = req;
             const { id } = req.params;
 
+            const newData = updateInfluencer.json;
+
+            console.log(newData);
             if (avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
@@ -59,7 +62,7 @@ module.exports = {
                 });
             }
 
-            await influencerServices.updateInfluencer(id, { ...updateInfluencer });
+            await influencerServices.updateInfluencer(id, { newData });
 
             res.status(OK).json('Influencer updated');
         } catch (e) {

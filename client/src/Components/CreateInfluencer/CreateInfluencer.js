@@ -84,7 +84,7 @@ const CreateInfluencer = (props) => {
   };
 
   const dateHandler = (date) => {
-    setInfluencerInfo(((prevState) => ({ ...prevState, birthday: date })));
+    setInfluencerInfo(((prevState) => ({ ...prevState, birthdate: date })));
   };
 
   const createInfluencerHandler = async (event) => {

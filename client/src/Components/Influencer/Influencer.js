@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from 'react-avatar';
 
@@ -15,8 +15,6 @@ import Label from '../Elements/Label/Label';
 
 const Influencer = () => {
   const influencer = useSelector(({ influencer }) => influencer);
-
-  useEffect(() => console.log(influencer), [influencer]);
 
   const socialMediaHandler = (profiles) => {
     let {
