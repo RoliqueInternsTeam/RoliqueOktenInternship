@@ -85,7 +85,7 @@ const Influencer = new Schema({
         required: true
     },
     birthdate: {
-        type: Number,
+        type: Date,
         required: false
     },
     profession: {

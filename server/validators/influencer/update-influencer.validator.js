@@ -6,10 +6,10 @@ module.exports = Joi.object({
     _id: Joi.string(),
     userId: Joi.string(),
     __v: Joi.number(),
-    firstName: Joi.string().trim().regex(NAME).required(),
-    lastName: Joi.string().trim().regex(NAME).required(),
+    firstName: Joi.string().trim().regex(NAME),
+    lastName: Joi.string().trim().regex(NAME),
     birthdate: Joi.date().allow(''),
-    profession: Joi.string().trim().required(),
+    profession: Joi.string().trim(),
     avatar: Joi.string().allow(null, ''),
     social: Joi.object().keys({
         instagram: Joi.object().keys({

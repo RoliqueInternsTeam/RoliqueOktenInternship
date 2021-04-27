@@ -41,19 +41,19 @@ module.exports = {
         try {
             const updateUser = req.body;
             const {
-                firstName, lastName, role, email, phone
+                firstName, lastName, role, email, phone, _id
             } = req.body;
             const updateUserNoPass = {
                 firstName, lastName, role, email, phone
             };
             const { avatar } = req;
-            const { id } = req.params;
+            // const { id } = req.params;
             if (avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
 
-                params.Key = `${id}.${fileExtension}`;
+                params.Key = `1.${fileExtension}`;
                 params.Body = avatar.data;
 
                 s3Client.upload(params, async (err, data) => {
@@ -63,16 +63,16 @@ module.exports = {
 
                     const locationUrl = data.Location;
 
-                    await userService.addPhotoUser(id, locationUrl);
+                    await userService.addPhotoUser(_id, locationUrl);
                 });
             }
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
-                await userService.updateUser(id, { ...updateUser });
+                await userService.updateUser(_id, { ...updateUser });
                 return res.status(OK).json('User updated').end();
             }
 
-            await userService.updateUser(id, { ...updateUserNoPass });
+            await userService.updateUser(_id, { ...updateUserNoPass });
 
             res.status(OK).json('User updated');
         } catch (e) {

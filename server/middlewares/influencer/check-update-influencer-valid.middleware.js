@@ -33,6 +33,7 @@ module.exports = (req, res, next) => {
         if (error) {
             throw new ErrorHandler(errors.NOT_VALID_BODY.message, errors.NOT_VALID_BODY.code);
         }
+        req.influencer = influencer;
         next();
     } catch (e) {
         next(e);
