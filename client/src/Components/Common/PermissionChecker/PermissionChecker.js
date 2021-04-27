@@ -9,7 +9,7 @@ const PermissionChecker = (props) => {
 
   let authorized = props.permission.includes(role);
 
-  if (role === EMPLOYEE) {
+  if (props.email && role === EMPLOYEE) {
     props.email === email ? authorized = true : authorized = false;
   }
 

@@ -29,14 +29,17 @@ const App = () => {
             <>
               { badRequest ? <Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={SOMETHING_WRONG} /> : null }
               <Sidebar />
-              <Route exact path="/users/create" component={CreateInternalUser} />
-              <Route exact path="/users/edit" component={EditInternalUser} />
-              <Route exact path="/users" component={Users} />
-              <Route exact path="/influencers/create" component={CreateInfluencer} />
-              <Route exact path="/influencers" component={Influencers} />
-              <Route exact path="/influencer/edit" component={EditInfluencer} />
-              <Route exact path="/influencer" component={Influencer} />
-              <Route render={() => <Redirect push to="/users" />} />
+              <Switch>
+                <Route exact path="/users/create" component={CreateInternalUser} />
+                <Route exact path="/users/edit" component={EditInternalUser} />
+                <Route exact path="/users" component={Users} />
+                <Route exact path="/influencers/create" component={CreateInfluencer} />
+                <Route exact path="/influencers" component={Influencers} />
+                <Route exact path="/influencer/edit" component={EditInfluencer} />
+                <Route exact path="/influencer" component={Influencer} />
+
+                <Route render={() => <Redirect to="/users" />} />
+              </Switch>
             </>
           ) : <Redirect to="/login" />
       }

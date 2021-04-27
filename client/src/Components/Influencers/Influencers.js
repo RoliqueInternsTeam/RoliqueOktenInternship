@@ -14,7 +14,6 @@ import Facebook from '../Elements/Logos/facebook.svg';
 import Instagram from '../Elements/Logos/instagram.svg';
 import Blogger from '../Elements/Logos/blogger.svg';
 import Rating from '../Elements/Icons/rating.svg';
-import Plus from '../Elements/Logos/plus-icon.svg';
 
 const Influencers = () => {
   const [influencers, setInfluencers] = useState([]);
@@ -131,7 +130,7 @@ const Influencers = () => {
             avatar={influencer.avatar}
             column1={usernameHandler(influencer.social)}
             column2={`${influencer.firstName} ${influencer.lastName}`}
-            column3={influencer.social ? [channelsHandler(influencer.social), <img src={Plus} alt='Add more' key={influencer._id} className={classes.channel} />] : null}
+            column3={influencer.social ? channelsHandler(influencer.social) : null}
             column4={<img src={Rating} alt='rating' />}
             to='/influencer'
             tooltipMessage='Open Influencer'

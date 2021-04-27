@@ -11,7 +11,7 @@ import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import { RESTRICTED_ACCESS, ROLES_INFO } from '../../config/messages';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
-import { ADMIN, MANAGER } from '../../config/constants';
+import { ADMIN, EMPLOYEE, MANAGER } from '../../config/constants';
 import RefreshToken from '../../helpers';
 import { setBadRequest } from '../../store/actions';
 import Message from '../Elements/Message/Message';
@@ -27,11 +27,11 @@ const EditInternalUser = (props) => {
   const creatingAccessHandler = (role) => {
     switch (role) {
       default:
-        return null;
+        return [EMPLOYEE];
       case ADMIN:
-        return ['admin', 'manager', 'employee'];
+        return [ADMIN, MANAGER, EMPLOYEE];
       case MANAGER:
-        return ['manager', 'employee'];
+        return [MANAGER, EMPLOYEE];
     }
   };
   const inputHandler = (event) => {
@@ -72,7 +72,7 @@ const EditInternalUser = (props) => {
 
   return (
     <PermissionChecker
-      permission={[ADMIN, MANAGER]}
+      permission={[ADMIN, MANAGER, EMPLOYEE]}
       display={<Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={RESTRICTED_ACCESS} redirect />}
     >
       <form className={classes.mainContainer} onSubmit={(event) => createHandler(event)}>
