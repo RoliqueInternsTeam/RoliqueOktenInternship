@@ -4,9 +4,10 @@ import Header from '../Common/Header/Header';
 import Search from '../Common/Search/Search';
 import classes from './Users.module.css';
 import List from '../Common/List/List';
-import RefreshToken from '../../helpers';
+// import RefreshToken from '../../helpers/RefreshToken';
 import { setUser, setUserList } from '../../store/actions';
 import TableRow from '../Common/TableRow/TableRow';
+import { getAll } from '../../helpers/ApiService';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -29,27 +30,12 @@ const Users = () => {
     }
   }, [search]);
 
-  const GetUsers = async () => {
-    const request = {
-      method: 'GET',
-      headers: {
-        AUTHORIZATION: access_token,
-      },
-    };
-    const response = await fetch('http://localhost:5000/user', request);
-
-    if (response.status === 200) {
-      const usersResponse = await response.json();
-      setUsers(usersResponse);
-      dispatch(setUserList(usersResponse));
-    }
-    if (response.status === 401) {
-      await RefreshToken();
-    }
-  };
-
   useEffect(() => {
-    GetUsers();
+    getAll('http://localhost:5000/user', access_token)
+      .then((res) => {
+        setUsers(res);
+        dispatch(setUserList(res));
+      });
   }, [access_token]);
 
   return (

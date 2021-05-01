@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import classes from './CreateInfluencer.module.css';
@@ -9,10 +9,9 @@ import { RESTRICTED_ACCESS } from '../../config/messages';
 import Header from '../Common/Header/Header';
 import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import Input from '../Elements/Input/Input';
-import RefreshToken from '../../helpers';
-import { setBadRequest } from '../../store/actions';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
+import { CreateEdit } from '../../helpers/ApiService';
 
 const CreateInfluencer = (props) => {
   const [influencerInfo, setInfluencerInfo] = useState({
@@ -47,7 +46,6 @@ const CreateInfluencer = (props) => {
       },
     },
   });
-  useEffect(() => console.log(influencerInfo), [influencerInfo]);
   const [avatar, setAvatar] = useState({ avatar: null });
 
   const access_token = useSelector(({ access_token }) => access_token);
@@ -94,26 +92,8 @@ const CreateInfluencer = (props) => {
     formData.append('json', JSON.stringify(influencerInfo));
     formData.append('avatar', avatar);
 
-    const request = {
-      method: 'POST',
-      headers: {
-        AUTHORIZATION: access_token,
-      },
-      body: formData,
-    };
-
-    const response = await fetch('http://localhost:5000/influencer', request);
-    if (response.status === 201) {
-      props.history.push('/influencers');
-    }
-    if (response.status === 401) {
-      await RefreshToken();
-      await createInfluencerHandler(event);
-    }
-    if (response.status !== 401 && response.status !== 201) {
-      dispatch(setBadRequest(true));
-      setTimeout(() => dispatch(setBadRequest(false)), 3000);
-    }
+    const redirect = props.history.push('/influencers');
+    await CreateEdit('POST', 'http://localhost:5000/influencer', formData, access_token, dispatch, redirect);
   };
 
   return (

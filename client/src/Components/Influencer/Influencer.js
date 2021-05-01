@@ -50,7 +50,7 @@ const Influencer = () => {
 
   return (
     <div className={classes.mainContainer}>
-      <Header title={`${influencer.firstName} ${influencer.lastName}`} button='edit' to='/influencer/edit' />
+      <Header title={`${influencer.firstName} ${influencer.lastName}`} button='edit' to={`/influencer/edit/${influencer._id}`} />
       <div className={classes.generalInfo}>
         {influencer.avatar
           ? <img src={influencer.avatar} alt='avatar' className={classes.avatar} />

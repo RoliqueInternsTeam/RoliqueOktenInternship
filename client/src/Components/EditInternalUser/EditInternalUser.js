@@ -12,10 +12,9 @@ import { RESTRICTED_ACCESS, ROLES_INFO } from '../../config/messages';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, EMPLOYEE, MANAGER } from '../../config/constants';
-import RefreshToken from '../../helpers';
-import { setBadRequest } from '../../store/actions';
 import Message from '../Elements/Message/Message';
 import Header from '../Common/Header/Header';
+import { CreateEdit } from '../../helpers/ApiService';
 
 const EditInternalUser = (props) => {
   const user = useSelector(({ user }) => user);
@@ -47,27 +46,8 @@ const EditInternalUser = (props) => {
       userInfo,
     );
 
-    const request = {
-      method: 'PUT',
-      headers: {
-        AUTHORIZATION: access_token,
-      },
-      body: formData,
-    };
-
-    const response = await fetch(`http://localhost:5000/user/${userInfo._id}`, request);
-
-    if (response.status === 200) {
-      props.history.push('/users');
-    }
-    if (response.status === 401) {
-      await RefreshToken();
-      await createHandler();
-    }
-    if (response.status !== 401 && response.status !== 200) {
-      dispatch(setBadRequest(true));
-      setTimeout(() => dispatch(setBadRequest(false)), 3000);
-    }
+    const redirect = props.history.push('/users');
+    await CreateEdit('PUT', `http://localhost:5000/user/${userInfo._id}`, formData, access_token, dispatch, redirect);
   };
 
   return (
