@@ -6,7 +6,6 @@ import Search from '../Common/Search/Search';
 import List from '../Common/List/List';
 import TableRow from '../Common/TableRow/TableRow';
 import { setInfluencer, setInfluencerList } from '../../store/actions';
-import RefreshToken from '../../helpers';
 import YouTube from '../Elements/Logos/youtube.svg';
 import Twitter from '../Elements/Logos/twitter.svg';
 import TikTok from '../Elements/Logos/tiktok.svg';
@@ -14,6 +13,7 @@ import Facebook from '../Elements/Logos/facebook.svg';
 import Instagram from '../Elements/Logos/instagram.svg';
 import Blogger from '../Elements/Logos/blogger.svg';
 import Rating from '../Elements/Icons/rating.svg';
+import { getAll } from '../../helpers/ApiService';
 
 const Influencers = () => {
   const [influencers, setInfluencers] = useState([]);
@@ -24,29 +24,12 @@ const Influencers = () => {
   const dispatch = useDispatch();
   const influencersList = useSelector(({ influencersList }) => influencersList);
 
-  const getInfluencers = async () => {
-    const request = {
-      method: 'GET',
-      headers: {
-        AUTHORIZATION: access_token,
-      },
-    };
-    const response = await fetch('http://localhost:5000/influencer', request);
-
-    if (response.status === 200) {
-      const influencersResponse = await response.json();
-
-      setInfluencers(influencersResponse);
-      dispatch(setInfluencerList(influencersResponse));
-    }
-
-    if (response.status === 401) {
-      await RefreshToken();
-    }
-  };
-
   useEffect(() => {
-    getInfluencers();
+    getAll('http://localhost:5000/influencer', access_token)
+      .then((res) => {
+        setInfluencers(res);
+        dispatch(setInfluencerList(res));
+      });
   }, [access_token]);
 
   const usernameHandler = (social) => {
@@ -132,7 +115,7 @@ const Influencers = () => {
             column2={`${influencer.firstName} ${influencer.lastName}`}
             column3={influencer.social ? channelsHandler(influencer.social) : null}
             column4={<img src={Rating} alt='rating' />}
-            to='/influencer'
+            to={`/influencer/${influencer._id}`}
             tooltipMessage='Open Influencer'
             imgAlt='Open Influencer'
             onClick={() => {

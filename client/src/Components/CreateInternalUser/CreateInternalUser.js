@@ -13,9 +13,8 @@ import { PHONE_NUMBER } from '../../config/regexp.enum';
 import { ADMIN, MANAGER } from '../../config/constants';
 import Header from '../Common/Header/Header';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
-import RefreshToken from '../../helpers';
-import { setBadRequest } from '../../store/actions';
 import Message from '../Elements/Message/Message';
+import { CreateEdit } from '../../helpers/ApiService';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -55,27 +54,8 @@ const CreateInternalUser = (props) => {
     const formData = serialize(
       userInfo,
     );
-
-    const request = {
-      method: 'POST',
-      headers: {
-        AUTHORIZATION: access_token,
-      },
-      body: formData,
-    };
-
-    const response = await fetch('http://localhost:5000/user', request);
-    if (response.status === 201) {
-      props.history.push('/users');
-    }
-    if (response.status === 401) {
-      await RefreshToken();
-      await createHandler();
-    }
-    if (response.status !== 401 && response.status !== 201) {
-      dispatch(setBadRequest(true));
-      setTimeout(() => dispatch(setBadRequest(false)), 3000);
-    }
+    const redirect = props.history.push('/users');
+    await CreateEdit('POST', 'http://localhost:5000/user', formData, access_token, dispatch, redirect);
   };
 
   return (

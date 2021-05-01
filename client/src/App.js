@@ -35,8 +35,8 @@ const App = () => {
                 <Route exact path="/users" component={Users} />
                 <Route exact path="/influencers/create" component={CreateInfluencer} />
                 <Route exact path="/influencers" component={Influencers} />
-                <Route exact path="/influencer/edit" component={EditInfluencer} />
-                <Route exact path="/influencer" component={Influencer} />
+                <Route path="/influencer/edit" component={EditInfluencer} />
+                <Route path="/influencer" component={Influencer} />
 
                 <Route render={() => <Redirect to="/users" />} />
               </Switch>

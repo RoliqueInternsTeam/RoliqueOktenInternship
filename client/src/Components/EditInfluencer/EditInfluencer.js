@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { setBadRequest } from '../../store/actions';
 import { ADMIN, MANAGER } from '../../config/constants';
 import { RESTRICTED_ACCESS } from '../../config/messages';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
@@ -10,9 +9,9 @@ import Header from '../Common/Header/Header';
 import Input from '../Elements/Input/Input';
 import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
-import RefreshToken from '../../helpers';
 import classes from './EditInfluencer.module.css';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
+import { CreateEdit } from '../../helpers/ApiService';
 
 const EditInfluencer = (props) => {
   const influencer = useSelector(({ influencer }) => influencer);
@@ -63,27 +62,8 @@ const EditInfluencer = (props) => {
     formData.append('json', JSON.stringify(influencerInfo));
     formData.append('avatar', avatar);
 
-    const request = {
-      method: 'PUT',
-      headers: {
-        AUTHORIZATION: access_token,
-      },
-      body: formData,
-    };
-
-    const response = await fetch(`http://localhost:5000/influencer/${influencerInfo._id}`, request);
-    console.log(response);
-    if (response.status === 200) {
-      props.history.push('/influencers');
-    }
-    if (response.status === 401) {
-      await RefreshToken();
-      await editInfluencerHandler(event);
-    }
-    if (response.status !== 401 && response.status !== 200) {
-      dispatch(setBadRequest(true));
-      setTimeout(() => dispatch(setBadRequest(false)), 3000);
-    }
+    const redirect = props.history.push('/influencers');
+    await CreateEdit('PUT', `http://localhost:5000/user/${influencerInfo._id}`, formData, access_token, dispatch, redirect);
   };
 
   return (
