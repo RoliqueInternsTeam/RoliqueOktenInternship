@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { serialize } from 'object-to-formdata';
@@ -22,6 +22,8 @@ const EditInternalUser = (props) => {
   const access_token = useSelector(({ access_token }) => access_token);
   const role = useSelector(({ role }) => role);
   const dispatch = useDispatch();
+
+  useEffect(() => setUserInfo(((prevState) => ({ ...prevState, ...user }))), [user]);
 
   const creatingAccessHandler = (role) => {
     switch (role) {

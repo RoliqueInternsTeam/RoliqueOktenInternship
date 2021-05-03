@@ -4,10 +4,9 @@ import Header from '../Common/Header/Header';
 import Search from '../Common/Search/Search';
 import classes from './Users.module.css';
 import List from '../Common/List/List';
-// import RefreshToken from '../../helpers/RefreshToken';
 import { setUser, setUserList } from '../../store/actions';
 import TableRow from '../Common/TableRow/TableRow';
-import { getAll } from '../../helpers/ApiService';
+import { getAll, getOne } from '../../helpers/ApiService';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -57,11 +56,12 @@ const Users = () => {
             column2={user.email}
             column3={capitalizeFirstLetter(user.role)}
             column4={user.phone}
-            to='/users/edit'
+            to={`/users/edit/${user._id}`}
             tooltipMessage='Edit User'
             imgAlt='Edit User'
             onClick={() => {
-              dispatch(setUser(user));
+              getOne(`http://localhost:5000/user/${user._id}`, access_token)
+                .then((res) => dispatch(setUser(res)));
             }}
           />
         ))}

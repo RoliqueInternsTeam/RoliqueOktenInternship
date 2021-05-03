@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from 'react-avatar';
 
@@ -15,6 +15,9 @@ import Label from '../Elements/Label/Label';
 
 const Influencer = () => {
   const influencer = useSelector(({ influencer }) => influencer);
+  const [influencerInfo, setInfluencerInfo] = useState({});
+
+  useEffect(() => setInfluencerInfo(((prevState) => ({ ...prevState, ...influencer }))), [influencer]);
 
   const socialMediaHandler = (profiles) => {
     let {
@@ -50,26 +53,26 @@ const Influencer = () => {
 
   return (
     <div className={classes.mainContainer}>
-      <Header title={`${influencer.firstName} ${influencer.lastName}`} button='edit' to={`/influencer/edit/${influencer._id}`} />
+      <Header title={`${influencerInfo.firstName} ${influencerInfo.lastName}`} button='edit' to={`/influencer/edit/${influencerInfo._id}`} />
       <div className={classes.generalInfo}>
-        {influencer.avatar
-          ? <img src={influencer.avatar} alt='avatar' className={classes.avatar} />
-          : <Avatar name={`${influencer.firstName} ${influencer.lastName}`} round />}
+        {influencerInfo.avatar
+          ? <img src={influencerInfo.avatar} alt='avatar' className={classes.avatar} />
+          : <Avatar name={`${influencerInfo.firstName} ${influencerInfo.lastName}`} round />}
         <div className={classes.personalInfo}>
-          <h2>{`${influencer.firstName} ${influencer.lastName}`}</h2>
+          <h2>{`${influencerInfo.firstName} ${influencerInfo.lastName}`}</h2>
           <div className={classes.textContainer}>
             <Label label='Birthday:' />
-            <p className={classes.p}>{influencer.birthdate}</p>
+            <p className={classes.p}>{influencerInfo.birthdate}</p>
             <Label label='Occupation:' />
-            <p className={classes.p}>{influencer.profession}</p>
+            <p className={classes.p}>{influencerInfo.profession}</p>
           </div>
           <div className={classes.socialMediaContainer}>
-            { influencer.social ? socialMediaHandler(influencer.social) : null }
+            { influencerInfo.social ? socialMediaHandler(influencerInfo.social) : null }
           </div>
         </div>
       </div>
       <div className={classes.photosContainer}>
-        { influencer.social.instagram?.instagramPhotos.map((photo) => <img src={photo.photoURL} alt='Instagram content' key={photo._id} className={classes.instagramPhoto} />) }
+        { influencerInfo.social?.instagram?.instagramPhotos.map((photo) => <img src={photo.photoURL} alt='Instagram content' key={photo._id} className={classes.instagramPhoto} />) }
       </div>
     </div>
   );

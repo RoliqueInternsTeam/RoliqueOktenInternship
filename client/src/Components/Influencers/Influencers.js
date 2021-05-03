@@ -13,7 +13,7 @@ import Facebook from '../Elements/Logos/facebook.svg';
 import Instagram from '../Elements/Logos/instagram.svg';
 import Blogger from '../Elements/Logos/blogger.svg';
 import Rating from '../Elements/Icons/rating.svg';
-import { getAll } from '../../helpers/ApiService';
+import { getAll, getOne } from '../../helpers/ApiService';
 
 const Influencers = () => {
   const [influencers, setInfluencers] = useState([]);
@@ -119,7 +119,8 @@ const Influencers = () => {
             tooltipMessage='Open Influencer'
             imgAlt='Open Influencer'
             onClick={() => {
-              dispatch(setInfluencer(influencer));
+              getOne(`http://localhost:5000/influencer/${influencer._id}`, access_token)
+                .then((res) => dispatch(setInfluencer(res)));
             }}
           />
         ))}

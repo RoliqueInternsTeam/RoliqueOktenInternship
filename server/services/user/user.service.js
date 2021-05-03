@@ -13,5 +13,6 @@ module.exports = {
     updateUser: (userId, data) => UserModel.findByIdAndUpdate({ _id: userId },
         { ...data }),
 
-    getUsers: () => UserModel.find({})
+    getUsers: () => UserModel.find({}),
+
 };

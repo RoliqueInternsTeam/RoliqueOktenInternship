@@ -77,5 +77,16 @@ module.exports = {
         } catch (e) {
             next(e);
         }
+    },
+    getOneInfluencer: async (req, res, next) => {
+        try {
+            const { id } = req.params;
+
+            const influencer = await influencerServices.findInfluencerById(id);
+
+            res.json(influencer);
+        } catch (e) {
+            next(e);
+        }
     }
 };

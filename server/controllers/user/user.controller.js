@@ -88,5 +88,16 @@ module.exports = {
             next(e);
         }
     },
+    getOneUser: async (req, res, next) => {
+        try {
+            const { id } = req.params;
+
+            const user = await userService.findUserById(id);
+
+            res.json(user);
+        } catch (e) {
+            next(e);
+        }
+    }
 
 };
