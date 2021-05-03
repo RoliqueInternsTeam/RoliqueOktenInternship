@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADMIN, MANAGER } from '../../config/constants';
@@ -11,7 +11,8 @@ import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
 import classes from './EditInfluencer.module.css';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
-import { CreateEdit } from '../../helpers/ApiService';
+import { Edit, getOne } from '../../helpers/ApiService';
+import { setInfluencer } from '../../store/actions';
 
 const EditInfluencer = (props) => {
   const influencer = useSelector(({ influencer }) => influencer);
@@ -20,6 +21,15 @@ const EditInfluencer = (props) => {
 
   const access_token = useSelector(({ access_token }) => access_token);
   const dispatch = useDispatch();
+
+  const fetchHandler = () => {
+    const path = props.history.location.pathname.split('/');
+    const id = path[3];
+    getOne(`http://localhost:5000/influencer/${id}`, access_token)
+      .then((res) => dispatch(setInfluencer(res)));
+  };
+
+  useEffect(() => fetchHandler(), []);
 
   const inputHandler = (event) => {
     setInfluencerInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
@@ -62,8 +72,8 @@ const EditInfluencer = (props) => {
     formData.append('json', JSON.stringify(influencerInfo));
     formData.append('avatar', avatar);
 
-    const redirect = props.history.push('/influencers');
-    await CreateEdit('PUT', `http://localhost:5000/user/${influencerInfo._id}`, formData, access_token, dispatch, redirect);
+    const status = await Edit(`http://localhost:5000/influencer/${influencerInfo._id}`, formData, access_token, dispatch);
+    status === 200 ? props.history.push('/influencers') : null;
   };
 
   return (

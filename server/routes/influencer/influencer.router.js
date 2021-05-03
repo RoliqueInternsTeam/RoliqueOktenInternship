@@ -37,5 +37,9 @@ influencerRouter.get('/',
     authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([]),
     influencerController.getAllInfluencers);
+influencerRouter.get('/:id',
+    authMiddleware.checkAccessToken,
+    usersMiddleware.checkUserAccess([]),
+    influencerController.getOneInfluencer);
 
 module.exports = influencerRouter;

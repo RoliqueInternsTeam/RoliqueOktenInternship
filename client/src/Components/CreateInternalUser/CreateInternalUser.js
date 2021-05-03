@@ -14,7 +14,7 @@ import { ADMIN, MANAGER } from '../../config/constants';
 import Header from '../Common/Header/Header';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import Message from '../Elements/Message/Message';
-import { CreateEdit } from '../../helpers/ApiService';
+import { Create } from '../../helpers/ApiService';
 
 const CreateInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState({
@@ -55,7 +55,7 @@ const CreateInternalUser = (props) => {
       userInfo,
     );
     const redirect = props.history.push('/users');
-    await CreateEdit('POST', 'http://localhost:5000/user', formData, access_token, dispatch, redirect);
+    await Create('http://localhost:5000/user', formData, access_token, dispatch, redirect);
   };
 
   return (

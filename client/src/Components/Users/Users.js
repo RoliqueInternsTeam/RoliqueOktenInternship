@@ -4,8 +4,7 @@ import Header from '../Common/Header/Header';
 import Search from '../Common/Search/Search';
 import classes from './Users.module.css';
 import List from '../Common/List/List';
-// import RefreshToken from '../../helpers/RefreshToken';
-import { setUser, setUserList } from '../../store/actions';
+import { setUserList } from '../../store/actions';
 import TableRow from '../Common/TableRow/TableRow';
 import { getAll } from '../../helpers/ApiService';
 
@@ -16,6 +15,14 @@ const Users = () => {
 
   const userList = useSelector(({ userList }) => userList);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAll('http://localhost:5000/user', access_token)
+      .then((res) => {
+        setUsers(res);
+        dispatch(setUserList(res));
+      });
+  }, []);
 
   const searchQuery = (event) => {
     setUsers(userList);
@@ -29,14 +36,6 @@ const Users = () => {
       setUsers(users.filter((user) => ([user.firstName, user.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
     }
   }, [search]);
-
-  useEffect(() => {
-    getAll('http://localhost:5000/user', access_token)
-      .then((res) => {
-        setUsers(res);
-        dispatch(setUserList(res));
-      });
-  }, [access_token]);
 
   return (
     <div className={classes.mainContainer}>
@@ -57,12 +56,9 @@ const Users = () => {
             column2={user.email}
             column3={capitalizeFirstLetter(user.role)}
             column4={user.phone}
-            to='/users/edit'
+            to={`/users/edit/${user._id}`}
             tooltipMessage='Edit User'
             imgAlt='Edit User'
-            onClick={() => {
-              dispatch(setUser(user));
-            }}
           />
         ))}
       />

@@ -31,7 +31,7 @@ const App = () => {
               <Sidebar />
               <Switch>
                 <Route exact path="/users/create" component={CreateInternalUser} />
-                <Route exact path="/users/edit" component={EditInternalUser} />
+                <Route path="/users/edit" component={EditInternalUser} />
                 <Route exact path="/users" component={Users} />
                 <Route exact path="/influencers/create" component={CreateInfluencer} />
                 <Route exact path="/influencers" component={Influencers} />

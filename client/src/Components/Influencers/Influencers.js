@@ -5,7 +5,7 @@ import classes from './Influencers.module.css';
 import Search from '../Common/Search/Search';
 import List from '../Common/List/List';
 import TableRow from '../Common/TableRow/TableRow';
-import { setInfluencer, setInfluencerList } from '../../store/actions';
+import { setInfluencerList } from '../../store/actions';
 import YouTube from '../Elements/Logos/youtube.svg';
 import Twitter from '../Elements/Logos/twitter.svg';
 import TikTok from '../Elements/Logos/tiktok.svg';
@@ -30,7 +30,7 @@ const Influencers = () => {
         setInfluencers(res);
         dispatch(setInfluencerList(res));
       });
-  }, [access_token]);
+  }, []);
 
   const usernameHandler = (social) => {
     const profiles = Object.keys(social);
@@ -118,9 +118,6 @@ const Influencers = () => {
             to={`/influencer/${influencer._id}`}
             tooltipMessage='Open Influencer'
             imgAlt='Open Influencer'
-            onClick={() => {
-              dispatch(setInfluencer(influencer));
-            }}
           />
         ))}
       />
