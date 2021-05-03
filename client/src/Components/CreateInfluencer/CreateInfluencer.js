@@ -11,7 +11,7 @@ import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import Input from '../Elements/Input/Input';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
-import { CreateEdit } from '../../helpers/ApiService';
+import { Create } from '../../helpers/ApiService';
 
 const CreateInfluencer = (props) => {
   const [influencerInfo, setInfluencerInfo] = useState({
@@ -93,7 +93,7 @@ const CreateInfluencer = (props) => {
     formData.append('avatar', avatar);
 
     const redirect = props.history.push('/influencers');
-    await CreateEdit('POST', 'http://localhost:5000/influencer', formData, access_token, dispatch, redirect);
+    await Create('http://localhost:5000/influencer', formData, access_token, dispatch, redirect);
   };
 
   return (

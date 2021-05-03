@@ -38,7 +38,6 @@ const TableRow = (props) => {
         <PermissionChecker email={props.column2} permission={permissionHandler()} display={null}>
           <NavLink
             to={props.to}
-            onClick={props.onClick}
           >
             <div className={classes.tooltipDiv}>
               <Tooltip arrowPlace='right' align='center' color='dark' message={props.tooltipMessage} />
@@ -60,7 +59,6 @@ TableRow.propTypes = {
   column3: PropTypes.node.isRequired,
   column4: PropTypes.node,
   to: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
   tooltipMessage: PropTypes.string.isRequired,
   imgAlt: PropTypes.string.isRequired,
 };

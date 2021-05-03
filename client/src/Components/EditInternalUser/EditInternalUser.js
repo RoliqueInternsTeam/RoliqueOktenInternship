@@ -14,7 +14,8 @@ import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, EMPLOYEE, MANAGER } from '../../config/constants';
 import Message from '../Elements/Message/Message';
 import Header from '../Common/Header/Header';
-import { CreateEdit } from '../../helpers/ApiService';
+import { Edit, getOne } from '../../helpers/ApiService';
+import { setUser } from '../../store/actions';
 
 const EditInternalUser = (props) => {
   const user = useSelector(({ user }) => user);
@@ -22,6 +23,15 @@ const EditInternalUser = (props) => {
   const access_token = useSelector(({ access_token }) => access_token);
   const role = useSelector(({ role }) => role);
   const dispatch = useDispatch();
+
+  const fetchHandler = () => {
+    const path = props.history.location.pathname.split('/');
+    const id = path[3];
+    getOne(`http://localhost:5000/user/${id}`, access_token)
+      .then((res) => dispatch(setUser(res)));
+  };
+
+  useEffect(() => fetchHandler(), []);
 
   useEffect(() => setUserInfo(((prevState) => ({ ...prevState, ...user }))), [user]);
 
@@ -49,7 +59,7 @@ const EditInternalUser = (props) => {
     );
 
     const redirect = props.history.push('/users');
-    await CreateEdit('PUT', `http://localhost:5000/user/${userInfo._id}`, formData, access_token, dispatch, redirect);
+    await Edit(`http://localhost:5000/user/${userInfo._id}`, formData, access_token, dispatch, redirect);
   };
 
   return (

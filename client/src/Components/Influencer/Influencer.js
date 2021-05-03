@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Avatar from 'react-avatar';
 
 import Header from '../Common/Header/Header';
@@ -12,10 +12,24 @@ import tiktokIcon from '../Elements/Icons/tiktok-icon.svg';
 import blogIcon from '../Elements/Icons/blogger-icon.svg';
 import youtubeIcon from '../Elements/Icons/youtube-icon.svg';
 import Label from '../Elements/Label/Label';
+import { getOne } from '../../helpers/ApiService';
+import { setInfluencer } from '../../store/actions';
 
-const Influencer = () => {
+const Influencer = (props) => {
+  const access_token = useSelector(({ access_token }) => access_token);
   const influencer = useSelector(({ influencer }) => influencer);
   const [influencerInfo, setInfluencerInfo] = useState({});
+
+  const dispatch = useDispatch();
+
+  const fetchHandler = () => {
+    const path = props.history.location.pathname.split('/');
+    const id = path[2];
+    getOne(`http://localhost:5000/influencer/${id}`, access_token)
+      .then((res) => dispatch(setInfluencer(res)));
+  };
+
+  useEffect(() => fetchHandler(), []);
 
   useEffect(() => setInfluencerInfo(((prevState) => ({ ...prevState, ...influencer }))), [influencer]);
 

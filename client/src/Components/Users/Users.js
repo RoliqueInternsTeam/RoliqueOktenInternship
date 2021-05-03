@@ -4,9 +4,9 @@ import Header from '../Common/Header/Header';
 import Search from '../Common/Search/Search';
 import classes from './Users.module.css';
 import List from '../Common/List/List';
-import { setUser, setUserList } from '../../store/actions';
+import { setUserList } from '../../store/actions';
 import TableRow from '../Common/TableRow/TableRow';
-import { getAll, getOne } from '../../helpers/ApiService';
+import { getAll } from '../../helpers/ApiService';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -15,6 +15,14 @@ const Users = () => {
 
   const userList = useSelector(({ userList }) => userList);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAll('http://localhost:5000/user', access_token)
+      .then((res) => {
+        setUsers(res);
+        dispatch(setUserList(res));
+      });
+  }, []);
 
   const searchQuery = (event) => {
     setUsers(userList);
@@ -28,14 +36,6 @@ const Users = () => {
       setUsers(users.filter((user) => ([user.firstName, user.lastName].join(' ').toLowerCase().includes(search.toLowerCase()))));
     }
   }, [search]);
-
-  useEffect(() => {
-    getAll('http://localhost:5000/user', access_token)
-      .then((res) => {
-        setUsers(res);
-        dispatch(setUserList(res));
-      });
-  }, [access_token]);
 
   return (
     <div className={classes.mainContainer}>
@@ -59,10 +59,6 @@ const Users = () => {
             to={`/users/edit/${user._id}`}
             tooltipMessage='Edit User'
             imgAlt='Edit User'
-            onClick={() => {
-              getOne(`http://localhost:5000/user/${user._id}`, access_token)
-                .then((res) => dispatch(setUser(res)));
-            }}
           />
         ))}
       />

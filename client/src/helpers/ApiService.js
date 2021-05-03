@@ -47,9 +47,9 @@ export async function getOne(url, access_token) {
   return foundObject;
 }
 
-export async function CreateEdit(method, url, formData, access_token, dispatch, redirect) {
+export async function Create(url, formData, access_token, dispatch, redirect) {
   const request = {
-    method,
+    method: 'POST',
     headers: {
       AUTHORIZATION: access_token,
     },
@@ -69,5 +69,29 @@ export async function CreateEdit(method, url, formData, access_token, dispatch, 
 
   if (response.status === 201) {
     return setTimeout(() => redirect, 500);
+  }
+}
+export async function Edit(url, formData, access_token, dispatch, redirect) {
+  const request = {
+    method: 'PUT',
+    headers: {
+      AUTHORIZATION: access_token,
+    },
+    body: formData,
+  };
+
+  const response = await fetch(url, request);
+
+  if (response.status === 401) {
+    await RefreshToken();
+  }
+
+  if (response.status !== 401 && response.status !== 200) {
+    dispatch(setBadRequest(true));
+    setTimeout(() => dispatch(setBadRequest(false)), 3000);
+  }
+
+  if (response.status === 200) {
+    return redirect;
   }
 }
