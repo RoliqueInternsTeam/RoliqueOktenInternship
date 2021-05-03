@@ -72,8 +72,8 @@ const EditInfluencer = (props) => {
     formData.append('json', JSON.stringify(influencerInfo));
     formData.append('avatar', avatar);
 
-    const redirect = props.history.push('/influencers');
-    await Edit(`http://localhost:5000/influencer/${influencerInfo._id}`, formData, access_token, dispatch, redirect);
+    const status = await Edit(`http://localhost:5000/influencer/${influencerInfo._id}`, formData, access_token, dispatch);
+    status === 200 ? props.history.push('/influencers') : null;
   };
 
   return (

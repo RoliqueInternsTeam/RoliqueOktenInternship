@@ -58,8 +58,8 @@ const EditInternalUser = (props) => {
       userInfo,
     );
 
-    const redirect = props.history.push('/users');
-    await Edit(`http://localhost:5000/user/${userInfo._id}`, formData, access_token, dispatch, redirect);
+    const status = await Edit(`http://localhost:5000/user/${userInfo._id}`, formData, access_token, dispatch);
+    status === 200 ? props.history.push('/users') : null;
   };
 
   return (

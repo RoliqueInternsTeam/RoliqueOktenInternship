@@ -71,7 +71,7 @@ export async function Create(url, formData, access_token, dispatch, redirect) {
     return setTimeout(() => redirect, 500);
   }
 }
-export async function Edit(url, formData, access_token, dispatch, redirect) {
+export async function Edit(url, formData, access_token, dispatch) {
   const request = {
     method: 'PUT',
     headers: {
@@ -92,6 +92,6 @@ export async function Edit(url, formData, access_token, dispatch, redirect) {
   }
 
   if (response.status === 200) {
-    return redirect;
+    return response.status;
   }
 }
