@@ -1,54 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // import PropTypes from 'prop-types';
 import Select from 'react-dropdown-select';
 import './Dropdown.css';
 import Label from '../Label/Label';
+import ArrowUp from '../Icons/arrowup.svg';
+import ArrowDown from '../Icons/arrowdown.svg';
 
-function capitalizeFirstLetter(string) {
-  return string[0].toUpperCase() + string.slice(1);
-}
-// const { notRequiredSelect } = classes;
-// let selectClass = classes.select;
-// function clickEventHandle() {
-//   selectClass = notRequiredSelect;
-// }
-// const Dropdown = (props) => (
-//   <div className={classes.div}>
-//     <Label label={props.label} />
-//     <select
-//       className={props.required ? selectClass : notRequiredSelect}
-//       name={props.name}
-//       required={props.required}
-//       onChange={props.onChange}
-//       onClick={clickEventHandle}
-//     >
-//       <option className={classes.selected} selected disabled hidden>
-//         { props.select ? capitalizeFirstLetter(props.select) : 'Select...' }
-//       </option>
-//       {props.options.map((option, key) => <option className={classes.option} key={key}>{capitalizeFirstLetter(option)}</option>)}
-//     </select>
-//   </div>
-// );
 const Dropdown = (props) => {
-  let style = {
-    background: '#DA1414',
+  const [style, setStyle] = useState({
     border: '1px solid #DA1414',
-  };
+  });
 
-  const customContentRenderer = ({ state }) => {
-    if (state.values[0]) {
-      style = {
-        background: '#BFBFBF',
-        border: '1px solid #BFBFBF',
-      };
-      return (
-        <div className='selected'>
-          {capitalizeFirstLetter(state.values[0])}
-        </div>
-      );
-    }
-    return (
+  const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
+
+  const customContentRenderer = ({ state }) => (
+    state.values[0] ? (
+      <div className='selected'>
+        {capitalizeFirstLetter(state.values[0])}
+      </div>
+    ) : (
       <input
         tabIndex="-1"
         className="react-dropdown-select-input"
@@ -56,13 +27,19 @@ const Dropdown = (props) => {
         placeholder="Select..."
         value=""
       />
-    );
-  };
+    )
+  );
 
   const customItemRenderer = ({ item, methods }) => (
     <div onClick={() => methods.addItem(item)} className='option'>
       {capitalizeFirstLetter(item)}
     </div>
+  );
+
+  const customDropdownHandleRenderer = ({ state }) => (
+    state.dropdown
+      ? <img alt='up' src={ArrowUp} className="arrowblack" />
+      : <img alt='down' src={ArrowDown} className="arrowblack" />
   );
 
   return (
@@ -73,8 +50,11 @@ const Dropdown = (props) => {
         required={props.required}
         itemRenderer={customItemRenderer}
         contentRenderer={customContentRenderer}
-        onChange={() => undefined}
-        values={[]}
+        dropdownHandleRenderer={customDropdownHandleRenderer}
+        onChange={() => setStyle({
+          border: '1px solid #BFBFBF',
+        })}
+        values={props.value ? [props.value] : []}
         style={style}
         options={props.options}
       />

@@ -90,8 +90,8 @@ const EditInternalUser = (props) => {
               label="Role"
               name="roles"
               options={creatingAccessHandler(role)}
-              select={userInfo.role}
               onChange={(event) => dropdownHandler(event)}
+              value={userInfo.role}
             />
             <div className={classes.passwordContainer}>
               <h4 className={classes.h4}>Password</h4>

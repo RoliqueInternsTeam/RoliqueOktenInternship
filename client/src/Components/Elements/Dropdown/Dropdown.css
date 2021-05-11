@@ -15,8 +15,9 @@ div.react-dropdown-select {
 div.react-dropdown-select:hover {
     border: 1px solid #DA1414;
 }
-div.react-dropdown-select:focus {
+div.react-dropdown-select:focus, div.react-dropdown-select:focus-within {
     box-shadow: none;
+    border: 1px solid #DA1414;
 }
 div.react-dropdown-select-dropdown{
     top: 33px;
@@ -61,4 +62,9 @@ div.selected {
     font-weight: 400;
     line-height: 17px;
     letter-spacing: -0.35px;
+}
+img.arrowblack {
+    vertical-align: middle;
+    padding-right: 13px;
+    filter: invert(0.5) sepia(1) saturate(0) hue-rotate(175deg);
 }
