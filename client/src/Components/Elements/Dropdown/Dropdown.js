@@ -8,8 +8,10 @@ import ArrowUp from '../Icons/arrowup.svg';
 import ArrowDown from '../Icons/arrowdown.svg';
 
 const Dropdown = (props) => {
-  const [style, setStyle] = useState({
+  const [style, setStyle] = useState(props.required ? {
     border: '1px solid #DA1414',
+  } : {
+    border: '1px solid #BFBFBF',
   });
 
   const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
@@ -51,9 +53,12 @@ const Dropdown = (props) => {
         itemRenderer={customItemRenderer}
         contentRenderer={customContentRenderer}
         dropdownHandleRenderer={customDropdownHandleRenderer}
-        onChange={() => setStyle({
-          border: '1px solid #BFBFBF',
-        })}
+        onChange={(values) => {
+          setStyle({
+            border: '1px solid #BFBFBF',
+          });
+          props.onChange(values[0]);
+        }}
         values={props.value ? [props.value] : []}
         style={style}
         options={props.options}

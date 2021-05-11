@@ -45,8 +45,8 @@ const CreateInternalUser = (props) => {
   const inputHandler = (event) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
-  const dropdownHandler = (event) => {
-    setUserInfo(((prevState) => ({ ...prevState, role: event.target.value.toLowerCase() })));
+  const dropdownHandler = (value) => {
+    setUserInfo(((prevState) => ({ ...prevState, role: value.toLowerCase() })));
   };
   const createHandler = async (event) => {
     event.preventDefault();
@@ -87,7 +87,7 @@ const CreateInternalUser = (props) => {
               name="roles"
               options={creatingAccessHandler(role)}
               required="required"
-              onChange={(event) => dropdownHandler(event)}
+              onChange={(value) => dropdownHandler(value)}
             />
             <div className={classes.passwordContainer}>
               <h4 className={classes.h4}>Password</h4>
