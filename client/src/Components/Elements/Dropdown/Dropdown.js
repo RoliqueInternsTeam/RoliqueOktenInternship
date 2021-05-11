@@ -1,46 +1,86 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classes from './Dropdown.module.css';
-import Label from '../Label/Label';
+import React, { useState } from 'react';
 
-function capitalizeFirstLetter(string) {
-  return string[0].toUpperCase() + string.slice(1);
-}
-const { notRequiredSelect } = classes;
-let selectClass = classes.select;
-function clickEventHandle() {
-  selectClass = classes.notRequiredSelect;
-}
-const Dropdown = (props) => (
-  <div className={classes.div}>
-    <Label label={props.label} />
-    <select
-      className={props.required ? selectClass : notRequiredSelect}
-      name={props.name}
-      required={props.required}
-      onChange={props.onChange}
-      onClick={clickEventHandle}
-    >
-      <option className={classes.selected} selected disabled hidden>
-        { props.select ? capitalizeFirstLetter(props.select) : 'Select...' }
-      </option>
-      {props.options.map((option, key) => <option className={classes.option} key={key}>{capitalizeFirstLetter(option)}</option>)}
-    </select>
-  </div>
-);
+import Select from 'react-dropdown-select';
+import PropTypes from 'prop-types';
+import './Dropdown.css';
+import Label from '../Label/Label';
+import ArrowUp from '../Icons/arrowup.svg';
+import ArrowDown from '../Icons/arrowdown.svg';
+
+const Dropdown = (props) => {
+  const [style, setStyle] = useState(props.required ? {
+    border: '1px solid #DA1414',
+  } : {
+    border: '1px solid #BFBFBF',
+  });
+  const [required, setRequired] = useState(!!props.required);
+
+  const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
+
+  const customContentRenderer = ({ state }) => (
+    state.values[0] ? (
+      <div className='selected'>
+        {capitalizeFirstLetter(state.values[0])}
+      </div>
+    ) : (
+      <input
+        tabIndex="-1"
+        className="react-dropdown-select-input"
+        size="9"
+        placeholder="Select..."
+        value=""
+      />
+    )
+  );
+
+  const customItemRenderer = ({ item, methods }) => (
+    <div onClick={() => methods.addItem(item)} className='option'>
+      {capitalizeFirstLetter(item)}
+    </div>
+  );
+
+  const customDropdownHandleRenderer = ({ state }) => (
+    state.dropdown
+      ? <img alt='up' src={ArrowUp} className="arrowblack" />
+      : <img alt='down' src={ArrowDown} className="arrowblack" />
+  );
+
+  return (
+    <div className='div'>
+      <Label label={props.label} />
+      <Select
+        name={props.name}
+        required={required}
+        itemRenderer={customItemRenderer}
+        contentRenderer={customContentRenderer}
+        dropdownHandleRenderer={customDropdownHandleRenderer}
+        onChange={(values) => {
+          setStyle({
+            border: '1px solid #BFBFBF',
+          });
+          setRequired(false);
+          props.onChange(values[0]);
+        }}
+        values={props.value ? [props.value] : []}
+        style={style}
+        options={props.options}
+      />
+    </div>
+  );
+};
 
 Dropdown.propTypes = {
   label: PropTypes.string.isRequired,
   required: PropTypes.string,
+  value: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  select: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 Dropdown.defaultProps = {
   required: '',
-  select: '',
+  value: undefined,
 };
 
 export default Dropdown;

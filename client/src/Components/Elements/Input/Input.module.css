@@ -5,7 +5,7 @@
     border-radius: 6px;
     width: 344px;
     height: 32px;
-
+    padding-left: 12px;
     margin-bottom: 16px;
 }
 .input:active {

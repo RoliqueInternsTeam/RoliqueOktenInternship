@@ -48,8 +48,8 @@ const EditInternalUser = (props) => {
   const inputHandler = (event) => {
     setUserInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
   };
-  const dropdownHandler = (event) => {
-    setUserInfo(((prevState) => ({ ...prevState, role: event.target.value.toLowerCase() })));
+  const dropdownHandler = (value) => {
+    setUserInfo(((prevState) => ({ ...prevState, role: value.toLowerCase() })));
   };
   const createHandler = async (event) => {
     event.preventDefault();
@@ -90,8 +90,8 @@ const EditInternalUser = (props) => {
               label="Role"
               name="roles"
               options={creatingAccessHandler(role)}
-              select={userInfo.role}
-              onChange={(event) => dropdownHandler(event)}
+              onChange={(value) => dropdownHandler(value)}
+              value={userInfo.role}
             />
             <div className={classes.passwordContainer}>
               <h4 className={classes.h4}>Password</h4>
