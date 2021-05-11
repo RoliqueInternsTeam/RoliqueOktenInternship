@@ -92,8 +92,8 @@ const CreateInfluencer = (props) => {
     formData.append('json', JSON.stringify(influencerInfo));
     formData.append('avatar', avatar);
 
-    const redirect = props.history.push('/influencers');
-    await Create('http://localhost:5000/influencer', formData, access_token, dispatch, redirect);
+    const status = await Create('http://localhost:5000/influencer', formData, access_token, dispatch);
+    status === 201 ? props.history.push('/influencers') : null;
   };
 
   return (

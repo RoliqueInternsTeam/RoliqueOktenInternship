@@ -46,7 +46,7 @@ export async function getOne(url, access_token) {
   return foundObject;
 }
 
-export async function Create(url, formData, access_token, dispatch, redirect) {
+export async function Create(url, formData, access_token, dispatch) {
   const auth = {
     headers: {
       AUTHORIZATION: access_token,
@@ -65,7 +65,7 @@ export async function Create(url, formData, access_token, dispatch, redirect) {
   }
 
   if (response.status === 201) {
-    return setTimeout(() => redirect, 500);
+    return response.status;
   }
 }
 

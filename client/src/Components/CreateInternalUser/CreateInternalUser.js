@@ -54,8 +54,9 @@ const CreateInternalUser = (props) => {
     const formData = serialize(
       userInfo,
     );
-    const redirect = props.history.push('/users');
-    await Create('http://localhost:5000/user', formData, access_token, dispatch, redirect);
+
+    const status = await Create('http://localhost:5000/user', formData, access_token, dispatch);
+    status === 201 ? props.history.push('/users') : null;
   };
 
   return (
