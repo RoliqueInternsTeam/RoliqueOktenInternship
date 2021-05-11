@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-// import PropTypes from 'prop-types';
 import Select from 'react-dropdown-select';
+import PropTypes from 'prop-types';
 import './Dropdown.css';
 import Label from '../Label/Label';
 import ArrowUp from '../Icons/arrowup.svg';
@@ -67,19 +67,18 @@ const Dropdown = (props) => {
   );
 };
 
-//
-// Dropdown.propTypes = {
-//   label: PropTypes.string.isRequired,
-//   required: PropTypes.string,
-//   name: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-//   select: PropTypes.string,
-//   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-// };
-//
-// Dropdown.defaultProps = {
-//   required: '',
-//   select: '',
-// };
+Dropdown.propTypes = {
+  label: PropTypes.string.isRequired,
+  required: PropTypes.string,
+  value: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+Dropdown.defaultProps = {
+  required: '',
+  value: undefined,
+};
 
 export default Dropdown;
