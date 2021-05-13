@@ -10,8 +10,8 @@ import Header from '../Common/Header/Header';
 import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import Input from '../Elements/Input/Input';
 import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
-import 'react-datepicker/src/stylesheets/datepicker.scss';
 import { Create } from '../../helpers/ApiService';
+import 'react-datepicker/src/stylesheets/datepicker.scss';
 
 const CreateInfluencer = (props) => {
   const [influencerInfo, setInfluencerInfo] = useState({

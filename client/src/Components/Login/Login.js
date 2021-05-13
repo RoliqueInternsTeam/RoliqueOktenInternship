@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
 import Cookies from 'universal-cookie';
+import axios from 'axios';
 import classes from './Login.module.css';
 
 import Input from '../Elements/Input/Input';
@@ -18,30 +19,22 @@ const Login = (props) => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const request = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    try {
+      const response = await axios.post('http://localhost:5000/auth', {
         [event.target[0].id]: event.target[0].value,
         [event.target[1].id]: event.target[1].value,
-      }),
-    };
+      });
 
-    const response = await fetch('http://localhost:5000/auth', request);
-
-    if (response.status !== 200) {
+      if (response.status === 200) {
+        const { access_token, refresh_token, role } = await response.data;
+        cookies.set('refresh_token', refresh_token);
+        dispatch(setEmail(event.target[0].value));
+        dispatch(setRole(role.toLowerCase()));
+        dispatch(setToken(access_token));
+        props.history.push('/users');
+      }
+    } catch (e) {
       setMismatch(true);
-    }
-
-    if (response.status === 200) {
-      const { access_token, refresh_token, role } = await response.json();
-      cookies.set('refresh_token', refresh_token);
-      dispatch(setEmail(event.target[0].value));
-      dispatch(setRole(role.toLowerCase()));
-      dispatch(setToken(access_token));
-      props.history.push('/users');
     }
   };
 
