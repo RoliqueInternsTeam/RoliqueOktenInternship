@@ -1,93 +1,84 @@
-import axios from 'axios';
-import RefreshToken from './RefreshToken';
+import axiosInstance from './TokenInterceptor';
 import { setBadRequest } from '../store/actions';
 
 export async function getAll(url, access_token) {
-  let array = [];
+  try {
+    let array = [];
 
-  const auth = {
-    headers: {
-      AUTHORIZATION: access_token,
-    },
-  };
+    const auth = {
+      headers: {
+        AUTHORIZATION: access_token,
+      },
+    };
 
-  const response = await axios.get(url, auth);
+    const response = await axiosInstance.get(url, auth);
 
-  if (response.status === 401) {
-    await RefreshToken();
+    if (response.status === 200) {
+      array = await response.data;
+    }
+
+    return array;
+  } catch (e) {
+    return console.log(e);
   }
-
-  if (response.status === 200) {
-    array = await response.data;
-  }
-
-  return array;
 }
 
 export async function getOne(url, access_token) {
-  let foundObject = {};
+  try {
+    let foundObject = {};
 
-  const auth = {
-    headers: {
-      AUTHORIZATION: access_token,
-    },
-  };
+    const auth = {
+      headers: {
+        AUTHORIZATION: access_token,
+      },
+    };
 
-  const response = await axios.get(url, auth);
+    const response = await axiosInstance.get(url, auth);
 
-  if (response.status === 401) {
-    await RefreshToken();
+    if (response.status === 200) {
+      foundObject = await response.data;
+    }
+
+    return foundObject;
+  } catch (e) {
+    return console.log(e);
   }
-
-  if (response.status === 200) {
-    foundObject = await response.data;
-  }
-
-  return foundObject;
 }
 
 export async function Create(url, formData, access_token, dispatch) {
-  const auth = {
-    headers: {
-      AUTHORIZATION: access_token,
-    },
-  };
+  try {
+    const auth = {
+      headers: {
+        AUTHORIZATION: access_token,
+      },
+    };
 
-  const response = await axios.post(url, formData, auth);
+    const response = await axiosInstance.post(url, formData, auth);
 
-  if (response.status === 401) {
-    await RefreshToken();
-  }
-
-  if (response.status !== 401 && response.status !== 201) {
+    if (response.status === 201) {
+      return response.status;
+    }
+  } catch (e) {
     dispatch(setBadRequest(true));
     setTimeout(() => dispatch(setBadRequest(false)), 3000);
-  }
-
-  if (response.status === 201) {
-    return response.status;
   }
 }
 
 export async function Edit(url, formData, access_token, dispatch) {
-  const auth = {
-    headers: {
-      AUTHORIZATION: access_token,
-    },
-  };
+  try {
+    const auth = {
+      headers: {
+        AUTHORIZATION: access_token,
+      },
+    };
 
-  const response = await axios.put(url, formData, auth);
+    const response = await axiosInstance.put(url, formData, auth);
 
-  if (response.status === 401) {
-    await RefreshToken();
-  }
-
-  if (response.status !== 401 && response.status !== 200) {
+    if (response.status === 200) {
+      return response.status;
+    }
+  } catch (e) {
     dispatch(setBadRequest(true));
     setTimeout(() => dispatch(setBadRequest(false)), 3000);
-  }
-
-  if (response.status === 200) {
-    return response.status;
   }
 }
