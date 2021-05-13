@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { store } from '../store/store';
-import { setToken } from '../store/actions';
+import { setBadRequest, setToken } from '../store/actions';
 
 const cookies = new Cookies();
 const refresh_token = cookies.get('refresh_token');
@@ -14,9 +14,9 @@ axiosInstance.interceptors.response.use(
     try {
       const originalRequest = error.config;
 
-      if (error.response.status === 401 && !refresh_token) {
-        window.location.href = '/login';
-        return Promise.reject(error);
+      if (error.response.status !== 401) {
+        store.dispatch(setBadRequest(true));
+        return setTimeout(() => store.dispatch(setBadRequest(false)), 3000);
       }
 
       if (error.response.status === 401 && refresh_token) {
