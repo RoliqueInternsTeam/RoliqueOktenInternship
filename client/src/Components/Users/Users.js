@@ -7,6 +7,7 @@ import List from '../Common/List/List';
 import { setUserList } from '../../store/actions';
 import TableRow from '../Common/TableRow/TableRow';
 import { getAll } from '../../helpers/ApiService';
+import Loading from '../Elements/Loading/Loading';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -41,27 +42,31 @@ const Users = () => {
     <div className={classes.mainContainer}>
       <Header title='Users' button='createNew' />
       <Search search={searchQuery} />
-      <List
-        column1='Name'
-        column2='email'
-        column3='Role'
-        column4='Phone'
-        map={users.map((user) => (
-          <TableRow
-            key={user._id}
-            role={user.role}
-            avatar={user.avatar}
-            column1={user.firstName}
-            column11={user.lastName}
-            column2={user.email}
-            column3={capitalizeFirstLetter(user.role)}
-            column4={user.phone}
-            to={`/users/edit/${user._id}`}
-            tooltipMessage='Edit User'
-            imgAlt='Edit User'
+      {users[0]
+        ? (
+          <List
+            column1='Name'
+            column2='email'
+            column3='Role'
+            column4='Phone'
+            map={users.map((user) => (
+              <TableRow
+                key={user._id}
+                role={user.role}
+                avatar={user.avatar}
+                column1={user.firstName}
+                column11={user.lastName}
+                column2={user.email}
+                column3={capitalizeFirstLetter(user.role)}
+                column4={user.phone}
+                to={`/users/edit/${user._id}`}
+                tooltipMessage='Edit User'
+                imgAlt='Edit User'
+              />
+            ))}
           />
-        ))}
-      />
+        )
+        : <Loading class='onList' />}
     </div>
   );
 };
