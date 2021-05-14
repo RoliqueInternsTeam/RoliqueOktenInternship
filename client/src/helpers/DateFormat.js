@@ -4,5 +4,7 @@ export default function DateFormat(t) {
     const f = new Intl.DateTimeFormat('en', m);
     return f.format(typeof t === 'string' ? new Date(t) : t);
   }
-  return a.map(format).join('.');
+  if (t) {
+    return a.map(format).join('.');
+  }
 }
