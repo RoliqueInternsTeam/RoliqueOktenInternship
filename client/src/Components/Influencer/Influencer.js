@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Avatar from 'react-avatar';
 
 import Header from '../Common/Header/Header';
@@ -13,26 +13,21 @@ import blogIcon from '../Elements/Icons/blogger-icon.svg';
 import youtubeIcon from '../Elements/Icons/youtube-icon.svg';
 import Label from '../Elements/Label/Label';
 import { getOne } from '../../helpers/ApiService';
-import { setInfluencer } from '../../store/actions';
+import Loading from '../Elements/Loading/Loading';
 import DateFormat from '../../helpers/DateFormat';
 
 const Influencer = (props) => {
   const access_token = useSelector(({ access_token }) => access_token);
-  const influencer = useSelector(({ influencer }) => influencer);
-  const [influencerInfo, setInfluencerInfo] = useState({});
-
-  const dispatch = useDispatch();
+  const [influencerInfo, setInfluencerInfo] = useState(null);
 
   const fetchHandler = () => {
     const path = props.history.location.pathname.split('/');
     const id = path[2];
     getOne(`http://localhost:5000/influencer/${id}`, access_token)
-      .then((res) => dispatch(setInfluencer(res)));
+      .then((res) => setInfluencerInfo(res));
   };
 
   useEffect(() => fetchHandler(), []);
-
-  useEffect(() => setInfluencerInfo(((prevState) => ({ ...prevState, ...influencer }))), [influencer]);
 
   const socialMediaHandler = (profiles) => {
     let {
@@ -67,29 +62,31 @@ const Influencer = (props) => {
   };
 
   return (
-    <div className={classes.mainContainer}>
-      <Header title={`${influencerInfo.firstName} ${influencerInfo.lastName}`} button='edit' to={`/influencer/edit/${influencerInfo._id}`} />
-      <div className={classes.generalInfo}>
-        {influencerInfo.avatar
-          ? <img src={influencerInfo.avatar} alt='avatar' className={classes.avatar} />
-          : <Avatar name={`${influencerInfo.firstName} ${influencerInfo.lastName}`} round />}
-        <div className={classes.personalInfo}>
-          <h2>{`${influencerInfo.firstName} ${influencerInfo.lastName}`}</h2>
-          <div className={classes.textContainer}>
-            <Label label='Birthday:' />
-            <p className={classes.p}>{DateFormat(influencerInfo.birthdate)}</p>
-            <Label label='Occupation:' />
-            <p className={classes.p}>{influencerInfo.profession}</p>
-          </div>
-          <div className={classes.socialMediaContainer}>
-            { influencerInfo.social ? socialMediaHandler(influencerInfo.social) : null }
+    influencerInfo ? (
+      <div className={classes.mainContainer}>
+        <Header title={`${influencerInfo.firstName} ${influencerInfo.lastName}`} button='edit' to={`/influencer/edit/${influencerInfo._id}`} />
+        <div className={classes.generalInfo}>
+          {influencerInfo.avatar
+            ? <img src={influencerInfo.avatar} alt='avatar' className={classes.avatar} />
+            : <Avatar name={`${influencerInfo.firstName} ${influencerInfo.lastName}`} round />}
+          <div className={classes.personalInfo}>
+            <h2>{`${influencerInfo.firstName} ${influencerInfo.lastName}`}</h2>
+            <div className={classes.textContainer}>
+              <Label label='Birthday:' />
+              <p className={classes.p}>{DateFormat(influencerInfo.birthdate)}</p>
+              <Label label='Occupation:' />
+              <p className={classes.p}>{influencerInfo.profession}</p>
+            </div>
+            <div className={classes.socialMediaContainer}>
+              { influencerInfo.social ? socialMediaHandler(influencerInfo.social) : null }
+            </div>
           </div>
         </div>
+        <div className={classes.photosContainer}>
+          { influencerInfo.social?.instagram?.instagramPhotos.map((photo) => <img src={photo.photoURL} alt='Instagram content' key={photo._id} className={classes.instagramPhoto} />) }
+        </div>
       </div>
-      <div className={classes.photosContainer}>
-        { influencerInfo.social?.instagram?.instagramPhotos.map((photo) => <img src={photo.photoURL} alt='Instagram content' key={photo._id} className={classes.instagramPhoto} />) }
-      </div>
-    </div>
+    ) : <Loading class='onBlankPage' />
   );
 };
 
