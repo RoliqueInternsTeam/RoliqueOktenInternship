@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { serialize } from 'object-to-formdata';
 import classes from './EditInternalUser.module.css';
 import Info from '../Elements/Icons/info.svg';
@@ -21,6 +21,8 @@ const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState(null);
   const access_token = useSelector(({ access_token }) => access_token);
   const role = useSelector(({ role }) => role);
+
+  const dispatch = useDispatch();
 
   const fetchHandler = () => {
     const path = props.history.location.pathname.split('/');

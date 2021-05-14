@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ADMIN, MANAGER } from '../../config/constants';
 import { RESTRICTED_ACCESS } from '../../config/messages';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
@@ -19,6 +19,7 @@ const EditInfluencer = (props) => {
   const [avatar, setAvatar] = useState(influencerInfo?.avatar);
 
   const access_token = useSelector(({ access_token }) => access_token);
+  const dispatch = useDispatch();
 
   const fetchHandler = () => {
     const path = props.history.location.pathname.split('/');
