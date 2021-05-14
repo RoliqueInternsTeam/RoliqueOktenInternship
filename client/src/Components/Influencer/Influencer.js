@@ -14,6 +14,7 @@ import youtubeIcon from '../Elements/Icons/youtube-icon.svg';
 import Label from '../Elements/Label/Label';
 import { getOne } from '../../helpers/ApiService';
 import { setInfluencer } from '../../store/actions';
+import DateFormat from '../../helpers/DateFormat';
 
 const Influencer = (props) => {
   const access_token = useSelector(({ access_token }) => access_token);
@@ -76,7 +77,7 @@ const Influencer = (props) => {
           <h2>{`${influencerInfo.firstName} ${influencerInfo.lastName}`}</h2>
           <div className={classes.textContainer}>
             <Label label='Birthday:' />
-            <p className={classes.p}>{influencerInfo.birthdate}</p>
+            <p className={classes.p}>{DateFormat(influencerInfo.birthdate)}</p>
             <Label label='Occupation:' />
             <p className={classes.p}>{influencerInfo.profession}</p>
           </div>
