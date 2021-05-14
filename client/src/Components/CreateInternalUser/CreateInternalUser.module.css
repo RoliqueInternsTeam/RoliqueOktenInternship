@@ -45,6 +45,7 @@
     position: absolute;
     top: 52px;
     right: -14px;
+    z-index: 999;
 }
 .info:hover + .tooltipHider {
     visibility: visible;

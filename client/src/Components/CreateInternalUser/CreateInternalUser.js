@@ -10,7 +10,7 @@ import Tooltip from '../Elements/Tooltip/Tooltip';
 import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import { RESTRICTED_ACCESS, ROLES_INFO } from '../../config/messages';
 import { PHONE_NUMBER } from '../../config/regexp.enum';
-import { ADMIN, MANAGER } from '../../config/constants';
+import { ADMIN, EMPLOYEE, MANAGER } from '../../config/constants';
 import Header from '../Common/Header/Header';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import Message from '../Elements/Message/Message';
@@ -36,9 +36,9 @@ const CreateInternalUser = (props) => {
       default:
         return null;
       case ADMIN:
-        return ['admin', 'manager', 'employee'];
+        return [ADMIN, MANAGER, EMPLOYEE];
       case MANAGER:
-        return ['manager', 'employee'];
+        return [MANAGER, EMPLOYEE];
     }
   };
 
