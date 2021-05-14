@@ -7,12 +7,13 @@ import { persistor, store } from './store/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import Loading from './Components/Elements/Loading/Loading';
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
           <App />
         </PersistGate>
       </Provider>

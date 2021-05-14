@@ -14,6 +14,7 @@ import Instagram from '../Elements/Logos/instagram.svg';
 import Blogger from '../Elements/Logos/blogger.svg';
 import Rating from '../Elements/Icons/rating.svg';
 import { getAll } from '../../helpers/ApiService';
+import Loading from '../Elements/Loading/Loading';
 
 const Influencers = () => {
   const [influencers, setInfluencers] = useState([]);
@@ -102,26 +103,29 @@ const Influencers = () => {
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
       <Search search={searchQuery} />
-      <List
-        column1='Username'
-        column2='Name'
-        column3='Channels'
-        column4='Rating'
-        map={influencers.map((influencer) => (
-          <TableRow
-            key={influencer._id}
-            avatar={influencer.avatar}
-            column1={usernameHandler(influencer.social)}
-            column2={`${influencer.firstName} ${influencer.lastName}`}
-            column3={influencer.social ? channelsHandler(influencer.social) : null}
-            column4={<img src={Rating} alt='rating' />}
-            to={`/influencer/${influencer._id}`}
-            tooltipMessage='Open Influencer'
-            imgAlt='Open Influencer'
+      {influencers[0]
+        ? (
+          <List
+            column1='Username'
+            column2='Name'
+            column3='Channels'
+            column4='Rating'
+            map={influencers.map((influencer) => (
+              <TableRow
+                key={influencer._id}
+                avatar={influencer.avatar}
+                column1={usernameHandler(influencer.social)}
+                column2={`${influencer.firstName} ${influencer.lastName}`}
+                column3={influencer.social ? channelsHandler(influencer.social) : null}
+                column4={<img src={Rating} alt='rating' />}
+                to={`/influencer/${influencer._id}`}
+                tooltipMessage='Open Influencer'
+                imgAlt='Open Influencer'
+              />
+            ))}
           />
-        ))}
-      />
-
+        )
+        : <Loading class='onList' />}
     </div>
   );
 };
