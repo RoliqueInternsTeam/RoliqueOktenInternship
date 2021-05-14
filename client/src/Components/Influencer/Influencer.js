@@ -14,6 +14,7 @@ import youtubeIcon from '../Elements/Icons/youtube-icon.svg';
 import Label from '../Elements/Label/Label';
 import { getOne } from '../../helpers/ApiService';
 import Loading from '../Elements/Loading/Loading';
+import DateFormat from '../../helpers/DateFormat';
 
 const Influencer = (props) => {
   const access_token = useSelector(({ access_token }) => access_token);
@@ -62,23 +63,23 @@ const Influencer = (props) => {
 
   return (
     influencerInfo ? (
-      <div className={classes.mainContainer}>
-        <Header title={`${influencerInfo.firstName} ${influencerInfo.lastName}`} button='edit' to={`/influencer/edit/${influencerInfo._id}`} />
-        <div className={classes.generalInfo}>
-          {influencerInfo.avatar
-            ? <img src={influencerInfo.avatar} alt='avatar' className={classes.avatar} />
-            : <Avatar name={`${influencerInfo.firstName} ${influencerInfo.lastName}`} round />}
-          <div className={classes.personalInfo}>
-            <h2>{`${influencerInfo.firstName} ${influencerInfo.lastName}`}</h2>
-            <div className={classes.textContainer}>
-              <Label label='Birthday:' />
-              <p className={classes.p}>{influencerInfo.birthdate}</p>
-              <Label label='Occupation:' />
-              <p className={classes.p}>{influencerInfo.profession}</p>
-            </div>
-            <div className={classes.socialMediaContainer}>
-              { influencerInfo.social ? socialMediaHandler(influencerInfo.social) : null }
-            </div>
+    
+    <div className={classes.mainContainer}>
+      <Header title={`${influencerInfo.firstName} ${influencerInfo.lastName}`} button='edit' to={`/influencer/edit/${influencerInfo._id}`} />
+      <div className={classes.generalInfo}>
+        {influencerInfo.avatar
+          ? <img src={influencerInfo.avatar} alt='avatar' className={classes.avatar} />
+          : <Avatar name={`${influencerInfo.firstName} ${influencerInfo.lastName}`} round />}
+        <div className={classes.personalInfo}>
+          <h2>{`${influencerInfo.firstName} ${influencerInfo.lastName}`}</h2>
+          <div className={classes.textContainer}>
+            <Label label='Birthday:' />
+            <p className={classes.p}>{DateFormat(influencerInfo.birthdate)}</p>
+            <Label label='Occupation:' />
+            <p className={classes.p}>{influencerInfo.profession}</p>
+          </div>
+          <div className={classes.socialMediaContainer}>
+            { influencerInfo.social ? socialMediaHandler(influencerInfo.social) : null }
           </div>
         </div>
         <div className={classes.photosContainer}>

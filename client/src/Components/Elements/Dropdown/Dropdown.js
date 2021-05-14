@@ -28,7 +28,7 @@ const Dropdown = (props) => {
         className="react-dropdown-select-input"
         size="9"
         placeholder="Select..."
-        value=""
+        defaultValue=""
       />
     )
   );
