@@ -10,7 +10,7 @@ import { getAll } from '../../helpers/ApiService';
 import Loading from '../Elements/Loading/Loading';
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(null);
   const [search, setSearch] = useState('');
   const access_token = useSelector(({ access_token }) => access_token);
 
@@ -42,7 +42,7 @@ const Users = () => {
     <div className={classes.mainContainer}>
       <Header title='Users' button='createNew' />
       <Search search={searchQuery} />
-      {users[0]
+      {users
         ? (
           <List
             column1='Name'

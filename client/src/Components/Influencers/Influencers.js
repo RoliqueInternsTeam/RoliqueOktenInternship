@@ -17,7 +17,7 @@ import { getAll } from '../../helpers/ApiService';
 import Loading from '../Elements/Loading/Loading';
 
 const Influencers = () => {
-  const [influencers, setInfluencers] = useState([]);
+  const [influencers, setInfluencers] = useState(null);
   const [search, setSearch] = useState('');
 
   const access_token = useSelector(({ access_token }) => access_token);
@@ -103,7 +103,7 @@ const Influencers = () => {
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
       <Search search={searchQuery} />
-      {influencers[0]
+      {influencers
         ? (
           <List
             column1='Username'

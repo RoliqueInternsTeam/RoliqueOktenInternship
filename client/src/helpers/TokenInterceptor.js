@@ -11,32 +11,32 @@ const axiosInstance = axios.create();
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    try {
-      const originalRequest = error.config;
+    const originalRequest = error.config;
 
-      if (error.response.status !== 401) {
-        store.dispatch(setBadRequest(true));
-        return setTimeout(() => store.dispatch(setBadRequest(false)), 3000);
-      }
+    if (error.response.status !== 401) {
+      store.dispatch(setBadRequest(true));
+      return setTimeout(() => store.dispatch(setBadRequest(false)), 3000);
+    }
 
-      if (error.response.status === 401 && refresh_token) {
+    if (error.response.status === 401) {
+      try {
         const response = await axios.post('http://localhost:5000/auth/refresh', {}, {
           headers: {
             AUTHORIZATION: refresh_token,
           },
         });
-
         if (response.status === 200) {
           const { access_token, refresh_token } = await response.data;
           cookies.set('refresh_token', refresh_token);
           store.dispatch(setToken(access_token));
+          return axiosInstance(originalRequest);
         }
+      } catch (e) {
+        window.location.href = '/login';
+        return Promise.reject(e);
       }
-      return axiosInstance(originalRequest);
-    } catch (e) {
-      window.location.href = '/login';
-      return Promise.reject(error);
     }
+    return axiosInstance(originalRequest);
   },
 );
 
