@@ -8,7 +8,7 @@ const cookies = new Cookies();
 const initialState = {
   access_token: null,
   user_updated: false,
-  badRequest: false,
+  badRequest: '',
   loading: true,
   userList: [],
   influencersList: [],
