@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import { ADMIN, EMPLOYEE, MANAGER } from '../../../config/constants';
 
 const PermissionChecker = (props) => {
-  const role = useSelector(({ role }) => role);
-  const email = useSelector(({ email }) => email);
+  const user = useSelector(({ user }) => user);
 
-  let authorized = props.permission.includes(role);
+  let authorized = props.permission.includes(user.role);
 
-  if (props.email && role === EMPLOYEE) {
-    props.email === email ? authorized = true : authorized = false;
+  if (props.id && user.role === EMPLOYEE) {
+    props.id === user._id ? authorized = true : authorized = false;
   }
 
   return authorized ? props.children : props.display;

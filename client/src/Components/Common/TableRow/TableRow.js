@@ -35,7 +35,7 @@ const TableRow = (props) => {
       <td>{props.column3}</td>
       <td>{props.column4}</td>
       <td className={classes.edit}>
-        <PermissionChecker email={props.column2} permission={permissionHandler()} display={null}>
+        <PermissionChecker id={props.id} permission={permissionHandler()} display={null}>
           <NavLink
             to={props.to}
           >
@@ -51,6 +51,7 @@ const TableRow = (props) => {
 };
 
 TableRow.propTypes = {
+  id: PropTypes.string.isRequired,
   role: PropTypes.string,
   avatar: PropTypes.string,
   column1: PropTypes.string.isRequired,

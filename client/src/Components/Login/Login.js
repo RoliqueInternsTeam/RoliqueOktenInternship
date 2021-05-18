@@ -8,7 +8,7 @@ import classes from './Login.module.css';
 import Input from '../Elements/Input/Input';
 import Message from '../Elements/Message/Message';
 import { INVALID_CREDENTIALS } from '../../config/messages';
-import { setEmail, setRole, setToken } from '../../store/actions';
+import { setToken, login } from '../../store/actions';
 
 const Login = (props) => {
   const [mismatch, setMismatch] = useState(null);
@@ -26,10 +26,9 @@ const Login = (props) => {
       });
 
       if (response.status === 200) {
-        const { access_token, refresh_token, role } = await response.data;
+        const { access_token, refresh_token, user } = await response.data;
         cookies.set('refresh_token', refresh_token);
-        dispatch(setEmail(event.target[0].value));
-        dispatch(setRole(role.toLowerCase()));
+        dispatch(login(user));
         dispatch(setToken(access_token));
         props.history.push('/users');
       }

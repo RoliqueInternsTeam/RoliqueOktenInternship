@@ -52,6 +52,7 @@ const Users = () => {
             map={users.map((user) => (
               <TableRow
                 key={user._id}
+                id={user._id}
                 role={user.role}
                 avatar={user.avatar}
                 column1={user.firstName}
