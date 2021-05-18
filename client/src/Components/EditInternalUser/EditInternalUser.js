@@ -20,7 +20,7 @@ import Loading from '../Elements/Loading/Loading';
 const EditInternalUser = (props) => {
   const [userInfo, setUserInfo] = useState(null);
   const access_token = useSelector(({ access_token }) => access_token);
-  const role = useSelector(({ role }) => role);
+  const user = useSelector(({ user }) => user);
 
   const dispatch = useDispatch();
 
@@ -119,7 +119,7 @@ const EditInternalUser = (props) => {
                 <Dropdown
                   label="Role"
                   name="roles"
-                  options={creatingAccessHandler(role)}
+                  options={creatingAccessHandler(user.role)}
                   onChange={(value) => dropdownHandler(value)}
                   value={userInfo.role}
                 />

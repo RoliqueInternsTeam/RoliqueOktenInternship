@@ -1,3 +1,4 @@
+import axios from 'axios';
 import axiosInstance from './TokenInterceptor';
 import { setBadRequest } from '../store/actions';
 
@@ -80,5 +81,19 @@ export async function Edit(url, formData, access_token, dispatch) {
   } catch (e) {
     dispatch(setBadRequest(true));
     return setTimeout(() => dispatch(setBadRequest(false)), 3000);
+  }
+}
+
+export async function Logout(access_token) {
+  try {
+    const response = await axios.delete('http://localhost:5000/auth/logout', {
+      headers: {
+        AUTHORIZATION: access_token,
+      },
+    });
+
+    return response;
+  } catch (e) {
+    console.log(e);
   }
 }
