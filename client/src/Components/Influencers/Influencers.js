@@ -113,6 +113,7 @@ const Influencers = () => {
             map={influencers.map((influencer) => (
               <TableRow
                 key={influencer._id}
+                id={influencer._id}
                 avatar={influencer.avatar}
                 column1={usernameHandler(influencer.social)}
                 column2={`${influencer.firstName} ${influencer.lastName}`}

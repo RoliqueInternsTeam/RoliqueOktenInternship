@@ -28,7 +28,7 @@ const CreateInternalUser = (props) => {
   });
 
   const access_token = useSelector(({ access_token }) => access_token);
-  const role = useSelector(({ role }) => role);
+  const user = useSelector(({ user }) => user);
   const dispatch = useDispatch();
 
   const creatingAccessHandler = (role) => {
@@ -86,7 +86,7 @@ const CreateInternalUser = (props) => {
             <Dropdown
               label="Role"
               name="roles"
-              options={creatingAccessHandler(role)}
+              options={creatingAccessHandler(user.role)}
               required="required"
               onChange={(value) => dropdownHandler(value)}
             />
