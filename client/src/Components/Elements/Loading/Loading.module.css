@@ -1,9 +1,9 @@
 .onBlankPage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
 }
 .onList {
-    margin-left: 50%;
-    margin-top: 20%;
+    margin-top: 15%;
+    display: grid;
+    place-items: center;
 }

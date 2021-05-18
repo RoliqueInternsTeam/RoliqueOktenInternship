@@ -1,10 +1,10 @@
 import {
-  BAD_REQUEST, EMAIL, ROLE, SET_INFLUENCERLIST, SET_USERLIST, TOKEN,
+  BAD_REQUEST, LOGIN, LOGOUT, SET_INFLUENCERLIST, SET_USERLIST, TOKEN,
 } from './actionTypes';
 
+export const login = (payload) => ({ type: LOGIN, payload });
+export const logout = () => ({ type: LOGOUT });
 export const setToken = (payload) => ({ type: TOKEN, payload });
-export const setRole = (payload) => ({ type: ROLE, payload });
-export const setEmail = (payload) => ({ type: EMAIL, payload });
 export const setBadRequest = (payload) => ({ type: BAD_REQUEST, payload });
 export const setUserList = (payload) => ({ type: SET_USERLIST, payload });
 export const setInfluencerList = (payload) => ({ type: SET_INFLUENCERLIST, payload });

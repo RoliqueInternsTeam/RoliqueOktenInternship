@@ -2,19 +2,24 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './Sidebar.module.css';
 import Vector from '../Elements/Icons/vector.svg';
 import Users from '../Elements/Icons/users.svg';
 import Volume from '../Elements/Icons/volume.svg';
 import At from '../Elements/Icons/at.svg';
-import Logout from '../Elements/Icons/log-out.png';
-import { LOGOUT } from '../../store/actionTypes';
-
-const logout = () => ({ type: LOGOUT });
+import LogoutIcon from '../Elements/Icons/log-out.png';
+import { Logout } from '../../helpers/ApiService';
+import { logout } from '../../store/actions';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const access_token = useSelector(({ access_token }) => access_token);
+
+  const logoutHandler = async () => {
+    Logout(access_token)
+      .then(() => dispatch(logout()));
+  };
 
   return (
     <div className={classes.sidebar}>
@@ -30,8 +35,8 @@ const Sidebar = () => {
       <NavLink activeClassName={classes.active} className={classes.imgContainer} to="/influencers">
         <img src={At} alt="influencers" />
       </NavLink>
-      <NavLink onClick={() => dispatch(logout())} className={classes.logoutContainer} to="/">
-        <img src={Logout} alt="logout" className={classes.logout} />
+      <NavLink onClick={logoutHandler} className={classes.logoutContainer} to="/login">
+        <img src={LogoutIcon} alt="logout" className={classes.logout} />
       </NavLink>
 
     </div>
