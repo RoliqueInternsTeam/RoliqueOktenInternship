@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        if (id === '') {
+        if (id === '' || id == null) {
             throw new ErrorHandler(errors.INFLUENCER_NOT_FOUND.message, errors.INFLUENCER_NOT_FOUND.code);
         }
 

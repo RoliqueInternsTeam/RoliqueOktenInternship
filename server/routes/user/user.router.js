@@ -6,8 +6,9 @@ const { ADMIN, MANAGER } = require('../../constants/constants');
 
 const userRouter = Router();
 
+userRouter.use(authMiddleware.checkAccessToken);
+
 userRouter.post('/',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([
         MANAGER,
         ADMIN
@@ -19,7 +20,6 @@ userRouter.post('/',
     fileMiddleware.checkPhotoCountUser,
     userController.createUser);
 userRouter.put('/:id',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([
         ADMIN,
         MANAGER
@@ -31,11 +31,9 @@ userRouter.put('/:id',
     fileMiddleware.checkPhotoCountUser,
     userController.updateUser);
 userRouter.get('/',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([]),
     userController.getAllUsers);
 userRouter.get('/:id',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([]),
     userController.getOneUser);
 module.exports = userRouter;

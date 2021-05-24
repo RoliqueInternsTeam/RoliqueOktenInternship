@@ -1,4 +1,4 @@
-const { influencerServices } = require('../../services');
+const { influencerServices, instagramServices } = require('../../services');
 const { ErrorHandler, errors } = require('../../errors');
 const { s3 } = require('../../config/s3.config');
 const { CREATED, OK } = require('../../constants/status-codes');
@@ -7,6 +7,10 @@ module.exports = {
     createInfluencer: async (req, res, next) => {
         try {
             const { avatar, user, influencer } = req;
+
+            if (influencer.social.instagram.instagramUsername) {
+                await instagramServices.getInstagramAccount(influencer);
+            }
 
             const newInfluencer = await influencerServices.createInfluencer({ userId: user._id, ...influencer });
             if (avatar && !influencer.avatar) {

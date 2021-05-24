@@ -11,8 +11,9 @@ const { ADMIN, MANAGER } = require('../../constants/constants');
 
 const influencerRouter = Router();
 
+influencerRouter.use(authMiddleware.checkAccessToken);
+
 influencerRouter.post('/',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([
         MANAGER,
         ADMIN
@@ -20,10 +21,9 @@ influencerRouter.post('/',
     influencerMiddleware.checkInfluencerValid,
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
-    influencerMiddleware.checkInformationInfluencer,
+    // influencerMiddleware.checkInformationInfluencer,
     influencerController.createInfluencer);
 influencerRouter.put('/:id',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess({
         ADMIN,
         MANAGER
@@ -34,11 +34,9 @@ influencerRouter.put('/:id',
     fileMiddleware.checkPhotoCountUser,
     influencerController.updateInfluencer);
 influencerRouter.get('/',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([]),
     influencerController.getAllInfluencers);
 influencerRouter.get('/:id',
-    authMiddleware.checkAccessToken,
     usersMiddleware.checkUserAccess([]),
     influencerController.getOneInfluencer);
 
