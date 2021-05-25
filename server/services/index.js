@@ -3,4 +3,5 @@ module.exports = {
     userServices: require('./user/user.service'),
     influencerServices: require('./influencer/influencer.service'),
     instagramServices: require('./instagram/instagram.service'),
+    cleanObjectService: require('./object/cleanObject.service')
 };

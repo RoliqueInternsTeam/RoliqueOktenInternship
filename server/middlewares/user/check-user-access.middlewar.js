@@ -2,7 +2,7 @@ const { ErrorHandler, errors } = require('../../errors');
 
 module.exports = (whoHaveAccess = []) => (req, res, next) => {
     try {
-        const { user } = req.user;
+        const { user } = req;
 
         if (!whoHaveAccess.length) {
             return next();

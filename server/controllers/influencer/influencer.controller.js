@@ -1,4 +1,4 @@
-const { influencerServices, instagramServices } = require('../../services');
+const { influencerServices, instagramServices, cleanObjectService } = require('../../services');
 const { ErrorHandler, errors } = require('../../errors');
 const { s3 } = require('../../config/s3.config');
 const { CREATED, OK } = require('../../constants/status-codes');
@@ -11,6 +11,7 @@ module.exports = {
             if (influencer.social.instagram.instagramUsername) {
                 await instagramServices.getInstagramAccount(influencer);
             }
+            await cleanObjectService.cleanObject(influencer);
 
             const newInfluencer = await influencerServices.createInfluencer({ userId: user._id, ...influencer });
             if (avatar && !influencer.avatar) {
@@ -40,13 +41,9 @@ module.exports = {
 
     updateInfluencer: async (req, res, next) => {
         try {
-            const updateInfluencer = req.body;
-            const { avatar } = req;
+            const { avatar, influencer } = req;
             const { id } = req.params;
 
-            const newData = updateInfluencer.json;
-
-            console.log(newData);
             if (avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
@@ -66,7 +63,9 @@ module.exports = {
                 });
             }
 
-            await influencerServices.updateInfluencer(id, { newData });
+            await cleanObjectService.cleanObject(influencer);
+
+            await influencerServices.updateInfluencer(id, { ...influencer });
 
             res.status(OK).json('Influencer updated');
         } catch (e) {

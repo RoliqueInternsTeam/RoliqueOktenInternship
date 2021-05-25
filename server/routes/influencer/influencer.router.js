@@ -21,7 +21,6 @@ influencerRouter.post('/',
     influencerMiddleware.checkInfluencerValid,
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
-    // influencerMiddleware.checkInformationInfluencer,
     influencerController.createInfluencer);
 influencerRouter.put('/:id',
     usersMiddleware.checkUserAccess({

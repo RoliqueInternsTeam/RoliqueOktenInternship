@@ -21,7 +21,14 @@ const profiles = {
             type: Number,
             required: false
         },
-        instagramPhotos: [photos]
+        instagramPhotos: {
+            type: [{
+                photoURL: String,
+                liked: Number,
+                comment: Number
+            }],
+            default: undefined
+        }
     },
     youtube: {
         youtubeUsername: {
