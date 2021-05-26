@@ -60,8 +60,8 @@ export async function Create(url, formData, access_token, dispatch) {
       return response.status;
     }
   } catch (e) {
-    dispatch(setBadRequest(true));
-    return setTimeout(() => dispatch(setBadRequest(false)), 3000);
+    dispatch(setBadRequest(e.response.data.message));
+    return setTimeout(() => dispatch(setBadRequest('')), 3000);
   }
 }
 
@@ -79,8 +79,8 @@ export async function Edit(url, formData, access_token, dispatch) {
       return response.status;
     }
   } catch (e) {
-    dispatch(setBadRequest(true));
-    return setTimeout(() => dispatch(setBadRequest(false)), 3000);
+    dispatch(setBadRequest(e.response.data.message));
+    return setTimeout(() => dispatch(setBadRequest('')), 3000);
   }
 }
 
