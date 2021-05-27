@@ -45,10 +45,7 @@ const Users = () => {
       {users
         ? (
           <List
-            column1='Name'
-            column2='email'
-            column3='Role'
-            column4='Phone'
+            headers={['Name', 'email', 'Role', 'Phone']}
             map={users.map((user) => (
               <TableRow
                 key={user._id}

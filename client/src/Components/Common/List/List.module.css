@@ -1,4 +1,6 @@
 .table {
+    /*display: inline-table;*/
+    white-space: nowrap;
     border-collapse: collapse;
     margin: 0 68px 0 28px;
     height: min-content;
@@ -6,13 +8,13 @@
     text-align: left;
     overflow-y: auto;
 }
-.th {
-    padding-left: 16px;
-}
-th{
+th {
+    box-sizing: border-box;
+    max-width: 300px;
     height: 56px;
     background: #FAF9FB;
     box-shadow: inset 0px -4px 0px #E5E5E5;
+    padding-left: 16px;
 }
 .span {
     font-family: Helvetica Neue, sans-serif;
@@ -27,6 +29,10 @@ th{
     mix-blend-mode: hard-light;
     opacity: 0.76;
 }
-.last {
-    width: 500px;
+th:nth-last-child(2) {
+    width: 40%;
+}
+th:last-child {
+    padding: 0;
+    width: 28px;
 }

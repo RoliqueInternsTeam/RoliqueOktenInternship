@@ -20,16 +20,18 @@
     vertical-align: middle;
     margin-right: 16px;
 }
-.tr .td {
-    padding-left: 16px;
-}
 .tr td {
-    padding: 0;
+    padding-left: 16px;
+    /*padding-right: 5%;*/
 }
-.edit {
+/*.tr td:not(:last-child) {*/
+/*    white-space: pre;*/
+/*}*/
+div.edit {
+    padding: 0;
     display: table-cell;
     position: relative;
-    width: 28px;
+    /*width: min-content;*/
     text-align: center;
     vertical-align: middle;
     background: #E7E6E8;

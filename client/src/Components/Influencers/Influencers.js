@@ -106,10 +106,7 @@ const Influencers = () => {
       {influencers
         ? (
           <List
-            column1='Username'
-            column2='Name'
-            column3='Channels'
-            column4='Rating'
+            headers={['Username', 'Name', 'Channels', 'Rating']}
             map={influencers.map((influencer) => (
               <TableRow
                 key={influencer._id}

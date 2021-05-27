@@ -22,7 +22,7 @@ const TableRow = (props) => {
 
   return (
     <tr className={classes.tr}>
-      <td className={classes.td}>
+      <td>
         {props.avatar
           ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} />
           : <Avatar name={props.column1 && props.column11 ? `${props.column1} ${props.column11}` : props.column2} size="32px" round style={{ marginRight: '12px' }} />}
@@ -34,7 +34,7 @@ const TableRow = (props) => {
       <td>{props.column2}</td>
       <td>{props.column3}</td>
       <td>{props.column4}</td>
-      <td className={classes.edit}>
+      <div className={classes.edit}>
         <PermissionChecker id={props.id} permission={permissionHandler()} display={null}>
           <NavLink
             to={props.to}
@@ -45,7 +45,7 @@ const TableRow = (props) => {
             <img src={Edit} alt={props.imgAlt} />
           </NavLink>
         </PermissionChecker>
-      </td>
+      </div>
     </tr>
   );
 };

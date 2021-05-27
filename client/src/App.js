@@ -14,6 +14,7 @@ import CreateInfluencer from './Components/CreateInfluencer/CreateInfluencer';
 import EditInfluencer from './Components/EditInfluencer/EditInfluencer';
 import Message from './Components/Elements/Message/Message';
 import Sidebar from './Components/Sidebar/Sidebar';
+import Campaigns from './Components/Campaigns/Campaigns';
 
 const App = () => {
   const access_token = useSelector(({ access_token }) => access_token);
@@ -34,6 +35,7 @@ const App = () => {
                 <Route exact path="/users" component={Users} />
                 <Route exact path="/influencers/create" component={CreateInfluencer} />
                 <Route exact path="/influencers" component={Influencers} />
+                <Route exact path="/campaigns" component={Campaigns} />
                 <Route path="/influencer/edit" component={EditInfluencer} />
                 <Route path="/influencer" component={Influencer} />
 
