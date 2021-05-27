@@ -14,8 +14,8 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response.status !== 401) {
-      store.dispatch(setBadRequest(true));
-      return setTimeout(() => store.dispatch(setBadRequest(false)), 3000);
+      store.dispatch(setBadRequest(error.response.data.message));
+      return setTimeout(() => store.dispatch(setBadRequest('')), 3000);
     }
 
     if (error.response.status === 401) {
