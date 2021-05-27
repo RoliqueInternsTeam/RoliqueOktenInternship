@@ -1,7 +1,5 @@
 const passwordHash = require('../../helpers/password.helper');
-const { userServices, cleanObjectService } = require('../../services');
-const { ErrorHandler, errors } = require('../../errors');
-const { s3 } = require('../../config/s3.config');
+const { userServices, cleanObjectService, s3Service: { uploadUserPhoto } } = require('../../services');
 const { CREATED, OK } = require('../../constants/status-codes');
 
 module.exports = {
@@ -15,26 +13,12 @@ module.exports = {
             await cleanObjectService.cleanObject(createUser);
 
             const newUser = await userServices.createUser(createUser);
+
             if (avatar) {
-                const { s3Client } = s3;
-                const params = s3.uploadParams;
-                const fileExtension = avatar.name.split('.').pop();
-
-                params.Key = `${await newUser._id}.${fileExtension}`;
-                params.Body = avatar.data;
-
-                s3Client.upload(params, async (err, data) => {
-                    if (err) {
-                        throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
-                    }
-
-                    const locationUrl = data.Location;
-
-                    await userServices.addPhotoUser(newUser._id, locationUrl);
-                });
+                await uploadUserPhoto(newUser._id, avatar);
             }
 
-            res.status(CREATED).json('User created');
+            res.status(CREATED).json(newUser);
         } catch (e) {
             next(e);
         }
@@ -42,36 +26,21 @@ module.exports = {
     updateUser: async (req, res, next) => {
         try {
             const { avatar, updateUser } = req;
-            const { id } = req.params;
+            const { _id } = updateUser;
 
             await cleanObjectService.cleanObject(updateUser);
             if (avatar) {
-                const { s3Client } = s3;
-                const params = s3.uploadParams;
-                const fileExtension = avatar.name.split('.').pop();
-
-                params.Key = `1.${fileExtension}`;
-                params.Body = avatar.data;
-
-                s3Client.upload(params, async (err, data) => {
-                    if (err) {
-                        throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
-                    }
-
-                    const locationUrl = data.Location;
-
-                    await userServices.addPhotoUser(id, locationUrl);
-                });
+                await uploadUserPhoto(_id, avatar);
             }
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
-                await userServices.updateUser(id, { ...updateUser });
-                return res.status(OK).json('User updated').end();
+                const newUpdateUser = await userServices.updateUser(_id, { ...updateUser });
+                return res.status(OK).json(newUpdateUser).end();
             }
 
-            await userServices.updateUser(id, { ...updateUser });
+            const newUpdateUser = await userServices.updateUser(_id, { ...updateUser });
 
-            res.status(OK).json('User updated');
+            res.status(OK).json(newUpdateUser);
         } catch (e) {
             next(e);
         }
