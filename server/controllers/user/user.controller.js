@@ -63,8 +63,15 @@ module.exports = {
                     await userServices.addPhotoUser(id, locationUrl);
                 });
             }
+
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
+                await userServices.updateUser(id, { ...updateUser });
+                return res.status(OK).json('User updated').end();
+            }
+
+            if (!updateUser.phone) {
+                updateUser.phone = '';
                 await userServices.updateUser(id, { ...updateUser });
                 return res.status(OK).json('User updated').end();
             }

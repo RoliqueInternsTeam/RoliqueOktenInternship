@@ -8,7 +8,7 @@ module.exports = Joi.object({
     __v: Joi.number(),
     firstName: Joi.string().trim().regex(NAME),
     lastName: Joi.string().trim().regex(NAME),
-    birthdate: Joi.date().allow(''),
+    birthdate: Joi.date().allow(null, ''),
     profession: Joi.string().trim(),
     avatar: Joi.string().allow(null, ''),
     social: Joi.object().keys({
