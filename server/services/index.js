@@ -4,5 +4,7 @@ module.exports = {
     influencerServices: require('./influencer/influencer.service'),
     instagramServices: require('./instagram/instagram.service'),
     cleanObjectService: require('./object/cleanObject.service'),
-    s3Service: require('./s3/s3.service')
+    s3Service: require('./s3/s3.service'),
+    campaignServices: require('./campaign/campaign.service'),
+    brandService: require('./brand/brand.service')
 };
