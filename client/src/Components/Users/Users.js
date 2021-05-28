@@ -8,6 +8,7 @@ import { setUserList } from '../../store/actions';
 import TableRow from '../Common/TableRow/TableRow';
 import { getAll } from '../../helpers/ApiService';
 import Loading from '../Elements/Loading/Loading';
+import Edit from '../Elements/Icons/combined-shape.svg';
 
 const Users = () => {
   const [users, setUsers] = useState(null);
@@ -46,20 +47,27 @@ const Users = () => {
         ? (
           <List
             headers={['Name', 'email', 'Role', 'Phone']}
-            map={users.map((user) => (
+            sort={[1, 2]}
+            map={users.map((user, index) => (
               <TableRow
-                key={user._id}
+                key={`${user._id}${index}`}
                 id={user._id}
                 role={user.role}
                 avatar={user.avatar}
+                columns={{
+                  email: user.email,
+                  role: capitalizeFirstLetter(user.role),
+                  phone: user.phone,
+                }}
                 column1={user.firstName}
                 column11={user.lastName}
-                column2={user.email}
-                column3={capitalizeFirstLetter(user.role)}
-                column4={user.phone}
+                // column2={user.email}
+                // column3={capitalizeFirstLetter(user.role)}
+                // column4={user.phone}
                 to={`/users/edit/${user._id}`}
                 tooltipMessage='Edit User'
                 imgAlt='Edit User'
+                rowBtn={Edit}
               />
             ))}
           />

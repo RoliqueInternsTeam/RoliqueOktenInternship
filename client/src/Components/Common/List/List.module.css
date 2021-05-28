@@ -29,6 +29,10 @@ th {
     mix-blend-mode: hard-light;
     opacity: 0.76;
 }
+.sort {
+    padding-left: 5px;
+    cursor: pointer;
+}
 th:nth-last-child(2) {
     width: 40%;
 }

@@ -15,6 +15,7 @@ import Blogger from '../Elements/Logos/blogger.svg';
 import Rating from '../Elements/Icons/rating.svg';
 import { getAll } from '../../helpers/ApiService';
 import Loading from '../Elements/Loading/Loading';
+import Edit from '../Elements/Icons/combined-shape.svg';
 
 const Influencers = () => {
   const [influencers, setInfluencers] = useState(null);
@@ -107,18 +108,26 @@ const Influencers = () => {
         ? (
           <List
             headers={['Username', 'Name', 'Channels', 'Rating']}
-            map={influencers.map((influencer) => (
+            map={influencers.map((influencer, index) => (
               <TableRow
-                key={influencer._id}
+                key={`${influencer._id}${index}`}
                 id={influencer._id}
                 avatar={influencer.avatar}
+                columns={{
+                  username: usernameHandler(influencer.social),
+                  name: `${influencer.firstName} ${influencer.lastName}`,
+                  channels: influencer.social ? channelsHandler(influencer.social) : null,
+                  rating: <img key src={Rating} alt='rating' />,
+                }}
+                columnOrder={[['avatar', 'username'], 'name', 'channels', 'rating']}
                 column1={usernameHandler(influencer.social)}
-                column2={`${influencer.firstName} ${influencer.lastName}`}
-                column3={influencer.social ? channelsHandler(influencer.social) : null}
-                column4={<img src={Rating} alt='rating' />}
+                // column2={`${influencer.firstName} ${influencer.lastName}`}
+                // column3={influencer.social ? channelsHandler(influencer.social) : null}
+                // column4={<img src={Rating} alt='rating' />}
                 to={`/influencer/${influencer._id}`}
                 tooltipMessage='Open Influencer'
                 imgAlt='Open Influencer'
+                rowBtn={Edit}
               />
             ))}
           />
