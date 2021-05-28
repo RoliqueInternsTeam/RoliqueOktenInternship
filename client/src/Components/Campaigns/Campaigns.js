@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import classes from './Campaigns.module.css';
 import { getAll } from '../../helpers/ApiService';
-import { setInfluencerList } from '../../store/actions';
+import { setCampaignList } from '../../store/actions';
 import Header from '../Common/Header/Header';
 import Search from '../Common/Search/Search';
-import List from '../Common/List/List';
-import TableRow from '../Common/TableRow/TableRow';
-import Rating from '../Elements/Icons/rating.svg';
+import Label from '../Elements/Label/Label';
+import Dropdown from '../Elements/Dropdown/Dropdown';
+// import List from '../Common/List/List';
+// import TableRow from '../Common/TableRow/TableRow';
+// import Export from '../Elements/Icons/export.svg';
 // import Loading from '../Elements/Loading/Loading';
 
 const Campaigns = () => {
@@ -18,18 +21,28 @@ const Campaigns = () => {
   const dispatch = useDispatch();
   const campaignList = useSelector(({ campaignList }) => campaignList);
 
-  useEffect(() => {
-    getAll('http://localhost:5000/campaign', access_token)
-      .then((res) => {
-        setCampaigns(res);
-        dispatch(setInfluencerList(res));
-      });
-  }, []);
-
   const searchQuery = (event) => {
     setCampaigns(campaignList);
     setSearch(event.target.value);
   };
+
+  const dropdownHandler = (value) => {
+    setUserInfo(((prevState) => ({ ...prevState, role: value.toLowerCase() })));
+  };
+
+  const optionsHandler = (option) => {
+    const options = [];
+    campaigns.forEach((campaign) => options.push(campaign[option]));
+    return options;
+  };
+
+  useEffect(() => {
+    getAll('http://localhost:5000/campaign', access_token)
+      .then((res) => {
+        setCampaigns(res);
+        dispatch(setCampaignList(res));
+      });
+  }, []);
 
   useEffect(() => {
     if (search) {
@@ -37,32 +50,69 @@ const Campaigns = () => {
     }
   }, [search]);
 
+  // eslint-disable-next-line implicit-arrow-linebreak
   return (
-    <div>
+    <div className={classes.mainContainer}>
       <Header title='Campaigns' button='createNew' />
-      <Search search={searchQuery} />
       {/* {campaigns */}
       {/*  ? ( */}
-      <List
-        column1='Username'
-        column2='Name'
-        column3='Channels'
-        column4='Rating'
-        map={campaigns.map((influencer) => (
-          <TableRow
-            key={influencer._id}
-            id={influencer._id}
-            avatar={influencer.avatar}
-            column1={usernameHandler(influencer.social)}
-            column2={`${influencer.firstName} ${influencer.lastName}`}
-            column3={influencer.social ? channelsHandler(influencer.social) : null}
-            column4={<img src={Rating} alt='rating' />}
-            to={`/influencer/${influencer._id}`}
-            tooltipMessage='Open Influencer'
-            imgAlt='Open Influencer'
+      <div className={classes.body}>
+        <div className={classes.filters}>
+          <h2 className={classes.h2}>Filters</h2>
+          <label className={classes.counter}>{campaigns.length}</label>
+          <Search search={searchQuery} />
+          <Label label='Planned channels' />
+          <Dropdown
+            label='Brand'
+            onChange={(value) => dropdownHandler(value)}
+            name='brand'
+            options={optionsHandler('brand')}
           />
-        ))}
-      />
+          <Dropdown
+            label='Effort'
+            onChange={(value) => dropdownHandler(value)}
+            name='effort'
+            options={optionsHandler('effort')}
+          />
+          <Dropdown
+            label='Status'
+            onChange={(value) => dropdownHandler(value)}
+            name='status'
+            options={optionsHandler('status')}
+          />
+          <Dropdown
+            label='TL'
+            onChange={(value) => dropdownHandler(value)}
+            name='tl'
+            options={optionsHandler('tl')}
+          />
+        </div>
+      </div>
+      {/* <List */}
+      {/*  headers={['Campaign Title', 'Brand', 'Start', 'End', 'Status', 'TL', 'Budget', 'Profit']} */}
+      {/*  sort={[1, 2, 3, 4, 7, 8]} */}
+      {/*  map={campaigns.map((campaign, index) => ( */}
+      {/*    <TableRow */}
+      {/*      key={`${campaign._id}${index}`} */}
+      {/*      id={campaign._id} */}
+      {/*      columns={{ */}
+      {/*        avatar: campaign.logo, */}
+      {/*        title: campaign.title, */}
+      {/*        channels: campaign.social ? channelsHandler(campaign.social) : null, */}
+      {/*        brand: campaign.brand, */}
+      {/*        status: campaign.brand, */}
+      {/*        tl: campaign.brand, */}
+      {/*        budget: campaign.brand, */}
+      {/*        profit: campaign.brand, */}
+      {/*      }} */}
+      {/*      columnsOrder={[['avatar', 'title', 'channels'], 'brand', 'start', 'end', 'status', 'TL', 'Budget', 'Profit']} */}
+      {/*      to={`/influencer/${campaign._id}`} */}
+      {/*      tooltipMessage='Export Campaign' */}
+      {/*      imgAlt='Export Campaign' */}
+      {/*      rowBtn={Export} */}
+      {/*    /> */}
+      {/*  ))} */}
+      {/* /> */}
       {/* ) : */}
       {/* <Loading class='onList' /> */}
       {/* } */}

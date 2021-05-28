@@ -53,17 +53,14 @@ const Users = () => {
                 key={`${user._id}${index}`}
                 id={user._id}
                 role={user.role}
-                avatar={user.avatar}
                 columns={{
+                  name: `${user.firstName} ${user.lastName}`,
+                  avatar: user.avatar,
                   email: user.email,
                   role: capitalizeFirstLetter(user.role),
                   phone: user.phone,
                 }}
-                column1={user.firstName}
-                column11={user.lastName}
-                // column2={user.email}
-                // column3={capitalizeFirstLetter(user.role)}
-                // column4={user.phone}
+                columnsOrder={[['avatar', 'name'], 'email', 'role', 'phone']}
                 to={`/users/edit/${user._id}`}
                 tooltipMessage='Edit User'
                 imgAlt='Edit User'

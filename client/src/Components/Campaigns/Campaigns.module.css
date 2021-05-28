@@ -1,0 +1,42 @@
+.mainContainer {
+    margin-left: 40px;
+    height: 100%;
+    background-color: #ebe8e9;
+}
+.body {
+    display: flex;
+    flex-direction: column;
+}
+.filters {
+    padding: 0 28px;
+    width: 240px;
+}
+.h2 {
+    font-family: Helvetica Neue, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.25px;
+
+    color: #151515;
+
+    opacity: 0.9;
+}
+.counter {
+    font-family: Helvetica Neue, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    align-items: center;
+    text-align: center;
+    padding: 2px 6px;
+    background: #FF650E;
+    border-radius: 2px;
+
+    color: #FFFFFF;
+}

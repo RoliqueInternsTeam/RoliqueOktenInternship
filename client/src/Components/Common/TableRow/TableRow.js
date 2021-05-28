@@ -21,22 +21,14 @@ const TableRow = (props) => {
 
   return (
     <tr className={classes.tr}>
-      <td>
-        {props.avatar
-          ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} />
-          : <Avatar name={props.column1 && props.column11 ? `${props.column1} ${props.column11}` : props.columns.name} size="32px" round style={{ marginRight: '12px' }} />}
-        &nbsp;
-        {props.column1}
-        &nbsp;
-        {props.column11}
-      </td>
-      {/* <td>{props.column2}</td> */}
-      {/* <td>{props.column3}</td> */}
-      {/* <td>{props.column4}</td> */}
-      {props.columnOrder.map((column, index) => (
+      {props.columnsOrder.map((column, index) => (
         <td key={index}>
-          {/* {Array.isArray(props.columns[column]) ? props.columns[column].forEach((value) => value) : props.columns[column] } */}
-          {Array.isArray(props.columns[column]) ? null : props.columns[column] }
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {Array.isArray(column) ? column.map((value) => (value === 'avatar' ? (props.columns.avatar
+            ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} />
+            : <Avatar name={props.columns.name} size="32px" round style={{ marginRight: '12px' }} />)
+            : props.columns[value]))
+            : props.columns[column]}
         </td>
       ))}
       <div className={classes.edit}>

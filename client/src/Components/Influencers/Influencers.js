@@ -112,18 +112,14 @@ const Influencers = () => {
               <TableRow
                 key={`${influencer._id}${index}`}
                 id={influencer._id}
-                avatar={influencer.avatar}
                 columns={{
+                  avatar: influencer.avatar,
                   username: usernameHandler(influencer.social),
                   name: `${influencer.firstName} ${influencer.lastName}`,
                   channels: influencer.social ? channelsHandler(influencer.social) : null,
                   rating: <img key src={Rating} alt='rating' />,
                 }}
-                columnOrder={[['avatar', 'username'], 'name', 'channels', 'rating']}
-                column1={usernameHandler(influencer.social)}
-                // column2={`${influencer.firstName} ${influencer.lastName}`}
-                // column3={influencer.social ? channelsHandler(influencer.social) : null}
-                // column4={<img src={Rating} alt='rating' />}
+                columnsOrder={[['avatar', 'username'], 'name', 'channels', 'rating']}
                 to={`/influencer/${influencer._id}`}
                 tooltipMessage='Open Influencer'
                 imgAlt='Open Influencer'
