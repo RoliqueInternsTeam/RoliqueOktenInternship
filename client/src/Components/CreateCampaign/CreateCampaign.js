@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
 import { ADMIN, MANAGER } from '../../config/constants';
 import Message from '../Elements/Message/Message';
@@ -16,11 +16,12 @@ import CreateBrand from '../CreateBrand/CreateBrand';
 import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import Label from '../Elements/Label/Label';
 import Toggle from '../Elements/Toggle/Toggle';
-import { getAll } from '../../helpers/ApiService';
+import { Create, getAll } from '../../helpers/ApiService';
 import { NUMBER_DOT_MASK } from '../../config/regexp.enum';
 
 function CreateCampaign() {
   const access_token = useSelector(({ access_token }) => access_token);
+  const dispatch = useDispatch();
 
   const [campaign, setCampaign] = useState({
     title: '',
@@ -50,8 +51,6 @@ function CreateCampaign() {
   const [brandCreation, setBrandCreation] = useState(false);
   const [budgetMismatch, setBudgetMismatch] = useState(null);
 
-  // eslint-disable-next-line no-use-before-define
-  useEffect(() => (!hashtagsIncluded ? setCampaign((prevState) => ({ ...prevState, hashtags: null })) : hashtagsHandler()), [hashtagsIncluded]);
   useEffect(() => {
     getAll('http://localhost:5000/user', access_token)
       .then((res) => {
@@ -145,14 +144,24 @@ function CreateCampaign() {
   };
 
   useEffect(() => budgetValidator(), [campaign.budgetsTargets]);
-  useEffect(() => console.log(campaign), [campaign]);
+  useEffect(() => (!hashtagsIncluded ? setCampaign((prevState) => ({ ...prevState, hashtags: null })) : hashtagsHandler()), [hashtagsIncluded]);
+
+  const createCampaignHandler = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('json', JSON.stringify(campaign));
+
+    const status = await Create('http://localhost:5000/campaign', formData, access_token, dispatch);
+    status === 201 ? props.history.push('/campaigns') : null;
+  };
 
   return (
     <PermissionChecker
       permission={[ADMIN, MANAGER]}
       display={<Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={RESTRICTED_ACCESS} redirect />}
     >
-      <form className={classes.mainContainer}>
+      <form className={classes.mainContainer} onSubmit={(event) => createCampaignHandler(event)}>
         <Header arrow title='Create Campaign' button='saveChanges' />
         <div className={classes.topContainer}>
           <div className={classes.leftContainer}>
