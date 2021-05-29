@@ -76,7 +76,7 @@ function CreateCampaign() {
         ...prevState,
         budgetsTargets: {
           ...prevState.budgetsTargets,
-          [event.target.id]: Number(event.target.value.replace('$ ', '').replace('.', '').replace('.', '')),
+          [event.target.id]: Number(event.target.value.replace('$ ', '').replaceAll('.', '')),
         },
       })));
     }
@@ -86,13 +86,13 @@ function CreateCampaign() {
         ...prevState.budgetsTargets,
         budgets: {
           ...prevState.budgetsTargets.budgets,
-          [event.target.id]: Number(event.target.value.replace('$ ', '').replace('.', '').replace('.', '')),
+          [event.target.id]: Number(event.target.value.replace('$ ', '').replaceAll('.', '')),
         },
       },
     })));
   };
   const dropdownHandler = (key, value) => {
-    setCampaign(((prevState) => ({ ...prevState, [key]: value.key.toLowerCase() })));
+    setCampaign(((prevState) => ({ ...prevState, [key]: value.key })));
   };
 
   const dateHandler = (key, date) => {
@@ -172,7 +172,7 @@ function CreateCampaign() {
               type='text'
               id="title"
               required
-              onChange={(event) => inputHandler('title', event)}
+              onChange={(event) => inputHandler(event)}
             />
             <Dropdown
               label="Status"
