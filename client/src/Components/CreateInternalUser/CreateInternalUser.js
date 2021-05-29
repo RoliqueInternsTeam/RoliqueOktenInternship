@@ -90,7 +90,7 @@ const CreateInternalUser = (props) => {
               required="required"
               onChange={(value) => dropdownHandler(value)}
             />
-            <div className={classes.passwordContainer}>
+            <div>
               <h4 className={classes.h4}>Password</h4>
               <Input label="Set Password" type='password' id="password" required="required" onChange={(event) => inputHandler(event)} />
             </div>

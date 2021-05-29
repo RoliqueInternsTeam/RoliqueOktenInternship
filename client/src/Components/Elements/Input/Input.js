@@ -6,14 +6,6 @@ import classes from './Input.module.css';
 import { PHONE_NUMBER } from '../../../config/regexp.enum';
 import Label from '../Label/Label';
 
-const mask = createNumberMask({
-  prefix: '',
-  suffix: '',
-  includeThousandsSeparator: true,
-  thousandsSeparatorSymbol: '.',
-  integerLimit: 9,
-});
-
 const Input = (props) => (
   <div className={`${classes.div} ${classes[props.className]}`}>
     <Label label={props.label} htmlFor={props.id} />
@@ -22,7 +14,13 @@ const Input = (props) => (
       <MaskedInput
         {...props}
         className={classes.input}
-        mask={mask}
+        mask={createNumberMask({
+          prefix: props.prefix,
+          suffix: '',
+          includeThousandsSeparator: true,
+          thousandsSeparatorSymbol: '.',
+          integerLimit: 9,
+        })}
         showMask={false}
         type='text'
         value={props.value}
@@ -37,6 +35,7 @@ const Input = (props) => (
           pattern={props.pattern}
           required={props.required}
           onChange={props.onChange}
+          disabled={props.disabled}
         />
     ) }
     {props.error ? <p className={classes.p}>{props.error}</p> : null}
@@ -53,6 +52,8 @@ Input.propTypes = {
   pattern: PropTypes.oneOf([PHONE_NUMBER]),
   onChange: PropTypes.func,
   error: PropTypes.string,
+  prefix: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -65,6 +66,8 @@ Input.defaultProps = {
   placeholder: null,
   pattern: null,
   onChange: null,
+  prefix: '',
+  disabled: false,
 };
 
 export default Input;

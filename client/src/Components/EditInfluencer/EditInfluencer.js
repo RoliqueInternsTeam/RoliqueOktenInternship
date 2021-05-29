@@ -8,7 +8,7 @@ import Message from '../Elements/Message/Message';
 import Header from '../Common/Header/Header';
 import Input from '../Elements/Input/Input';
 import PictureLoader from '../Common/PictureLoader/PictureLoader';
-import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
+import DateInput from '../Elements/DateInput/DateInput';
 import classes from './EditInfluencer.module.css';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
 import { Edit, getOne } from '../../helpers/ApiService';
@@ -89,7 +89,13 @@ const EditInfluencer = (props) => {
                 <h4 className={classes.h4}>General</h4>
                 <Input label="First Name" type='text' id="firstName" value={influencerInfo.firstName} onChange={(event) => inputHandler(event)} />
                 <Input label="Last Name" type='text' id="lastName" value={influencerInfo.lastName} onChange={(event) => inputHandler(event)} />
-                <BirthdateInput setState={dateHandler} selected={Date.parse(influencerInfo.birthdate)} label='Birthdate' />
+                <DateInput
+                  setState={dateHandler}
+                  selected={Date.parse(influencerInfo.birthdate)}
+                  label='Birthdate'
+                  input='longInput'
+                  calendar='longCalendar'
+                />
                 <Input label="Profession" type='text' id="profession" value={influencerInfo.profession} onChange={(event) => inputHandler(event)} />
                 <PictureLoader label='Profile Picture' alt='Add an avatar' avatar={avatar} setState={setAvatar} />
               </div>

@@ -20,7 +20,7 @@ const Dropdown = (props) => {
   const customContentRenderer = ({ state }) => (
     state.values[0] ? (
       <div className='selected'>
-        {capitalizeFirstLetter(state.values[0])}
+        {typeof state.values[0] === 'string' ? capitalizeFirstLetter(state.values[0]) : state.values[0]}
       </div>
     ) : (
       <input
@@ -35,7 +35,7 @@ const Dropdown = (props) => {
 
   const customItemRenderer = ({ item, methods }) => (
     <div onClick={() => methods.addItem(item)} className='option'>
-      {capitalizeFirstLetter(item)}
+      {typeof item === 'string' ? capitalizeFirstLetter(item) : item}
     </div>
   );
 

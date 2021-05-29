@@ -3,7 +3,6 @@
     border: 1px solid #BFBFBF;
     box-sizing: border-box;
     border-radius: 6px;
-    width: 344px;
     height: 32px;
     padding-left: 12px;
     margin-bottom: 16px;
@@ -21,21 +20,6 @@
 }
 .input:invalid {
     border: 1px solid #DA1414;
-}
-.label {
-    font-family: Helvetica Neue, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: -0.35px;
-
-    color: rgba(0, 0, 0, 0.6);
-
-    mix-blend-mode: hard-light;
-    opacity: 0.76;
-
-    margin-bottom: 8px;
 }
 .div {
     display: flex;

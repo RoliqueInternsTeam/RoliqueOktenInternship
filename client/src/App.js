@@ -15,6 +15,7 @@ import EditInfluencer from './Components/EditInfluencer/EditInfluencer';
 import Message from './Components/Elements/Message/Message';
 import { SOMETHING_WRONG } from './config/messages';
 import Sidebar from './Components/Sidebar/Sidebar';
+import CreateCampaign from './Components/CreateCampaign/CreateCampaign';
 
 const App = () => {
   const access_token = useSelector(({ access_token }) => access_token);
@@ -37,6 +38,7 @@ const App = () => {
                 <Route exact path="/influencers" component={Influencers} />
                 <Route path="/influencer/edit" component={EditInfluencer} />
                 <Route path="/influencer" component={Influencer} />
+                <Route path="/campaigns/create" component={CreateCampaign} />
 
                 <Route render={() => <Redirect to="/users" />} />
               </Switch>
