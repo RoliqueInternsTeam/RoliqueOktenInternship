@@ -131,6 +131,8 @@ function CreateCampaign() {
   };
 
   const budgetValidator = () => {
+    setBudgetMismatch(false);
+
     const {
       totalBudget,
       budgets: {
@@ -152,9 +154,6 @@ function CreateCampaign() {
     if (result < totalBudget) {
       const mismatch = totalBudget - result;
       setBudgetMismatch(`Budgets below are $${mismatch.toString().replace(NUMBER_DOT_MASK, '$1.')} less than the Total Budget`);
-    }
-    if (result === totalBudget) {
-      setBudgetMismatch(false);
     }
   };
 
