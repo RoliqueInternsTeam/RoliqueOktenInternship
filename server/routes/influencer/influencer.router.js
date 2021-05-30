@@ -22,6 +22,7 @@ influencerRouter.post('/',
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
     influencerController.createInfluencer);
+
 influencerRouter.put('/:id',
     usersMiddleware.checkUserAccess({
         ADMIN,
@@ -32,9 +33,11 @@ influencerRouter.put('/:id',
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
     influencerController.updateInfluencer);
+
 influencerRouter.get('/',
     usersMiddleware.checkUserAccess([]),
     influencerController.getAllInfluencers);
+
 influencerRouter.get('/:id',
     usersMiddleware.checkUserAccess([]),
     influencerController.getOneInfluencer);

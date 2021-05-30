@@ -11,6 +11,7 @@ module.exports = {
             if (influencer.social.instagram.instagramUsername) {
                 await instagramServices.getInstagramAccount(influencer);
             }
+
             await cleanObjectService.cleanObject(influencer);
 
             const newInfluencer = await influencerServices.createInfluencer({ userId: user._id, ...influencer });

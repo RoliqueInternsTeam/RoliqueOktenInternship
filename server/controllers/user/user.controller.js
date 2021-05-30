@@ -1,5 +1,5 @@
 const passwordHash = require('../../helpers/password.helper');
-const userService = require('../../services/user/user.service');
+const { userServices, cleanObjectService } = require('../../services');
 const { ErrorHandler, errors } = require('../../errors');
 const { s3 } = require('../../config/s3.config');
 const { CREATED, OK } = require('../../constants/status-codes');
@@ -7,12 +7,14 @@ const { CREATED, OK } = require('../../constants/status-codes');
 module.exports = {
     createUser: async (req, res, next) => {
         try {
-            const { avatar, body: { password } } = req;
-            const passwordHashed = await passwordHash.hash(password);
+            const { avatar, createUser } = req;
+            const passwordHashed = await passwordHash.hash(createUser.password);
 
-            Object.assign(req.body, { password: passwordHashed });
+            Object.assign(createUser, { password: passwordHashed });
 
-            const newUser = await userService.createUser(req.body);
+            await cleanObjectService.cleanObject(createUser);
+
+            const newUser = await userServices.createUser(createUser);
             if (avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
@@ -28,7 +30,7 @@ module.exports = {
 
                     const locationUrl = data.Location;
 
-                    await userService.addPhotoUser(newUser._id, locationUrl);
+                    await userServices.addPhotoUser(newUser._id, locationUrl);
                 });
             }
 
@@ -39,15 +41,10 @@ module.exports = {
     },
     updateUser: async (req, res, next) => {
         try {
-            const updateUser = req.body;
-            const {
-                firstName, lastName, role, email, phone
-            } = req.body;
-            const updateUserNoPass = {
-                firstName, lastName, role, email, phone
-            };
-            const { avatar } = req;
+            const { avatar, updateUser } = req;
             const { id } = req.params;
+
+            await cleanObjectService.cleanObject(updateUser);
             if (avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
@@ -63,16 +60,23 @@ module.exports = {
 
                     const locationUrl = data.Location;
 
-                    await userService.addPhotoUser(id, locationUrl);
+                    await userServices.addPhotoUser(id, locationUrl);
                 });
             }
+
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
-                await userService.updateUser(id, { ...updateUser });
+                await userServices.updateUser(id, { ...updateUser });
                 return res.status(OK).json('User updated').end();
             }
 
-            await userService.updateUser(id, { ...updateUserNoPass });
+            if (!updateUser.phone) {
+                updateUser.phone = '';
+                await userServices.updateUser(id, { ...updateUser });
+                return res.status(OK).json('User updated').end();
+            }
+
+            await userServices.updateUser(id, { ...updateUser });
 
             res.status(OK).json('User updated');
         } catch (e) {
@@ -81,7 +85,7 @@ module.exports = {
     },
     getAllUsers: async (req, res, next) => {
         try {
-            const users = await userService.getUsers();
+            const users = await userServices.getUsers();
 
             res.json(users);
         } catch (e) {
@@ -92,7 +96,7 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            const user = await userService.findUserById(id);
+            const user = await userServices.findUserById(id);
 
             res.json(user);
         } catch (e) {

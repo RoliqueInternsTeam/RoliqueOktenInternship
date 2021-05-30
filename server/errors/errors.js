@@ -39,6 +39,15 @@ module.exports = {
         message: 'Not token',
         code: BAD_REQUEST
     },
+    WRONG_BUDGET: {
+        message: 'Wrong  total budget campaign',
+        code: BAD_REQUEST
+    },
+    BRAND_ALREADY_EXIST: {
+        message: 'Brand already exist',
+        code: BAD_REQUEST
+    },
+
     // UNAUTHORIZED
     NOT_VALID_TOKEN: {
         message: 'Not valid token',
