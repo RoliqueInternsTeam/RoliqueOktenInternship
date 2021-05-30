@@ -9,7 +9,7 @@ import { RESTRICTED_ACCESS } from '../../config/messages';
 import Header from '../Common/Header/Header';
 import PictureLoader from '../Common/PictureLoader/PictureLoader';
 import Input from '../Elements/Input/Input';
-import BirthdateInput from '../Elements/BirthdateInput/BirthdateInput';
+import DateInput from '../Elements/DateInput/DateInput';
 import { Create } from '../../helpers/ApiService';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
 
@@ -108,7 +108,13 @@ const CreateInfluencer = (props) => {
             <h4 className={classes.h4}>General</h4>
             <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
             <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
-            <BirthdateInput setState={dateHandler} selected={influencerInfo.birthdate} label='Birthdate' />
+            <DateInput
+              setState={dateHandler}
+              selected={influencerInfo.birthdate}
+              label='Birthdate'
+              input='longInput'
+              calendar='longCalendar'
+            />
             <Input label="Profession" type='text' id="profession" required="required" onChange={(event) => inputHandler(event)} />
             <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setAvatar} />
           </div>

@@ -1,0 +1,102 @@
+.mainContainer {
+    margin-left: 40px;
+}
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 47px;
+    margin-left: 100px;
+    margin-right: 140px;
+}
+.leftContainer {
+    width: 408px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.datesContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.clientContainer {
+    margin-top: 22px;
+}
+.addBrandLabel {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.35px;
+
+    color: #FF650E;
+}
+.rightContainer {
+    width: 408px;
+}
+.miscContainer {
+    display: flex;
+    flex-direction: column;
+}
+.campaignLogsContainer {
+    margin-top: 8px;
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bottomContainer {
+    height: 650px;
+    width: 408px;
+
+    margin-top: 160px;
+    margin-left: 100px;
+
+    display: flex;
+    flex-direction: column;
+}
+.budgetContainer {
+    margin-left: -5px;
+    display: grid;
+    align-items: center;
+
+    grid-template-columns: 1fr 4fr;
+
+}
+.h4 {
+    margin-bottom: 24px;
+}
+.textArea {
+    background: #FAFAFB;
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 6px;
+
+    height: 64px;
+
+    margin-bottom: 16px;
+}
+.separator {
+    position: absolute;
+    width: 1080px;
+    height: 1px;
+    left: 180px;
+    top: 855px;
+
+    background: #BFBFBF;
+}
+.dropdownOption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.dot {
+    margin-right: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}

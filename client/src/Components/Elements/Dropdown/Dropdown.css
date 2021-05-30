@@ -1,13 +1,14 @@
 .div {
     display: flex;
     flex-direction: column;
+
+    margin-bottom: 16px;
 }
 div.react-dropdown-select {
     background: #FAFAFB;
     border: 1px solid #DA1414;
     box-sizing: border-box;
     border-radius: 6px;
-    width: 344px;
     height: 30px;
     padding: 1px 0 1px 12px;
     min-height: 32px;
