@@ -1,6 +1,5 @@
 .mainContainer {
     margin-left: 40px;
-    margin-right: 140px;
 }
 .topContainer {
     display: flex;
@@ -8,6 +7,7 @@
     justify-content: space-between;
     margin-top: 47px;
     margin-left: 100px;
+    margin-right: 140px;
 }
 .leftContainer {
     width: 408px;

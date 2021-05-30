@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <Switch>
-      <Route exact path='/login' component={Login} />
+      <Route exact path='/login' render={() => (access_token ? <Redirect to="/" /> : <Login />)} />
       {
         access_token
           ? (

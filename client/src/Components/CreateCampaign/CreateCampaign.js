@@ -141,6 +141,9 @@ function CreateCampaign() {
       const mismatch = totalBudget - result;
       setBudgetMismatch(`Budgets below are $${mismatch.toString().replace(NUMBER_DOT_MASK, '$1.')} less than the Total Budget`);
     }
+    if (result === totalBudget) {
+      setBudgetMismatch(false);
+    }
   };
 
   useEffect(() => budgetValidator(), [campaign.budgetsTargets]);
@@ -162,7 +165,7 @@ function CreateCampaign() {
       display={<Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={RESTRICTED_ACCESS} redirect />}
     >
       <form className={classes.mainContainer} onSubmit={(event) => createCampaignHandler(event)}>
-        <Header arrow title='Create Campaign' button='saveChanges' />
+        <Header arrow title='Create Campaign' button='saveChanges' disabled={budgetMismatch} />
         <div className={classes.topContainer}>
           <div className={classes.leftContainer}>
             <h4 className={classes.h4}>Basic Information</h4>
