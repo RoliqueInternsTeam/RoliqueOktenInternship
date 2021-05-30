@@ -47,7 +47,13 @@ function CreateCampaign() {
   const [brandList, setBrandList] = useState([]);
   const [managersList, setManagersList] = useState([]);
   const [hashtagsIncluded, setHashtagsIncluded] = useState(true);
-  const [budgetIncluded, setBudgetIncluded] = useState(true);
+  const [budgetIncluded, setBudgetIncluded] = useState({
+    influencerBudget: true,
+    socialAdsMediaBudget: true,
+    productionBudget: true,
+    travelBudget: true,
+    handlingFee: true,
+  });
   const [brandCreation, setBrandCreation] = useState(false);
   const [budgetMismatch, setBudgetMismatch] = useState(null);
 
@@ -64,6 +70,21 @@ function CreateCampaign() {
         setBrandList(res);
       });
   }, []);
+
+  useEffect(() => (!budgetIncluded ? setCampaign((prevState) => ({
+    ...prevState,
+    budgetsTargets: {
+      totalBudget: '',
+      budgets: {
+        influencerBudget: '',
+        socialAdsMediaBudget: '',
+        productionBudget: '',
+        travelBudget: '',
+        handlingFee: '',
+        otherBudget: '',
+      },
+    },
+  })) : null), [budgetIncluded]);
 
   useEffect(() => (!hashtagsIncluded ? setCampaign((prevState) => ({ ...prevState, hashtags: null })) : null), [hashtagsIncluded]);
 
@@ -106,16 +127,7 @@ function CreateCampaign() {
     setState((prevCheck) => !prevCheck);
   };
   const toggleHandler = (key, checked) => {
-    setCampaign(((prevState) => ({
-      ...prevState,
-      budgetsTargets: {
-        ...prevState.budgetsTargets,
-        budgets: {
-          ...prevState.budgetsTargets.budgets,
-          [key]: checked,
-        },
-      },
-    })));
+    setBudgetIncluded((prevState) => ({ ...prevState, [key]: checked }));
   };
 
   const budgetValidator = () => {
@@ -318,8 +330,8 @@ function CreateCampaign() {
                     htmlFor='influencerBudget'
                     type='influencerBudget'
                     id="influencerBudget"
-                    required={campaign.budgetsTargets.budgets.influencerBudget}
-                    disabled={!campaign.budgetsTargets.budgets.influencerBudget}
+                    required={budgetIncluded.influencerBudget}
+                    disabled={!budgetIncluded.influencerBudget}
                     onChange={(event) => inputBudgetHandler(event)}
 
                   />
@@ -334,8 +346,8 @@ function CreateCampaign() {
                     htmlFor='socialAdsMediaBudget'
                     type='socialAdsMediaBudget'
                     id="socialAdsMediaBudget"
-                    required={campaign.budgetsTargets.budgets.socialAdsMediaBudget}
-                    disabled={!campaign.budgetsTargets.budgets.socialAdsMediaBudget}
+                    required={budgetIncluded.socialAdsMediaBudget}
+                    disabled={!budgetIncluded.socialAdsMediaBudget}
                     onChange={(event) => inputBudgetHandler(event)}
 
                   />
@@ -350,8 +362,8 @@ function CreateCampaign() {
                     htmlFor='productionBudget'
                     type='productionBudget'
                     id="productionBudget"
-                    required={campaign.budgetsTargets.budgets.productionBudget}
-                    disabled={!campaign.budgetsTargets.budgets.productionBudget}
+                    required={budgetIncluded.productionBudget}
+                    disabled={!budgetIncluded.productionBudget}
                     onChange={(event) => inputBudgetHandler(event)}
 
                   />
@@ -366,8 +378,8 @@ function CreateCampaign() {
                     htmlFor='travelBudget'
                     type='travelBudget'
                     id="travelBudget"
-                    required={campaign.budgetsTargets.budgets.travelBudget}
-                    disabled={!campaign.budgetsTargets.budgets.travelBudget}
+                    required={budgetIncluded.travelBudget}
+                    disabled={!budgetIncluded.travelBudget}
                     onChange={(event) => inputBudgetHandler(event)}
 
                   />
@@ -382,8 +394,8 @@ function CreateCampaign() {
                     htmlFor='handlingFee'
                     type='handlingFee'
                     id="handlingFee"
-                    required={campaign.budgetsTargets.budgets.handlingFee}
-                    disabled={!campaign.budgetsTargets.budgets.handlingFee}
+                    required={budgetIncluded.handlingFee}
+                    disabled={!budgetIncluded.handlingFee}
                     onChange={(event) => inputBudgetHandler(event)}
 
                   />
@@ -398,8 +410,8 @@ function CreateCampaign() {
                     htmlFor='otherBudget'
                     type='otherBudget'
                     id="otherBudget"
-                    required={campaign.budgetsTargets.budgets.otherBudget}
-                    disabled={!campaign.budgetsTargets.budgets.otherBudget}
+                    required={budgetIncluded.otherBudget}
+                    disabled={!budgetIncluded.otherBudget}
                     onChange={(event) => inputBudgetHandler(event)}
 
                   />
