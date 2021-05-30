@@ -4,27 +4,30 @@
     background-color: #ebe8e9;
 }
 .body {
+    margin: 24px 68px 0 28px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 .filters {
-    padding: 0 28px;
-    width: 240px;
+    padding-right: 40px ;
+    width: 224px;
 }
-.h2 {
+.table {
+    width: 100%;
+}
+.span {
+    display: flex;
     font-family: Helvetica Neue, serif;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 20px;
-
-    display: flex;
-    align-items: center;
     letter-spacing: -0.25px;
-
     color: #151515;
-
     opacity: 0.9;
+    align-content: center;
+
+    margin-bottom: 23px;
 }
 .counter {
     font-family: Helvetica Neue, serif;
@@ -39,4 +42,9 @@
     border-radius: 2px;
 
     color: #FFFFFF;
+    margin: auto 0 auto 14px;
+    vertical-align: middle;
+}
+.channel {
+    margin-right: 4px;
 }

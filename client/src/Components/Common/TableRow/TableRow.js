@@ -22,16 +22,29 @@ const TableRow = (props) => {
   return (
     <tr className={classes.tr}>
       {props.columnsOrder.map((column, index) => (
-        <td key={index}>
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {Array.isArray(column) ? column.map((value) => (value === 'avatar' ? (props.columns.avatar
-            ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} />
-            : <Avatar name={props.columns.name} size="32px" round style={{ marginRight: '12px' }} />)
-            : props.columns[value]))
+        <td key={index} className={classes[props.effort?.toLowerCase()]}>
+          {Array.isArray(column) ? column.map((value) => {
+            if (value === 'avatar') {
+              return props.columns.avatar
+                ? <img src={props.avatar} alt='avatar' className={classes.profilePicture} />
+                : (
+                  <Avatar
+                    name={props.columns.name || props.columns.title}
+                    size="32px"
+                    round
+                    style={{ marginRight: '12px' }}
+                  />
+                );
+            }
+            if (value === 'channels') {
+              return <div className={classes.socialDiv}>{props.columns[value]}</div>;
+            }
+            return props.columns[value];
+          })
             : props.columns[column]}
         </td>
       ))}
-      <div className={classes.edit}>
+      <div className={classes.rowBtn}>
         <PermissionChecker id={props.id} permission={permissionHandler()} display={null}>
           <NavLink
             to={props.to}

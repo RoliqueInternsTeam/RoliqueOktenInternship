@@ -103,32 +103,34 @@ const Influencers = () => {
   return (
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
-      <Search search={searchQuery} />
-      {influencers
-        ? (
-          <List
-            headers={['Username', 'Name', 'Channels', 'Rating']}
-            map={influencers.map((influencer, index) => (
-              <TableRow
-                key={`${influencer._id}${index}`}
-                id={influencer._id}
-                columns={{
-                  avatar: influencer.avatar,
-                  username: usernameHandler(influencer.social),
-                  name: `${influencer.firstName} ${influencer.lastName}`,
-                  channels: influencer.social ? channelsHandler(influencer.social) : null,
-                  rating: <img key src={Rating} alt='rating' />,
-                }}
-                columnsOrder={[['avatar', 'username'], 'name', 'channels', 'rating']}
-                to={`/influencer/${influencer._id}`}
-                tooltipMessage='Open Influencer'
-                imgAlt='Open Influencer'
-                rowBtn={Edit}
-              />
-            ))}
-          />
-        )
-        : <Loading class='onList' />}
+      <div className={classes.body}>
+        <Search search={searchQuery} />
+        {influencers
+          ? (
+            <List
+              headers={['Username', 'Name', 'Channels', 'Rating']}
+              map={influencers.map((influencer, index) => (
+                <TableRow
+                  key={`${influencer._id}${index}`}
+                  id={influencer._id}
+                  columns={{
+                    avatar: influencer.avatar,
+                    username: usernameHandler(influencer.social),
+                    name: `${influencer.firstName} ${influencer.lastName}`,
+                    channels: influencer.social ? channelsHandler(influencer.social) : null,
+                    rating: <img key src={Rating} alt='rating' />,
+                  }}
+                  columnsOrder={[['avatar', 'username'], 'name', 'channels', 'rating']}
+                  to={`/influencer/${influencer._id}`}
+                  tooltipMessage='Open Influencer'
+                  imgAlt='Open Influencer'
+                  rowBtn={Edit}
+                />
+              ))}
+            />
+          )
+          : <Loading class='onList' />}
+      </div>
     </div>
   );
 };

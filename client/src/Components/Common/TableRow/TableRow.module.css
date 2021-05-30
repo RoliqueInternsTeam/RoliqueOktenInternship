@@ -1,7 +1,7 @@
 .tr {
     height: 56px;
     background: #FFFFFF 55%;
-    box-shadow: inset 0px -4px 0px #E5E5E5;
+    border-bottom: 4px solid #ebe8e9;
 
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
@@ -21,22 +21,40 @@
     margin-right: 16px;
 }
 .tr td {
-    padding-left: 16px;
-    /*padding-right: 5%;*/
+    padding: 0 16px;
 }
-/*.tr td:not(:last-child) {*/
-/*    white-space: pre;*/
-/*}*/
-div.edit {
+.tr td:nth-last-child(2) {
+    width: 30%;
+}
+.tr td.high:first-child {
+    box-sizing: border-box;
+    border-right: 4px solid #ebe8e9;
+    border-left: 4px solid #ED6B3E;
+}
+.tr td.medium:first-child {
+    box-sizing: border-box;
+    border-right: 4px solid #ebe8e9;
+    border-left: 4px solid #FBA63C;
+}
+.tr td.low:first-child {
+    box-sizing: border-box;
+    border-right: 4px solid #ebe8e9;
+    border-left: 4px solid #5DC983;
+}
+.socialDiv {
+    display: inline-block;
+    padding-left: 40px;
+}
+div.rowBtn {
     padding: 0;
     display: table-cell;
     position: relative;
-    /*width: min-content;*/
     text-align: center;
     vertical-align: middle;
     background: #E7E6E8;
+    min-width: 28px;
 }
-.edit:hover .tooltipDiv {
+.rowBtn:hover .tooltipDiv {
     visibility: visible;
 }
 .tooltipDiv {
