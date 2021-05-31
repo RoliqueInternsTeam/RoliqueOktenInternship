@@ -9,7 +9,7 @@
     flex-direction: row;
 }
 .filters {
-    padding-right: 40px ;
+    margin-right: 40px ;
     width: 224px;
 }
 .table {

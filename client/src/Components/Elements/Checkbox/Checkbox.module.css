@@ -1,14 +1,21 @@
 .container {
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 27px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.35px;
+    color: rgba(0, 0, 0, 0.6);
 }
 .container input {
     position: absolute;

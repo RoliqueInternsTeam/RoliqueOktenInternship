@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Avatar from 'react-avatar';
 import classes from './Campaigns.module.css';
 import { getAll } from '../../helpers/ApiService';
 import { setCampaignList } from '../../store/actions';
@@ -99,9 +100,9 @@ const Campaigns = () => {
         <div className={classes.filters}>
           <div className={classes.span}>
             Filters
-            <label className={classes.counter}>{campaigns.length}</label>
+            <label className={classes.counter}>{campaigns?.length}</label>
           </div>
-          <Search search={searchQuery} />
+          <Search placeholder='Search by title...' search={searchQuery} />
           <Label label='Planned channels' />
 
           <Dropdown
@@ -147,7 +148,7 @@ const Campaigns = () => {
                       channels: campaign.social ? channelsHandler(campaign.social) : null,
                       brand: campaign.brand,
                       status: campaign.status,
-                      teamLead: campaign.teamLead,
+                      teamLead: <Avatar name={campaign.teamLead} size="32px" round style={{ marginRight: '12px' }} />,
                       budget: campaign.budgetsTargets.totalBudget,
                       profit: campaign.profit,
                     }}
