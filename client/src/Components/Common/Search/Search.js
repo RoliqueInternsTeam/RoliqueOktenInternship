@@ -6,7 +6,7 @@ import classes from './Search.module.css';
 const Search = (props) => (
   <div className={classes.Search}>
     <Input
-      placeholder='Search'
+      placeholder={props.placeholder}
       onChange={(event) => {
         props.search(event);
       }}
@@ -16,6 +16,11 @@ const Search = (props) => (
 
 Search.propTypes = {
   search: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+};
+
+Search.defaultProps = {
+  placeholder: 'Search',
 };
 
 export default Search;

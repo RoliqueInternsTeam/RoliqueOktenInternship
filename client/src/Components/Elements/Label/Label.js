@@ -10,10 +10,9 @@ const Label = (props) => (
 
 Label.propTypes = {
   htmlFor: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
 };
 Label.defaultProps = {
-  label: null,
   htmlFor: null,
 };
 
