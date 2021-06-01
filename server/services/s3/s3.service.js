@@ -25,22 +25,18 @@ module.exports = {
             console.log(e);
         }
     },
-    uploadUserPhoto: async (userId, avatar) => {
-        try {
-            const fileExtension = avatar.name.split('.').pop();
+    uploadUserPhoto: (userId, avatar) => {
+        const fileExtension = avatar.name.split('.').pop();
 
-            s3uploadParams.Key = `users/${userId}/${uuid.v1()}.${fileExtension}`;
-            s3uploadParams.Body = avatar.data;
+        s3uploadParams.Key = `users/${userId}/${uuid.v1()}.${fileExtension}`;
+        s3uploadParams.Body = avatar.data;
 
-            await s3Client.upload(s3uploadParams, async (err, data) => {
-                if (err) {
-                    throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
-                }
+        s3Client.upload(s3uploadParams, async (err, data) => {
+            if (err) {
+                throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
+            }
 
-                await userServices.addPhotoUser(userId, data.Location);
-            });
-        } catch (e) {
-            console.log(e);
-        }
+            await userServices.addPhotoUser(userId, data.Location);
+        });
     }
 };

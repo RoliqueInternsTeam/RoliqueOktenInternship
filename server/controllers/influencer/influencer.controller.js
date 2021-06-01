@@ -1,7 +1,9 @@
+const uuid = require('uuid');
 const { influencerServices, instagramServices, cleanObjectService } = require('../../services');
 const { ErrorHandler, errors } = require('../../errors');
-const { s3 } = require('../../config/s3.config');
 const { CREATED, OK } = require('../../constants/status-codes');
+const s3uploadParams = require('../../helpers/s3.helper');
+const { s3Client } = require('../../config/s3.config');
 
 module.exports = {
     createInfluencer: async (req, res, next) => {
@@ -14,22 +16,22 @@ module.exports = {
             await cleanObjectService.cleanObject(influencer);
 
             const newInfluencer = await influencerServices.createInfluencer({ userId: user._id, ...influencer });
+            const { _id } = newInfluencer;
+
             if (avatar && !influencer.avatar) {
-                const { s3Client } = s3;
-                const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
 
-                params.Key = `${await newInfluencer._id}.${fileExtension}`;
-                params.Body = avatar.data;
+                s3uploadParams.Key = `influencers/${_id}/${uuid.v1()}.${fileExtension}`;
+                s3uploadParams.Body = avatar.data;
 
-                s3Client.upload(params, async (err, data) => {
+                await s3Client.upload(s3uploadParams, async (err, data) => {
                     if (err) {
                         throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
                     }
 
                     const locationUrl = data.Location;
 
-                    await influencerServices.addPhotoInfluencer(newInfluencer._id, locationUrl);
+                    await influencerServices.addPhotoInfluencer(_id, locationUrl);
                 });
             }
 
@@ -42,32 +44,30 @@ module.exports = {
     updateInfluencer: async (req, res, next) => {
         try {
             const { avatar, influencer } = req;
-            const { id } = req.params;
+            const { _id } = influencer;
 
             if (avatar) {
-                const { s3Client } = s3;
-                const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
 
-                params.Key = `${id}.${fileExtension}`;
-                params.Body = avatar.data;
+                s3uploadParams.Key = `influencers/${_id}/${uuid.v1()}.${fileExtension}`;
+                s3uploadParams.Body = avatar.data;
 
-                s3Client.upload(params, async (err, data) => {
+                await s3Client.upload(s3uploadParams, async (err, data) => {
                     if (err) {
                         throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
                     }
 
                     const locationUrl = data.Location;
 
-                    await influencerServices.addPhotoInfluencer(id, locationUrl);
+                    await influencerServices.addPhotoInfluencer(_id, locationUrl);
                 });
             }
 
             await cleanObjectService.cleanObject(influencer);
 
-            await influencerServices.updateInfluencer(id, { ...influencer });
+            const updateInfluencer = await influencerServices.updateInfluencer(_id, { ...influencer });
 
-            res.status(OK).json('Influencer updated');
+            res.status(OK).json(updateInfluencer);
         } catch (e) {
             next(e);
         }
