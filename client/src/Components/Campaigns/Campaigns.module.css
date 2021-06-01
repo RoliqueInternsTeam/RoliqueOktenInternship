@@ -48,3 +48,43 @@
 .channel {
     margin-right: 4px;
 }
+.dropdownOption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.dot {
+    margin-right: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+input[type="image"] {
+    height: 24px;
+    width: 24px;
+    margin-right: 4px;
+}
+.channelsDiv {
+    display: inline-block;
+    padding: 7px 0px 16px 0px;
+    width: max-content;
+}
+.budgetFilter {
+    display: flex;
+    flex-direction: row;
+}
+.budgetFilter div {
+    width: 98px;
+}
+.budgetFilter span {
+    font-family: Helvetica Neue, serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.3499999940395355px;
+    text-align: center;
+
+    padding: 0px 4px;
+    line-height: 32px;
+    margin-top: 8px;
+}

@@ -23,6 +23,7 @@ const TableRow = (props) => {
     <tr className={classes.tr}>
       {props.columnsOrder.map((column, index) => (
         <td key={index} className={classes[props.effort?.toLowerCase()]}>
+          {/* eslint-disable-next-line no-nested-ternary */}
           {Array.isArray(column) ? column.map((value) => {
             if (value === 'avatar') {
               return props.columns.avatar
@@ -41,7 +42,12 @@ const TableRow = (props) => {
             }
             return props.columns[value];
           })
-            : props.columns[column]}
+            : ((column === 'status') ? (
+              <div className={classes.statusColor} custom={props.columns[column]}>
+                <div className={classes.dot} />
+                {props.columns[column]}
+              </div>
+            ) : props.columns[column])}
         </td>
       ))}
       <div className={classes.rowBtn}>
@@ -64,21 +70,14 @@ const TableRow = (props) => {
 //   id: PropTypes.string.isRequired,
 //   role: PropTypes.string,
 //   avatar: PropTypes.string,
-//   column1: PropTypes.string.isRequired,
-//   column11: PropTypes.string,
-// column2: PropTypes.string.isRequired,
-// column3: PropTypes.node.isRequired,
-// column4: PropTypes.node,
 //   to: PropTypes.string.isRequired,
 //   tooltipMessage: PropTypes.string.isRequired,
 //   imgAlt: PropTypes.string.isRequired,
 // };
-
+//
 // TableRow.defaultProps = {
 //   role: '',
 //   avatar: '',
-//   column11: '',
-//   column4: '',
 // };
 
 export default TableRow;

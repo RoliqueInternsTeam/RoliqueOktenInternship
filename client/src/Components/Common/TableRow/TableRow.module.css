@@ -63,3 +63,54 @@ div.rowBtn {
     top: 4px;
     visibility: hidden;
 }
+.statusColor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 32px;
+    width: fit-content;
+    padding: 3px 12px 3px 12px;
+
+    font-family: Helvetica Neue, serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+
+    letter-spacing: -0.35px;
+    opacity: 0.76;
+}
+.dot {
+    margin-right: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+.tr td > div[custom='Running']{
+    background-color: #CEECFD;
+    color: #1778B0;
+}
+.tr td > div[custom='Running'] > div {
+    background-color: #1778B0;
+}
+.tr td > div[custom='Pre-phase']{
+    background-color: #F0DAF3;
+    color: #9D1CB2;
+}
+.tr td > div[custom='Pre-phase'] > div {
+    background-color: #B14AC2;
+}
+.tr td > div[custom='Requested']{
+    background-color: #FCEBC4;
+    color: #CF9919;
+}
+.tr td > div[custom='Requested'] > div {
+    background-color: #D9AD42;
+}
+.tr td > div[custom='Done']{
+    background-color: #D6EDE2;
+    color: #2B9261;
+}
+.tr td > div[custom='Done'] > div {
+    background-color: #54A880;
+}

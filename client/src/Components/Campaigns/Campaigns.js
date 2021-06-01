@@ -17,25 +17,92 @@ import TikTok from '../Elements/Logos/tiktok.svg';
 import YouTube from '../Elements/Logos/youtube.svg';
 import Facebook from '../Elements/Logos/facebook.svg';
 import Twitter from '../Elements/Logos/twitter.svg';
+import Story from '../Elements/Logos/instagram-stories.svg';
 import Blogger from '../Elements/Logos/blogger.svg';
+import Snapchat from '../Elements/Logos/snapchat.svg';
+import Input from '../Elements/Input/Input';
+import DateFormat from '../../helpers/DateFormat';
+import useSortableData from '../../helpers/useSortableData';
 
 const Campaigns = () => {
-  const [campaigns, setCampaigns] = useState(null);
-
-  const [search, setSearch] = useState('');
-  const access_token = useSelector(({ access_token }) => access_token);
-
   const dispatch = useDispatch();
+  const access_token = useSelector(({ access_token }) => access_token);
   const campaignList = useSelector(({ campaignList }) => campaignList);
 
-  const searchQuery = (event) => {
-    setCampaigns(campaignList);
+  const [campaigns, setCampaigns] = useState([...campaignList]);
+  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
+  const [searchedCampaigns, setSearchedCampaigns] = useState([]);
+  const [campaignsTable, setCampaignsTable] = useState([...campaignList]);
+  const [filters, setFilters] = useState({});
+  const [search, setSearch] = useState('');
+  // const [sortConfig, setSortConfig] = useState(null);
+  const { items, requestSort } = useSortableData(campaignsTable);
+
+  useEffect(() => {
+    getAll('http://localhost:5000/campaign', access_token)
+      .then((res) => {
+        console.log(res);
+        setCampaigns(res);
+        dispatch(setCampaignList(res));
+      });
+  }, []);
+
+  const searchHandler = (event) => {
+    if (filteredCampaigns.length !== 0) {
+      setSearchedCampaigns([...filteredCampaigns]);
+    } else {
+      setSearchedCampaigns([...campaigns]);
+    }
     setSearch(event.target.value);
   };
 
-  const dropdownHandler = (value) => {
-    // setCampaigns(((prevState) => ({ ...prevState, role: value.toLowerCase() })));
-    console.log(value);
+  useEffect(() => {
+    if (search) {
+      setSearchedCampaigns(searchedCampaigns.filter((campaign) => (campaign.title.toLowerCase().includes(search.toLowerCase()))));
+    }
+    if (!search) {
+      setSearchedCampaigns([]);
+    }
+  }, [search]);
+
+  useEffect(() => {
+    if (search || searchedCampaigns.length) {
+      setCampaignsTable([...searchedCampaigns]);
+    }
+  }, [searchedCampaigns]);
+
+  const filterHandler = (key, value) => {
+    if (searchedCampaigns.length !== 0 && search) {
+      setFilteredCampaigns([...searchedCampaigns]);
+    } else {
+      setFilteredCampaigns([...campaigns]);
+    }
+    setFilters((prevState) => ({
+      ...prevState,
+      [key]: value.key || value,
+    }));
+  };
+
+  useEffect(() => {
+    if (Object.keys(filters).length !== 0) {
+      setFilteredCampaigns(filteredCampaigns.filter((campaign) => Object.keys(filters).every((key) => ((['instagram', 'twitter', 'youtube', 'facebook', 'tiktok', 'story', 'snapchat'].includes(key))
+        ? (campaign.social.includes(key))
+        : (campaign[key].toLowerCase() === filters[key].toLowerCase())))));
+    }
+  }, [filters]);
+
+  useEffect(() => {
+    if (Object.keys(filters).length) {
+      setCampaignsTable([...filteredCampaigns]);
+    }
+  }, [filteredCampaigns]);
+
+  const optionsHandler = (option) => {
+    const options = [];
+    if (campaignList) {
+      campaignList.forEach((campaign) => (options.includes(campaign[option]) ? null : options.push(campaign[option])));
+    }
+    return options;
   };
 
   const channelsHandler = (social) => {
@@ -70,29 +137,42 @@ const Campaigns = () => {
     return channels.map((channel) => channel);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const optionsHandler = (option) => {
-    const options = [];
-    // campaigns.forEach((campaign) => options.push(campaign[option]));
-    return options;
+  const socialFilterHandler = (event) => {
+    console.log(event.target.name);
+    filterHandler(event.target.name, true);
+    console.log(event.target.clicked);
+    // eslint-disable-next-line no-param-reassign
+    event.target.clicked = !event.target.clicked;
   };
 
-  useEffect(() => {
-    getAll('http://localhost:5000/campaign', access_token)
-      .then((res) => {
-        console.log(res);
-        setCampaigns(res);
-        dispatch(setCampaignList(res));
-      });
-  }, []);
+  // React.useMemo(() => {
+  //   const sortedProducts = [...campaignsTable];
+  //   console.log(sortedProducts);
+  //   console.log(sortConfig);
+  //   if (sortConfig !== null) {
+  //     sortedProducts.sort((a, b) => {
+  //       if (a[sortConfig.key] < b[sortConfig.key]) {
+  //         return sortConfig.direction === 'ascending' ? -1 : 1;
+  //       }
+  //       if (a[sortConfig.key] > b[sortConfig.key]) {
+  //         return sortConfig.direction === 'ascending' ? 1 : -1;
+  //       }
+  //       return 0;
+  //     });
+  //   }
+  //   console.log(sortedProducts);
+  //   return setCampaignsTable([...sortedProducts]);
+  // }, [campaignsTable, sortConfig]);
+  //
+  // const requestSort = (key) => {
+  //   console.log(key);
+  //   let direction = 'ascending';
+  //   if (sortConfig?.key === key && sortConfig?.direction === 'ascending') {
+  //     direction = 'descending';
+  //   }
+  //   setSortConfig({ key, direction });
+  // };
 
-  useEffect(() => {
-    if (search) {
-      setCampaigns(campaigns.filter((campaign) => (campaign.title.toLowerCase().includes(search.toLowerCase()))));
-    }
-  }, [search]);
-
-  // eslint-disable-next-line implicit-arrow-linebreak
   return (
     <div className={classes.mainContainer}>
       <Header title='Campaigns' button='createNew' />
@@ -100,43 +180,98 @@ const Campaigns = () => {
         <div className={classes.filters}>
           <div className={classes.span}>
             Filters
-            <label className={classes.counter}>{campaigns?.length}</label>
+            <label className={classes.counter}>{campaignsTable?.length}</label>
           </div>
-          <Search placeholder='Search by title...' search={searchQuery} />
+          <Search placeholder='Search by title...' search={searchHandler} />
           <Label label='Planned channels' />
-
+          <div className={classes.channelsDiv}>
+            <input type="image" alt='instagram' clicked='false' name='instagram' src={Instagram} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='twitter' name='twitter' src={Twitter} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='youtube' name='youtube' src={YouTube} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='facebook' name='facebook' src={Facebook} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='tiktok' name='tiktok' src={TikTok} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='story' name='story' src={Story} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='snapchat' name='snapchat' src={Snapchat} onClick={(event) => socialFilterHandler(event)} />
+          </div>
           <Dropdown
             label='Brand'
-            onChange={(value) => dropdownHandler(value)}
+            onChange={(value) => filterHandler('brand', value)}
             name='brand'
             options={optionsHandler('brand')}
           />
           <Dropdown
             label='Effort'
-            onChange={(value) => dropdownHandler(value)}
+            onChange={(value) => filterHandler('effort', value)}
             name='effort'
-            options={optionsHandler('effort')}
+            options={[
+              <div className={classes.dropdownOption} key='Not set'>
+                <div className={classes.dot} style={{ backgroundColor: '#FFFFFF', border: '1px solid #CCCCCC' }} />
+                Not set
+              </div>,
+              <div className={classes.dropdownOption} key='Low'>
+                <div className={classes.dot} style={{ backgroundColor: '#5DC983' }} />
+                Low
+              </div>,
+              <div className={classes.dropdownOption} key='Medium'>
+                <div className={classes.dot} style={{ backgroundColor: '#FBA63C' }} />
+                Medium
+              </div>,
+              <div className={classes.dropdownOption} key='High'>
+                <div className={classes.dot} style={{ backgroundColor: '#ED6B3E' }} />
+                High
+              </div>,
+            ]}
           />
           <Dropdown
             label='Status'
-            onChange={(value) => dropdownHandler(value)}
+            onChange={(value) => filterHandler('status', value)}
             name='status'
-            options={optionsHandler('status')}
+            options={[
+              <div className={classes.dropdownOption} key='Requested'>
+                <div className={classes.dot} style={{ backgroundColor: '#D9AD42' }} />
+                Requested
+              </div>,
+              <div className={classes.dropdownOption} key='Pre-phase'>
+                <div className={classes.dot} style={{ backgroundColor: '#B14AC2' }} />
+                Pre-phase
+              </div>,
+              <div className={classes.dropdownOption} key='Running'>
+                <div className={classes.dot} style={{ backgroundColor: '#1778B0' }} />
+                Running
+              </div>,
+              <div className={classes.dropdownOption} key='Done'>
+                <div className={classes.dot} style={{ backgroundColor: '#54A880' }} />
+                Done
+              </div>,
+            ]}
           />
           <Dropdown
             label='TL'
-            onChange={(value) => dropdownHandler(value)}
-            name='tl'
-            options={optionsHandler('tl')}
+            onChange={(value) => filterHandler('teamLead', value)}
+            name='teamLead'
+            options={optionsHandler('teamLead')}
           />
+          <Label label='Budget' />
+          <div className={classes.budgetFilter}>
+            <Input placeholder='Min' />
+            <span>-</span>
+            <Input placeholder='Max' />
+          </div>
+          <Label label='Profit' />
+          <div className={classes.budgetFilter}>
+            <Input placeholder='Min' />
+            <span>-</span>
+            <Input placeholder='Max' />
+          </div>
         </div>
         <div className={classes.table}>
-          {campaigns
+          {campaignsTable
             ? (
               <List
                 headers={['Campaign Title', 'Brand', 'Start', 'End', 'Status', 'TL', 'Budget', 'Profit']}
-                sort={[1, 2, 3, 4, 7, 8]}
-                map={campaigns.map((campaign, index) => (
+                sortColumns={[1, 2, 3, 4, 7, 8]}
+                requestSort={requestSort}
+                map={(items || campaignsTable).map((campaign, index) => (
                   <TableRow
                     key={`${campaign._id}${index}`}
                     id={campaign._id}
@@ -151,6 +286,8 @@ const Campaigns = () => {
                       teamLead: <Avatar name={campaign.teamLead} size="32px" round style={{ marginRight: '12px' }} />,
                       budget: campaign.budgetsTargets.totalBudget,
                       profit: campaign.profit,
+                      start: DateFormat(campaign.startDate),
+                      end: DateFormat(campaign.endDate),
                     }}
                     columnsOrder={[['avatar', 'title', 'channels'], 'brand', 'start', 'end', 'status', 'teamLead', 'budget', 'profit']}
                     to={`/influencer/${campaign._id}`}
