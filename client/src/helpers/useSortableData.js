@@ -1,9 +1,9 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 
 export default function useSortableData(items, config = null) {
-  const [sortConfig, setSortConfig] = React.useState(config);
+  const [sortConfig, setSortConfig] = useState(config);
 
-  const sortedItems = React.useMemo(() => {
+  const sortedItems = useMemo(() => {
     const sortableItems = [...items];
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {

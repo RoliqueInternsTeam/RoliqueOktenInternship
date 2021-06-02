@@ -29,20 +29,18 @@ const Campaigns = () => {
   const access_token = useSelector(({ access_token }) => access_token);
   const campaignList = useSelector(({ campaignList }) => campaignList);
 
-  const [campaigns, setCampaigns] = useState([...campaignList]);
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
   const [searchedCampaigns, setSearchedCampaigns] = useState([]);
   const [campaignsTable, setCampaignsTable] = useState([...campaignList]);
   const [filters, setFilters] = useState({});
   const [search, setSearch] = useState('');
-  // const [sortConfig, setSortConfig] = useState(null);
-  const { items, requestSort } = useSortableData(campaignsTable);
+  const { sortedTable, requestSort } = useSortableData(campaignsTable);
+  const socialProfiles = ['instagram', 'twitter', 'youtube', 'facebook', 'tiktok', 'story', 'snapchat'];
 
   useEffect(() => {
     getAll('http://localhost:5000/campaign', access_token)
       .then((res) => {
-        console.log(res);
-        setCampaigns(res);
+        setCampaignsTable(res);
         dispatch(setCampaignList(res));
       });
   }, []);
@@ -51,7 +49,7 @@ const Campaigns = () => {
     if (filteredCampaigns.length !== 0) {
       setSearchedCampaigns([...filteredCampaigns]);
     } else {
-      setSearchedCampaigns([...campaigns]);
+      setSearchedCampaigns([...campaignList]);
     }
     setSearch(event.target.value);
   };
@@ -75,7 +73,7 @@ const Campaigns = () => {
     if (searchedCampaigns.length !== 0 && search) {
       setFilteredCampaigns([...searchedCampaigns]);
     } else {
-      setFilteredCampaigns([...campaigns]);
+      setFilteredCampaigns([...campaignList]);
     }
     setFilters((prevState) => ({
       ...prevState,
@@ -83,16 +81,42 @@ const Campaigns = () => {
     }));
   };
 
+  const socialFilterHandler = (event) => {
+    console.log(event.target.id);
+    filterHandler(event.target.id, true);
+    console.log(event.target.clicked);
+    // eslint-disable-next-line no-param-reassign
+    event.target.clicked = !event.target.clicked;
+  };
+
+  const budgetFilterHandler = (event) => {
+    filterHandler(event.target.id, event.target.value);
+    if (!event.target.value) {
+      const filter = { ...filters };
+      delete filter[event.target.id];
+      setFilters(filter);
+    }
+  };
+
   useEffect(() => {
     if (Object.keys(filters).length !== 0) {
-      setFilteredCampaigns(filteredCampaigns.filter((campaign) => Object.keys(filters).every((key) => ((['instagram', 'twitter', 'youtube', 'facebook', 'tiktok', 'story', 'snapchat'].includes(key))
-        ? (campaign.social.includes(key))
-        : (campaign[key].toLowerCase() === filters[key].toLowerCase())))));
+      setFilteredCampaigns(filteredCampaigns.filter((campaign) => Object.keys(filters).every((key) => {
+        if (socialProfiles.includes(key)) {
+          return (campaign.social.includes(key));
+        }
+        if (key.includes('Budget')) {
+          return key.includes('min') ? +campaign.budgetsTargets.totalBudget >= filters[key] : +campaign.budgetsTargets.totalBudget <= filters[key];
+        }
+        if (key.includes('Profit')) {
+          return key.includes('min') ? +campaign.profit >= filters[key] : +campaign.profit <= filters[key];
+        }
+        return (campaign[key].toLowerCase() === filters[key].toLowerCase());
+      })));
     }
   }, [filters]);
 
   useEffect(() => {
-    if (Object.keys(filters).length) {
+    if (filteredCampaigns.length || Object.keys(filters).length) {
       setCampaignsTable([...filteredCampaigns]);
     }
   }, [filteredCampaigns]);
@@ -137,42 +161,6 @@ const Campaigns = () => {
     return channels.map((channel) => channel);
   };
 
-  const socialFilterHandler = (event) => {
-    console.log(event.target.name);
-    filterHandler(event.target.name, true);
-    console.log(event.target.clicked);
-    // eslint-disable-next-line no-param-reassign
-    event.target.clicked = !event.target.clicked;
-  };
-
-  // React.useMemo(() => {
-  //   const sortedProducts = [...campaignsTable];
-  //   console.log(sortedProducts);
-  //   console.log(sortConfig);
-  //   if (sortConfig !== null) {
-  //     sortedProducts.sort((a, b) => {
-  //       if (a[sortConfig.key] < b[sortConfig.key]) {
-  //         return sortConfig.direction === 'ascending' ? -1 : 1;
-  //       }
-  //       if (a[sortConfig.key] > b[sortConfig.key]) {
-  //         return sortConfig.direction === 'ascending' ? 1 : -1;
-  //       }
-  //       return 0;
-  //     });
-  //   }
-  //   console.log(sortedProducts);
-  //   return setCampaignsTable([...sortedProducts]);
-  // }, [campaignsTable, sortConfig]);
-  //
-  // const requestSort = (key) => {
-  //   console.log(key);
-  //   let direction = 'ascending';
-  //   if (sortConfig?.key === key && sortConfig?.direction === 'ascending') {
-  //     direction = 'descending';
-  //   }
-  //   setSortConfig({ key, direction });
-  // };
-
   return (
     <div className={classes.mainContainer}>
       <Header title='Campaigns' button='createNew' />
@@ -185,13 +173,13 @@ const Campaigns = () => {
           <Search placeholder='Search by title...' search={searchHandler} />
           <Label label='Planned channels' />
           <div className={classes.channelsDiv}>
-            <input type="image" alt='instagram' clicked='false' name='instagram' src={Instagram} onClick={(event) => socialFilterHandler(event)} />
-            <input type="image" alt='twitter' name='twitter' src={Twitter} onClick={(event) => socialFilterHandler(event)} />
-            <input type="image" alt='youtube' name='youtube' src={YouTube} onClick={(event) => socialFilterHandler(event)} />
-            <input type="image" alt='facebook' name='facebook' src={Facebook} onClick={(event) => socialFilterHandler(event)} />
-            <input type="image" alt='tiktok' name='tiktok' src={TikTok} onClick={(event) => socialFilterHandler(event)} />
-            <input type="image" alt='story' name='story' src={Story} onClick={(event) => socialFilterHandler(event)} />
-            <input type="image" alt='snapchat' name='snapchat' src={Snapchat} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='instagram' clicked='false' id='instagram' src={Instagram} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='twitter' id='twitter' src={Twitter} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='youtube' id='youtube' src={YouTube} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='facebook' id='facebook' src={Facebook} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='tiktok' id='tiktok' src={TikTok} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='story' id='story' src={Story} onClick={(event) => socialFilterHandler(event)} />
+            <input type="image" alt='snapchat' id='snapchat' src={Snapchat} onClick={(event) => socialFilterHandler(event)} />
           </div>
           <Dropdown
             label='Brand'
@@ -253,15 +241,15 @@ const Campaigns = () => {
           />
           <Label label='Budget' />
           <div className={classes.budgetFilter}>
-            <Input placeholder='Min' />
+            <Input placeholder='Min' id='minBudget' onChange={(event) => budgetFilterHandler(event)} />
             <span>-</span>
-            <Input placeholder='Max' />
+            <Input placeholder='Max' id='maxBudget' onChange={(event) => budgetFilterHandler(event)} />
           </div>
           <Label label='Profit' />
           <div className={classes.budgetFilter}>
-            <Input placeholder='Min' />
+            <Input placeholder='Min' id='minProfit' onChange={(event) => budgetFilterHandler(event)} />
             <span>-</span>
-            <Input placeholder='Max' />
+            <Input placeholder='Max' id='maxProfit' onChange={(event) => budgetFilterHandler(event)} />
           </div>
         </div>
         <div className={classes.table}>
@@ -271,7 +259,7 @@ const Campaigns = () => {
                 headers={['Campaign Title', 'Brand', 'Start', 'End', 'Status', 'TL', 'Budget', 'Profit']}
                 sortColumns={[1, 2, 3, 4, 7, 8]}
                 requestSort={requestSort}
-                map={(items || campaignsTable).map((campaign, index) => (
+                map={(sortedTable || campaignsTable).map((campaign, index) => (
                   <TableRow
                     key={`${campaign._id}${index}`}
                     id={campaign._id}
