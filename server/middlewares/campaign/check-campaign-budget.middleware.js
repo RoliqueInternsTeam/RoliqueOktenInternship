@@ -2,8 +2,8 @@ const { ErrorHandler, errors } = require('../../errors');
 
 module.exports = (req, res, next) => {
     try {
-        const campaign = req.body;
-        const { budgetsTargets: { totalBudget, budgets } } = campaign;
+        const { createCampaign } = req;
+        const { budgetsTargets: { totalBudget, budgets } } = createCampaign;
 
         if (totalBudget) {
             const sumBudgets = Object.values(budgets).reduce((a, b) => +a + +b);
