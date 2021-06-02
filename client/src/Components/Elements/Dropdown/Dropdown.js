@@ -14,6 +14,7 @@ const Dropdown = (props) => {
     border: '1px solid #BFBFBF',
   });
   const [required, setRequired] = useState(!!props.required);
+  const [selected, setSelected] = useState(null);
 
   const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
 
@@ -51,6 +52,7 @@ const Dropdown = (props) => {
       <Select
         name={props.name}
         required={required}
+        clearable={selected ? props.clearable : null}
         itemRenderer={customItemRenderer}
         contentRenderer={customContentRenderer}
         dropdownHandleRenderer={customDropdownHandleRenderer}
@@ -59,6 +61,7 @@ const Dropdown = (props) => {
             border: '1px solid #BFBFBF',
           });
           setRequired(false);
+          setSelected(values[0]);
           props.onChange(values[0]);
         }}
         values={props.value ? [props.value] : []}
