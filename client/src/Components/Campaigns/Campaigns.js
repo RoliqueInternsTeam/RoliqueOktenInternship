@@ -75,7 +75,6 @@ const Campaigns = () => {
     } else {
       setFilteredCampaigns([...campaignList]);
     }
-    console.log(key, value);
     if (value) {
       setFilters((prevState) => ({
         ...prevState,
@@ -105,6 +104,10 @@ const Campaigns = () => {
       setFilters(filter);
     }
   };
+
+  useEffect(() => {
+    console.log(sortedTable);
+  }, [sortedTable]);
 
   useEffect(() => {
     if (Object.keys(filters).length !== 0) {
