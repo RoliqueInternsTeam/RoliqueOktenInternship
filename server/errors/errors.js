@@ -67,6 +67,10 @@ module.exports = {
         message: 'Influencer not found',
         code: NOT_FOUND
     },
+    CAMPAIGN_NOT_FOUND: {
+        message: 'Campaign not found',
+        code: NOT_FOUND
+    },
     // FORBIDDEN
     ACCESS_DENIED: {
         message: 'Access denied',

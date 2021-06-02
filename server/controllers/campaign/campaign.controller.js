@@ -6,9 +6,9 @@ const { CREATED } = require('../../constants/status-codes');
 module.exports = {
     createCampaign: async (req, res, next) => {
         try {
-            const { avatar, user, body } = req;
+            const { avatar, user, createCampaign } = req;
 
-            const newCampaign = await campaignServices.createCampaign({ userId: user._id, ...body });
+            const newCampaign = await campaignServices.createCampaign({ userId: user._id, ...createCampaign });
             if (avatar) {
                 const { s3Client } = s3;
                 const params = s3.uploadParams;
@@ -48,7 +48,7 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            const campaign = await campaignServices.findCampaignByParams(id);
+            const campaign = await campaignServices.findCampaignById(id);
 
             res.json(campaign);
         } catch (e) {
@@ -68,9 +68,9 @@ module.exports = {
 
     createBrand: async (req, res, next) => {
         try {
-            const { avatar, user, body } = req;
+            const { avatar, user, createBrand } = req;
 
-            const newBrand = await brandService.createBrand({ userId: user._id, ...body });
+            const newBrand = await brandService.createBrand({ userId: user._id, ...createBrand });
             if (avatar) {
 
             }
