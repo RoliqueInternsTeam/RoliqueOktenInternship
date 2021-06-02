@@ -1,7 +1,7 @@
 const CampaignModel = require('../../dataBase/models/Campaign');
 
 module.exports = {
-    findCampaignByParams: (params) => CampaignModel.findOne(params),
+    findCampaignById: (params) => CampaignModel.findById(params),
 
     createCampaign: (campaign) => new CampaignModel(campaign).save(),
 

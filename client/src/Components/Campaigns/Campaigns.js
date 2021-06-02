@@ -75,10 +75,18 @@ const Campaigns = () => {
     } else {
       setFilteredCampaigns([...campaignList]);
     }
-    setFilters((prevState) => ({
-      ...prevState,
-      [key]: value.key || value,
-    }));
+    console.log(key, value);
+    if (value) {
+      setFilters((prevState) => ({
+        ...prevState,
+        [key]: value.key || value,
+      }));
+    }
+    if (!value) {
+      const filter = { ...filters };
+      delete filter[key];
+      setFilters(filter);
+    }
   };
 
   const socialFilterHandler = (event) => {
@@ -183,12 +191,14 @@ const Campaigns = () => {
           </div>
           <Dropdown
             label='Brand'
+            clearable
             onChange={(value) => filterHandler('brand', value)}
             name='brand'
             options={optionsHandler('brand')}
           />
           <Dropdown
             label='Effort'
+            clearable
             onChange={(value) => filterHandler('effort', value)}
             name='effort'
             options={[
@@ -212,6 +222,7 @@ const Campaigns = () => {
           />
           <Dropdown
             label='Status'
+            clearable
             onChange={(value) => filterHandler('status', value)}
             name='status'
             options={[
@@ -235,6 +246,7 @@ const Campaigns = () => {
           />
           <Dropdown
             label='TL'
+            clearable
             onChange={(value) => filterHandler('teamLead', value)}
             name='teamLead'
             options={optionsHandler('teamLead')}

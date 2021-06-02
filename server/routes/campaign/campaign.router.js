@@ -18,6 +18,7 @@ campaignRouter.post('/',
         MANAGER,
         ADMIN
     ]),
+    campaignMiddleware.checkCampaignValid,
     campaignMiddleware.checkBudget,
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
@@ -29,6 +30,7 @@ campaignRouter.get('/',
 
 campaignRouter.get('/:id',
     usersMiddleware.checkUserAccess([]),
+    campaignMiddleware.checkCampaignById,
     campaignController.getOneCampaign);
 
 campaignRouter.post('/brand',
@@ -36,6 +38,7 @@ campaignRouter.post('/brand',
         MANAGER,
         ADMIN
     ]),
+    campaignMiddleware.checkBrandValid,
     campaignMiddleware.checkIsBrandCreated,
     fileMiddleware.checkFileMiddleware,
     fileMiddleware.checkPhotoCountUser,
