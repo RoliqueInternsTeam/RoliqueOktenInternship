@@ -35,7 +35,7 @@ function CreateBrand(props) {
       brand,
     );
 
-    const status = await Create('http://localhost:5000/campaigns/brand', formData, access_token, dispatch);
+    const status = await Create('http://localhost:5000/campaign/brand', formData, access_token, dispatch);
     status === 201 ? props.setState(false) : null;
   };
 
