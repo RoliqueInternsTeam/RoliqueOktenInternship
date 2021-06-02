@@ -3,7 +3,7 @@ const { ErrorHandler, errors } = require('../../errors');
 
 module.exports = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const { id } = JSON.parse(req.body.json);
 
         if (id === '' || id == null) {
             throw new ErrorHandler(errors.CAMPAIGN_NOT_FOUND.message, errors.CAMPAIGN_NOT_FOUND.code);
