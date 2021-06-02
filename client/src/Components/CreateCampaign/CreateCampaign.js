@@ -31,7 +31,6 @@ function CreateCampaign() {
     endDate: '',
     hashtags: null,
     brand: '',
-    avatar: null,
     budgetsTargets: {
       totalBudget: '',
       budgets: {
@@ -44,6 +43,8 @@ function CreateCampaign() {
       },
     },
   });
+  const [avatar, setAvatar] = useState({ avatar: null });
+
   const [brandList, setBrandList] = useState([]);
   const [managersList, setManagersList] = useState([]);
   const [hashtagsIncluded, setHashtagsIncluded] = useState(true);
@@ -165,6 +166,7 @@ function CreateCampaign() {
 
     const formData = new FormData();
     formData.append('json', JSON.stringify(campaign));
+    formData.append('avatar', avatar);
 
     const status = await Create('http://localhost:5000/campaign', formData, access_token, dispatch);
     status === 201 ? props.history.push('/campaigns') : null;
@@ -286,7 +288,7 @@ function CreateCampaign() {
             </div>
             <div className={classes.miscContainer}>
               <h4 className={classes.h4}>Misc.</h4>
-              <PictureLoader label="Campaign Logo" setState={setCampaign} alt="Campaign Logo" />
+              <PictureLoader label="Campaign Logo" setState={setAvatar} alt="Campaign Logo" />
               <Label label="Client Description" htmlFor='description' />
               <textarea id="description" name="description" className={classes.textArea} />
               <Label label="Internal Notes" htmlFor='notes' />
