@@ -32,6 +32,7 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest);
         }
       } catch (e) {
+        store.dispatch(setToken(null));
         window.location.href = '/login';
         return Promise.reject(e);
       }

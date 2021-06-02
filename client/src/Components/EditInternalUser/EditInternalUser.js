@@ -123,7 +123,7 @@ const EditInternalUser = (props) => {
                   onChange={(value) => dropdownHandler(value)}
                   value={userInfo.role}
                 />
-                <div className={classes.passwordContainer}>
+                <div>
                   <h4 className={classes.h4}>Password</h4>
                   <Input label="Set Password" type='password' id="password" onChange={(event) => inputHandler(event)} />
                 </div>

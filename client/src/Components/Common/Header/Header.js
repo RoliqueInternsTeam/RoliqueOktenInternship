@@ -12,7 +12,7 @@ const Header = (props) => {
       default:
         return null;
       case 'saveChanges':
-        return <button type='submit' className={classes.button}>Save changes</button>;
+        return <button type='submit' className={classes.button} disabled={props.disabled}>Save changes</button>;
       case 'createNew':
         return <CreateNew />;
       case 'edit':
@@ -43,12 +43,14 @@ Header.propTypes = {
   to: PropTypes.string,
   title: PropTypes.string,
   arrow: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Header.defaultProps = {
   to: '/',
   title: '',
   arrow: false,
+  disabled: false,
 };
 
 export default withRouter(Header);

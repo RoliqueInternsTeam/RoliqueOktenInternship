@@ -83,7 +83,7 @@ const Influencer = (props) => {
           </div>
         </div>
         <div className={classes.photosContainer}>
-          { influencerInfo.social?.instagram?.instagramPhotos.map((photo) => <img src={photo.photoURL} alt='Instagram content' key={photo._id} className={classes.instagramPhoto} />) }
+          { influencerInfo.social?.instagram?.instagramPhotos?.map((photo) => <img src={photo.photoURL} alt='Instagram content' key={photo._id} className={classes.instagramPhoto} />) }
         </div>
       </div>
     ) : <Loading class='onBlankPage' />

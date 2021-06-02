@@ -65,6 +65,7 @@
     margin-top: 47px;
 }
 .leftContainer {
+    width: 344px;
     margin-left: 180px;
 }
 .rightContainer {
@@ -72,6 +73,7 @@
     flex-direction: column;
 
     margin-right: 180px;
+    width: 344px;
 }
 .rolesInfo {
     position: relative;
@@ -79,9 +81,6 @@
     flex-direction: row;
 
     align-items: center;
-}
-.passwordContainer {
-    margin-top: 39px;
 }
 .tooltipHider {
     width: 372px;
