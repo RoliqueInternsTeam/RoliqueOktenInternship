@@ -20,7 +20,7 @@
     margin-top: 47px;
 }
 .leftContainer {
-    width: 344px;
+    width: 408px;
     margin-left: 180px;
 }
 .rightContainer {
@@ -28,7 +28,7 @@
     flex-direction: column;
 
     margin-right: 180px;
-    width: 344px;
+    width: 408px;
 }
 .rolesInfo {
     position: relative;
@@ -43,7 +43,7 @@
     visibility: hidden;
     position: absolute;
     top: 52px;
-    right: -14px;
+    right: 50px;
     z-index: 999;
 }
 .info:hover + .tooltipHider {
