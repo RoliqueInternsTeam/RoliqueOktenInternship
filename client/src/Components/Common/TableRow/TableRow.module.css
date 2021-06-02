@@ -1,7 +1,7 @@
 .tr {
     height: 56px;
     background: #FFFFFF 55%;
-    box-shadow: inset 0px -4px 0px #E5E5E5;
+    border-bottom: 4px solid #ebe8e9;
 
     font-family: Helvetica Neue, sans-serif;
     font-style: normal;
@@ -20,21 +20,41 @@
     vertical-align: middle;
     margin-right: 16px;
 }
-.tr .td {
-    padding-left: 16px;
-}
 .tr td {
-    padding: 0;
+    padding: 0 16px;
 }
-.edit {
+.tr td:nth-last-child(2) {
+    width: 30%;
+}
+.tr td.high:first-child {
+    box-sizing: border-box;
+    border-right: 4px solid #ebe8e9;
+    border-left: 4px solid #ED6B3E;
+}
+.tr td.medium:first-child {
+    box-sizing: border-box;
+    border-right: 4px solid #ebe8e9;
+    border-left: 4px solid #FBA63C;
+}
+.tr td.low:first-child {
+    box-sizing: border-box;
+    border-right: 4px solid #ebe8e9;
+    border-left: 4px solid #5DC983;
+}
+.socialDiv {
+    display: inline-block;
+    padding-left: 40px;
+}
+div.rowBtn {
+    padding: 0;
     display: table-cell;
     position: relative;
-    width: 28px;
     text-align: center;
     vertical-align: middle;
     background: #E7E6E8;
+    min-width: 28px;
 }
-.edit:hover .tooltipDiv {
+.rowBtn:hover .tooltipDiv {
     visibility: visible;
 }
 .tooltipDiv {
@@ -42,4 +62,55 @@
     left: -142px;
     top: 4px;
     visibility: hidden;
+}
+.statusColor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 32px;
+    width: fit-content;
+    padding: 3px 12px 3px 12px;
+
+    font-family: Helvetica Neue, serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+
+    letter-spacing: -0.35px;
+    opacity: 0.76;
+}
+.dot {
+    margin-right: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+.tr td > div[custom='Running']{
+    background-color: #CEECFD;
+    color: #1778B0;
+}
+.tr td > div[custom='Running'] > div {
+    background-color: #1778B0;
+}
+.tr td > div[custom='Pre-phase']{
+    background-color: #F0DAF3;
+    color: #9D1CB2;
+}
+.tr td > div[custom='Pre-phase'] > div {
+    background-color: #B14AC2;
+}
+.tr td > div[custom='Requested']{
+    background-color: #FCEBC4;
+    color: #CF9919;
+}
+.tr td > div[custom='Requested'] > div {
+    background-color: #D9AD42;
+}
+.tr td > div[custom='Done']{
+    background-color: #D6EDE2;
+    color: #2B9261;
+}
+.tr td > div[custom='Done'] > div {
+    background-color: #54A880;
 }

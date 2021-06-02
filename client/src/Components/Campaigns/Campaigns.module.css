@@ -1,0 +1,90 @@
+.mainContainer {
+    margin-left: 40px;
+    height: 100%;
+    background-color: #ebe8e9;
+}
+.body {
+    margin: 24px 68px 0 28px;
+    display: flex;
+    flex-direction: row;
+}
+.filters {
+    margin-right: 40px ;
+    width: 224px;
+}
+.table {
+    width: 100%;
+}
+.span {
+    display: flex;
+    font-family: Helvetica Neue, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.25px;
+    color: #151515;
+    opacity: 0.9;
+    align-content: center;
+
+    margin-bottom: 23px;
+}
+.counter {
+    font-family: Helvetica Neue, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    align-items: center;
+    text-align: center;
+    padding: 2px 6px;
+    background: #FF650E;
+    border-radius: 2px;
+
+    color: #FFFFFF;
+    margin: auto 0 auto 14px;
+    vertical-align: middle;
+}
+.channel {
+    margin-right: 4px;
+}
+.dropdownOption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.dot {
+    margin-right: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+input[type="image"] {
+    height: 24px;
+    width: 24px;
+    margin-right: 4px;
+}
+.channelsDiv {
+    display: inline-block;
+    padding: 7px 0px 16px 0px;
+    width: max-content;
+}
+.budgetFilter {
+    display: flex;
+    flex-direction: row;
+}
+.budgetFilter div {
+    width: 98px;
+}
+.budgetFilter span {
+    font-family: Helvetica Neue, serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.3499999940395355px;
+    text-align: center;
+
+    padding: 0px 4px;
+    line-height: 32px;
+    margin-top: 8px;
+}

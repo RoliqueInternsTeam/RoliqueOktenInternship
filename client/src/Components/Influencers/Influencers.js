@@ -15,6 +15,7 @@ import Blogger from '../Elements/Logos/blogger.svg';
 import Rating from '../Elements/Icons/rating.svg';
 import { getAll } from '../../helpers/ApiService';
 import Loading from '../Elements/Loading/Loading';
+import Edit from '../Elements/Icons/combined-shape.svg';
 
 const Influencers = () => {
   const [influencers, setInfluencers] = useState(null);
@@ -102,31 +103,34 @@ const Influencers = () => {
   return (
     <div className={classes.mainContainer}>
       <Header title='Influencers' button='createNew' />
-      <Search search={searchQuery} />
-      {influencers
-        ? (
-          <List
-            column1='Username'
-            column2='Name'
-            column3='Channels'
-            column4='Rating'
-            map={influencers.map((influencer) => (
-              <TableRow
-                key={influencer._id}
-                id={influencer._id}
-                avatar={influencer.avatar}
-                column1={usernameHandler(influencer.social)}
-                column2={`${influencer.firstName} ${influencer.lastName}`}
-                column3={influencer.social ? channelsHandler(influencer.social) : null}
-                column4={<img src={Rating} alt='rating' />}
-                to={`/influencer/${influencer._id}`}
-                tooltipMessage='Open Influencer'
-                imgAlt='Open Influencer'
-              />
-            ))}
-          />
-        )
-        : <Loading class='onList' />}
+      <div className={classes.body}>
+        <Search search={searchQuery} />
+        {influencers
+          ? (
+            <List
+              headers={['Username', 'Name', 'Channels', 'Rating']}
+              map={influencers.map((influencer, index) => (
+                <TableRow
+                  key={`${influencer._id}${index}`}
+                  id={influencer._id}
+                  columns={{
+                    avatar: influencer.avatar,
+                    username: usernameHandler(influencer.social),
+                    name: `${influencer.firstName} ${influencer.lastName}`,
+                    channels: influencer.social ? channelsHandler(influencer.social) : null,
+                    rating: <img key src={Rating} alt='rating' />,
+                  }}
+                  columnsOrder={[['avatar', 'username'], 'name', 'channels', 'rating']}
+                  to={`/influencer/${influencer._id}`}
+                  tooltipMessage='Open Influencer'
+                  imgAlt='Open Influencer'
+                  rowBtn={Edit}
+                />
+              ))}
+            />
+          )
+          : <Loading class='onList' />}
+      </div>
     </div>
   );
 };

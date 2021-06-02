@@ -75,7 +75,7 @@ Dropdown.propTypes = {
   value: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 Dropdown.defaultProps = {

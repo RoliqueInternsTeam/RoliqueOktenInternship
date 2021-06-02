@@ -8,6 +8,7 @@ import { setUserList } from '../../store/actions';
 import TableRow from '../Common/TableRow/TableRow';
 import { getAll } from '../../helpers/ApiService';
 import Loading from '../Elements/Loading/Loading';
+import Edit from '../Elements/Icons/combined-shape.svg';
 
 const Users = () => {
   const [users, setUsers] = useState(null);
@@ -41,33 +42,36 @@ const Users = () => {
   return (
     <div className={classes.mainContainer}>
       <Header title='Users' button='createNew' />
-      <Search search={searchQuery} />
-      {users
-        ? (
-          <List
-            column1='Name'
-            column2='email'
-            column3='Role'
-            column4='Phone'
-            map={users.map((user) => (
-              <TableRow
-                key={user._id}
-                id={user._id}
-                role={user.role}
-                avatar={user.avatar}
-                column1={user.firstName}
-                column11={user.lastName}
-                column2={user.email}
-                column3={capitalizeFirstLetter(user.role)}
-                column4={user.phone}
-                to={`/users/edit/${user._id}`}
-                tooltipMessage='Edit User'
-                imgAlt='Edit User'
-              />
-            ))}
-          />
-        )
-        : <Loading class='onList' />}
+      <div className={classes.body}>
+        <Search search={searchQuery} />
+        {users
+          ? (
+            <List
+              headers={['Name', 'email', 'Role', 'Phone']}
+              sort={[1, 2]}
+              map={users.map((user, index) => (
+                <TableRow
+                  key={`${user._id}${index}`}
+                  id={user._id}
+                  role={user.role}
+                  columns={{
+                    name: `${user.firstName} ${user.lastName}`,
+                    avatar: user.avatar,
+                    email: user.email,
+                    role: capitalizeFirstLetter(user.role),
+                    phone: user.phone,
+                  }}
+                  columnsOrder={[['avatar', 'name'], 'email', 'role', 'phone']}
+                  to={`/users/edit/${user._id}`}
+                  tooltipMessage='Edit User'
+                  imgAlt='Edit User'
+                  rowBtn={Edit}
+                />
+              ))}
+            />
+          )
+          : <Loading class='onList' />}
+      </div>
     </div>
   );
 };

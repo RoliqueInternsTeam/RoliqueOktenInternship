@@ -2,5 +2,6 @@ module.exports = {
     authMiddleware: require('./auth'),
     usersMiddleware: require('./user'),
     fileMiddleware: require('./files'),
-    influencerMiddleware: require('./influencer')
+    influencerMiddleware: require('./influencer'),
+    campaignMiddleware: require('./campaign'),
 };
