@@ -1,8 +1,10 @@
+const uuid = require('uuid');
 const passwordHash = require('../../helpers/password.helper');
 const { userServices, cleanObjectService } = require('../../services');
-const { ErrorHandler, errors } = require('../../errors');
-const { s3 } = require('../../config/s3.config');
 const { CREATED, OK } = require('../../constants/status-codes');
+const s3uploadParams = require('../../helpers/s3.helper');
+const { ErrorHandler, errors } = require('../../errors');
+const { s3Client } = require('../../config/s3.config');
 
 module.exports = {
     createUser: async (req, res, next) => {
@@ -15,26 +17,24 @@ module.exports = {
             await cleanObjectService.cleanObject(createUser);
 
             const newUser = await userServices.createUser(createUser);
+            const { _id } = newUser;
+
             if (avatar) {
-                const { s3Client } = s3;
-                const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
 
-                params.Key = `${await newUser._id}.${fileExtension}`;
-                params.Body = avatar.data;
+                s3uploadParams.Key = `users/${_id}/${uuid.v1()}.${fileExtension}`;
+                s3uploadParams.Body = avatar.data;
 
-                s3Client.upload(params, async (err, data) => {
+                await s3Client.upload(s3uploadParams, async (err, data) => {
                     if (err) {
                         throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
                     }
 
-                    const locationUrl = data.Location;
-
-                    await userServices.addPhotoUser(newUser._id, locationUrl);
+                    await userServices.addPhotoUser(_id, data.Location);
                 });
             }
 
-            res.status(CREATED).json('User created');
+            res.status(CREATED).json(newUser);
         } catch (e) {
             next(e);
         }
@@ -42,43 +42,39 @@ module.exports = {
     updateUser: async (req, res, next) => {
         try {
             const { avatar, updateUser } = req;
-            const { id } = req.params;
+            const { _id } = updateUser;
 
             await cleanObjectService.cleanObject(updateUser);
             if (avatar) {
-                const { s3Client } = s3;
-                const params = s3.uploadParams;
                 const fileExtension = avatar.name.split('.').pop();
 
-                params.Key = `1.${fileExtension}`;
-                params.Body = avatar.data;
+                s3uploadParams.Key = `users/${_id}/${uuid.v1()}.${fileExtension}`;
+                s3uploadParams.Body = avatar.data;
 
-                s3Client.upload(params, async (err, data) => {
+                await s3Client.upload(s3uploadParams, async (err, data) => {
                     if (err) {
                         throw new ErrorHandler(errors.UPLOAD_IMAGE_ERROR.message, errors.UPLOAD_IMAGE_ERROR.code);
                     }
 
-                    const locationUrl = data.Location;
-
-                    await userServices.addPhotoUser(id, locationUrl);
+                    await userServices.addPhotoUser(_id, data.Location);
                 });
             }
 
             if (updateUser.password) {
                 updateUser.password = await passwordHash.hash(updateUser.password);
-                await userServices.updateUser(id, { ...updateUser });
-                return res.status(OK).json('User updated').end();
+                const newUpdateUser = await userServices.updateUser(_id, { ...updateUser });
+                return res.status(OK).json(newUpdateUser).end();
             }
 
             if (!updateUser.phone) {
                 updateUser.phone = '';
-                await userServices.updateUser(id, { ...updateUser });
+                await userServices.updateUser(_id, { ...updateUser });
                 return res.status(OK).json('User updated').end();
             }
 
-            await userServices.updateUser(id, { ...updateUser });
+            const newUpdateUser = await userServices.updateUser(_id, { ...updateUser });
 
-            res.status(OK).json('User updated');
+            res.status(OK).json(newUpdateUser);
         } catch (e) {
             next(e);
         }
