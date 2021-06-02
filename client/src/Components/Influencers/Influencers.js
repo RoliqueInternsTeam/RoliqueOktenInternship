@@ -118,7 +118,7 @@ const Influencers = () => {
                     username: usernameHandler(influencer.social),
                     name: `${influencer.firstName} ${influencer.lastName}`,
                     channels: influencer.social ? channelsHandler(influencer.social) : null,
-                    rating: <img key src={Rating} alt='rating' />,
+                    rating: <img src={Rating} alt='rating' />,
                   }}
                   columnsOrder={[['avatar', 'username'], 'name', 'channels', 'rating']}
                   to={`/influencer/${influencer._id}`}
