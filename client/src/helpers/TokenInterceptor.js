@@ -2,6 +2,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { store } from '../store/store';
 import { setBadRequest, setToken } from '../store/actions';
+import { SOMETHING_WRONG } from '../config/messages';
 
 const cookies = new Cookies();
 const refresh_token = cookies.get('refresh_token');
@@ -14,7 +15,7 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response.status !== 401) {
-      store.dispatch(setBadRequest(error.response.data.message));
+      store.dispatch(setBadRequest(SOMETHING_WRONG));
       return setTimeout(() => store.dispatch(setBadRequest('')), 3000);
     }
 
