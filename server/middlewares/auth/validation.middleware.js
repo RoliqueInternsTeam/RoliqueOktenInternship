@@ -1,4 +1,4 @@
-const { ErrorHandler, errors: { NOT_VALID_BODY } } = require('../../errors');
+const { ErrorHandler, errors } = require('../../errors');
 const userValidator = require('../../validators/user/userValidator');
 
 module.exports = (req, res, next) => {
@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
         const { error } = userValidator.validate(req.body);
 
         if (error) {
-            throw new ErrorHandler(error.details[0].message, NOT_VALID_BODY);
+            throw new ErrorHandler(errors.NOT_VALID_BODY.message, errors.NOT_VALID_BODY.code);
         }
 
         next();

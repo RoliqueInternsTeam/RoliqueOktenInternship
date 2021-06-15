@@ -1,0 +1,48 @@
+%div {
+    display: flex;
+    flex-direction: column;
+
+    input {
+        background: #FAFAFB;
+        border: 1px solid #BFBFBF;
+        box-sizing: border-box;
+        border-radius: 6px;
+        height: 32px;
+
+        margin-bottom: 16px;
+        padding-left: 12px;
+    }
+
+    .react-datepicker__tab-loop {
+        background-color: red;
+
+        .react-datepicker-popper {
+            background-color: red;
+
+            .react-datepicker {
+                background-color: red;
+            }
+        }
+    }
+}
+
+.longInput {
+    @extend %div;
+
+    input {
+        width: 344px;
+    }
+}
+.shortInput {
+    @extend %div;
+    input {
+        width: 196px;
+    }
+}
+
+.longCalendar {
+    width: 344px !important;
+}
+.shortCalendar {
+    width: 196px !important;
+}

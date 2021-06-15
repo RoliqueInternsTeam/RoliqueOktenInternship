@@ -1,0 +1,56 @@
+.mainContainer {
+    margin-left: 40px;
+
+    background: #ebe8e9;
+    height: 100vh;
+}
+.generalInfo {
+    margin-top: 40px;
+    margin-left: 40px;
+    display: flex;
+    align-items: flex-start;
+}
+.personalInfo {
+    margin-left: 24px;
+}
+.personalInfo > h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+.avatar {
+    border-radius: 50%;
+    height: 104px;
+    width: 104px;
+}
+.p {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    letter-spacing: -0.35px;
+    margin-top: 0;
+    margin-left: 22px;
+
+    color: #383838;
+}
+.textContainer {
+    height: 30px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    width: fit-content;
+}
+.socialMediaContainer {
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: row;
+}
+.photosContainer {
+    margin: 48px 0 0 28px;
+}
+.instagramPhoto {
+    max-width: 296px;
+
+    margin: 0 20px 20px
+}

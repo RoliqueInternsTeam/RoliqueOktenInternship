@@ -1,0 +1,148 @@
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router';
+import classes from './CreateInfluencer.module.css';
+import PermissionChecker from '../Common/PermissionChecker/PermissionChecker';
+import { ADMIN, MANAGER } from '../../config/constants';
+import Message from '../Elements/Message/Message';
+import { RESTRICTED_ACCESS } from '../../config/messages';
+import Header from '../Common/Header/Header';
+import PictureLoader from '../Common/PictureLoader/PictureLoader';
+import Input from '../Elements/Input/Input';
+import DateInput from '../Elements/DateInput/DateInput';
+import { Create } from '../../helpers/ApiService';
+import 'react-datepicker/src/stylesheets/datepicker.scss';
+
+const CreateInfluencer = (props) => {
+  const [influencerInfo, setInfluencerInfo] = useState({
+    firstName: '',
+    lastName: '',
+    birthdate: '',
+    profession: '',
+    social: {
+      instagram: {
+        instagramUsername: '',
+        instagramFollowers: '',
+      },
+      youtube: {
+        youtubeUsername: '',
+        youtubeFollowers: '',
+      },
+      facebook: {
+        facebookUsername: '',
+        facebookFollowers: '',
+      },
+      tiktok: {
+        tiktokUsername: '',
+        tiktokFollowers: '',
+      },
+      twitter: {
+        twitterUsername: '',
+        twitterFollowers: '',
+      },
+      blog: {
+        blogUsername: '',
+        blogFollowers: '',
+      },
+    },
+  });
+  const [avatar, setAvatar] = useState({ avatar: null });
+
+  const access_token = useSelector(({ access_token }) => access_token);
+  const dispatch = useDispatch();
+
+  const inputHandler = (event) => {
+    setInfluencerInfo(((prevState) => ({ ...prevState, [event.target.id]: event.target.value })));
+  };
+
+  const inputNetworkHandler = (event) => {
+    setInfluencerInfo(((prevState) => ({
+      ...prevState,
+      social: {
+        ...prevState.social,
+        [event.target.id.replace('Username', '')]: {
+          ...prevState.social[event.target.id.replace('Username', '')],
+          [event.target.id]: event.target.value,
+        },
+      },
+    })));
+  };
+
+  const inputFollowersHandler = (event) => {
+    setInfluencerInfo(((prevState) => ({
+      ...prevState,
+      social: {
+        ...prevState.social,
+        [event.target.id.replace('Followers', '')]: {
+          ...prevState.social[event.target.id.replace('Followers', '')],
+          [event.target.id]: event.target.value.replaceAll('.', ''),
+        },
+      },
+    })));
+  };
+
+  const dateHandler = (date) => {
+    setInfluencerInfo(((prevState) => ({ ...prevState, birthdate: date })));
+  };
+
+  const createInfluencerHandler = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('json', JSON.stringify(influencerInfo));
+    formData.append('avatar', avatar);
+
+    const status = await Create('http://localhost:5000/influencer', formData, access_token, dispatch);
+    status === 201 ? props.history.push('/influencers') : null;
+  };
+
+  return (
+    <PermissionChecker
+      permission={[ADMIN, MANAGER]}
+      display={<Message style={['error-bg-color', 'error-icon-color', 'error-text-color']} position='absolute' message={RESTRICTED_ACCESS} redirect />}
+    >
+      <form className={classes.mainContainer} onSubmit={(event) => createInfluencerHandler(event)}>
+        <Header arrow title='Create Influencer' button='saveChanges' />
+        <div className={classes.body}>
+          <div className={classes.leftContainer}>
+            <h4 className={classes.h4}>General</h4>
+            <Input label="First Name" type='text' id="firstName" required="required" onChange={(event) => inputHandler(event)} />
+            <Input label="Last Name" type='text' id="lastName" required="required" onChange={(event) => inputHandler(event)} />
+            <DateInput
+              setState={dateHandler}
+              selected={influencerInfo.birthdate}
+              label='Birthdate'
+              input='longInput'
+              calendar='longCalendar'
+            />
+            <Input label="Profession" type='text' id="profession" required="required" onChange={(event) => inputHandler(event)} />
+            <PictureLoader label='Profile Picture' alt='Add an avatar' setState={setAvatar} />
+          </div>
+          <div className={classes.rightContainer}>
+            <h4 className={classes.h4}>Social Profiles</h4>
+            <div className={classes.socialProfilesContainer}>
+              <div className={classes.networkContainer}>
+                <Input label="Instagram" type='text' id="instagramUsername" required={influencerInfo.social.instagram.instagramFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Youtube" type='text' id="youtubeUsername" required={influencerInfo.social.youtube.youtubeFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Facebook" type='text' id="facebookUsername" required={influencerInfo.social.facebook.facebookFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="TikTok" type='text' id="tiktokUsername" required={influencerInfo.social.tiktok.tiktokFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Twitter" type='text' id="twitterUsername" required={influencerInfo.social.twitter.twitterFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+                <Input label="Blog" type='text' id="blogUsername" required={influencerInfo.social.blog.blogFollowers ? 'required' : null} onChange={(event) => inputNetworkHandler(event)} />
+              </div>
+              <div className={classes.followersContainer}>
+                <Input input="masked" label="Instagram Followers" id="instagramFollowers" required={influencerInfo.social.instagram.instagramUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Youtube Followers" id="youtubeFollowers" required={influencerInfo.social.youtube.youtubeUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Facebook Followers" id="facebookFollowers" required={influencerInfo.social.facebook.facebookUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="TikTok Followers" id="tiktokFollowers" required={influencerInfo.social.tiktok.tiktokUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Twitter Followers" id="twitterFollowers" required={influencerInfo.social.twitter.twitterUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+                <Input input="masked" label="Blog Followers" id="blogFollowers" required={influencerInfo.social.blog.blogUsername ? 'required' : null} onChange={(event) => inputFollowersHandler(event)} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </PermissionChecker>
+  );
+};
+
+export default withRouter(CreateInfluencer);

@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "react/prop-types": "off",
+    "react/destructuring-assignment": "off",
+    "no-unused-expressions": "off",
+    "no-undef": "off",
+    "react/jsx-filename-extension": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/prefer-stateless-function": "off",
+    "class-methods-use-this": "off",
+    "react/no-array-index-key": "off",
+    "max-len": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "no-noninteractive-element-interactions": "off",
+    "import/named": "off",
+    "camelcase": "off",
+    "import/prefer-default-export": "warn",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-param-reassign": "warn",
+    "prefer-const": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-plusplus": "off"
+  },
+  "plugins": [
+    "jsx-a11y",
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  }
+}

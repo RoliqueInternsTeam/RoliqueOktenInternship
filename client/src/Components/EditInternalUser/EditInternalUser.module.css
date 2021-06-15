@@ -1,0 +1,95 @@
+.mainContainer {
+    margin-left: 40px;
+}
+.header {
+    height: 79px;
+    width: 100%;
+    margin-top: 0;
+    margin-right: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);;
+}
+.headerLeft {
+    width: max-content;
+    margin-left: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.arrow {
+    margin-right: 20px;
+}
+.arrow:hover {
+    cursor: pointer;
+}
+.button {
+    width: 123px;
+    height: 33px;
+    margin-right: 68px;
+
+    background: linear-gradient(180deg, #FF650E 0%, #FF650E 100%);
+    border-radius: 8px;
+    border-style: none;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
+.h4 {
+    margin-bottom: 24px;
+}
+.info {
+    width: 16px;
+    height: 16px;
+
+    margin-left: 10px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+.body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    margin-top: 47px;
+}
+.leftContainer {
+    width: 344px;
+    margin-left: 180px;
+}
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+
+    margin-right: 180px;
+    width: 344px;
+}
+.rolesInfo {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+.tooltipHider {
+    width: 372px;
+    height: 244px;
+    visibility: hidden;
+    position: absolute;
+    top: 52px;
+    right: -14px;
+}
+.info:hover + .tooltipHider {
+    visibility: visible;
+}

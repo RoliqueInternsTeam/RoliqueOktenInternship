@@ -1,0 +1,60 @@
+.container {
+    width: 127px;
+    height: 25px;
+
+    margin-right: 16px;
+    padding: 8px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.image {
+    height: 13px;
+    width: 13px;
+}
+.label {
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.35px;
+
+    color: #FFFFFF;
+
+    margin-left: 6px;
+}
+.instagram {
+    border-radius: 17px;
+
+    background: radial-gradient(114.11% 114.11% at 22.66% 97.97%, #FED574 0%, #FDCB70 5.15%, #F8AF66 14.03%, #F28256 25.48%, #EC5847 34.88%, #C73283 64.9%, #5C6CB3 100%);
+}
+.tiktok {
+    border-radius: 32px;
+
+    background-color: #000000;
+}
+.facebook {
+    border-radius: 32px;
+
+    background-color: #415A94;
+}
+.blog {
+    border-radius: 32px;
+
+    background-color: #E8934C;
+}
+.youtube {
+    border-radius: 32px;
+
+    background-color: #C13732;
+}
+.twitter {
+    border-radius: 32px;
+
+    background-color: #68ABE7;
+}

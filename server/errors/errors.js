@@ -1,4 +1,9 @@
-const { BAD_REQUEST, UNAUTHORIZED } = require('../constants/status-codes');
+const {
+    BAD_REQUEST,
+    UNAUTHORIZED,
+    NOT_FOUND,
+    FORBIDDEN
+} = require('../constants/status-codes');
 
 module.exports = {
     // BAD REQUEST
@@ -26,6 +31,10 @@ module.exports = {
         message: 'You can upload just one photo as avatar',
         code: BAD_REQUEST
     },
+    UPLOAD_IMAGE_ERROR: {
+        message: 'Error occurred while trying to upload to S3 bucket',
+        code: BAD_REQUEST
+    },
     NOT_TOKEN: {
         message: 'Not token',
         code: BAD_REQUEST
@@ -34,6 +43,25 @@ module.exports = {
     NOT_VALID_TOKEN: {
         message: 'Not valid token',
         code: UNAUTHORIZED
+    },
+    NOT_VALID_REFRESH_TOKEN: {
+        message: 'Not valid token',
+        code: UNAUTHORIZED
+    },
+
+    // NOT FOUND
+    USER_NOT_FOUND: {
+        message: 'User not found',
+        code: NOT_FOUND
+    },
+    INFLUENCER_NOT_FOUND: {
+        message: 'Influencer not found',
+        code: NOT_FOUND
+    },
+    // FORBIDDEN
+    ACCESS_DENIED: {
+        message: 'Access denied',
+        code: FORBIDDEN
     },
 
 };

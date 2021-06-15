@@ -8,5 +8,11 @@ authRouter.post('/',
     authMiddleware.checkAuthUserValid,
     authMiddleware.checkPassword,
     authController.login);
+authRouter.post('/refresh',
+    authMiddleware.checkRefreshToken,
+    authController.refreshToken);
+authRouter.delete('/logout',
+    authMiddleware.checkAccessToken,
+    authController.logoutUser);
 
 module.exports = authRouter;

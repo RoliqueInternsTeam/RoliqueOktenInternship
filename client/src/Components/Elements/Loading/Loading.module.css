@@ -1,0 +1,9 @@
+.onBlankPage {
+    display: grid;
+    place-items: center;
+}
+.onList {
+    margin-top: 15%;
+    display: grid;
+    place-items: center;
+}

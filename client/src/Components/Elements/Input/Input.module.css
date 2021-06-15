@@ -1,0 +1,45 @@
+.input {
+    background: #FAFAFB;
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 6px;
+    height: 32px;
+    padding-left: 12px;
+    margin-bottom: 16px;
+}
+.input:active {
+    border: 1px solid rgba(255, 101, 14, 0.5);
+    box-shadow: 0px 0px 2px rgba(255, 101, 14, 0.25);
+}
+.input:not([value]) {
+    border: 1px solid #DA1414;
+}
+
+.loginInput > .input:required {
+    border: 1px solid #BFBFBF;
+}
+.input:invalid {
+    border: 1px solid #DA1414;
+}
+.div {
+    display: flex;
+    flex-direction: column;
+}
+.p {
+    width: 74px;
+    height: 14px;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: -0.35px;
+
+    color: #DA1414;
+
+    margin: 4px 0px 0px 0px;
+}
+.loginInput > input:required {
+    border: 1px solid #BFBFBF;
+}

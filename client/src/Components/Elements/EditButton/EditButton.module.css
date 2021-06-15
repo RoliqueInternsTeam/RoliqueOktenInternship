@@ -1,0 +1,31 @@
+.button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px 16px 8px 8px;
+
+    width: 73px;
+    height: 33px;
+    right: 203px;
+    top: 23px;
+
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    font-family: Helvetica Neue, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 0.6);
+
+    cursor: pointer;
+}
+.link{
+    text-decoration: none;
+}
+.editImage {
+    margin-right: 10px;
+}

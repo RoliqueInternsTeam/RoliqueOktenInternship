@@ -17,23 +17,23 @@ const UserSchema = new Schema({
         required: true
     },
 
-    firstname: {
+    firstName: {
         type: String,
         required: true
     },
 
-    lastname: {
+    lastName: {
         type: String,
         required: true
     },
 
     phone: {
-        type: Number,
+        type: Schema.Types.Mixed,
         required: false
     },
 
     avatar: {
-        type: String,
+        type: Schema.Types.Mixed,
         required: false
     }
 });

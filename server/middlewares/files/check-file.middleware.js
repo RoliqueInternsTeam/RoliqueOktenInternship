@@ -6,7 +6,7 @@ const {
 
 module.exports = (req, res, next) => {
     try {
-        req.photos = [];
+        const photos = [];
 
         if (!req.files) {
             return next();
@@ -21,11 +21,14 @@ module.exports = (req, res, next) => {
                 if (size > MAX_PHOTO_SIZE) {
                     throw new ErrorHandler(errors.TOO_BIG_FILE.message, errors.TOO_BIG_FILE.code);
                 }
-                req.photos.push(files[i]);
+                photos.push(files[i]);
             } else {
                 throw new ErrorHandler(errors.WRONG_FILE_EXTENSION.message, errors.WRONG_FILE_EXTENSION.code);
             }
         }
+
+        req.photos = photos;
+
         next();
     } catch (e) {
         next(e);
